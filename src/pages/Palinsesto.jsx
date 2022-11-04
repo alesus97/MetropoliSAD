@@ -159,7 +159,6 @@ export default function Palinsesto(){
         columns={columns}
          data={user}
         options={{
-          headerStyle: { borderBottomColor: 'red', borderBottomWidth: '3px', fontFamily: 'verdana' },
           actionsColumnIndex: -1
         }}
         editable={{

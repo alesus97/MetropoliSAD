@@ -8,6 +8,7 @@ import {
     FaShoppingBag,
     FaThList
 }from "react-icons/fa";
+import { Dashboard, Ballot } from '@mui/icons-material';
 import { NavLink } from 'react-router-dom';
 
 const Sidebar = ({children}) => {
@@ -15,14 +16,9 @@ const Sidebar = ({children}) => {
     const toggle = () => setIsOpen (!isOpen);
     const menuItem=[
         {
-            path:"/dashboard",
-            name:"Dashboard",
-            icon:<FaTh/>
-        },
-        {
-            path:"/about",
-            name:"About",
-            icon:<FaUserAlt/>
+            path:"/palinsesto",
+            name:"Palinsesto",
+            icon:<Dashboard />
         },
         {
             path:"/analytics",

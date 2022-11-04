@@ -41,7 +41,7 @@ export default function Login(props) {
       password: data.get('password'),
     });
     props.onLoginAction();
-    navigate('/dashboard', {replace: true})
+    navigate('/palinsesto', {replace: true})
   };
 
   // ---------------------------

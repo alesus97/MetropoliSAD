@@ -7,35 +7,32 @@ import { Alert } from '@mui/material';
 import AlertTitle from '@mui/material/AlertTitle';
 import axios from 'axios';
 
-const validateEmail = (email) => {
+const validatedate = (date) => {
     const re = /^((?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\]))$/;
-    return re.test(String(email).toLowerCase());
+    return re.test(String(date).toLowerCase());
   }
 
-export default function About(){
+export default function Palinsesto(){
     const defaultMaterialTheme = createTheme();
     const [user, setUser] = useState([]);
   const [iserror, setIserror] = useState(false);
   const [errorMessages, setErrorMessages] = useState([]);
 
   let columns = [
-    { title: 'NAME', field: 'name' },
-    { title: 'USERNAME', field: 'username' },
-    { title: 'EMAIL', field: 'email' },
-    { title: 'PHONE', field: 'phone' },
-    { title: 'WEBSITE', field: 'website' },
+    { title: 'Titolo', field: 'film.titolo' },
+    { title: 'Data', field: 'data' },
+    { title: 'Sala', field: 'sala.numero_sala' },
+    { title: 'Prezzo', field: 'prezzo' },
   ]
 
-  let data = [
-    { name: 'manish', username: 'traptrick', email: 'themk85@gmail.com', phone: '9999999999', website: 'https://github.com/traptrick' }
-  ]  
+ 
 
   useEffect(() => {
-    axios.get(`https://jsonplaceholder.typicode.com/users`)
+    axios.get(`https://63652c10f711cb49d1f73192.mockapi.io/api/palinsesto`)
       .then(res => {
         const users = res.data;
         setUser(users);
-        // console.log(users); 
+         console.log(users); 
       })
   }, [])
 
@@ -48,17 +45,17 @@ export default function About(){
     if (newData.name === "") {
       errorList.push("Try Again, You didn't enter the name field")
     }
-    if (newData.username === "") {
-      errorList.push("Try Again, You didn't enter the Username field")
+    if (newData.duration === "") {
+      errorList.push("Try Again, You didn't enter the duration field")
     }
-    if (newData.email === "" || validateEmail(newData.email) === false) {
-      errorList.push("Oops!!! Please enter a valid email")
+    if (newData.date === "" || validatedate(newData.date) === false) {
+      errorList.push("Oops!!! Please enter a valid date")
     }
-    if (newData.phone === "") {
-      errorList.push("Try Again, Phone number field can't be blank")
+    if (newData.hall === "") {
+      errorList.push("Try Again, hall number field can't be blank")
     }
-    if (newData.website === "") {
-      errorList.push("Try Again, Enter website url before submitting")
+    if (newData.cinema === "") {
+      errorList.push("Try Again, Enter cinema url before submitting")
     }
 
     if (errorList.length < 1) {
@@ -112,17 +109,17 @@ export default function About(){
     if (newData.name === "") {
       errorList.push("Try Again, You didn't enter the name field")
     }
-    if (newData.username === "") {
-      errorList.push("Try Again, You didn't enter the Username field")
+    if (newData.duration === "") {
+      errorList.push("Try Again, You didn't enter the duration field")
     }
-    if (newData.email === "" || validateEmail(newData.email) === false) {
-      errorList.push("Oops!!! Please enter a valid email")
+    if (newData.date === "" || validatedate(newData.date) === false) {
+      errorList.push("Oops!!! Please enter a valid date")
     }
-    if (newData.phone === "") {
-      errorList.push("Try Again, Phone number field can't be blank")
+    if (newData.hall === "") {
+      errorList.push("Try Again, hall number field can't be blank")
     }
-    if (newData.website === "") {
-      errorList.push("Try Again, Enter website url before submitting")
+    if (newData.cinema === "") {
+      errorList.push("Try Again, Enter cinema url before submitting")
     }
 
     if (errorList.length < 1) {

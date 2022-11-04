@@ -1,6 +1,6 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useState } from 'react';
 import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 
 // import Dashboard from './pages/Dashboard.jsx';
@@ -23,24 +23,36 @@ const Login = lazy(() => import('./pages/Login.jsx'));
 
 
 
-const logged = false;
+
 
 const App = () => {
+  var [logged,setLogged] = useState(false);
+  var content = null;
+  if (logged){
+    content = <Sidebar>
+  <Suspense fallback={<div>Loading...</div>}>
+    <Routes>
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/comment" element={<Comment />} />
+      <Route path="/analytics" element={<Analytics />} />
+      <Route path="/product" element={<Product />} />
+      <Route path="/productList" element={<ProductList />} />
+    </Routes>
+    </Suspense>
+  </Sidebar>
+} else {
+  content = <Suspense fallback={<div>Loading...</div>}>
+      <Routes>
+      <Route path="*" element={<Navigate to = "/" replace />}/>
+      <Route path="/" element={<Login onLoginAction={() => {setLogged(true)}} />} />
+      </Routes>
+  </Suspense>
+}
+
   return (
     <BrowserRouter>
-      <Sidebar>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          <Route path="/" element={logged ? <Dashboard /> : <Login /> } />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/comment" element={<Comment />} />
-          <Route path="/analytics" element={<Analytics />} />
-          <Route path="/product" element={<Product />} />
-          <Route path="/productList" element={<ProductList />} />
-        </Routes>
-        </Suspense>
-      </Sidebar>
+      {content}
     </BrowserRouter>
   );
 };

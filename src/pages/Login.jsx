@@ -30,9 +30,8 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function Login() {
+export default function Login(props) {
   const navigate  = useNavigate();
-
   // ---- handler
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -41,7 +40,7 @@ export default function Login() {
       email: data.get('email'),
       password: data.get('password'),
     });
-
+    props.onLoginAction();
     navigate('/dashboard', {replace: true})
   };
 

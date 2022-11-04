@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import CustomizedProgressBars from './pages/LoadingPage'; 
+import SimpleBackdrop from './pages/LoadingPage';
 
 const Palinsesto = lazy(() => import('./pages/Palinsesto.jsx'));
 const Film = lazy(() => import('./pages/Palinsesto.jsx'));
@@ -21,18 +22,18 @@ const App = () => {
   var content = null;
   if (logged){
     content = <Sidebar>
-  <Suspense fallback={<CustomizedProgressBars/>}>
+  <Suspense fallback={<SimpleBackdrop/>}>
     <Routes>
       <Route path="/palinsesto" element={<Palinsesto />} />
       <Route path="/comment" element={<Comment />} />
       <Route path="/analytics" element={<Analytics />} />
       <Route path="/product" element={<Product />} />
-      <Route path="/productList" element={<ProductList />} />
+      <Route path="/productList" element={<ProductList />} /> 
     </Routes>
     </Suspense>
   </Sidebar>
 } else {
-  content = <Suspense fallback={<CustomizedProgressBars/>}>
+  content = <Suspense fallback={<SimpleBackdrop/>}>
       <Routes>
       <Route path="*" element={<Navigate to = "/" replace />}/>
       <Route path="/" element={<Login onLoginAction={() => {setLogged(true)}} />} />

@@ -2,14 +2,8 @@ import React, {useState, useEffect} from 'react';
 import FilmCard from '../components/Card';
 import axios from 'axios';
 import { Container } from '@mui/system';
-import { Button, Fab, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 import FormDialog from '../components/Dialog';
 
 
@@ -38,14 +32,7 @@ export default function Analytics() {
 
     return (
       <div>
-
-      {/* <Fab variant= "extended" onClick={handleClickOpen}>
-      <AddIcon sx={{mr:1}}/>
-      Create new
-      </Fab> */}
       <FormDialog/>
-
-
 
       <Container>
         <Grid container spacing={3}>

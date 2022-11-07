@@ -6,7 +6,6 @@ import Typography from '@mui/material/Typography';
 import ButtonBase from '@mui/material/ButtonBase';
 import { IconButton } from '@mui/material';
 import { DeleteOutlineOutlined } from '@mui/icons-material';
-import Fab from '@mui/material';
 
 const Img = styled('img')({
   margin: 'auto',

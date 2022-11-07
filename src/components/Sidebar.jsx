@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import {
-    FaTh,
     FaBars,
-    FaUserAlt,
     FaRegChartBar,
     FaCommentAlt,
     FaShoppingBag,
     FaThList
 }from "react-icons/fa";
-import { Dashboard, Ballot } from '@mui/icons-material';
+import { Dashboard } from '@mui/icons-material';
 import { NavLink } from 'react-router-dom';
 
 const Sidebar = ({children}) => {

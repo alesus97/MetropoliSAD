@@ -32,7 +32,7 @@ export default function Palinsesto(){
       .then(res => {
         const users = res.data;
         setUser(users);
-         console.log(users); 
+        // console.log(users); 
       })
   }, [])
 

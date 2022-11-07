@@ -6,8 +6,7 @@ import CustomizedProgressBars from './pages/LoadingPage';
 import SimpleBackdrop from './pages/LoadingPage';
 
 const Palinsesto = lazy(() => import('./pages/Palinsesto.jsx'));
-const Film = lazy(() => import('./pages/Palinsesto.jsx'));
-const Analytics = lazy(() => import('./pages/Analytics.jsx'));
+const Film = lazy(() => import('./pages/Film.jsx'));
 const Comment = lazy(() => import('./pages/Comment.jsx'));
 const Product = lazy(() => import('./pages/Product.jsx'));
 const ProductList = lazy(() => import('./pages/ProductList.jsx'));
@@ -26,7 +25,7 @@ const App = () => {
     <Routes>
       <Route path="/palinsesto" element={<Palinsesto />} />
       <Route path="/comment" element={<Comment />} />
-      <Route path="/analytics" element={<Analytics />} />
+      <Route path="/film" element={<Film />} />
       <Route path="/product" element={<Product />} />
       <Route path="/productList" element={<ProductList />} /> 
     </Routes>

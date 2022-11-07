@@ -21,8 +21,8 @@ const Sidebar = ({children}) => {
             icon:<Dashboard />
         },
         {
-            path:"/analytics",
-            name:"Analytics",
+            path:"/film",
+            name:"Film",
             icon:<FaRegChartBar/>
         },
         {

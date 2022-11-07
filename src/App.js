@@ -4,15 +4,13 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import SimpleBackdrop from './pages/LoadingPage';
 
+
 const Palinsesto = lazy(() => import('./pages/Palinsesto.jsx'));
 const Film = lazy(() => import('./pages/Film.jsx'));
 const Comment = lazy(() => import('./pages/Comment.jsx'));
 const Product = lazy(() => import('./pages/Product.jsx'));
 const ProductList = lazy(() => import('./pages/ProductList.jsx'));
 const Login = lazy(() => import('./pages/Login.jsx'));
-
-
-
 
 
 const App = () => {
@@ -47,3 +45,4 @@ const App = () => {
 };
 
 export default App;
+

@@ -7,6 +7,7 @@ import ButtonBase from '@mui/material/ButtonBase';
 import { IconButton } from '@mui/material';
 import { DeleteOutlineOutlined } from '@mui/icons-material';
 
+
 const Img = styled('img')({
   margin: 'auto',
   display: 'block',
@@ -14,7 +15,9 @@ const Img = styled('img')({
   maxHeight: '100%',
 })
 
-export default function FilmCard({info}, {gridIndex}) {
+export default function FilmCard(props) {
+  
+
   return (
     
     <Paper
@@ -30,25 +33,26 @@ export default function FilmCard({info}, {gridIndex}) {
       <Grid container spacing={2}>
         <Grid item>
           <ButtonBase sx={{ width: 128, height: 128 }}>
-            <Img alt="complex" src={info.copertina} />
+            <Img alt="complex" src={props.info.copertina} />
           </ButtonBase>
         </Grid>
         <Grid item xs={12} sm container>
           <Grid item xs container direction="column" spacing={2}>
             <Grid item xs>
               <Typography gutterBottom variant="subtitle1" component="div">
-              { info.titolo}
+              { props.info.titolo}
               </Typography>
               <Typography variant="body2" gutterBottom>
-                {info.genere}
+                {props.info.genere}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {gridIndex}
+              {123}
               </Typography>
             </Grid>
             <Grid item>
-              <IconButton onClick={() => {console.log("Tasto delete premuto")}}>
+              <IconButton onClick={props.onDeleteAction}>
                 <DeleteOutlineOutlined/>
+                
               {/* <Typography sx={{ cursor: 'pointer' }} variant="body2">
                 Remove
               </Typography> */}

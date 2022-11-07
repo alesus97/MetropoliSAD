@@ -21,14 +21,19 @@ export default function Analytics() {
   
 
   useEffect(() => {
-    axios.get(`https://6368e35028cd16bba70f1e8a.mockapi.io/film`)
+    axios.get("https://6368e35028cd16bba70f1e8a.mockapi.io/film")
       .then(res => {
         const infoS = res.data;
         setInfoS(infoS);
         console.log(infoS); 
       })
   }, [])
-
+const handleDeleteFilm = (index) => {
+  const dataDelete = [...infoS]
+  dataDelete.splice(index, 1)
+  setInfoS([...dataDelete])
+  console.log("sto grandissimo cazzo!")
+}
 
     return (
       <div>
@@ -39,7 +44,7 @@ export default function Analytics() {
         {
           infoS.map((info,index) => ( 
             <Grid item key={info.titolo} xs={12} md={6} lg={4}>
-              <FilmCard info = {info} gridIndex = {index}></FilmCard>
+              <FilmCard info = {info} onDeleteAction= {() => handleDeleteFilm(index)}></FilmCard>
             </Grid>
         ))
       }
@@ -49,4 +54,5 @@ export default function Analytics() {
      </div>
       
     );
+
 };

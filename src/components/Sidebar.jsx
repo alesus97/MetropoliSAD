@@ -1,65 +1,117 @@
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import CssBaseline from '@mui/material/CssBaseline';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import List from '@mui/material/List';
+import Typography from '@mui/material/Typography';
+import { ListItemText } from '@mui/material';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import {makeStyles} from '@mui/styles';
+
+
+import { useNavigate } from 'react-router-dom';
+
+
 import React, { useState } from 'react';
 import {
-    FaBars,
     FaRegChartBar,
     FaCommentAlt,
     FaShoppingBag,
     FaThList
 }from "react-icons/fa";
 import { Dashboard } from '@mui/icons-material';
-import { NavLink } from 'react-router-dom';
+
+const drawerWidth = 240;
+
+
+const useStyles = makeStyles({
+page: {
+    background: '#f9f9f9',
+    width: '100%'
+    },
+    drawer:{
+        width: drawerWidth
+    },
+    drawerPaper:{
+        width: drawerWidth
+    },
+    root:{
+        display: 'flex'
+    }
+    });
+    
 
 const Sidebar = ({children}) => {
+    const classes = useStyles();
+    const navigate  = useNavigate();
     const[isOpen ,setIsOpen] = useState(false);
     const toggle = () => setIsOpen (!isOpen);
     const menuItem=[
         {
-            path:"/palinsesto",
             name:"Palinsesto",
-            icon:<Dashboard />
+            icon:<Dashboard />,
+            onClick:() => {navigate('/palinsesto')}
         },
         {
-            path:"/film",
             name:"Film",
-            icon:<FaRegChartBar/>
+            icon:<FaRegChartBar/>,
+            onClick:() => {navigate('/film', {replace: true})}
         },
         {
-            path:"/comment",
             name:"Comment",
-            icon:<FaCommentAlt/>
+            icon:<FaCommentAlt/>,
+            onClick:() => {navigate('/comment')}
         },
         {
-            path:"/product",
             name:"Product",
-            icon:<FaShoppingBag/>
+            icon:<FaShoppingBag/>,
+            onClick:() => {navigate('/product')}
         },
         {
-            path:"/productList",
             name:"Product List",
-            icon:<FaThList/>
+            icon:<FaThList/>,
+            onClick:() => {navigate('/productList')}
         }
     ]
-    return (
-        <div className="container">
-           <div style={{width: isOpen ? "200px" : "50px"}} className="sidebar">
-               <div className="top_section">
-                   <h1 style={{display: isOpen ? "block" : "none"}} className="logo">Logo</h1>
-                   <div style={{marginLeft: isOpen ? "50px" : "0px"}} className="bars">
-                       <FaBars onClick={toggle}/>
-                   </div>
-               </div>
-               {
-                   menuItem.map((item, index)=>(
-                       <NavLink to={item.path} key={index} className="link">
-                           <div className="icon">{item.icon}</div>
-                           <div style={{display: isOpen ? "block" : "none"}} className="link_text">{item.name}</div>
-                       </NavLink>
-                   ))
-               }
-           </div>
-           <main>{children}</main>
-        </div>
-    );
-};
+  return (
+
+    
+
+    <Box sx={{ display: 'flex' }}>
+      <CssBaseline />
+      <AppBar
+        position="fixed"
+        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
+      >
+        <Toolbar>
+          <Typography variant="h6" noWrap component="div">
+           AppBar
+          </Typography>
+        </Toolbar>
+      </AppBar>
+
+   
+     
+      <Drawer variant="permanent" className={classes.drawer} anchor="left" classes={{paper: classes.drawerPaper}}>
+      <List>
+        {menuItem.map((item, index) => {
+          return (
+            <ListItem button key={index} onClick={item.onClick}>
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.name} />
+            </ListItem>
+          );
+        })}
+      </List>
+    </Drawer>
+    <div className={classes.page}> 
+    {children}
+    </div>
+      
+     </Box>
+  );
+}
 
 export default Sidebar;

@@ -1,12 +1,8 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-import ButtonBase from "@mui/material/ButtonBase";
-import { IconButton } from "@mui/material";
+import { Grid, Paper, Typography, ButtonBase, IconButton } from "@mui/material";
 import { DeleteOutlineOutlined } from "@mui/icons-material";
-import { useTheme } from "@mui/styles";
+
 const Img = styled("img")({
   margin: "auto",
   display: "block",
@@ -15,8 +11,6 @@ const Img = styled("img")({
 });
 
 export default function FilmCard(props) {
-  const theme = useTheme();
-
   return (
     <Paper
       sx={{

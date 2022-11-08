@@ -4,6 +4,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import SimpleBackdrop from "./pages/LoadingPage";
 
+
 const Palinsesto = lazy(() => import("./pages/Palinsesto.jsx"));
 const Film = lazy(() => import("./pages/Film.jsx"));
 const Sale = lazy(() => import("./pages/Sale.jsx"));
@@ -48,7 +49,11 @@ const App = () => {
     );
   }
 
-  return <BrowserRouter>{content}</BrowserRouter>;
+  return (
+    <BrowserRouter>
+      {content}
+    </BrowserRouter>
+  );
 };
 
 export default App;

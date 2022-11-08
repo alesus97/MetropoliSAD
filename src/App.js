@@ -6,7 +6,7 @@ import SimpleBackdrop from "./pages/LoadingPage";
 
 const Palinsesto = lazy(() => import("./pages/Palinsesto.jsx"));
 const Film = lazy(() => import("./pages/Film.jsx"));
-const Comment = lazy(() => import("./pages/Comment.jsx"));
+const Sale = lazy(() => import("./pages/Sale.jsx"));
 const Product = lazy(() => import("./pages/Product.jsx"));
 const ProductList = lazy(() => import("./pages/ProductList.jsx"));
 const Login = lazy(() => import("./pages/Login.jsx"));
@@ -20,7 +20,7 @@ const App = () => {
         <Suspense fallback={<SimpleBackdrop />}>
           <Routes>
             <Route path="/palinsesto" element={<Palinsesto />} />
-            <Route path="/comment" element={<Comment />} />
+            <Route path="/sale" element={<Sale />} />
             <Route path="/film" element={<Film />} />
             <Route path="/product" element={<Product />} />
             <Route path="/productList" element={<ProductList />} />

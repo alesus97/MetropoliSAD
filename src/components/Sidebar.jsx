@@ -42,7 +42,7 @@ const useStyles = makeStyles({
   appContent: {
     // flex: "1 1 100%",
      MaxWidth: "100%",
-    paddingTop: 80,
+    paddingTop: 90,
     // margin: "0 auto",
   },
 });
@@ -68,10 +68,10 @@ const Sidebar = ({ children }) => {
       },
     },
     {
-      name: "Comment",
+      name: "Sale",
       icon: <FaCommentAlt />,
       onClick: () => {
-        navigate("/comment");
+        navigate("/sale");
       },
     },
     {

@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useState } from "react";
-import "./App.css";
+// import "./App.css";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import SimpleBackdrop from "./pages/LoadingPage";

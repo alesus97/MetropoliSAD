@@ -9,8 +9,8 @@ import { ListItemText } from '@mui/material';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import {makeStyles} from '@mui/styles';
-
-
+import MenuAppBar from './AppBar';
+import Divider from '@mui/material/Divider';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -80,8 +80,9 @@ const Sidebar = ({children}) => {
     
 
     <Box sx={{ display: 'flex' }}>
+      
       <CssBaseline />
-      <AppBar
+      {/* <AppBar
         position="fixed"
         sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
       >
@@ -90,11 +91,15 @@ const Sidebar = ({children}) => {
            AppBar
           </Typography>
         </Toolbar>
-      </AppBar>
+      </AppBar> */}
+      <MenuAppBar/>
+
 
    
      
       <Drawer variant="permanent" className={classes.drawer} anchor="left" classes={{paper: classes.drawerPaper}}>
+        <Toolbar/>
+        <Divider/>
       <List>
         {menuItem.map((item, index) => {
           return (
@@ -106,10 +111,10 @@ const Sidebar = ({children}) => {
         })}
       </List>
     </Drawer>
-    <div className={classes.page}> 
-    {children}
+    <div>
+      {children}
     </div>
-      
+
      </Box>
   );
 }

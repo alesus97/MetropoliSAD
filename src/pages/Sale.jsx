@@ -7,11 +7,11 @@ import { Alert } from "@mui/material";
 import AlertTitle from "@mui/material/AlertTitle";
 import axios from "axios";
 
-const validatedate = (date) => {
-  const re =
-    /^((?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\]))$/;
-  return re.test(String(date).toLowerCase());
-};
+// const validatedate = (date) => {
+//   const re =
+//     /^((?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\]))$/;
+//   return re.test(String(date).toLowerCase());
+// };
 
 export default function Sale() {
   const defaultMaterialTheme = createTheme();
@@ -40,15 +40,15 @@ export default function Sale() {
   const handleRowUpdate = (newData, oldData, resolve) => {
     //validating the data inputs
     let errorList = [];
-    if (newData.name === "") {
-      errorList.push("Try Again, You didn't enter the name field");
-    }
-    if (newData.duration === "") {
-      errorList.push("Try Again, You didn't enter the duration field");
-    }
-    if (newData.date === "" || validatedate(newData.date) === false) {
-      errorList.push("Oops!!! Please enter a valid date");
-    }
+    // if (newData.name === "") {
+    //   errorList.push("Try Again, You didn't enter the name field");
+    // }
+    // if (newData.duration === "") {
+    //   errorList.push("Try Again, You didn't enter the duration field");
+    // }
+    // if (newData.date === "" || validatedate(newData.date) === false) {
+    //   errorList.push("Oops!!! Please enter a valid date");
+    // }
     if (newData.hall === "") {
       errorList.push("Try Again, hall number field can't be blank");
     }
@@ -105,15 +105,15 @@ export default function Sale() {
   const handleRowAdd = (newData, resolve) => {
     //validating the data inputs
     let errorList = [];
-    if (newData.name === "") {
-      errorList.push("Try Again, You didn't enter the name field");
-    }
-    if (newData.duration === "") {
-      errorList.push("Try Again, You didn't enter the duration field");
-    }
-    if (newData.date === "" || validatedate(newData.date) === false) {
-      errorList.push("Oops!!! Please enter a valid date");
-    }
+    // if (newData.name === "") {
+    //   errorList.push("Try Again, You didn't enter the name field");
+    // }
+    // if (newData.duration === "") {
+    //   errorList.push("Try Again, You didn't enter the duration field");
+    // }
+    // if (newData.date === "" || validatedate(newData.date) === false) {
+    //   errorList.push("Oops!!! Please enter a valid date");
+    // }
     if (newData.hall === "") {
       errorList.push("Try Again, hall number field can't be blank");
     }

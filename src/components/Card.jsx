@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
 import { IconButton } from "@mui/material";
 import { DeleteOutlineOutlined } from "@mui/icons-material";
-
+import { useTheme } from "@mui/styles";
 const Img = styled("img")({
   margin: "auto",
   display: "block",
@@ -15,6 +15,8 @@ const Img = styled("img")({
 });
 
 export default function FilmCard(props) {
+  const theme = useTheme();
+
   return (
     <Paper
       sx={{
@@ -22,8 +24,6 @@ export default function FilmCard(props) {
         margin: "auto",
         maxWidth: 500,
         flexGrow: 1,
-        backgroundColor: (theme) =>
-          theme.palette.mode === "dark" ? "#1A2027" : "#fff",
       }}
     >
       <Grid container spacing={2}>

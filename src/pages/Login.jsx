@@ -13,6 +13,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "@mui/styles";
+import { createStyles, makeStyles, styled } from "@mui/styles";
 
 function Copyright(props) {
   return (
@@ -32,9 +34,16 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme();
+
+const CustomTextField = styled(TextField)({
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: 'white',
+    },
+}})
 
 export default function Login(props) {
+  const theme = useTheme();
   const navigate = useNavigate();
   // ---- handler
   const handleSubmit = (event) => {
@@ -51,9 +60,7 @@ export default function Login(props) {
   // ---------------------------
 
   return (
-    <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
         <Box
           sx={{
             marginTop: 8,
@@ -71,12 +78,12 @@ export default function Login(props) {
           <Box
             component="form"
             onSubmit={handleSubmit}
-            noValidate
+            // noValidate
             sx={{ mt: 1 }}
           >
-            <TextField
+            <CustomTextField
               margin="normal"
-              required
+              //required
               fullWidth
               id="email"
               label="Email Address"
@@ -84,9 +91,9 @@ export default function Login(props) {
               autoComplete="email"
               autoFocus
             />
-            <TextField
+            <CustomTextField
               margin="normal"
-              required
+              //required
               fullWidth
               name="password"
               label="Password"
@@ -122,6 +129,5 @@ export default function Login(props) {
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
-    </ThemeProvider>
   );
 }

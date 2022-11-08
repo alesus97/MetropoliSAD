@@ -31,17 +31,15 @@ export default function Analytics() {
     const dataDelete = [...infoS];
     dataDelete.splice(index, 1);
     setInfoS([...dataDelete]);
-    console.log("sto grandissimo cazzo!");
+    //console.log("sto grandissimo cazzo!");
   };
 
   return (
-    <div>
+      <Container maxWidth={false} sx={{ml:"20%", mt:"5%", maxWidth:"80%"}}>
       <FormDialog />
-
-      <Container>
         <Grid container spacing={3}>
           {infoS.map((info, index) => (
-            <Grid item key={info.titolo} xs={12} md={6} lg={4}>
+            <Grid item key={info.codice_film} xs={12} md={6} lg={4}>
               <FilmCard
                 info={info}
                 onDeleteAction={() => handleDeleteFilm(index)}
@@ -50,6 +48,5 @@ export default function Analytics() {
           ))}
         </Grid>
       </Container>
-    </div>
   );
 }

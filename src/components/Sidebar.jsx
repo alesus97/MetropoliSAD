@@ -21,6 +21,7 @@ import {
   FaThList,
 } from "react-icons/fa";
 import { Dashboard } from "@mui/icons-material";
+import { Container } from "@mui/system";
 
 const drawerWidth = 240;
 
@@ -33,16 +34,16 @@ const useStyles = makeStyles({
     width: drawerWidth,
   },
   drawerPaper: {
-    width: drawerWidth,
+     width: drawerWidth,
   },
   root: {
     display: "flex",
   },
   appContent: {
-    // flex: "1 3 100%",
-    MaxWidth: "100%",
+    // flex: "1 1 100%",
+     MaxWidth: "100%",
     paddingTop: 80,
-    margin: "0 auto",
+    // margin: "0 auto",
   },
 });
 
@@ -89,18 +90,9 @@ const Sidebar = ({ children }) => {
     },
   ];
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box display="flex" alignItems="center" justifyContent="center">
       <CssBaseline />
-      {/* <AppBar
-        position="fixed"
-        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
-      >
-        <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-           AppBar
-          </Typography>
-        </Toolbar>
-      </AppBar> */}
+
       <MenuAppBar />
 
       <Drawer
@@ -122,8 +114,9 @@ const Sidebar = ({ children }) => {
           })}
         </List>
       </Drawer>
+ 
+    <div className={classes.appContent}>{children}</div>
 
-      <div className={classes.appContent}>{children}</div>
     </Box>
   );
 };

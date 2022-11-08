@@ -1,35 +1,34 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormGroup from '@mui/material/FormGroup';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
-import {makeStyles} from '@mui/styles';
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import Switch from "@mui/material/Switch";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormGroup from "@mui/material/FormGroup";
+import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu";
+import { makeStyles } from "@mui/styles";
 const drawerWidth = 240;
 
 const useStyles = makeStyles({
-    page: {
-        background: '#f9f9f9',
-        width: '100%'
-        },
-        drawer:{
-            width: drawerWidth
-        },
-        drawerPaper:{
-            width: drawerWidth
-        },
-        root:{
-            display: 'flex'
-        }
-        });
-
+  page: {
+    background: "#f9f9f9",
+    width: "100%",
+  },
+  drawer: {
+    width: drawerWidth,
+  },
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  root: {
+    display: "flex",
+  },
+});
 
 export default function MenuAppBar() {
   const [auth, setAuth] = React.useState(true);
@@ -48,7 +47,7 @@ export default function MenuAppBar() {
   };
 
   return (
-    <> 
+    <>
       <FormGroup>
         <FormControlLabel
           control={
@@ -58,11 +57,13 @@ export default function MenuAppBar() {
               aria-label="login switch"
             />
           }
-          label={auth ? 'Logout' : 'Login'}
+          label={auth ? "Logout" : "Login"}
         />
       </FormGroup>
-      <AppBar  position="fixed"
-        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`}}>
+      <AppBar
+        position="fixed"
+        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
+      >
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Photos
@@ -83,13 +84,13 @@ export default function MenuAppBar() {
                 id="menu-appbar"
                 anchorEl={anchorEl}
                 anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
+                  vertical: "top",
+                  horizontal: "right",
                 }}
                 keepMounted
                 transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
+                  vertical: "top",
+                  horizontal: "right",
                 }}
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
@@ -101,6 +102,6 @@ export default function MenuAppBar() {
           )}
         </Toolbar>
       </AppBar>
-      </>
+    </>
   );
 }

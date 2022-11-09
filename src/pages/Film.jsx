@@ -3,7 +3,6 @@ import FilmCard from "../components/Card";
 import axios from "axios";
 import { Container } from "@mui/system";
 import { Grid } from "@mui/material";
-
 import FormDialog from "../components/Dialog";
 
 export default function Film() {
@@ -35,11 +34,12 @@ export default function Film() {
   };
 
   return (
-      <Container maxWidth={false} sx={{ml:"20%", mt:"5%", maxWidth:"80%", backgroundColor:'white'}}>
-      <FormDialog />
+
+      <Container maxWidth={false} sx={{ml:"20%", mt:"5%", maxWidth:"80%"}}>
+      {/* <FormDialog /> */}
         <Grid  jualistify="center" container spacing={3}>
           {films.map((info, index) => (
-            <Grid item key={info.codice_film} xs={12} md={6} lg={4}>
+            <Grid item key={info.codice_film} xs={12} md={6} lg={3}>
               <FilmCard
                 info={info}
                 onDeleteAction={() => handleDeleteFilm(index)}
@@ -48,5 +48,5 @@ export default function Film() {
           ))}
         </Grid>
       </Container>
-  );
+   );
 }

@@ -3,31 +3,31 @@ import MaterialTable from "material-table";
 import { Alert, AlertTitle, Box } from "@mui/material";
 import axios from "axios";
 
-const validatedate = (date) => {
-  const re =
-    /^((?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\]))$/;
-  return re.test(String(date).toLowerCase());
-};
+// const validatedate = (date) => {
+//   const re =
+//     /^((?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\]))$/;
+//   return re.test(String(date).toLowerCase());
+// };
 
 export default function Palinsesto() {
-  const [user, setUser] = useState([]);
+  const [film, setFilm] = useState([]);
   const [iserror, setIserror] = useState(false);
   const [errorMessages, setErrorMessages] = useState([]);
 
   let columns = [
     { title: "Titolo", field: "film.titolo" },
-    { title: "Data", field: "data" },
     { title: "Sala", field: "sala.numero_sala" },
-    { title: "Prezzo", field: "prezzo" },
+    // { title: "Data", field: "sala" },
+     { title: "Prezzo", field: "prezzo" }
   ];
 
   useEffect(() => {
     axios
-      .get(`https://63652c10f711cb49d1f73192.mockapi.io/api/palinsesto`)
+      .get(`https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/1/spettacoli`)
       .then((res) => {
-        const users = res.data;
-        setUser(users);
-        // console.log(users);
+        const films = res.data;
+        setFilm(films);
+        console.log(films);
       });
   }, []);
 
@@ -41,9 +41,9 @@ export default function Palinsesto() {
     if (newData.duration === "") {
       errorList.push("Try Again, You didn't enter the duration field");
     }
-    if (newData.date === "" || validatedate(newData.date) === false) {
-      errorList.push("Oops!!! Please enter a valid date");
-    }
+    // if (newData.date === "" || validatedate(newData.date) === false) {
+    //   errorList.push("Oops!!! Please enter a valid date");
+    // }
     if (newData.hall === "") {
       errorList.push("Try Again, hall number field can't be blank");
     }
@@ -53,15 +53,15 @@ export default function Palinsesto() {
 
     if (errorList.length < 1) {
       axios
-        .put(
-          `https://jsonplaceholder.typicode.com/users/${newData.id}`,
+        .post(
+          `https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/spettacolo/${newData.id}`,
           newData
         )
         .then((response) => {
-          const updateUser = [...user];
+          const updatefilm = [...film];
           const index = oldData.tableData.id;
-          updateUser[index] = newData;
-          setUser([...updateUser]);
+          updatefilm[index] = newData;
+          setFilm([...updatefilm]);
           resolve();
           setIserror(false);
           setErrorMessages([]);
@@ -81,12 +81,12 @@ export default function Palinsesto() {
   //function for deleting a row
   const handleRowDelete = (oldData, resolve) => {
     axios
-      .delete(`https://jsonplaceholder.typicode.com/users/${oldData.id}`)
+      .delete(`https://jsonplaceholder.typicode.com/films/${oldData.id}`)
       .then((response) => {
-        const dataDelete = [...user];
+        const dataDelete = [...film];
         const index = oldData.tableData.id;
         dataDelete.splice(index, 1);
-        setUser([...dataDelete]);
+        setFilm([...dataDelete]);
         resolve();
       })
       .catch((error) => {
@@ -106,9 +106,9 @@ export default function Palinsesto() {
     if (newData.duration === "") {
       errorList.push("Try Again, You didn't enter the duration field");
     }
-    if (newData.date === "" || validatedate(newData.date) === false) {
-      errorList.push("Oops!!! Please enter a valid date");
-    }
+    // if (newData.date === "" || validatedate(newData.date) === false) {
+    //   errorList.push("Oops!!! Please enter a valid date");
+    // }
     if (newData.hall === "") {
       errorList.push("Try Again, hall number field can't be blank");
     }
@@ -118,11 +118,11 @@ export default function Palinsesto() {
 
     if (errorList.length < 1) {
       axios
-        .post(`https://jsonplaceholder.typicode.com/users`, newData)
+        .post(`https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/spettacolo`, newData)
         .then((response) => {
-          let newUserdata = [...user];
-          newUserdata.push(newData);
-          setUser(newUserdata);
+          let newfilmdata = [...film];
+          newfilmdata.push(newData);
+          setFilm(newfilmdata);
           resolve();
           setErrorMessages([]);
           setIserror(false);
@@ -140,18 +140,17 @@ export default function Palinsesto() {
   };
 
   return (
-    // <div>
-    <Box sx={{ width: "70%", ml: "25%", mt: "3.7%" }}>
-      <div>
+
+    <Box sx={{ width: "70%", ml: "25%", mt: "5%" }}>
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
         />
 
         <MaterialTable
-          title="User Details"
+          title="film Details"
           columns={columns}
-          data={user}
+          data={film}
           options={{
             actionsColumnIndex: -1,
           }}
@@ -170,9 +169,7 @@ export default function Palinsesto() {
               }),
           }}
         />
-      </div>
 
-      <div>
         {iserror && (
           <Alert severity="error">
             <AlertTitle>ERROR</AlertTitle>
@@ -181,7 +178,6 @@ export default function Palinsesto() {
             })}
           </Alert>
         )}
-      </div>
     </Box>
   );
 }

@@ -6,7 +6,7 @@ import { Grid } from "@mui/material";
 
 import FormDialog from "../components/Dialog";
 
-export default function Analytics() {
+export default function Film() {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -16,29 +16,29 @@ export default function Analytics() {
   const handleClose = () => {
     setOpen(false);
   };
-  const [infoS, setInfoS] = useState([]);
+  const [films, setFilms] = useState([]);
 
   useEffect(() => {
     axios
-      .get("https://6368e35028cd16bba70f1e8a.mockapi.io/film")
+      .get("https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/film")
       .then((res) => {
-        const infoS = res.data;
-        setInfoS(infoS);
-        console.log(infoS);
+        const films = res.data;
+        setFilms(films);
+        console.log(films);
       });
   }, []);
   const handleDeleteFilm = (index) => {
-    const dataDelete = [...infoS];
+    const dataDelete = [...films];
     dataDelete.splice(index, 1);
-    setInfoS([...dataDelete]);
+    setFilms([...dataDelete]);
     //console.log("sto grandissimo cazzo!");
   };
 
   return (
-      <Container maxWidth={false} sx={{ml:"20%", mt:"5%", maxWidth:"80%"}}>
+      <Container maxWidth={false} sx={{ml:"20%", mt:"5%", maxWidth:"80%", backgroundColor:'white'}}>
       <FormDialog />
-        <Grid container spacing={3}>
-          {infoS.map((info, index) => (
+        <Grid  jualistify="center" container spacing={3}>
+          {films.map((info, index) => (
             <Grid item key={info.codice_film} xs={12} md={6} lg={4}>
               <FilmCard
                 info={info}

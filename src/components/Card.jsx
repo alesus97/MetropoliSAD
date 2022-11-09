@@ -1,61 +1,101 @@
-import * as React from "react";
-import { styled } from "@mui/material/styles";
-import { Grid, Paper, Typography, ButtonBase, IconButton } from "@mui/material";
-import { DeleteOutlineOutlined } from "@mui/icons-material";
+import * as React from 'react';
+import { styled } from '@mui/material/styles';
+import Card from '@mui/material/Card';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import Collapse from '@mui/material/Collapse';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Grid } from '@mui/material';
 
-const Img = styled("img")({
-  margin: "auto",
-  display: "block",
-  maxWidth: "100%",
-  maxHeight: "100%",
-});
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  marginLeft: 'auto',
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
+
+// const img = styled("img")({
+//   margin: "auto",
+//   display: "block",
+//   maxWidth: "100%",
+//   maxHeight: "100%"
+
+// });
 
 export default function FilmCard(props) {
-  return (
-    <Paper
-      sx={{
-        p: 2,
-        margin: "auto",
-        maxWidth: 500,
-        flexGrow: 1,
-      }}
-    >
-      <Grid container spacing={2}>
-        <Grid item>
-          <ButtonBase sx={{ width: 128, height: 128 }}>
-            <Img alt="complex" src={props.info.copertina} />
-          </ButtonBase>
-        </Grid>
-        <Grid item xs={12} sm container>
-          <Grid item xs container direction="column" spacing={2}>
-            <Grid item xs>
-              <Typography gutterBottom variant="subtitle1" component="div">
-                {props.info.titolo}
-              </Typography>
-              <Typography variant="body2" gutterBottom>
-                {props.info.genere}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {123}
-              </Typography>
-            </Grid>
-            <Grid item>
-              <IconButton onClick={props.onDeleteAction}>
-                <DeleteOutlineOutlined />
+  const [expanded, setExpanded] = React.useState(false);
 
-                {/* <Typography sx={{ cursor: 'pointer' }} variant="body2">
-                Remove
-              </Typography> */}
-              </IconButton>
-            </Grid>
-          </Grid>
-          <Grid item>
-            <Typography variant="subtitle1" component="div">
-              $19.00
-            </Typography>
-          </Grid>
-        </Grid>
-      </Grid>
-    </Paper>
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
+
+  return (
+    <Card raised sx={{ maxWidth: 345 }}>
+      <CardMedia
+        component="img"
+        height="500"
+        image="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Il_Muro_-_FIlm_2019_-_Locandina.jpg/429px-Il_Muro_-_FIlm_2019_-_Locandina.jpg"
+       // image={props.info.copertina}
+      />
+      <CardContent>
+        <Typography variant="h5"  gutterBottom>
+        {props.info.titolo}
+        </Typography> 
+        </CardContent>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <CardContent>
+        <Typography paragraph variant="body1">
+         {props.info.genere}
+        </Typography>
+
+        <Typography paragraph variant="body1">
+        {props.info.durata}
+        </Typography>
+
+        <Typography paragraph variant="body1">
+        {props.info.regia}
+        </Typography>
+
+        <Typography paragraph variant="body1">
+        
+        {props.info.produttore}
+        </Typography>
+
+        <Typography paragraph variant="body1">
+        {props.info.data_uscita}
+        </Typography>
+
+        <Typography paragraph variant="body1">
+        {props.info.codice_film}
+        </Typography>
+
+    
+      
+
+          <Typography paragraph >Trama:</Typography>
+          <Typography paragraph>
+          {props.info.trama}
+          </Typography>
+          
+        </CardContent>
+      </Collapse>
+      <CardActions disableSpacing>
+        <ExpandMore
+          expand={expanded}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more"
+        >
+          <ExpandMoreIcon color="primary"/>
+        </ExpandMore>
+      </CardActions>
+    </Card>
   );
 }

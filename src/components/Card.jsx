@@ -8,7 +8,8 @@ import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Grid } from '@mui/material';
+import Divider from '@mui/material/Divider';
+
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -37,7 +38,7 @@ export default function FilmCard(props) {
   };
 
   return (
-    <Card raised >
+    <Card raised  >
       <CardMedia sx={{width:"100%", margin:"auto"}}
         component="img"
         // height="30%"
@@ -46,7 +47,7 @@ export default function FilmCard(props) {
        // image={props.info.copertina}
       />
       <CardContent>
-        <Typography variant="h5"  gutterBottom>
+        <Typography  gutterBottom align="center" sx={{ fontWeight: 'bold' }}>
         {props.info.titolo}
         </Typography> 
         </CardContent>
@@ -76,10 +77,7 @@ export default function FilmCard(props) {
         <Typography paragraph variant="body1">
         {props.info.codice_film}
         </Typography>
-
-    
       
-
           <Typography paragraph >Trama:</Typography>
           <Typography paragraph>
           {props.info.trama}
@@ -87,14 +85,19 @@ export default function FilmCard(props) {
           
         </CardContent>
       </Collapse>
+     
       <CardActions disableSpacing>
+      
+      <Typography variant="body2"  color="primary">
+          Dettagli
+          </Typography>
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
           aria-expanded={expanded}
-          aria-label="show more"
         >
           <ExpandMoreIcon color="primary"/>
+         
         </ExpandMore>
       </CardActions>
     </Card>

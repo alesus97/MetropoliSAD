@@ -3,7 +3,7 @@ import FilmCard from "../components/Card";
 import axios from "axios";
 import { Container } from "@mui/system";
 import { Grid } from "@mui/material";
-import FormDialog from "../components/Dialog";
+import InserFilmFormDialog from "../components/InsertFilmFormDialog";
 
 export default function Film() {
   const [open, setOpen] = React.useState(false);
@@ -36,7 +36,7 @@ export default function Film() {
   return (
 
       <Container maxWidth={false} sx={{ml:"20%", mt:"5%", maxWidth:"80%"}}>
-      {/* <FormDialog /> */}
+      <InserFilmFormDialog />
         <Grid  jualistify="center" container spacing={3}>
           {films.map((info, index) => (
             <Grid item key={info.codice_film} xs={12} md={6} lg={3}>

@@ -8,7 +8,9 @@ import {
   Typography,
   ListItem,
   ListItemIcon,
-  useTheme
+  useTheme,
+  Divider,
+  IconButton
 } from "@mui/material";
 
 import { useNavigate } from "react-router-dom";
@@ -61,9 +63,7 @@ const Sidebar = ({ children }) => {
         sx={{ zIndex: theme.zIndex.drawer + 1, width: "80%" }}
       >
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 0 }}>
-            AppBar
-          </Typography>
+         
         </Toolbar>
       </AppBar>
       <Drawer
@@ -76,10 +76,14 @@ const Sidebar = ({ children }) => {
         // classes={{ paper: classes.drawerPaper }}
       >
         {/* <Divider color={theme.palette.primary.main} /> */}
-        <List>
+        <List >
+        <Typography variant="h6" component="div" sx={{ml:"30%"}}>
+            AppBar
+          </Typography>
+          <Divider sx={{paddingTop:3}}/>
           {menuItem.map((item, index) => {
             return (
-              <ListItem button key={index} onClick={item.onClick}>
+              <ListItem button key={index} onClick={item.onClick} >
                 <ListItemIcon>{item.icon}</ListItemIcon>
                 <ListItemText variant="title" primary={item.name} />
               </ListItem>

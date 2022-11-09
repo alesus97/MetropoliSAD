@@ -1,17 +1,16 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
+
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import AddIcon from '@mui/icons-material/Add'
 import { Button, Container, Fab } from '@mui/material';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 
 
 
-export default function FormDialog() {
+export default function InsertFilmFormDialog() {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -20,6 +19,15 @@ export default function FormDialog() {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    
+    console.log({
+      titolo: data.get("email")
+    });
   };
 
   return (
@@ -38,20 +46,24 @@ export default function FormDialog() {
           
           <Container component="main" maxWidth="xs">
         <Box 
-      sx={{
-        alignItems:"center",
-        display: 'flex',
-        flexDirection: 'column',
-        '& .MuiTextField-root': { width: '50ch' },
-      }}
+            component="form"
+            onSubmit={handleSubmit}
+            sx={{
+              alignItems:"center",
+              display: 'flex',
+              flexDirection: 'column',
+              '& .MuiTextField-root': { width: '50ch' },
+            }}
     >
-
           <TextField
-            label="Titolo"
-            fullWidth
             margin="normal"
-            variant="standard"
-            focused
+            //required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            autoFocus
           />
           <TextField
             label="Genere"
@@ -111,19 +123,18 @@ export default function FormDialog() {
             fullWidth
             margin="normal"
             variant="standard"
-            type="url"
+            // type="url"
             focused
           />
-
           
-          </Box>
-          </Container>
-          
-      </DialogContent>
-        <DialogActions>
+         
+      
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Ok</Button>
-        </DialogActions>
+          <Button type="submit" >Ok</Button>
+
+        </Box>
+        </Container>
+        </DialogContent>
       </Dialog>
     </div> 
     

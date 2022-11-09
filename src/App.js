@@ -5,7 +5,7 @@ import Sidebar from "./components/Sidebar";
 import SimpleBackdrop from "./pages/LoadingPage";
 
 
-const Palinsesto = lazy(() => import("./pages/Palinsesto.jsx"));
+const Palinsesto = lazy(() => import("./pages/Palinsesto2.jsx"));
 const Film = lazy(() => import("./pages/Film.jsx"));
 const Sale = lazy(() => import("./pages/Sale.jsx"));
 const Product = lazy(() => import("./pages/Product.jsx"));

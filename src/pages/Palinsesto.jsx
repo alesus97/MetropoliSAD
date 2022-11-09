@@ -10,7 +10,7 @@ import axios from "axios";
 // };
 
 export default function Palinsesto() {
-  const [film, setFilm] = useState([]);
+  const [spettacoli, setSpettacoli] = useState([]);
   const [iserror, setIserror] = useState(false);
   const [errorMessages, setErrorMessages] = useState([]);
 
@@ -18,16 +18,17 @@ export default function Palinsesto() {
     { title: "Titolo", field: "film.titolo" },
     { title: "Sala", field: "sala.numero_sala" },
     // { title: "Data", field: "sala" },
-     { title: "Prezzo", field: "prezzo" }
+    { title: "Prezzo", field: "prezzo" },
   ];
+
 
   useEffect(() => {
     axios
-      .get(`https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/1/spettacoli`)
+      .get(
+        `https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/1/spettacoli`
+      )
       .then((res) => {
-        const films = res.data;
-        setFilm(films);
-        console.log(films);
+        setSpettacoli(res.data);
       });
   }, []);
 
@@ -58,10 +59,10 @@ export default function Palinsesto() {
           newData
         )
         .then((response) => {
-          const updatefilm = [...film];
+          const updateSpettacoli = [...spettacoli];
           const index = oldData.tableData.id;
-          updatefilm[index] = newData;
-          setFilm([...updatefilm]);
+          updateSpettacoli[index] = newData;
+          setSpettacoli([...updateSpettacoli]);
           resolve();
           setIserror(false);
           setErrorMessages([]);
@@ -83,10 +84,10 @@ export default function Palinsesto() {
     axios
       .delete(`https://jsonplaceholder.typicode.com/films/${oldData.id}`)
       .then((response) => {
-        const dataDelete = [...film];
+        const dataDelete = [...spettacoli];
         const index = oldData.tableData.id;
         dataDelete.splice(index, 1);
-        setFilm([...dataDelete]);
+        setSpettacoli([...dataDelete]);
         resolve();
       })
       .catch((error) => {
@@ -118,11 +119,20 @@ export default function Palinsesto() {
 
     if (errorList.length < 1) {
       axios
-        .post(`https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/spettacolo`, newData)
+        .post(
+          `https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/spettacolo`,
+          newData
+        )
         .then((response) => {
-          let newfilmdata = [...film];
-          newfilmdata.push(newData);
-          setFilm(newfilmdata);
+          let newSpettacolidata = [...spettacoli];
+          const newSpettacolo = {
+            // film:{
+            //   titolo: newData.
+            // }
+
+          }
+          newSpettacolidata.push(newData);
+          setSpettacoli(newSpettacolidata);
           resolve();
           setErrorMessages([]);
           setIserror(false);
@@ -140,44 +150,50 @@ export default function Palinsesto() {
   };
 
   return (
-
     <Box sx={{ width: "70%", ml: "25%", mt: "5%" }}>
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/icon?family=Material+Icons"
-        />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      />
 
-        <MaterialTable
-          title="film Details"
-          columns={columns}
-          data={film}
-          options={{
-            actionsColumnIndex: -1,
-          }}
-          editable={{
-            onRowUpdate: (newData, oldData) =>
-              new Promise((resolve) => {
-                handleRowUpdate(newData, oldData, resolve);
-              }),
-            onRowAdd: (newData) =>
-              new Promise((resolve) => {
-                handleRowAdd(newData, resolve);
-              }),
-            onRowDelete: (oldData) =>
-              new Promise((resolve) => {
-                handleRowDelete(oldData, resolve);
-              }),
-          }}
-        />
+      <MaterialTable
+        title="film Details"
+        columns={columns}
+        data={spettacoli}
+        options={{
+          actionsColumnIndex: -1,
+        }}
+        editable={{
+          onRowUpdate: (newData, oldData) =>
+            new Promise((resolve) => {
+              handleRowUpdate(newData, oldData, resolve);
+            }),
+          onRowAdd: (newData) =>
+            new Promise((resolve) => {
+              console.log(newData)
+              const newSpettacolo = {
+                codice_film: 4,
+                id_sala: 44,
+                data_ora: "",
+                prezzo: 22,
+              };
+              handleRowAdd(newSpettacolo, resolve);
+            }),
+          onRowDelete: (oldData) =>
+            new Promise((resolve) => {
+              handleRowDelete(oldData, resolve);
+            }),
+        }}
+      />
 
-        {iserror && (
-          <Alert severity="error">
-            <AlertTitle>ERROR</AlertTitle>
-            {errorMessages.map((msg, i) => {
-              return <div key={i}>{msg}</div>;
-            })}
-          </Alert>
-        )}
+      {iserror && (
+        <Alert severity="error">
+          <AlertTitle>ERROR</AlertTitle>
+          {errorMessages.map((msg, i) => {
+            return <div key={i}>{msg}</div>;
+          })}
+        </Alert>
+      )}
     </Box>
   );
 }

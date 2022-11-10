@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   ListItemText,
   Drawer,
@@ -10,15 +10,19 @@ import {
   ListItemIcon,
   useTheme,
   Divider,
-  IconButton
+  IconButton,
+  Menu
 } from "@mui/material";
 
 import { useNavigate } from "react-router-dom";
-import { Movie, Chair, Dashboard } from "@mui/icons-material";
+import { Movie, Chair, Dashboard, Adb} from "@mui/icons-material";
+
+
 
 const Sidebar = ({ children }) => {
   const theme = useTheme();
   const navigate = useNavigate();
+
   const menuItem = [
     {
       name: "Palinsesto",
@@ -60,27 +64,45 @@ const Sidebar = ({ children }) => {
     <div>
       <AppBar
         position="fixed"
-        sx={{ zIndex: theme.zIndex.drawer + 1, width: "80%" }}
+        sx={{ zIndex: theme.zIndex.drawer + 1, width: "100%" }}
       >
-        <Toolbar>
-         
+        <Toolbar >
+        <Adb sx={{ display: { color:'inherit'}, ml:"1%" }} />
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              ml: "1.3%",
+             
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.4rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            MEGLIO DELL'UCI CINEMAS
+          </Typography>
         </Toolbar>
       </AppBar>
       <Drawer
         PaperProps={{
-          sx: { width: "20%" },
+          sx: { width: "15%" },
         }}
         variant="permanent"
-        // className={classes.drawer}
+        
         anchor="left"
-        // classes={{ paper: classes.drawerPaper }}
+       
       >
-        {/* <Divider color={theme.palette.primary.main} /> */}
+        <Divider color={theme.palette.primary.main} />
         <List >
         <Typography variant="h6" component="div" sx={{ml:"30%"}}>
             AppBar
           </Typography>
-          <Divider sx={{paddingTop:3}}/>
+          <Toolbar/>
+          {/* <Divider sx={{paddingTop:3}}/> */}
           {menuItem.map((item, index) => {
             return (
               <ListItem button key={index} onClick={item.onClick} >

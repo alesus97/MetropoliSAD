@@ -11,6 +11,9 @@ import { Box, IconButton } from "@mui/material";
 import axios from "axios";
 import { Delete } from "@mui/icons-material";
 import InsertSpettacoloFormDialog from "../components/InsertSpettacoloFormDialog";
+import {Fab} from "@mui/material";
+import AddIcon from '@mui/icons-material/Add'
+import InsertFilmFormDialog from "../components/InsertFilmFormDialog";
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -28,6 +31,10 @@ export default function BasicTable() {
 const [spettacoli, setSpettacoli] = useState([]);
   const [iserror, setIserror] = useState(false);
   const [errorMessages, setErrorMessages] = useState([]);
+  const [openDialog, setOpenDialog] = React.useState(false);
+
+  
+  
 
   
 
@@ -40,10 +47,19 @@ const [spettacoli, setSpettacoli] = useState([]);
         setSpettacoli(res.data);
       });
   }, []);
+  
 
   return (
     <Box sx={{ width: "70%", ml: "25%", mt: "5%" }}>
-        <InsertSpettacoloFormDialog/>
+       <Fab color="primary" aria-label="add" onClick={() => setOpenDialog(true)}>
+        <AddIcon/>
+      </Fab> 
+
+      <InsertSpettacoloFormDialog openDialog={openDialog} setCloseDialog={() => setOpenDialog(false)}/>
+     
+      
+        
+
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>

@@ -32,10 +32,14 @@ export default function InsertFilmFormDialog() {
 
   return (
     <div>
-    <Fab variant= "extended" onClick={handleClickOpen}>
+    {/* <Fab variant= "extended" onClick={handleClickOpen}>
       <AddIcon sx={{mr:1}}/>
       Create new
-      </Fab> 
+      </Fab>  */}
+
+      <Fab color="primary" aria-label="add" onClick={handleClickOpen}  >
+        <AddIcon/>
+      </Fab>
 
       <Dialog open={open} fullWidth maxWidth="sm" onClose={handleClose}>
 

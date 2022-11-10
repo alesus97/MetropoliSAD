@@ -3,13 +3,14 @@ import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
-import {Select} from '@mui/material';
+import {FormControl, Select} from '@mui/material';
 import { styled } from '@mui/styles';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import AddIcon from '@mui/icons-material/Add'
 import { Button, Container, Fab, MenuItem } from '@mui/material';
 import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
 
 const CustomTextField = styled(TextField)({
     '& .MuiOutlinedInput-root': {
@@ -18,17 +19,18 @@ const CustomTextField = styled(TextField)({
       },
   }})
 
-export default function InsertSpettacoloFormDialog() {
-  const [open, setOpen] = React.useState(false);
+export default function InsertSpettacoloFormDialog(props) {
+  
   const [film, setFilm] = useState([]);
   const [sale, setSale] = useState([]);
+ 
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  
+  
 
+ 
   const handleClose = () => {
-    setOpen(false);
+    props.setCloseDialog()
   };
 
   const handleSubmit = (event) => {
@@ -60,14 +62,15 @@ export default function InsertSpettacoloFormDialog() {
       });
   }, []);
 
+  const [currency ] = React.useState('DATA');
+ 
   return (
     <div>
-    <Fab variant= "extended" onClick={handleClickOpen}>
-      <AddIcon sx={{mr:1}}/>
-      Create new
-      </Fab> 
+   
 
-      <Dialog open={open} fullWidth maxWidth="sm" onClose={handleClose}>
+      
+
+      <Dialog open={props.openDialog} fullWidth maxWidth="sm" onClose={handleClose}>
 
        <DialogTitle align="center">
        Inserisci Spettacolo
@@ -86,7 +89,7 @@ export default function InsertSpettacoloFormDialog() {
             }}
     >
 
-          <CustomTextField
+          {/* <CustomTextField
             margin="normal"
             //required
             fullWidth
@@ -97,20 +100,45 @@ export default function InsertSpettacoloFormDialog() {
           //  autoComplete="email"
             variant='standard'
             focused
-          />
-      
-          <Select type="submit" fullWidth defaultValue=""  >
-            {film.map((film, index) => (
-                <MenuItem key={index} value={film}>{film.titolo}</MenuItem>
-            ))}
-          </Select>
-          
+                    
+          label="Data di uscita"
+          value={currency}
+          type="date"
+          margin="normal"
+          fullWidth
+          variant="standard"
+          autoFocus
+          /> */}
 
+      <Box>
+      <TextField
+        //label="Data di uscita"
+        
+        variant="standard"
+        type="date"
+      
+      />
+     
+    </Box>
+          
+      <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }} fullWidth>
+        <InputLabel>Titolo</InputLabel>
+      <Select type="submit" fullWidth defaultValue=""  >
+          {film.map((film, index) => (
+              <MenuItem key={index} value={film}>{film.titolo}</MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+          
+          
+            <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }} fullWidth>
+              <InputLabel>Sala</InputLabel>
           <Select  fullWidth defaultValue="">
             {sale.map((sala, index) => (
                 <MenuItem key={index} value={sala}>{sala.numero_sala}</MenuItem>
             ))}
           </Select>
+          </FormControl>
           
          
           

@@ -30,7 +30,6 @@ export default function Film() {
     const dataDelete = [...films];
     dataDelete.splice(index, 1);
     setFilms([...dataDelete]);
-    //console.log("sto grandissimo cazzo!");
   };
 
   return (

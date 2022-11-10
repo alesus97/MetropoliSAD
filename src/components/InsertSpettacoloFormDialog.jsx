@@ -11,10 +11,10 @@ import AddIcon from "@mui/icons-material/Add";
 import { Button, Container, Fab, MenuItem } from "@mui/material";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
-import {InputAdornment} from "@mui/material";
+import { InputAdornment } from "@mui/material";
 
 const CustomTextField = styled(TextField)({
-  "& .MuiInput-root": {
+  "& .MuiOutlinedInput-root": {
     "& fieldset": {
       borderColor: "white",
     },
@@ -25,6 +25,10 @@ export default function InsertSpettacoloFormDialog(props) {
   const [film, setFilm] = useState([]);
   const [sale, setSale] = useState([]);
 
+  const [iserror, setIserror] = useState(false);
+  const [errorMessages, setErrorMessages] = useState([]);
+  const [openDialog, setOpenDialog] = React.useState(false);
+
   const handleClose = () => {
     props.setCloseDialog();
   };
@@ -32,13 +36,65 @@ export default function InsertSpettacoloFormDialog(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log(data);
 
-    console.log({
-      film: data.get("film"),
-      data: data.get("data"),
-      sala: data.get("sala")
-    });
+    const jsonData = {
+      codice_film: JSON.parse(data.get("film")).codice_film,
+      id_sala: JSON.parse(data.get("sala")).id_sala,
+      data_ora: data.get("data"),
+      prezzo: data.get("prezzo"),
+    };
+
+;
+
+    axios
+      .post(
+        `https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/spettacolo`,
+        jsonData
+      )
+      .then((response) => {
+       
+        const sala = JSON.parse(data.get("sala"));
+        const film = JSON.parse(data.get("film"));
+       
+        const newSpettacolo = {
+          codice_spettacolo: response.data.codice_spettacolo,
+          data: data.get("data").replace(/T/," "),
+          prezzo: data.get("prezzo"),
+          sala: {
+            id_sala: sala.id_sala,
+            numero_sala: sala.numero_sala,
+          },
+          film: {
+            codice_film: film.codice_film,
+            titolo: film.titolo,
+            durata: film.durata,
+          },
+        };
+
+        props.onAddSpettacolo(newSpettacolo);
+
+        console.log(newSpettacolo);
+        handleClose();
+        // const updateSpettacoli = [...spettacoli];
+        // const index = oldData.tableData.id;
+        // updateSpettacoli[index] = newData;
+        // setSpettacoli([...updateSpettacoli]);
+        // resolve();
+        setIserror(false);
+        setErrorMessages([]);
+      })
+      .catch((error) => {
+        setErrorMessages(["Update failed! Server error"]);
+        setIserror(true);
+        // resolve();
+      });
+
+    // console.log({
+    //   film: data.get("film"),
+    //   data: data.get("data"),
+    //   sala: data.get("sala"),
+    //   prezzo: data.get("prezzo")
+    // });
   };
 
   useEffect(() => {
@@ -56,8 +112,6 @@ export default function InsertSpettacoloFormDialog(props) {
         setSale(res.data);
       });
   }, []);
-
-  const [currency] = React.useState("DATA");
 
   return (
     <div>
@@ -81,7 +135,7 @@ export default function InsertSpettacoloFormDialog(props) {
               }}
             >
               <CustomTextField
-                variant="standard"
+                sx={{ borderColor: "red" }}
                 margin="normal"
                 defaultValue=""
                 select
@@ -90,15 +144,13 @@ export default function InsertSpettacoloFormDialog(props) {
                 label="Seleziona Film"
               >
                 {film.map((film, index) => (
-                  <MenuItem key={index} value={film.codice_film}>
+                  <MenuItem key={index} value={JSON.stringify(film)}>
                     {film.titolo}
                   </MenuItem>
                 ))}
               </CustomTextField>
-               
-            
+
               <CustomTextField
-                variant="standard"
                 margin="normal"
                 defaultValue=""
                 select
@@ -107,27 +159,31 @@ export default function InsertSpettacoloFormDialog(props) {
                 label="Seleziona Sala"
               >
                 {sale.map((sala, index) => (
-                  <MenuItem key={index} value={sala.id_sala}>
+                  <MenuItem key={index} value={JSON.stringify(sala)}>
                     {sala.numero_sala}
                   </MenuItem>
                 ))}
               </CustomTextField>
 
-              <CustomTextField 
-              label="Data di uscita"
-              id="standard-start-adornment"
-              InputProps={{
-                startAdornment: <InputAdornment position="start"/>,
-              }}
-              variant="standard"
-              type="datetime-local"
-              fullWidth
-              margin="normal"
-              name="data"/>
+              <CustomTextField
+                label="Data di uscita"
+                id="standard-start-adornment"
+                InputProps={{
+                  startAdornment: <InputAdornment position="start" />,
+                }}
+                type="datetime-local"
+                fullWidth
+                margin="normal"
+                name="data"
+              />
 
-              <CustomTextField variant="standard" margin="normal" fullWidth label="Prezzo biglietto" type="number" name="data" />
-
-
+              <CustomTextField
+                margin="normal"
+                fullWidth
+                label="Prezzo biglietto"
+                type="number"
+                name="prezzo"
+              />
 
               <Button onClick={handleClose}>Cancel</Button>
               <Button type="submit">Ok</Button>

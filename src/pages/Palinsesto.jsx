@@ -11,32 +11,42 @@ import { Box, IconButton } from "@mui/material";
 import axios from "axios";
 import { Delete } from "@mui/icons-material";
 import InsertSpettacoloFormDialog from "../components/InsertSpettacoloFormDialog";
-import {Fab} from "@mui/material";
-import AddIcon from '@mui/icons-material/Add'
+import { Fab } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 import InsertFilmFormDialog from "../components/InsertFilmFormDialog";
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  // createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  // createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  // createData("Eclair", 262, 16.0, 24, 6.0),
-  // createData("Cupcake", 305, 3.7, 67, 4.3),
-  // createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
-
 export default function BasicTable() {
-const [spettacoli, setSpettacoli] = useState([]);
+  const [spettacoli, setSpettacoli] = useState([]);
   const [iserror, setIserror] = useState(false);
   const [errorMessages, setErrorMessages] = useState([]);
   const [openDialog, setOpenDialog] = React.useState(false);
 
-  
-  
+  const addSpettacolo = (spettacolo) => {
+    const newSpettacoli = [...spettacoli]
+    newSpettacoli.push(spettacolo)
+    setSpettacoli(newSpettacoli)
+  }
 
-  
+  // () => {console.log(spettacoli[index])}
+  const handleDelete = (index) => {
+    console.log(spettacoli[index])
+    const codiceSpettacolo = spettacoli[index].codice_spettacolo;
+    axios
+      .delete(
+        `https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/spettacolo/${codiceSpettacolo}`
+      )
+      .then((res) => {
+        const dataDelete = [...spettacoli];
+        dataDelete.splice(index,1);
+        setSpettacoli([...dataDelete]);
+        console.log("Spettacolo cancellato correttamente");
+      })
+      .catch((error) => {
+        console.log(error);
+        setErrorMessages(["Update failed! Server error"]);
+        setIserror(true);
+      });
+  };
 
   useEffect(() => {
     axios
@@ -47,18 +57,18 @@ const [spettacoli, setSpettacoli] = useState([]);
         setSpettacoli(res.data);
       });
   }, []);
-  
 
   return (
     <Box sx={{ width: "70%", ml: "25%", mt: "5%" }}>
-       <Fab color="primary" aria-label="add" onClick={() => setOpenDialog(true)}>
-        <AddIcon/>
-      </Fab> 
+      <Fab color="primary" aria-label="add" onClick={() => setOpenDialog(true)}>
+        <AddIcon />
+      </Fab>
 
-      <InsertSpettacoloFormDialog openDialog={openDialog} setCloseDialog={() => setOpenDialog(false)}/>
-     
-      
-        
+      <InsertSpettacoloFormDialog
+        openDialog={openDialog}
+        setCloseDialog={() => setOpenDialog(false)}
+        onAddSpettacolo={addSpettacolo}
+      />
 
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -87,8 +97,8 @@ const [spettacoli, setSpettacoli] = useState([]);
                 <TableCell align="center">{spettacolo.prezzo}</TableCell>
 
                 <TableCell align="center">
-                  <IconButton onClick={() => {console.log(spettacoli[index])}}>
-                    <Delete  color="primary"/>
+                  <IconButton onClick={() => handleDelete(index)}>
+                    <Delete color="primary" />
                   </IconButton>
                 </TableCell>
               </TableRow>

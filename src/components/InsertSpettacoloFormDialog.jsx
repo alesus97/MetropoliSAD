@@ -19,6 +19,9 @@ const CustomTextField = styled(TextField)({
       borderColor: "white",
     },
   },
+  '&   .MuiSelect-icon':{
+    color:"#F9D159"
+}
 });
 
 export default function InsertSpettacoloFormDialog(props) {
@@ -75,26 +78,16 @@ export default function InsertSpettacoloFormDialog(props) {
 
         console.log(newSpettacolo);
         handleClose();
-        // const updateSpettacoli = [...spettacoli];
-        // const index = oldData.tableData.id;
-        // updateSpettacoli[index] = newData;
-        // setSpettacoli([...updateSpettacoli]);
-        // resolve();
         setIserror(false);
         setErrorMessages([]);
       })
       .catch((error) => {
         setErrorMessages(["Update failed! Server error"]);
         setIserror(true);
-        // resolve();
+
       });
 
-    // console.log({
-    //   film: data.get("film"),
-    //   data: data.get("data"),
-    //   sala: data.get("sala"),
-    //   prezzo: data.get("prezzo")
-    // });
+
   };
 
   useEffect(() => {
@@ -135,7 +128,6 @@ export default function InsertSpettacoloFormDialog(props) {
               }}
             >
               <CustomTextField
-                sx={{ borderColor: "red" }}
                 margin="normal"
                 defaultValue=""
                 select
@@ -166,7 +158,7 @@ export default function InsertSpettacoloFormDialog(props) {
               </CustomTextField>
 
               <CustomTextField
-                label="Data di uscita"
+                label="Data spettacolo"
                 id="standard-start-adornment"
                 InputProps={{
                   startAdornment: <InputAdornment position="start" />,

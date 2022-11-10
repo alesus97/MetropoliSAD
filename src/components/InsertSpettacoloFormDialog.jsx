@@ -85,22 +85,26 @@ export default function InsertSpettacoloFormDialog() {
               '& .MuiTextField-root': { width: '50ch' },
             }}
     >
+
           <CustomTextField
             margin="normal"
             //required
             fullWidth
             id="email"
-            label="Email Address"
+            label="Data di uscita"
             name="email"
-            autoComplete="email"
-            // variant='standard'
-            autoFocus
+            type="date"
+          //  autoComplete="email"
+            variant='standard'
+            focused
           />
-          <Select type="submit" fullWidth defaultValue="">
+      
+          <Select type="submit" fullWidth defaultValue=""  >
             {film.map((film, index) => (
                 <MenuItem key={index} value={film}>{film.titolo}</MenuItem>
             ))}
           </Select>
+          
 
           <Select  fullWidth defaultValue="">
             {sale.map((sala, index) => (
@@ -109,7 +113,7 @@ export default function InsertSpettacoloFormDialog() {
           </Select>
           
          
-      
+          
           <Button onClick={handleClose}>Cancel</Button>
           <Button type="submit" >Ok</Button>
 

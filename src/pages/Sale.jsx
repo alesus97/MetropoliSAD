@@ -1,192 +1,77 @@
-import React, { useState, useEffect } from "react";
-import MaterialTable from "material-table";
-import { ThemeProvider } from "@mui/material";
-import { createTheme } from "@mui/material";
-
-import { Alert } from "@mui/material";
-import AlertTitle from "@mui/material/AlertTitle";
+import * as React from "react";
+import { useState, useEffect } from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import { Box, IconButton } from "@mui/material";
 import axios from "axios";
+import { Delete } from "@mui/icons-material";
+import InsertSaleFormDialog from "../components/InsertSaleFormDialog";
 
-// const validatedate = (date) => {
-//   const re =
-//     /^((?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\]))$/;
-//   return re.test(String(date).toLowerCase());
-// };
+function createData() {
+  return { };
+}
 
-export default function Sale() {
-  const defaultMaterialTheme = createTheme();
-  const [user, setUser] = useState([]);
+export default function BasicTable() {
+const [spettacoli, setSpettacoli] = useState([]);
   const [iserror, setIserror] = useState(false);
   const [errorMessages, setErrorMessages] = useState([]);
 
-  let columns = [
-    { title: "Numero Sala", field: "NumeroSala" },
-    { title: "Cinema", field: "Cinema" },
-    
-  ];
+  
 
   useEffect(() => {
     axios
-      .get(`https://636a3d40c07d8f936d97639f.mockapi.io/Sale`)
-
+      .get(
+        `https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/1/spettacoli`
+      )
       .then((res) => {
-        const users = res.data;
-        setUser(users);
-        // console.log(users);
+        setSpettacoli(res.data);
       });
   }, []);
 
-  //function for updating the existing row details
-  const handleRowUpdate = (newData, oldData, resolve) => {
-    //validating the data inputs
-    let errorList = [];
-    // if (newData.name === "") {
-    //   errorList.push("Try Again, You didn't enter the name field");
-    // }
-    // if (newData.duration === "") {
-    //   errorList.push("Try Again, You didn't enter the duration field");
-    // }
-    // if (newData.date === "" || validatedate(newData.date) === false) {
-    //   errorList.push("Oops!!! Please enter a valid date");
-    // }
-    if (newData.hall === "") {
-      errorList.push("Try Again, hall number field can't be blank");
-    }
-    if (newData.cinema === "") {
-      errorList.push("Try Again, Enter cinema url before submitting");
-    }
-
-    if (errorList.length < 1) {
-      axios
-        .put(
-          `https://jsonplaceholder.typicode.com/users/${newData.id}`,
-          newData
-        )
-        .then((response) => {
-          const updateUser = [...user];
-          const index = oldData.tableData.id;
-          updateUser[index] = newData;
-          setUser([...updateUser]);
-          resolve();
-          setIserror(false);
-          setErrorMessages([]);
-        })
-        .catch((error) => {
-          setErrorMessages(["Update failed! Server error"]);
-          setIserror(true);
-          resolve();
-        });
-    } else {
-      setErrorMessages(errorList);
-      setIserror(true);
-      resolve();
-    }
-  };
-
-  //function for deleting a row
-  const handleRowDelete = (oldData, resolve) => {
-    axios
-      .delete(`https://jsonplaceholder.typicode.com/users/${oldData.id}`)
-      .then((response) => {
-        const dataDelete = [...user];
-        const index = oldData.tableData.id;
-        dataDelete.splice(index, 1);
-        setUser([...dataDelete]);
-        resolve();
-      })
-      .catch((error) => {
-        setErrorMessages(["Delete failed! Server error"]);
-        setIserror(true);
-        resolve();
-      });
-  };
-
-  //function for adding a new row to the table
-  const handleRowAdd = (newData, resolve) => {
-    //validating the data inputs
-    let errorList = [];
-    // if (newData.name === "") {
-    //   errorList.push("Try Again, You didn't enter the name field");
-    // }
-    // if (newData.duration === "") {
-    //   errorList.push("Try Again, You didn't enter the duration field");
-    // }
-    // if (newData.date === "" || validatedate(newData.date) === false) {
-    //   errorList.push("Oops!!! Please enter a valid date");
-    // }
-    if (newData.hall === "") {
-      errorList.push("Try Again, hall number field can't be blank");
-    }
-    if (newData.cinema === "") {
-      errorList.push("Try Again, Enter cinema url before submitting");
-    }
-
-    if (errorList.length < 1) {
-      axios
-        .post(`https://jsonplaceholder.typicode.com/users`, newData)
-        .then((response) => {
-          let newUserdata = [...user];
-          newUserdata.push(newData);
-          setUser(newUserdata);
-          resolve();
-          setErrorMessages([]);
-          setIserror(false);
-        })
-        .catch((error) => {
-          setErrorMessages(["Cannot add data. Server error!"]);
-          setIserror(true);
-          resolve();
-        });
-    } else {
-      setErrorMessages(errorList);
-      setIserror(true);
-      resolve();
-    }
-  };
-
   return (
-    <div>
-      <div style={{ width: "100%", height: "100%" }}>
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/icon?family=Material+Icons"
-        />
-        <ThemeProvider theme={defaultMaterialTheme}>
-          <MaterialTable
-            title="Gestione sale"
-            columns={columns}
-            data={user}
-            options={{
-              actionsColumnIndex: -1,
-            }}
-            editable={{
-              onRowUpdate: (newData, oldData) =>
-                new Promise((resolve) => {
-                  handleRowUpdate(newData, oldData, resolve);
-                }),
-              onRowAdd: (newData) =>
-                new Promise((resolve) => {
-                  handleRowAdd(newData, resolve);
-                }),
-              onRowDelete: (oldData) =>
-                new Promise((resolve) => {
-                  handleRowDelete(oldData, resolve);
-                }),
-            }}
-          />
-        </ThemeProvider>
-      </div>
+    <Box sx={{ width: "50%", ml: "35%", mt: "5%" }}>
+        <InsertSaleFormDialog/>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Numero sala</TableCell>
+              <TableCell align="center">Capienza</TableCell>
+              {/* <TableCell align="center">Posti</TableCell>
+              <TableCell align="center">Prezzo</TableCell>
+              <TableCell align="center">Elimina</TableCell> */}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {spettacoli.map((spettacolo, index) => (
+              <TableRow
+                key={spettacolo.codice_spettacolo}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {spettacolo.film.titolo} {/*MODIFICA CON L'API DI SALA*/}
+                </TableCell>
+                <TableCell align="center">
+                  {spettacolo.sala.numero_sala} {/*MODIFICA CON L'API DI SALA*/}
+                </TableCell>
+                {/* <TableCell align="center">{spettacolo.data}</TableCell>
+                <TableCell align="center">{spettacolo.prezzo}</TableCell> */}
 
-      <div>
-        {iserror && (
-          <Alert severity="error">
-            <AlertTitle>ERROR</AlertTitle>
-            {errorMessages.map((msg, i) => {
-              return <div key={i}>{msg}</div>;
-            })}
-          </Alert>
-        )}
-      </div>
-    </div>
+                {/* <TableCell align="center">
+                  <IconButton onClick={() => {console.log(spettacoli[index])}}>
+                    <Delete  color="primary"/>
+                  </IconButton>
+                </TableCell> */}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
   );
 }

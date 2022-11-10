@@ -34,7 +34,7 @@ export default function Film() {
 
   return (
 
-      <Container maxWidth={false} sx={{ml:"20%", mt:"5%", maxWidth:"80%"}}>
+      <Container maxWidth={false} sx={{ml:"15%", mt:"5%", maxWidth:"85%"}}>
       <InserFilmFormDialog />
         <Grid  jualistify="center" container spacing={3}>
           {films.map((info, index) => (
@@ -46,6 +46,7 @@ export default function Film() {
             </Grid>
           ))}
         </Grid>
+        <p></p>
       </Container>
    );
 }

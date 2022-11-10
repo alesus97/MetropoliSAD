@@ -1,25 +1,33 @@
-import * as React from "react";
+import React from "react";
 import { useState, useEffect } from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import { Box, IconButton } from "@mui/material";
+import {Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Box,
+  IconButton,
+  Fab
+
+} from "@mui/material";
+
+
+
 import axios from "axios";
 import { Delete } from "@mui/icons-material";
 import InsertSpettacoloFormDialog from "../components/InsertSpettacoloFormDialog";
-import { Fab } from "@mui/material";
+
 import AddIcon from "@mui/icons-material/Add";
-import InsertFilmFormDialog from "../components/InsertFilmFormDialog";
+
 
 export default function BasicTable() {
   const [spettacoli, setSpettacoli] = useState([]);
   const [iserror, setIserror] = useState(false);
   const [errorMessages, setErrorMessages] = useState([]);
   const [openDialog, setOpenDialog] = React.useState(false);
+
 
   const addSpettacolo = (spettacolo) => {
     const newSpettacoli = [...spettacoli]
@@ -59,8 +67,8 @@ export default function BasicTable() {
   }, []);
 
   return (
-    <Box sx={{ width: "70%", ml: "25%", mt: "5%" }}>
-      <Fab color="primary" aria-label="add" onClick={() => setOpenDialog(true)}>
+    <Box sx={{ width: "75%", ml: "20%", mt: "5%" }}>
+      <Fab sx={{position: 'fixed' , bottom:"3%", right:"3%"}}color="primary" aria-label="add" onClick={() => setOpenDialog(true)}>
         <AddIcon />
       </Fab>
 
@@ -70,7 +78,7 @@ export default function BasicTable() {
         onAddSpettacolo={addSpettacolo}
       />
 
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} sx={{maxHeight: "800px"}}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -106,6 +114,7 @@ export default function BasicTable() {
           </TableBody>
         </Table>
       </TableContainer>
+      <p/>
     </Box>
   );
 }

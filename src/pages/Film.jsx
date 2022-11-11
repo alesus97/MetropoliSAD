@@ -33,12 +33,13 @@ export default function Film() {
   };
 
   return (
-
-      <Container maxWidth={false} sx={{ml:"15%", mt:"5%", maxWidth:"85%"}}>
+      
+    
+      <Container>
       <InserFilmFormDialog />
         <Grid  jualistify="center" container spacing={3}>
           {films.map((info, index) => (
-            <Grid item key={info.codice_film} xs={12} md={6} lg={3}>
+            <Grid item key={info.codice_film} xs={12} md={6} lg={4}>
               <FilmCard
                 info={info}
                 onDeleteAction={() => handleDeleteFilm(index)}

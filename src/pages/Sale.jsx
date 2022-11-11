@@ -34,7 +34,7 @@ const [spettacoli, setSpettacoli] = useState([]);
   }, []);
 
   return (
-    <Box sx={{ width: "50%", ml: "35%", mt: "5%" }}>
+    <Box>
         <InsertSaleFormDialog/>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">

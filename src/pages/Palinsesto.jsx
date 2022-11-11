@@ -67,7 +67,7 @@ export default function BasicTable() {
   }, []);
 
   return (
-    <Box sx={{ width: "75%", ml: "20%", mt: "5%" }}>
+    <Box >
       <Fab sx={{position: 'fixed' , bottom:"3%", right:"3%"}}color="primary" aria-label="add" onClick={() => setOpenDialog(true)}>
         <AddIcon />
       </Fab>

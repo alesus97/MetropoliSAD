@@ -126,12 +126,6 @@ export default function InsertSpettacoloFormDialog(props) {
             <Box
               component="form"
               onSubmit={handleSubmit}
-              sx={{
-                alignItems: "center",
-                display: "flex",
-                flexDirection: "column",
-                "& .MuiTextField-root": { width: "50ch" },
-              }}
             >
               <CustomTextField
                 margin="normal"

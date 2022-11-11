@@ -20,19 +20,19 @@ function createData() {
   return { };
 }
 
-const addSala = (sale) => {
-  const newSala = [...sale]
-  newSpettacoli.push(spettacolo)
-  setSpettacoli(newSpettacoli)
-}
+
 
 export default function BasicTable() {
-const [spettacoli, setSpettacoli] = useState([]);
+const [sale, setSale] = useState([]);
   const [iserror, setIserror] = useState(false);
   const [errorMessages, setErrorMessages] = useState([]);
   const [openDialog, setOpenDialog] = React.useState(false);
 
-  
+  const addSala = (sala) => {
+    const newSala = [...sale]
+    newSala.push(sala)
+    setSale(newSala)
+  }
 
   useEffect(() => {
     axios
@@ -40,7 +40,7 @@ const [spettacoli, setSpettacoli] = useState([]);
         `https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/1/spettacoli`
       )
       .then((res) => {
-        setSpettacoli(res.data);
+        setSale(res.data);
       });
   }, []);
 
@@ -54,42 +54,7 @@ const [spettacoli, setSpettacoli] = useState([]);
         setCloseDialog={() => setOpenDialog(false)}
         onAddSala={addSala}
         />
-      {/* <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Numero sala</TableCell>
-              <TableCell align="center">Capienza</TableCell>
-              <TableCell align="center">Posti</TableCell>
-              <TableCell align="center">Prezzo</TableCell>
-              <TableCell align="center">Elimina</TableCell> 
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {spettacoli.map((spettacolo, index) => (
-              <TableRow
-                key={spettacolo.codice_spettacolo}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {spettacolo.film.titolo} 
-                </TableCell>
-                <TableCell align="center">
-                  {spettacolo.sala.numero_sala} 
-                </TableCell>
-                <TableCell align="center">{spettacolo.data}</TableCell>
-                <TableCell align="center">{spettacolo.prezzo}</TableCell> 
-
-                <TableCell align="center">
-                  <IconButton onClick={() => {console.log(spettacoli[index])}}>
-                    <Delete  color="primary"/>
-                  </IconButton>
-                </TableCell> 
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer> */}
+      
       <CardSala/>
     </Box>
   );

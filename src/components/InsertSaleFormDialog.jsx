@@ -10,6 +10,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import AddIcon from '@mui/icons-material/Add'
 import { Button, Container, Fab, MenuItem } from '@mui/material';
 import Box from '@mui/material/Box';
+import {Stack} from '@mui/material';
 
 const CustomTextField = styled(TextField)({
     '& .MuiOutlinedInput-root': {
@@ -29,7 +30,7 @@ export default function InsertSaleFormDialog(props) {
 
   const handleClose = () => {
     props.setCloseDialog();
-  };
+  }; 
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -63,7 +64,10 @@ export default function InsertSaleFormDialog(props) {
   return (
     <div>
  
-      <Dialog open={open} fullWidth maxWidth="sm" onClose={handleClose}>
+      <Dialog 
+      open={props.openDialog} 
+      fullWidth maxWidth="sm" 
+      onClose={handleClose}>
 
        <DialogTitle align="center">
        Inserisci Sala
@@ -82,38 +86,21 @@ export default function InsertSaleFormDialog(props) {
             }}
     >
 
-          <CustomTextField
-            margin="normal"
-            //required
-            fullWidth
-            id="email"
-            label="Numero sala"
-            name="email"
-            //type="number"
-          //  autoComplete="email"
-            variant='standard'
-            focused
-          />
-
-        <CustomTextField
-            margin="normal"
-            //required
-            fullWidth
-            id="email"
-            label="Capienza"
-            name="email"
-           // type="number"
-          //  autoComplete="email"
-            variant='standard'
-            focused
-          />
-
           
-         
-          
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit" >Ok</Button>
 
+              <CustomTextField
+                margin="normal"
+                fullWidth
+                label="Numero Sala"
+                type="number"
+                name="numero_sala"
+              />
+              
+              <p></p>
+              <Stack direction="row" spacing={2}> 
+              <Button variant="outlined" type="submit" >Ok</Button>
+              <Button variant="outlined" onClick={handleClose}>Cancel</Button>
+              </Stack>
         </Box>
         </Container>
         </DialogContent>

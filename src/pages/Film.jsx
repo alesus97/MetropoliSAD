@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import FilmCard from "../components/Card";
 import axios from "axios";
 import { Grid, Fab, Box } from "@mui/material";
-import InsertFilmFormDialog from "../components/InsertFilmFormDialog";
 import AddIcon from "@mui/icons-material/Add";
+import InsertFormDialog from "../components/InsertFormDialog";
 
 export default function Film(props) {
   const [open, setOpen] = React.useState(false);
@@ -73,11 +73,19 @@ export default function Film(props) {
         <AddIcon />
       </Fab>
 
-      <InsertFilmFormDialog
+      <InsertFormDialog
+      openDialog={openDialog}
+      setCloseDialog={() => setOpenDialog(false)}
+      onAddFilm={addFilm}
+      formType="film"
+      ></InsertFormDialog>
+
+      {/* <InsertFilmFormDialog
         openDialog={openDialog}
         setCloseDialog={() => setOpenDialog(false)}
         onAddFilm={addFilm}
-      />
+      /> */}
+
       <Grid jualistify="center" container spacing={3}>
         {films.map((info, index) => (
           <Grid item key={info.codice_film} xs={12} md={6} lg={4}>

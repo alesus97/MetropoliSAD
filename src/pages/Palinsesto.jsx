@@ -17,9 +17,9 @@ import {Table,
 
 import axios from "axios";
 import { Delete } from "@mui/icons-material";
-import InsertSpettacoloFormDialog from "../components/InsertSpettacoloFormDialog";
 
 import AddIcon from "@mui/icons-material/Add";
+import InsertFormDialog from "../components/InsertFormDialog";
 
 
 export default function BasicTable() {
@@ -37,7 +37,7 @@ export default function BasicTable() {
 
   // () => {console.log(spettacoli[index])}
   const handleDelete = (index) => {
-    console.log(spettacoli[index])
+
     const codiceSpettacolo = spettacoli[index].codice_spettacolo;
     axios
       .delete(
@@ -72,10 +72,17 @@ export default function BasicTable() {
         <AddIcon />
       </Fab>
 
-      <InsertSpettacoloFormDialog
+
+      {/* <InsertSpettacoloFormDialog
         openDialog={openDialog}
         setCloseDialog={() => setOpenDialog(false)}
         onAddSpettacolo={addSpettacolo}
+      /> */}
+      <InsertFormDialog
+        openDialog={openDialog}
+        setCloseDialog={() => setOpenDialog(false)}
+        onAddSpettacolo={addSpettacolo}
+        formType="spettacolo"
       />
 
       <TableContainer component={Paper} sx={{maxHeight: "800px"}}>

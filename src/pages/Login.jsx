@@ -53,7 +53,6 @@ export default function Login(props) {
       email: data.get("email"),
       password: data.get("password"),
     });
-    console.log(data)
     props.onLoginAction();
     navigate("/palinsesto", { replace: true });
   };

@@ -7,6 +7,8 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import { Grid } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -38,12 +40,17 @@ export default function RecipeReviewCard() {
         title={
             <Grid container spacing={1}>
             <Grid item xs={7}>
-              <Typography align="center" variant="h6">Sala 1</Typography>
+              <Typography align="center" variant="h6" >Sala 1</Typography>
             </Grid>
-            <Grid item xs={2}>
-              <Typography align="center" variant="h6">12 posti</Typography>
+            <Grid item >
+              <Typography align="center" variant="h6" >12 posti</Typography>
             </Grid>
           </Grid>  
+        }
+        action={
+          <IconButton >
+          <DeleteIcon  color="primary" />
+          </IconButton>
         }
        
       />

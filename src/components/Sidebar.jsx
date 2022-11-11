@@ -85,7 +85,6 @@ const Sidebar = ({ children }) => {
             href="/"
             sx={{
               ml: "1.3%",
-
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".4rem",

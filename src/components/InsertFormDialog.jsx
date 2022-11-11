@@ -100,7 +100,7 @@ export default function InsertFormDialog(props) {
           }
 
           props.onAddSala(newSala2)
-
+          handleClose();
           setIserror(false);
           setErrorMessages([]);
         })

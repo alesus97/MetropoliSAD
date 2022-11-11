@@ -43,9 +43,9 @@ const CustomTextField = styled(TextField)({
 }})
 
 export default function Login(props) {
-  // const theme = useTheme();
+
   const navigate = useNavigate();
-  // ---- handler
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -57,7 +57,6 @@ export default function Login(props) {
     navigate("/palinsesto", { replace: true });
   };
 
-  // ---------------------------
 
   return (
       <Container component="main" maxWidth="xs">

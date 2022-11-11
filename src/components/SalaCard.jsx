@@ -21,7 +21,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function RecipeReviewCard() {
+export default function SalaCard(props) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -40,15 +40,15 @@ export default function RecipeReviewCard() {
         title={
             <Grid container spacing={1}>
             <Grid item xs={7}>
-              <Typography align="center" variant="h6" >Sala 1</Typography>
+              <Typography align="center" variant="h6" >Sala {props.info.numero_sala}</Typography>
             </Grid>
             <Grid item >
-              <Typography align="center" variant="h6" >12 posti</Typography>
+              <Typography align="center" variant="h6" >{props.info.capienza}</Typography>
             </Grid>
           </Grid>  
         }
         action={
-          <IconButton >
+          <IconButton onClick={() => props.onDeleteAction()}>
           <DeleteIcon  color="primary" />
           </IconButton>
         }

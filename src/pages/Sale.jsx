@@ -11,15 +11,26 @@ import { Box, IconButton } from "@mui/material";
 import axios from "axios";
 import { Delete } from "@mui/icons-material";
 import InsertSaleFormDialog from "../components/InsertSaleFormDialog";
+import CardSala from "../components/CardSala"
+import { Fab} from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+
 
 function createData() {
   return { };
+}
+
+const addSala = (sale) => {
+  const newSala = [...sale]
+  newSpettacoli.push(spettacolo)
+  setSpettacoli(newSpettacoli)
 }
 
 export default function BasicTable() {
 const [spettacoli, setSpettacoli] = useState([]);
   const [iserror, setIserror] = useState(false);
   const [errorMessages, setErrorMessages] = useState([]);
+  const [openDialog, setOpenDialog] = React.useState(false);
 
   
 
@@ -35,16 +46,23 @@ const [spettacoli, setSpettacoli] = useState([]);
 
   return (
     <Box>
-        <InsertSaleFormDialog/>
-      <TableContainer component={Paper}>
+       <Fab sx={{position: 'fixed' , bottom:"3%", right:"3%"}}color="primary" aria-label="add" onClick={() => setOpenDialog(true)}>
+        <AddIcon />
+      </Fab>
+        <InsertSaleFormDialog
+        openDialog={openDialog}
+        setCloseDialog={() => setOpenDialog(false)}
+        onAddSala={addSala}
+        />
+      {/* <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>Numero sala</TableCell>
               <TableCell align="center">Capienza</TableCell>
-              {/* <TableCell align="center">Posti</TableCell>
+              <TableCell align="center">Posti</TableCell>
               <TableCell align="center">Prezzo</TableCell>
-              <TableCell align="center">Elimina</TableCell> */}
+              <TableCell align="center">Elimina</TableCell> 
             </TableRow>
           </TableHead>
           <TableBody>
@@ -54,24 +72,25 @@ const [spettacoli, setSpettacoli] = useState([]);
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {spettacolo.film.titolo} {/*MODIFICA CON L'API DI SALA*/}
+                  {spettacolo.film.titolo} 
                 </TableCell>
                 <TableCell align="center">
-                  {spettacolo.sala.numero_sala} {/*MODIFICA CON L'API DI SALA*/}
+                  {spettacolo.sala.numero_sala} 
                 </TableCell>
-                {/* <TableCell align="center">{spettacolo.data}</TableCell>
-                <TableCell align="center">{spettacolo.prezzo}</TableCell> */}
+                <TableCell align="center">{spettacolo.data}</TableCell>
+                <TableCell align="center">{spettacolo.prezzo}</TableCell> 
 
-                {/* <TableCell align="center">
+                <TableCell align="center">
                   <IconButton onClick={() => {console.log(spettacoli[index])}}>
                     <Delete  color="primary"/>
                   </IconButton>
-                </TableCell> */}
+                </TableCell> 
               </TableRow>
             ))}
           </TableBody>
         </Table>
-      </TableContainer>
+      </TableContainer> */}
+      <CardSala/>
     </Box>
   );
 }

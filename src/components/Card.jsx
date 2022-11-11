@@ -10,7 +10,6 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Divider from '@mui/material/Divider';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Grid } from '@mui/material';
 
 
 
@@ -25,13 +24,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-// const img = styled("img")({
-//   margin: "auto",
-//   display: "block",
-//   maxWidth: "100%",
-//   maxHeight: "100%"
 
-// });
 
 export default function FilmCard(props) {
   const [expanded, setExpanded] = React.useState(false);
@@ -39,16 +32,16 @@ export default function FilmCard(props) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
+  console.log(props.info.copertina)
   return (
     <Card raised  >
       
       <CardMedia sx={{width:"100%", margin:"auto"}} 
         component="img"
         // height="30%"
-        image="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Il_Muro_-_FIlm_2019_-_Locandina.jpg/429px-Il_Muro_-_FIlm_2019_-_Locandina.jpg"
+       // image="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Il_Muro_-_FIlm_2019_-_Locandina.jpg/429px-Il_Muro_-_FIlm_2019_-_Locandina.jpg"
       //  image="https://www.lascimmiapensa.com/wp-content/uploads/2017/04/jeeg-robot-1.jpg"
-       // image={props.info.copertina}
+        image={props.info.copertina}
       /> 
       <CardContent>
         <Typography  gutterBottom align="center" sx={{ fontWeight: 'bold' }}>
@@ -91,19 +84,19 @@ export default function FilmCard(props) {
       </Collapse>
      
       <CardActions disableSpacing>
+
+      <IconButton onClick={() => props.onDeleteAction()}>
+      <DeleteIcon  color="primary" />
+      </IconButton>
       
-      <DeleteIcon  color="primary" sx={{ml:'2%'}}/>
- 
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
           aria-expanded={expanded}
         >
-
-          <ExpandMoreIcon  color="primary" /> 
-         
+          <ExpandMoreIcon color="primary"/>
         </ExpandMore>
-        <Typography variant="body2"  color="primary" sx={{mr:'2%'}}>
+        <Typography variant="body2"  color="primary">
           Dettagli
           </Typography>
       </CardActions>

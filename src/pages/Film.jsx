@@ -5,10 +5,12 @@ import { Grid, Fab, Box } from "@mui/material";
 import InsertFilmFormDialog from "../components/InsertFilmFormDialog";
 import AddIcon from "@mui/icons-material/Add";
 
-export default function Film() {
+export default function Film(props) {
   const [open, setOpen] = React.useState(false);
   const [openDialog, setOpenDialog] = React.useState(false);
   const [films, setFilms] = useState([]);
+  const [errorMessages, setErrorMessages] = useState([]);
+  const [iserror, setIserror] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -25,20 +27,38 @@ export default function Film() {
       .then((res) => {
         const films = res.data;
         setFilms(films);
-        console.log(films);
+      //  console.log(films);
       });
   }, []);
 
-  // const handleDeleteFilm = (index) => {
-  //   const dataDelete = [...films];
-  //   dataDelete.splice(index, 1);
-  //   setFilms([...dataDelete]);
-  // };
+  const handleDeleteFilm = (index) => {
+  // console.log(films[index])
+    
+    const codiceFilm = films[index].codice_film;
+    axios
+      .delete(
+        `https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/film/${codiceFilm}`
+      )
+      .then((res) => {
+        const dataDelete = [...films];
+        dataDelete.splice(index, 1);
+        setFilms([...dataDelete]);
+        console.log("Film cancellato correttamente");
+      })
+      .catch((error) => {
+        console.log(error);
+        setErrorMessages(["Update failed! Server error"]);
+        setIserror(true);
+      });
+     
+
+
+  };
 
   const addFilm = (newFilm) => {
-    console.log(newFilm)
+   // console.log(newFilm)
     const newFilms = [...films]
-    newFilms.push(newFilm)
+    newFilms.unshift(newFilm)
     setFilms(newFilms)
   }
 
@@ -63,7 +83,7 @@ export default function Film() {
           <Grid item key={info.codice_film} xs={12} md={6} lg={4}>
             <FilmCard
               info={info}
-              // onDeleteAction={() => handleDeleteFilm(index)}
+              onDeleteAction={() => handleDeleteFilm(index)}
             ></FilmCard>
           </Grid>
         ))}

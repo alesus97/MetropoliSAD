@@ -13,7 +13,6 @@ import DialogSpettacolo from "./Dialogs/DialogSpettacolo";
 import DialogFilm from "./Dialogs/DialogFilm";
 import DialogSala from "./Dialogs/DialogSala";
 
-
 export default function InsertFormDialog(props) {
   const [isDisabled, setIsDisabled] = useState(false);
   const [iserror, setIserror] = useState(false);
@@ -22,7 +21,6 @@ export default function InsertFormDialog(props) {
   const handleClose = () => {
     props.setCloseDialog();
   };
-
 
   const handleSubmit = (event) => {
     if (props.formType === "film") {
@@ -60,7 +58,6 @@ export default function InsertFormDialog(props) {
             image_url: data.get("locandina"),
           };
 
-          
           props.onAddFilm(newFilm2);
 
           setIsDisabled(false);
@@ -78,9 +75,41 @@ export default function InsertFormDialog(props) {
     } else if (props.formType === "sala") {
       event.preventDefault();
       const data = new FormData(event.currentTarget);
-      console.log({
-        titolo: data.get(""),
-      });
+
+
+      const newSala = {
+        numeroSala: data.get("numero_sala"),
+        numeroFile: Number(data.get("numero_file")),
+        postiPerFila: Number(data.get("postiPerFila")),
+      };
+
+      console.log(newSala)
+
+      axios
+        .post(
+          `https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/1/sala`,
+          newSala
+        )
+        .then((response) => {
+          console.log("Sala creata");
+
+          const newSala2={
+            id_sala: response.data.id_sala,
+            numero_sala: data.get("numero_sala"),
+            capienza: Number( data.get("postiPerFila") *  data.get("numero_file") )
+          }
+
+          props.onAddSala(newSala2)
+
+          setIserror(false);
+          setErrorMessages([]);
+        })
+        .catch((error) => {
+          console.log(error);
+          console.log("ERRORE!")
+          setErrorMessages(["Update failed! Server error"]);
+          setIserror(true);
+        });
     } else if (props.formType === "spettacolo") {
       setIsDisabled(true);
       event.preventDefault();
@@ -153,7 +182,7 @@ export default function InsertFormDialog(props) {
                   "& .MuiTextField-root": { width: "50ch" },
                 }}
               >
-               <DialogFilm/>
+                <DialogFilm />
                 <p></p>
                 <Stack direction="row" spacing={2}>
                   <Button
@@ -195,9 +224,7 @@ export default function InsertFormDialog(props) {
                   "& .MuiTextField-root": { width: "50ch" },
                 }}
               >
-
-                <DialogSala/>
-               
+                <DialogSala />
 
                 <p></p>
                 <Stack direction="row" spacing={2}>
@@ -227,7 +254,7 @@ export default function InsertFormDialog(props) {
           <DialogContent>
             <Container component="main" maxWidth="xs">
               <Box component="form" onSubmit={handleSubmit}>
-               <DialogSpettacolo/>
+                <DialogSpettacolo />
                 <p></p>
                 <Stack direction="row" spacing={2}>
                   <Button

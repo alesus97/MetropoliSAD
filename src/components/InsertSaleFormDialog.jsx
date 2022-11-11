@@ -18,7 +18,7 @@ const CustomTextField = styled(TextField)({
       },
   }})
 
-export default function InsertSaleFormDialog() {
+export default function InsertSaleFormDialog(props) {
   const [open, setOpen] = React.useState(false);
   const [film, setFilm] = useState([]);
   const [sale, setSale] = useState([]);
@@ -28,7 +28,7 @@ export default function InsertSaleFormDialog() {
   };
 
   const handleClose = () => {
-    setOpen(false);
+    props.setCloseDialog();
   };
 
   const handleSubmit = (event) => {
@@ -62,15 +62,7 @@ export default function InsertSaleFormDialog() {
 
   return (
     <div>
-    {/* <Fab variant= "extended" onClick={handleClickOpen} color="primary">
-      <AddIcon sx={{mr:1}}/>
-      Create new
-      </Fab>  */}
-
-      <Fab color="primary" aria-label="add" onClick={handleClickOpen}  >
-        <AddIcon/>
-      </Fab>
-
+ 
       <Dialog open={open} fullWidth maxWidth="sm" onClose={handleClose}>
 
        <DialogTitle align="center">
@@ -115,19 +107,7 @@ export default function InsertSaleFormDialog() {
             variant='standard'
             focused
           />
-{/*       
-          <Select type="submit" fullWidth defaultValue=""  >
-            {film.map((film, index) => (
-                <MenuItem key={index} value={film}>{film.titolo}</MenuItem>
-            ))}
-          </Select>
-          
 
-          <Select  fullWidth defaultValue="">
-            {sale.map((sala, index) => (
-                <MenuItem key={index} value={sala}>{sala.numero_sala}</MenuItem>
-            ))}
-          </Select> */}
           
          
           

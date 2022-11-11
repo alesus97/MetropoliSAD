@@ -48,7 +48,7 @@ export default function InsertFilmFormDialog(props) {
       data_uscita: data.get("data"),
       durata: data.get("durata"),
       trama: data.get("trama"),
-      // locandina: data.get("locandina"),
+      //locandina: data.get("locandina"),
     }
 
     axios.post(`https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/film`,
@@ -58,7 +58,7 @@ export default function InsertFilmFormDialog(props) {
      
 
       const newFilm2 = {
-        codice_film: 100,
+        codice_film: 109,
         titolo: data.get("titolo"),
         genere: data.get("genere"),
         cast: data.get("cast"),
@@ -67,10 +67,10 @@ export default function InsertFilmFormDialog(props) {
         data_uscita: data.get("data"),
         durata: data.get("durata"),
         trama: data.get("trama"),
-        // locandina: data.get("locandina"),
+       locandina: data.get("locandina"),
       }
 
-      console.log(newFilm2);
+     // console.log(newFilm2);
       props.onAddFilm(newFilm2);
       
      

@@ -90,6 +90,7 @@ const Sidebar = ({ children }) => {
           >
             MEGLIO DELL'UCI CINEMAS
           </Typography>
+          
         </Toolbar>
       </AppBar>
       <Drawer

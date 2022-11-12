@@ -85,6 +85,7 @@ export default function DialogSpettacolo(){
     margin="normal"
     name="data"
     required
+
   />
 
   <CustomTextField

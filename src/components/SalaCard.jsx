@@ -31,7 +31,7 @@ export default function SalaCard(props) {
               <Typography align="center" variant="h6" >Sala {props.info.numero_sala}</Typography>
             </Grid>
             <Grid item >
-              <Typography align="center" variant="h6" >{props.info.capienza}</Typography>
+              <Typography align="center" variant="h6" >{props.info.capienza} Posti</Typography>
             </Grid>
           </Grid>  
         }

@@ -4,7 +4,6 @@ import CircularProgress, { circularProgressClasses,
 } from '@mui/material/CircularProgress';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
 
-// Inspired by the former Facebook spinners.
 function FacebookCircularProgress(props) {
   return (
     <Box sx={{ position: 'relative' }}>

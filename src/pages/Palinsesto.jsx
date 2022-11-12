@@ -35,7 +35,6 @@ export default function BasicTable() {
     setSpettacoli(newSpettacoli)
   }
 
-  // () => {console.log(spettacoli[index])}
   const handleDelete = (index) => {
 
     const codiceSpettacolo = spettacoli[index].codice_spettacolo;
@@ -72,12 +71,6 @@ export default function BasicTable() {
         <AddIcon />
       </Fab>
 
-
-      {/* <InsertSpettacoloFormDialog
-        openDialog={openDialog}
-        setCloseDialog={() => setOpenDialog(false)}
-        onAddSpettacolo={addSpettacolo}
-      /> */}
       <InsertFormDialog
         openDialog={openDialog}
         setCloseDialog={() => setOpenDialog(false)}

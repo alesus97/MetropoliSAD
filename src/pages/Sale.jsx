@@ -16,10 +16,8 @@ export default function Sale() {
   const [iserror, setIserror] = useState(false);
 
 
-
   const handleDeleteSala = (index) => {
-    // console.log(films[index])
-      
+
      const idSala = sale[index].id_sala;
     
       axios
@@ -36,9 +34,7 @@ export default function Sale() {
           console.log(error);
           setErrorMessages(["Update failed! Server error"]);
           setIserror(true);
-        });
-       
-  
+        });     
   
     };
 

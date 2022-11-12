@@ -9,9 +9,6 @@ import {
   ListItem,
   ListItemIcon,
   useTheme,
-  Divider,
-  IconButton,
-  Menu,
   useMediaQuery,
   Box,
 } from "@mui/material";
@@ -73,7 +70,6 @@ const Sidebar = ({ children }) => {
     <Box sx={{ display: "flex" }}>
       <AppBar
         position="fixed"
-        // sx={{ zIndex: theme.zIndex.drawer + 1, width: "100%" }}
         sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
       >
         <Toolbar>
@@ -97,9 +93,6 @@ const Sidebar = ({ children }) => {
         </Toolbar>
       </AppBar>
       <Drawer
-        // PaperProps={{
-        //   sx: { width: "15%" },
-        // }}
         variant={isMdUp ? "permanent" : "temporary"}
         anchor="left"
         sx={{

@@ -49,6 +49,7 @@ export default function DialogSpettacolo(){
     name="film"
     fullWidth
     label="Seleziona Film"
+    required
   >
     {film.map((film, index) => (
       <MenuItem key={index} value={JSON.stringify(film)}>
@@ -64,6 +65,7 @@ export default function DialogSpettacolo(){
     name="sala"
     fullWidth
     label="Seleziona Sala"
+    required
   >
     {sale.map((sala, index) => (
       <MenuItem key={index} value={JSON.stringify(sala)}>
@@ -82,6 +84,7 @@ export default function DialogSpettacolo(){
     fullWidth
     margin="normal"
     name="data"
+    required
   />
 
   <CustomTextField
@@ -90,6 +93,7 @@ export default function DialogSpettacolo(){
     label="Prezzo biglietto"
     type="number"
     name="prezzo"
+    required
   />
 
 </Box>

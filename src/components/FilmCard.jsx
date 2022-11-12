@@ -37,10 +37,6 @@ export default function FilmCard(props) {
       
       <CardMedia sx={{width:"100%", margin:"auto"}} 
         component="img"
-       
-        // height="30%"
-       // image="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Il_Muro_-_FIlm_2019_-_Locandina.jpg/429px-Il_Muro_-_FIlm_2019_-_Locandina.jpg"
-      //  image="https://www.lascimmiapensa.com/wp-content/uploads/2017/04/jeeg-robot-1.jpg"
          image={props.info.image_url}
       /> 
       <CardContent>

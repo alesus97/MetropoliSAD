@@ -9,18 +9,6 @@ import Stack from '@mui/material/Stack';
 import { Grid } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
-
 export default function SalaCard(props) {
   const [expanded, setExpanded] = React.useState(false);
 
@@ -29,7 +17,7 @@ export default function SalaCard(props) {
   };
 
   return (
-    <Card sx={{ maxWidth: 500}}>
+    <Card raised sx={{ maxWidth: 500}}>
       <CardMedia
         component="img"
         height="250"

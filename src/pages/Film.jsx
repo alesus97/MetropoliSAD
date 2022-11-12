@@ -56,7 +56,6 @@ export default function Film(props) {
   };
 
   const addFilm = (newFilm) => {
-   // console.log(newFilm)
     const newFilms = [...films]
     newFilms.unshift(newFilm)
     setFilms(newFilms)

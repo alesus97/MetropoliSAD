@@ -1,25 +1,27 @@
 import * as React from "react";
-import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import { useState } from "react";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Button, Container, Stack } from "@mui/material";
+import { Alert, Button, Container, Stack } from "@mui/material";
 import Box from "@mui/material/Box";
-import { styled } from "@mui/styles";
 import axios from "axios";
-
+import { Error } from "@mui/icons-material";
 import DialogSpettacolo from "./Dialogs/DialogSpettacolo";
 import DialogFilm from "./Dialogs/DialogFilm";
 import DialogSala from "./Dialogs/DialogSala";
 
+
+
 export default function InsertFormDialog(props) {
   const [isDisabled, setIsDisabled] = useState(false);
   const [iserror, setIserror] = useState(false);
-  const [errorMessages, setErrorMessages] = useState([]);
+  const [errorMessage, setErrorMessage] = useState([]);
 
   const handleClose = () => {
     props.setCloseDialog();
+    setIserror(false);
+    setErrorMessage("");
   };
 
   const handleSubmit = (event) => {
@@ -63,11 +65,11 @@ export default function InsertFormDialog(props) {
           setIsDisabled(false);
           handleClose();
           setIserror(false);
-          setErrorMessages([]);
+          setErrorMessage("");
         })
         .catch((error) => {
           console.log(error);
-          setErrorMessages(["Update failed! Server error"]);
+          setErrorMessage(error.response.data.message);
           setIserror(true);
         });
 
@@ -102,12 +104,11 @@ export default function InsertFormDialog(props) {
           props.onAddSala(newSala2)
           handleClose();
           setIserror(false);
-          setErrorMessages([]);
+          setErrorMessage("");
         })
         .catch((error) => {
-          console.log(error);
-          console.log("ERRORE!")
-          setErrorMessages(["Update failed! Server error"]);
+         
+          setErrorMessage(error.response.data.message);
           setIserror(true);
         });
     } else if (props.formType === "spettacolo") {
@@ -151,11 +152,14 @@ export default function InsertFormDialog(props) {
           setIsDisabled(false);
           handleClose();
           setIserror(false);
-          setErrorMessages([]);
+          setErrorMessage("");
         })
         .catch((error) => {
-          setErrorMessages(["Update failed! Server error"]);
+
+          console.log(error)
+          setErrorMessage(error.response.data.message);
           setIserror(true);
+          setIsDisabled(false);
         });
     }
   };
@@ -183,6 +187,7 @@ export default function InsertFormDialog(props) {
                 }}
               >
                 <DialogFilm />
+                {iserror ? <Alert variant="filled" color="primary" icon={<Error fontSize="inherit"/>}>{errorMessage}</Alert> : <></>}
                 <p></p>
                 <Stack direction="row" spacing={2}>
                   <Button
@@ -210,6 +215,7 @@ export default function InsertFormDialog(props) {
           fullWidth
           maxWidth="sm"
           onClose={handleClose}
+          
         >
           <DialogTitle align="center">Inserisci Sala</DialogTitle>
           <DialogContent>
@@ -225,7 +231,7 @@ export default function InsertFormDialog(props) {
                 }}
               >
                 <DialogSala />
-
+                {iserror ? <Alert variant="filled" color="primary" icon={<Error fontSize="inherit"/>}>{errorMessage}</Alert> : <></>}
                 <p></p>
                 <Stack direction="row" spacing={2}>
                   <Button variant="outlined" type="submit">
@@ -255,6 +261,7 @@ export default function InsertFormDialog(props) {
             <Container component="main" maxWidth="xs">
               <Box component="form" onSubmit={handleSubmit}>
                 <DialogSpettacolo />
+                {iserror ? <Alert variant="filled" color="primary" icon={<Error fontSize="inherit"/>}>{errorMessage}</Alert> : <></>}
                 <p></p>
                 <Stack direction="row" spacing={2}>
                   <Button

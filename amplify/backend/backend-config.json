@@ -1,0 +1,11 @@
+{
+  "auth": {
+    "deshboardsidebarmainee2c0103": {
+      "service": "Cognito",
+      "serviceType": "imported",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}

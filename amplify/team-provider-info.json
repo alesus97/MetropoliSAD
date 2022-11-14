@@ -1,0 +1,25 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-deshboardsidebarmain-dev-113619-authRole",
+      "UnauthRoleArn": "arn:aws:iam::440871172531:role/amplify-deshboardsidebarmain-dev-113619-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::440871172531:role/amplify-deshboardsidebarmain-dev-113619-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-deshboardsidebarmain-dev-113619-deployment",
+      "UnauthRoleName": "amplify-deshboardsidebarmain-dev-113619-unauthRole",
+      "StackName": "amplify-deshboardsidebarmain-dev-113619",
+      "StackId": "arn:aws:cloudformation:eu-central-1:440871172531:stack/amplify-deshboardsidebarmain-dev-113619/2de91780-6408-11ed-ba86-0297a00a5a9e",
+      "AmplifyAppId": "d3kl836ad4rma6"
+    },
+    "categories": {
+      "auth": {
+        "deshboardsidebarmainee2c0103": {
+          "userPoolId": "eu-central-1_PS719oUcl",
+          "userPoolName": "utentiCinema",
+          "webClientId": "24vlulv9ss7r9mdft67nim943a",
+          "nativeClientId": "24vlulv9ss7r9mdft67nim943a"
+        }
+      }
+    }
+  }
+}

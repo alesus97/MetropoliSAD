@@ -93,26 +93,29 @@ export default function IdentifyAccount(props) {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" justify="center" >
     <Box
-    //   sx={{
-    //     marginTop: 8,
-    //     display: "flex",
-    //     flexDirection: "column",
-    //     alignItems: "center",
-    //   }}
+      sx={{
+        marginTop: 8,
+       //display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      
+        
+       }}
     >
-        <Avatar  sx={{ m: 1, bgcolor: "secondary.main" }}>
-          <LockOutlinedIcon/>
-        </Avatar>
-        <Typography component="h1" variant="h5" align="center">
-          Inserire email account gestore cinema
-        </Typography>
+        <Avatar sx={{ m: 1,  bgcolor: "secondary.main" }}>
+    <LockOutlinedIcon />
+  </Avatar>
+  <Typography component="h1" variant="h5">
+    inserire mail account gestore cinema
+  </Typography>
         <Box
           component="form"
           onSubmit={handleSubmit}
-        //    noValidate
-        //   sx={{ mt: 1 }}
+          
+          sx={{ mt: 1 }}
+        
         >
           <CustomTextField
             margin="normal"
@@ -123,7 +126,10 @@ export default function IdentifyAccount(props) {
             name="email"
             autoComplete="email"
             autoFocus
+          
           />
+
+
 
           {isOkClicked ? (
             <Alert
@@ -138,19 +144,14 @@ export default function IdentifyAccount(props) {
           )}
           <p></p>
             
-            
-            
-             
-           
-
-<Grid container spacing={2}>
+          <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-            <Button variant="outlined" type="submit" >
+            <Button variant="contained" type="submit" fullWidth >
               Ok
             </Button>
             </Grid>
             <Grid item xs={12} sm={6} >
-            <Button variant="outlined" onClick={() => handleCancel()}>
+            <Button variant="contained" onClick={() => handleCancel()} fullWidth >
               Cancel
             </Button>
             </Grid>
@@ -162,3 +163,4 @@ export default function IdentifyAccount(props) {
     </Container>
   );
 }
+

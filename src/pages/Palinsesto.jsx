@@ -58,8 +58,7 @@ export default function BasicTable() {
   useEffect(() => {
     axios
       .get(
-        `https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/1/spettacoli`
-      )
+        `https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/1/spettacoli`)
       .then((res) => {
         setSpettacoli(res.data);
       });

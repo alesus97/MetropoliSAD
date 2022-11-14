@@ -16,7 +16,7 @@ import { useState } from "react";
 import { Error } from "@mui/icons-material";
 
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Amplify, Auth } from "aws-amplify";
 import awsconfig from "../aws-exports";
 import { AUTH_USER_TOKEN_KEY } from "../const";
@@ -49,44 +49,31 @@ const CustomTextField = styled(TextField)({
   },
 });
 
-export default function Login(props) {
+export default function ForgotPassword(props) {
   Amplify.configure(awsconfig);
   const [iserror, setIserror] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
-  const [email, setEmail] = useState();
-
   const navigate = useNavigate();
-
-  const forgotPassword = () => {
-    // Auth.forgotPassword()
-  };
+  const {state} = useLocation();
+  const {email}= state;
 
   const handleSubmit = (event) => {
     event.preventDefault();
+   
     const data = new FormData(event.currentTarget);
-    const email = data.get("email");
-    const password = data.get("password");
+    const verificationCode = data.get("verification_code");
+    const password = data.get("new_password");
+    const confirmPassword = data.get("confirm_password");
 
-    Auth.signIn(email, password)
-      .then((user) => {
-        setIserror(false);
-        setErrorMessage("");
-        console.log(user);
-
-        localStorage.setItem(
-          AUTH_USER_TOKEN_KEY,
-          user.signInUserSession.accessToken.jwtToken
-        );
-        console.log(localStorage);
-
-        props.onLoginAction();
-        
-        navigate("/palinsesto", { replace: true });
+    Auth.forgotPasswordSubmit(
+      email,
+      verificationCode,
+      password
+    )
+      .then((data) => {
+        navigate('/login')
       })
-      .catch((err) => {
-        setErrorMessage(err.message);
-        setIserror(true);
-      });
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -103,7 +90,7 @@ export default function Login(props) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Controlla la tua email per il codice di verifica
         </Typography>
         <Box
           component="form"
@@ -115,9 +102,9 @@ export default function Login(props) {
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
+            id="verification_code"
+            label="Codice di Verifica"
+            name="verification_code"
             autoComplete="email"
             autoFocus
           />
@@ -125,10 +112,20 @@ export default function Login(props) {
             margin="normal"
             required
             fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
+            id="new_password"
+            label="Nuova Password"
+            name="new_password"
+            autoComplete="email"
+            autoFocus
+          />
+          <CustomTextField
+            margin="normal"
+            required
+            fullWidth
+            name="confirm_password"
+            label="Conferma Password"
+            type="confirm_password"
+            id="confirm_password"
             autoComplete="current-password"
           />
 
@@ -143,10 +140,6 @@ export default function Login(props) {
           ) : (
             <></>
           )}
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
 
           <Button
             type="submit"
@@ -154,15 +147,8 @@ export default function Login(props) {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign In
+            Imposta nuova password
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="/identifyAccount" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-          </Grid>
         </Box>
       </Box>
       <Copyright sx={{ mt: 8, mb: 4 }} />

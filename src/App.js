@@ -11,6 +11,9 @@ const Sale = lazy(() => import("./pages/Sale.jsx"));
 const Product = lazy(() => import("./pages/Product.jsx"));
 const ProductList = lazy(() => import("./pages/ProductList.jsx"));
 const Login = lazy(() => import("./pages/Login.jsx"));
+const ResetPassword = lazy(() => import("./pages/ResetPassword.jsx"));
+const IdentifyAccount = lazy(() => import("./pages/IdentifyAccount.jsx"));
+
 
 const App = () => {
   var [logged, setLogged] = useState(false);
@@ -33,6 +36,8 @@ const App = () => {
     content = (
       <Suspense fallback={<SimpleBackdrop />}>
         <Routes>
+        <Route path="/identifyAccount" element={<IdentifyAccount />} />
+         <Route path="/resetPassword" element={<ResetPassword />} />
           <Route path="*" element={<Navigate to="/" replace />} />
           <Route
             path="/"

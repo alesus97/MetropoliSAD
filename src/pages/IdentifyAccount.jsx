@@ -11,9 +11,11 @@ import {
   Typography,
   Container,
   Alert,
+  Stack,
 } from "@mui/material";
 import { useState } from "react";
 import { Error } from "@mui/icons-material";
+import { Navigate } from "react-router-dom";
 
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useNavigate } from "react-router-dom";
@@ -49,120 +51,111 @@ const CustomTextField = styled(TextField)({
   },
 });
 
-export default function Login(props) {
+export default function IdentifyAccount(props) {
   Amplify.configure(awsconfig);
-  const [iserror, setIserror] = useState(false);
+  const [iserror, setIserror] = useState();
+  const [isOkClicked, setOkClicked] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
   const [email, setEmail] = useState();
 
   const navigate = useNavigate();
 
-  const forgotPassword = () => {
-    // Auth.forgotPassword()
-  };
-
   const handleSubmit = (event) => {
+    
     event.preventDefault();
+   
     const data = new FormData(event.currentTarget);
+    console.log(iserror);
+
     const email = data.get("email");
-    const password = data.get("password");
-
-    Auth.signIn(email, password)
-      .then((user) => {
-        setIserror(false);
+    Auth.forgotPassword(email)
+      .then((data) => {
         setErrorMessage("");
-        console.log(user);
+        setOkClicked(true);
+        setIserror(false);
 
-        localStorage.setItem(
-          AUTH_USER_TOKEN_KEY,
-          user.signInUserSession.accessToken.jwtToken
-        );
-        console.log(localStorage);
+        console.log(data);
 
-        props.onLoginAction();
-        
-        navigate("/palinsesto", { replace: true });
+         navigate('/resetPassword', {state: {email: email}} );
       })
       .catch((err) => {
-        setErrorMessage(err.message);
+        setOkClicked(true);
         setIserror(true);
+        console.log(err);
+        setErrorMessage(err.message);
+        
       });
+  };
+
+  const handleCancel = () => {
+    console.log("AAA");
+    navigate("/login", { replace: true });
   };
 
   return (
     <Container component="main" maxWidth="xs">
-      <Box
-        sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-          <LockOutlinedIcon />
+    <Box
+    //   sx={{
+    //     marginTop: 8,
+    //     display: "flex",
+    //     flexDirection: "column",
+    //     alignItems: "center",
+    //   }}
+    >
+        <Avatar  sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <LockOutlinedIcon/>
         </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
+        <Typography component="h1" variant="h5" align="center">
+          Inserire email account gestore cinema
         </Typography>
         <Box
           component="form"
           onSubmit={handleSubmit}
-          // noValidate
-          sx={{ mt: 1 }}
+        //    noValidate
+        //   sx={{ mt: 1 }}
         >
           <CustomTextField
             margin="normal"
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label="Indirizzo Email"
             name="email"
             autoComplete="email"
             autoFocus
           />
-          <CustomTextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
 
-          {iserror ? (
+          {isOkClicked ? (
             <Alert
               variant="filled"
               color="primary"
               icon={<Error fontSize="inherit" />}
             >
-              {errorMessage}
+              {iserror ? errorMessage : "Codice inviato correttamente"}
             </Alert>
           ) : (
             <></>
           )}
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
+          <p></p>
+            
+            
+            
+             
+           
 
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Sign In
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="/identifyAccount" variant="body2">
-                Forgot password?
-              </Link>
+<Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+            <Button variant="outlined" type="submit" >
+              Ok
+            </Button>
+            </Grid>
+            <Grid item xs={12} sm={6} >
+            <Button variant="outlined" onClick={() => handleCancel()}>
+              Cancel
+            </Button>
             </Grid>
           </Grid>
+         
         </Box>
       </Box>
       <Copyright sx={{ mt: 8, mb: 4 }} />

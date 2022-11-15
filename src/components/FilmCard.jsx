@@ -93,7 +93,7 @@ export default function FilmCard(props) {
           <ExpandMoreIcon color="primary"/>
         </ExpandMore>
         <Typography variant="body2"  color="primary">
-          Dettagli
+          Details
           </Typography>
       </CardActions>
     </Card>

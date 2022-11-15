@@ -28,10 +28,10 @@ export default function SalaCard(props) {
         title={
             <Grid container spacing={1}>
             <Grid item xs={7}>
-              <Typography align="center" variant="h6" >Sala {props.info.numero_sala}</Typography>
+              <Typography align="center" variant="h6" >Hall {props.info.numero_sala}</Typography>
             </Grid>
             <Grid item >
-              <Typography align="center" variant="h6" >{props.info.capienza} Posti</Typography>
+              <Typography align="center" variant="h6" >{props.info.capienza} Seats</Typography>
             </Grid>
           </Grid>  
         }

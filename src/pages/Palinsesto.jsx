@@ -81,11 +81,11 @@ export default function BasicTable() {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Titolo</TableCell>
-              <TableCell align="center">Sala</TableCell>
-              <TableCell align="center">Data</TableCell>
-              <TableCell align="center">Prezzo</TableCell>
-              <TableCell align="center">Elimina</TableCell>
+              <TableCell>Title</TableCell>
+              <TableCell align="center">Hall</TableCell>
+              <TableCell align="center">Date</TableCell>
+              <TableCell align="center">Price</TableCell>
+              <TableCell align="center">Delete</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

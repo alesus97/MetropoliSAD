@@ -1,157 +1,269 @@
-import * as React from "react";
-import {
-  Avatar,
-  Button,
-  TextField,
-  FormControlLabel,
-  Checkbox,
-  Link,
-  Grid,
-  Box,
-  Typography,
-  Container,
-  Alert,
-} from "@mui/material";
-import { useState } from "react";
+import React, { useState } from "react";
+import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
+import { Form, FormikProvider, useFormik } from "formik";
+import * as Yup from "yup";
+import { Amplify, Auth } from "aws-amplify";
+import { AUTH_USER_TOKEN_KEY } from "../const";
+import awsconfig from "../aws-exports";
+import styled from "@emotion/styled";
+import { Container, Typography, Divider } from "@mui/material";
+import Logo from "../components/Logo";
+import { CircularProgress } from "@mui/material";
+import {Alert} from "@mui/material";
 import { Error } from "@mui/icons-material";
 
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { useLocation, useNavigate } from "react-router-dom";
-import { Amplify, Auth } from "aws-amplify";
-import awsconfig from "../aws-exports";
-import { AUTH_USER_TOKEN_KEY } from "../const";
+import {
+  Box,
+  Checkbox,
+  FormControlLabel,
+  IconButton,
+  InputAdornment,
+  Link,
+  Stack,
+  TextField,
+} from "@mui/material";
+import { LoadingButton } from "@mui/lab";
+import { Icon } from "@iconify/react";
+import { motion } from "framer-motion";
 
-import { styled } from "@mui/styles";
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
-const CustomTextField = styled(TextField)({
-  "& .MuiOutlinedInput-root": {
-    "& fieldset": {
-      borderColor: "white",
-    },
+let easing = [0.6, -0.05, 0.01, 0.99];
+const animate = {
+  opacity: 1,
+  y: 0,
+  transition: {
+    duration: 0.6,
+    ease: easing,
+    delay: 0.16,
   },
+};
+
+const RootStyle = styled("div")({
+  height: "100vh",
+  display: "grid",
+  placeItems: "center",
 });
 
-export default function ForgotPassword(props) {
+const HeadingStyle = styled(Box)({
+  textAlign: "center",
+});
+
+const ContentStyle = styled("div")({
+  maxWidth: 600,
+  padding: 25,
+  margin: "auto",
+  display: "flex",
+  justifyContent: "center",
+  flexDirection: "column",
+  background: "#292828",
+});
+
+const fadeInUp = {
+  initial: {
+    y: 60,
+    opacity: 0,
+    transition: { duration: 0.6, ease: easing },
+  },
+  animate: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: easing,
+    },
+  },
+};
+
+const ResetPassword = (props) => {
   Amplify.configure(awsconfig);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const [iserror, setIserror] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
-  const navigate = useNavigate();
-  const {state} = useLocation();
-  const {email}= state;
+  const { state } = useLocation();
+  const { email } = state;
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-   
-    const data = new FormData(event.currentTarget);
-    const verificationCode = data.get("verification_code");
-    const password = data.get("new_password");
-    const confirmPassword = data.get("confirm_password");
+  const [showPassword, setShowPassword] = useState(false);
 
-    Auth.forgotPasswordSubmit(
-      email,
-      verificationCode,
-      password
-    )
-      .then((data) => {
-        navigate('/login')
-      })
-      .catch((err) => console.log(err));
-  };
+  const LoginSchema = Yup.object().shape({
+    verificationCode: Yup.string().required("Verification code is required"),
+    password: Yup.string().required("Password is required"),
+    confirmPassword: Yup.string().required("Password is required"),
+  });
+
+  const CustomTextField = styled(TextField)({
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "white",
+      },
+    },
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      verificationCode: "",
+      password: "",
+      confirmPassword: "",
+    },
+    validationSchema: LoginSchema,
+    onSubmit: () => {
+      console.log("submitting...");
+
+      Auth.forgotPasswordSubmit(email, values.verificationCode, values.password)
+        .then((data) => {
+          navigate("/login");
+        })
+        .catch((err) => console.log(err));
+    },
+  });
+
+  const { errors, touched, values, isSubmitting, getFieldProps, handleSubmit } =
+    formik;
 
   return (
-    <Container component="main" maxWidth="xs">
-      <Box
-        sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Controlla la tua email per il codice di verifica
-        </Typography>
-        <Box
-          component="form"
-          onSubmit={handleSubmit}
-          // noValidate
-          sx={{ mt: 1 }}
-        >
-          <CustomTextField
-            margin="normal"
-            required
-            fullWidth
-            id="verification_code"
-            label="Codice di Verifica"
-            name="verification_code"
-            autoComplete="email"
-            autoFocus
-          />
-          <CustomTextField
-            margin="normal"
-            required
-            fullWidth
-            id="new_password"
-            label="Nuova Password"
-            name="new_password"
-            autoComplete="email"
-            autoFocus
-          />
-          <CustomTextField
-            margin="normal"
-            required
-            fullWidth
-            name="confirm_password"
-            label="Conferma Password"
-            type="confirm_password"
-            id="confirm_password"
-            autoComplete="current-password"
-          />
+    <RootStyle>
+      <Container maxWidth="sm">
+        <ContentStyle>
+          <HeadingStyle component={motion.div} {...fadeInUp}>
+            <Logo />
+            <Typography sx={{ color: "text.secondary", mb: 5 }}>
+              Check your email for verification code
+            </Typography>
+          </HeadingStyle>
 
-          {iserror ? (
-            <Alert
-              variant="filled"
-              color="primary"
-              icon={<Error fontSize="inherit" />}
-            >
-              {errorMessage}
-            </Alert>
-          ) : (
-            <></>
-          )}
+          <FormikProvider value={formik}>
+            <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
+              <Box
+                component={motion.div}
+                animate={{
+                  transition: {
+                    staggerChildren: 0.55,
+                  },
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 3,
+                  }}
+                  component={motion.div}
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={animate}
+                >
+                  <CustomTextField
+                    fullWidth
+                    autoComplete="verificationCode"
+                    label="Verification Code"
+                    name="verificationCode"
+                    {...getFieldProps("verificationCode")}
+                    error={Boolean(
+                      touched.verificationCode && errors.verificationCode
+                    )}
+                    helperText={
+                      touched.verificationCode && errors.verificationCode
+                    }
+                  />
 
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Imposta nuova password
-          </Button>
-        </Box>
-      </Box>
-      <Copyright sx={{ mt: 8, mb: 4 }} />
-    </Container>
+                  <CustomTextField
+                    fullWidth
+                    autoComplete="current-password"
+                    type={showPassword ? "text" : "password"}
+                    label="New Password"
+                    {...getFieldProps("password")}
+                    error={Boolean(touched.password && errors.password)}
+                    helperText={touched.password && errors.password}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            onClick={() => setShowPassword((prev) => !prev)}
+                          >
+                            {showPassword ? (
+                              <Icon icon="eva:eye-fill" />
+                            ) : (
+                              <Icon icon="eva:eye-off-fill" />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+
+                  <CustomTextField
+                    fullWidth
+                    autoComplete="current-password"
+                    type={showPassword ? "text" : "password"}
+                    label="Confirm New Password"
+                    {...getFieldProps("confirmPassword")}
+                    error={Boolean(
+                      touched.confirmPassword && errors.confirmPassword
+                    )}
+                    helperText={
+                      touched.confirmPassword && errors.confirmPassword
+                    }
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            onClick={() => setShowPassword((prev) => !prev)}
+                          >
+                            {showPassword ? (
+                              <Icon icon="eva:eye-fill" />
+                            ) : (
+                              <Icon icon="eva:eye-off-fill" />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </Box>
+
+                <Box
+                  component={motion.div}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={animate}
+                >
+                  {/* {iserror ? (
+                    <Alert
+                      variant="filled"
+                      color="primary"
+                      icon={<Error fontSize="inherit" />}
+                    >
+                      {errorMessage}
+                    </Alert>
+                  ) : (
+                    <></>
+                  )} */}
+
+                  <Stack
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="space-between"
+                    sx={{ my: 2 }}
+                  ></Stack>
+
+                  <LoadingButton
+                    fullWidth
+                    size="large"
+                    type="submit"
+                    variant="contained"
+                    loading={isSubmitting}
+                    loadingIndicator={
+                      <CircularProgress color="primary" size={16} />
+                    }
+                  >
+                    {isSubmitting ? "loading..." : "Reset"}
+                  </LoadingButton>
+                </Box>
+              </Box>
+            </Form>
+          </FormikProvider>
+        </ContentStyle>
+      </Container>
+    </RootStyle>
   );
-}
+};
+
+export default ResetPassword;

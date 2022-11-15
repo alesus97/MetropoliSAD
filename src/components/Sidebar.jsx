@@ -23,11 +23,11 @@ const Sidebar = ({ children }) => {
 
   const menuItem = [
     {
-      name: "Palinsesto",
-      path: "/palinsesto",
+      name: "Schedule",
+      path: "/schedule",
       icon: <Dashboard color="primary" />,
       onClick: () => {
-        navigate("/palinsesto", { replace: true });
+        navigate("/schedule", { replace: true });
       },
     },
     {
@@ -39,11 +39,11 @@ const Sidebar = ({ children }) => {
       },
     },
     {
-      name: "Sale",
-      path: "/sale",
+      name: "Hall",
+      path: "/hall",
       icon: <Chair color="primary" />,
       onClick: () => {
-        navigate("/sale");
+        navigate("/hall");
       },
     },
     {

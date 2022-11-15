@@ -12,7 +12,7 @@ import { CircularProgress } from "@mui/material";
 import {Alert} from "@mui/material"
 import { Error } from "@mui/icons-material";
 import { animate, RootStyle, HeadingStyle, ContentStyle, fadeInUp } from "./ConstAuth";
-
+import {Fade} from "@mui/material";
 import {
   Box,
   Stack,
@@ -123,7 +123,7 @@ const IdentifyAccount = (props) => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={animate}
                 >
-                  <p></p>
+                  {/* <p></p>
                   {isOkClicked ? (
                     <Alert
                       variant="filled"
@@ -135,7 +135,8 @@ const IdentifyAccount = (props) => {
                   ) : (
                     <></>
                   )}
-                  <p></p>
+                  <p></p> */}
+
                   <Stack
                     direction="row"
                     alignItems="center"
@@ -143,6 +144,24 @@ const IdentifyAccount = (props) => {
                     sx={{ my: 2 }}
                   ></Stack>
 
+<Fade
+                    in={isOkClicked} //Write the needed condition here to make it appear
+                    timeout={{ enter: 500, exit: 500 }} //Edit these two values to change the duration of transition when the element is getting appeared and disappeard
+                    addEndListener={() => {
+                      setTimeout(() => {
+                        setIserror(false);
+                      }, 2000);
+                    }}
+                  >
+                    <Alert
+                       variant="filled"
+                       color="primary"
+                       icon={<Error fontSize="inherit" />}
+                    >
+                       {iserror ? errorMessage : "Codice inviato correttamente"}
+                    </Alert>
+                  </Fade>
+                  <p></p>
                   <LoadingButton
                     fullWidth
                     size="large"

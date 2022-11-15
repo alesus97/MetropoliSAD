@@ -1,5 +1,4 @@
 import React, { Suspense, lazy, useState } from "react";
-import "./";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import SimpleBackdrop from "./pages/LoadingPage";
@@ -14,6 +13,7 @@ const ResetPassword = lazy(() => import("./pages/Auth/ResetPassword.jsx"));
 const IdentifyAccount = lazy(() => import("./pages/Auth/IdentifyAccount.jsx"));
 
 const App = () => {
+
   var [logged, setLogged] = useState(false);
   var content = null;
   if (logged) {

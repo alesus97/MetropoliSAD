@@ -9,9 +9,9 @@ const Film = lazy(() => import("./pages/Film.jsx"));
 const Sale = lazy(() => import("./pages/Sale.jsx"));
 const Product = lazy(() => import("./pages/Product.jsx"));
 const ProductList = lazy(() => import("./pages/ProductList.jsx"));
-const Login = lazy(() => import("./pages/Login"));
-const ResetPassword = lazy(() => import("./pages/ResetPassword.jsx"));
-const IdentifyAccount = lazy(() => import("./pages/IdentifyAccount.jsx"));
+const Login = lazy(() => import("./pages/Auth/Login"));
+const ResetPassword = lazy(() => import("./pages/Auth/ResetPassword.jsx"));
+const IdentifyAccount = lazy(() => import("./pages/Auth/IdentifyAccount.jsx"));
 
 const App = () => {
   var [logged, setLogged] = useState(false);

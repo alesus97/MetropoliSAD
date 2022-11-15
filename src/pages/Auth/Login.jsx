@@ -3,14 +3,13 @@ import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import { Form, FormikProvider, useFormik } from "formik";
 import * as Yup from "yup";
 import { Amplify, Auth } from "aws-amplify";
-import { AUTH_USER_TOKEN_KEY } from "../const";
-import awsconfig from "../aws-exports";
-import styled from "@emotion/styled";
-import {Container, Typography, Divider} from "@mui/material";
-import Logo from "../components/Logo";
-import {CircularProgress} from "@mui/material";
+import { AUTH_USER_TOKEN_KEY } from "../../const";
+import awsconfig from "../../aws-exports";
+import Logo from "../../components/Logo";
 import { Error } from "@mui/icons-material";
-import {Alert} from "@mui/material";
+import { animate, RootStyle, HeadingStyle, ContentStyle, fadeInUp } from "./ConstAuth";
+import styled from "@emotion/styled";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 import {
   Box,
@@ -21,21 +20,15 @@ import {
   Link,
   Stack,
   TextField,
+  CircularProgress,
+  Alert,
+  Container, 
+  Typography,
 } from "@mui/material";
+
 import { LoadingButton } from "@mui/lab";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
-
-let easing = [0.6, -0.05, 0.01, 0.99];
-const animate = {
-  opacity: 1,
-  y: 0,
-  transition: {
-    duration: 0.6,
-    ease: easing,
-    delay: 0.16,
-  },
-};
 
 const CustomTextField = styled(TextField)({
   "& .MuiOutlinedInput-root": {
@@ -45,53 +38,14 @@ const CustomTextField = styled(TextField)({
   },
 });
 
-const RootStyle = styled("div")({
-    //   background: "rgb(249, 250, 251)",
-      height: "100vh",
-      display: "grid",
-      placeItems: "center",
-    });
-    
-    const HeadingStyle = styled(Box)({
-      textAlign: "center",
-    });
-    
-    const ContentStyle = styled("div")({
-      maxWidth: 600,
-      padding: 25,
-      margin: "auto",
-      display: "flex",
-      justifyContent: "center",
-      flexDirection: "column",
-       background: "#292828",
-    });
-    
-    const fadeInUp = {
-      initial: {
-        y: 60,
-        opacity: 0,
-        transition: { duration: 0.6, ease: easing },
-      },
-      animate: {
-        y: 0,
-        opacity: 1,
-        transition: {
-          duration: 0.6,
-          ease: easing,
-        },
-      },
-    };
-
 const LoginForm = (props) => {
   Amplify.configure(awsconfig);
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
   const [iserror, setIserror] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
 
   const [showPassword, setShowPassword] = useState(false);
-
 
   
   const LoginSchema = Yup.object().shape({
@@ -190,15 +144,16 @@ const LoginForm = (props) => {
               error={Boolean(touched.password && errors.password)}
               helperText={touched.password && errors.password}
               InputProps={{
+                
                 endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
+                  <InputAdornment position="end" >
+                    <IconButton 
                       onClick={() => setShowPassword((prev) => !prev)}
                     >
                       {showPassword ? (
-                        <Icon icon="eva:eye-fill" />
+                        <Visibility color="primary"/>
                       ) : (
-                        <Icon icon="eva:eye-off-fill" />
+                        <VisibilityOff color="primary" />
                       )}
                     </IconButton>
                   </InputAdornment>

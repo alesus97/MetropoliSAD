@@ -14,14 +14,11 @@ import {
 } from "@mui/material";
 
 import { useLocation, useNavigate } from "react-router-dom";
-import { Movie, Chair, Dashboard, Adb } from "@mui/icons-material";
-import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import Tooltip from "@mui/material/Tooltip";
+import { Movie, Chair, Dashboard, Adb, Quiz } from "@mui/icons-material";
+
 import LogoutIcon from '@mui/icons-material/Logout';
 import PersonIcon from '@mui/icons-material/Person';
+import UserMenu from "./UserMenu";
 
 
 
@@ -70,11 +67,11 @@ const Sidebar = ({ children }) => {
       },
     },
     {
-      name: "Product",
-      path: "/product",
-      icon: <Chair color="primary" />,
+      name: "Quiz",
+      path: "/quiz",
+      icon: <Quiz color="primary" />,
       onClick: () => {
-        navigate("/product");
+        navigate("/quiz");
       },
     },
     {
@@ -87,18 +84,7 @@ const Sidebar = ({ children }) => {
     },
   ];
 
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-
   
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
 
   // const {pathName} = useLocation()
   return (
@@ -133,36 +119,8 @@ const Sidebar = ({ children }) => {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             
           </Box>
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu}>
-                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/> 
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '50px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting, index) => (
-                <MenuItem key={index} onClick={handleCloseUserMenu}>
-                  <ListItemIcon>{setting.icon}</ListItemIcon>
-                  <Typography textAlign="center">{setting.name}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+         
+         <UserMenu/>
           
         </Toolbar>
         

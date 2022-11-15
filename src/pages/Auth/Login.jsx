@@ -79,14 +79,13 @@ const LoginForm = (props) => {
           setErrorMessage("");
           // console.log(user);
 
-
           localStorage.setItem(
             AUTH_USER_TOKEN_KEY,
             user.signInUserSession.accessToken.jwtToken
           );
 
           
-          console.log(localStorage);
+          // console.log(localStorage);
 
           props.onLoginAction();
 
@@ -222,18 +221,20 @@ const LoginForm = (props) => {
 
                   <Fade
                     in={iserror} //Write the needed condition here to make it appear
-                    timeout={{ enter: 500, exit: 500 }} //Edit these two values to change the duration of transition when the element is getting appeared and disappeard
+                    timeout={{ enter: 1000, exit: 1000 }} //Edit these two values to change the duration of transition when the element is getting appeared and disappeard
                     addEndListener={() => {
                       setTimeout(() => {
                         setIserror(false);
-                      }, 2000);
+                      }, 4000);
                     }}
                   >
+                    
                     <Alert
                        variant="filled"
                        color="primary"
                        icon={<Error fontSize="inherit" />}
                     >
+                      
                       {errorMessage}
                     </Alert>
                   </Fade>

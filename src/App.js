@@ -2,7 +2,8 @@ import React, { Suspense, lazy, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import SimpleBackdrop from "./pages/LoadingPage";
-
+import { useEffect } from "react";
+import axios from "axios";
 const Palinsesto = lazy(() => import("./pages/Palinsesto.jsx"));
 const Film = lazy(() => import("./pages/Film.jsx"));
 const Sale = lazy(() => import("./pages/Sale.jsx"));
@@ -12,15 +13,33 @@ const Login = lazy(() => import("./pages/Auth/Login"));
 const ResetPassword = lazy(() => import("./pages/Auth/ResetPassword.jsx"));
 const IdentifyAccount = lazy(() => import("./pages/Auth/IdentifyAccount.jsx"));
 
+axios.defaults.headers.common['Authorization'] = localStorage.getItem("ReactAmplify.TokenKey");
+
 const App = () => {
+
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    () => JSON.parse(localStorage.getItem('auth')) || false
+  );
+
+  const setAuth = (value) => {
+    setIsAuthenticated(value);
+    
+  };
+
+  useEffect(()=>{
+    localStorage.setItem("auth", JSON.stringify(isAuthenticated));
+  }, [isAuthenticated]);
+
+
 
   var [logged, setLogged] = useState(false);
   var content = null;
-  if (logged) {
+  if (isAuthenticated) {
     content = (
       <Sidebar>
         <Suspense fallback={<SimpleBackdrop />}>
           <Routes>
+            <Route path="/" element={<Navigate to="/schedule" replace />} />
             <Route path="/schedule" element={<Palinsesto />} />
             <Route path="/hall" element={<Sale />} />
             <Route path="/film" element={<Film />} />
@@ -42,8 +61,9 @@ const App = () => {
             element={
               <Login
                 onLoginAction={() => {
-                  console.log("Cambiato stato login in vero");
-                  setLogged(true);
+                  // console.log("Cambiato stato login in vero");
+                  // setLogged(true);
+                  setAuth(true)
                 }}
               />
             }

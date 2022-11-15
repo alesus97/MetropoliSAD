@@ -28,7 +28,8 @@ import {
   CircularProgress,
   Alert,
   Container,
-  Typography,
+  Typography, 
+  Fade
 } from "@mui/material";
 
 import { LoadingButton } from "@mui/lab";
@@ -48,6 +49,7 @@ const ResetPassword = (props) => {
   Amplify.configure(awsconfig);
   const navigate = useNavigate();
   const location = useLocation();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [iserror, setIserror] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
   const { state } = useLocation();
@@ -87,13 +89,19 @@ const ResetPassword = (props) => {
     onSubmit: () => {
       Auth.forgotPasswordSubmit(email, values.verificationCode, values.password)
         .then((data) => {
+          setIserror(false);
+          setErrorMessage("");
           navigate("/login");
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          setIsSubmitting(false);
+          setErrorMessage(err.message);
+          setIserror(true);
+        });
     },
   });
 
-  const { errors, touched, values, isSubmitting, getFieldProps, handleSubmit } =
+  const { errors, touched, values, getFieldProps, handleSubmit } =
     formik;
 
   return (
@@ -201,7 +209,7 @@ const ResetPassword = (props) => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={animate}
                 >
-                  <p></p>
+                  {/* <p></p>
                   {iserror ? (
                     <Alert
                       variant="filled"
@@ -212,7 +220,7 @@ const ResetPassword = (props) => {
                     </Alert>
                   ) : (
                     <></>
-                  )}
+                  )} */}
 
                   <Stack
                     direction="row"
@@ -220,6 +228,25 @@ const ResetPassword = (props) => {
                     justifyContent="space-between"
                     sx={{ my: 2 }}
                   ></Stack>
+
+                  <Fade
+                    in={iserror} //Write the needed condition here to make it appear
+                    timeout={{ enter: 1000, exit: 1000 }} //Edit these two values to change the duration of transition when the element is getting appeared and disappeard
+                    addEndListener={() => {
+                      setTimeout(() => {
+                        setIserror(false);
+                      }, 4000);
+                    }}
+                  >
+                    <Alert
+                      variant="filled"
+                      color="primary"
+                      icon={<Error fontSize="inherit" />}
+                    >
+                      {errorMessage}
+                    </Alert>
+                  </Fade>
+                  <p></p>
 
                   <LoadingButton
                     fullWidth
@@ -231,7 +258,7 @@ const ResetPassword = (props) => {
                       <CircularProgress color="primary" size={16} />
                     }
                   >
-                    {isSubmitting ? "loading..." : "Login"}
+                    {isSubmitting ? "loading..." : "Reset"}
                   </LoadingButton>
                 </Box>
               </Box>

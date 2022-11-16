@@ -17,7 +17,6 @@ import {
   ContentStyle,
   fadeInUp,
 } from "./ConstAuth";
-import styled from "@emotion/styled";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 import {
@@ -38,14 +37,6 @@ import {
 import { LoadingButton } from "@mui/lab";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
-
-const CustomTextField = styled(TextField)({
-  "& .MuiOutlinedInput-root": {
-    "& fieldset": {
-      borderColor: "white",
-    },
-  },
-});
 
 const LoginForm = (props) => {
   Amplify.configure(awsconfig);
@@ -132,7 +123,7 @@ const LoginForm = (props) => {
                   initial={{ opacity: 0, y: 40 }}
                   animate={animate}
                 >
-                  <CustomTextField
+                  <TextField
                     fullWidth
                     autoComplete="email"
                     type="email"
@@ -141,9 +132,12 @@ const LoginForm = (props) => {
                     {...getFieldProps("email")}
                     error={Boolean(touched.email && errors.email)}
                     helperText={touched.email && errors.email}
+                    sx={{"& fieldset": {
+                      borderColor: "white",
+                    },}}
                   />
 
-                  <CustomTextField
+                  <TextField
                     fullWidth
                     autoComplete="current-password"
                     type={showPassword ? "text" : "password"}
@@ -151,6 +145,9 @@ const LoginForm = (props) => {
                     {...getFieldProps("password")}
                     error={Boolean(touched.password && errors.password)}
                     helperText={touched.password && errors.password}
+                    sx={{"& fieldset": {
+                      borderColor: "white",
+                    },}}
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">

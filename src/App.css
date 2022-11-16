@@ -1,3 +1,10 @@
 ::-webkit-calendar-picker-indicator {
     filter: invert(83%) sepia(74%) saturate(498%) hue-rotate(325deg) brightness(101%) contrast(95%);
 }
+
+
+
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: "white";
+}

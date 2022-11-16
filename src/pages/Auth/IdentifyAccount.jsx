@@ -5,7 +5,6 @@ import * as Yup from "yup";
 import { Amplify, Auth } from "aws-amplify";
 import { AUTH_USER_TOKEN_KEY } from "../../const";
 import awsconfig from "../../aws-exports";
-import styled from "@emotion/styled";
 import { Container, Typography, Divider } from "@mui/material";
 import Logo from "../../components/Logo";
 import { CircularProgress } from "@mui/material";
@@ -21,15 +20,6 @@ import {
 import { LoadingButton } from "@mui/lab";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
-
-
-const CustomTextField = styled(TextField)({
-  "& .MuiOutlinedInput-root": {
-    "& fieldset": {
-      borderColor: "white",
-    },
-  },
-});
 
 const IdentifyAccount = (props) => {
   Amplify.configure(awsconfig);
@@ -106,7 +96,7 @@ const IdentifyAccount = (props) => {
                   initial={{ opacity: 0, y: 40 }}
                   animate={animate}
                 >
-                  <CustomTextField
+                  <TextField
                     fullWidth
                     autoComplete="email"
                     type="email"
@@ -115,6 +105,10 @@ const IdentifyAccount = (props) => {
                     {...getFieldProps("email")}
                     error={Boolean(touched.email && errors.email)}
                     helperText={touched.email && errors.email}
+                    sx={{"& fieldset": {
+                      borderColor: "white",
+                    },}}
+                    
                   />
                 </Box>
 

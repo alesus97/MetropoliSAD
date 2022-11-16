@@ -32,7 +32,7 @@ export default function FilmCard(props) {
     setExpanded(!expanded);
   };
   return (
-    <Card raised  >
+    <Card raised   >
       
       <CardMedia sx={{width:"100%", margin:"auto"}} 
         component="img"
@@ -58,7 +58,7 @@ export default function FilmCard(props) {
         </Typography>
 
         <Typography paragraph variant="body1">
-        
+  
         {props.info.produttore}
         </Typography>
 

@@ -4,6 +4,8 @@ import Sidebar from "./components/Sidebar";
 import SimpleBackdrop from "./pages/LoadingPage";
 import { useEffect } from "react";
 import axios from "axios";
+import "./App.css"
+
 const Palinsesto = lazy(() => import("./pages/Palinsesto.jsx"));
 const Film = lazy(() => import("./pages/Film.jsx"));
 const Sale = lazy(() => import("./pages/Sale.jsx"));
@@ -12,9 +14,9 @@ const ProductList = lazy(() => import("./pages/ProductList.jsx"));
 const Login = lazy(() => import("./pages/Auth/Login"));
 const ResetPassword = lazy(() => import("./pages/Auth/ResetPassword.jsx"));
 const IdentifyAccount = lazy(() => import("./pages/Auth/IdentifyAccount.jsx"));
-
+ 
 axios.defaults.headers.common['Authorization'] = localStorage.getItem("ReactAmplify.TokenKey");
-
+  
 const App = () => {
 
   const [isAuthenticated, setIsAuthenticated] = useState(

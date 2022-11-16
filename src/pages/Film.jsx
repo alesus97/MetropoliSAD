@@ -81,7 +81,7 @@ export default function Film(props) {
 
       <Grid jualistify="center" container spacing={3}>
         {films.map((info, index) => (
-          <Grid item key={info.codice_film} xs={12} md={6} lg={4}>
+          <Grid item key={info.codice_film} xs={12} md={6} lg={3}>
             <FilmCard
               info={info}
               onDeleteAction={() => handleDeleteFilm(index)}

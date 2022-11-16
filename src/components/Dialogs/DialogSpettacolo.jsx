@@ -5,21 +5,11 @@ import { useState } from "react";
 
 import { InputAdornment } from "@mui/material";
 import Box from "@mui/material/Box";
-import { styled } from "@mui/styles";
 import axios from "axios";
 import { useEffect } from "react";
 import { MenuItem } from "@mui/material";
 
-const CustomTextField = styled(TextField)({
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: "white",
-      },
-    },
-    "&   .MuiSelect-icon": {
-      color: "#F9D159",
-    },
-  });
+
 
 
 export default function DialogSpettacolo(){
@@ -42,7 +32,7 @@ export default function DialogSpettacolo(){
       }, []);
     return(
     <Box> 
-    <CustomTextField
+    <TextField
     margin="normal"
     defaultValue=""
     select
@@ -50,15 +40,20 @@ export default function DialogSpettacolo(){
     fullWidth
     label="Seleziona Film"
     required
+    sx={{"& fieldset": {
+      borderColor: "white",
+    }, "&   .MuiSelect-icon": {
+      color: "#F9D159",
+    },}}
   >
     {film.map((film, index) => (
       <MenuItem key={index} value={JSON.stringify(film)}>
         {film.titolo}
       </MenuItem>
     ))}
-  </CustomTextField>
+  </TextField>
 
-  <CustomTextField
+  <TextField
     margin="normal"
     defaultValue=""
     select
@@ -66,15 +61,22 @@ export default function DialogSpettacolo(){
     fullWidth
     label="Seleziona Sala"
     required
+    sx={{"& fieldset": {
+      borderColor: "white",
+    }, "&   .MuiSelect-icon": {
+      color: "#F9D159",
+    }
+  
+  }}
   >
     {sale.map((sala, index) => (
       <MenuItem key={index} value={JSON.stringify(sala)}>
         {sala.numero_sala}
       </MenuItem>
     ))}
-  </CustomTextField>
+  </TextField>
 
-  <CustomTextField
+  <TextField
     label="Data spettacolo"
     id="standard-start-adornment"
     InputProps={{
@@ -85,16 +87,23 @@ export default function DialogSpettacolo(){
     margin="normal"
     name="data"
     required
+    sx={{"& fieldset": {
+      borderColor: "white",
+    },
+  }}
 
   />
 
-  <CustomTextField
+  <TextField
     margin="normal"
     fullWidth
     label="Prezzo biglietto"
     type="number"
     name="prezzo"
     required
+    sx={{"& fieldset": {
+      borderColor: "white",
+    },}}
   />
 
 </Box>

@@ -1,54 +1,57 @@
 
 import React from "react";
 import { InputAdornment,Box, TextField } from "@mui/material";
-import { styled } from "@mui/styles";
 
 
-const CustomTextField = styled(TextField)({
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: "white",
-      },
-    },
-    "&   .MuiSelect-icon": {
-      color: "#F9D159",
-    },
-  });
-  
 export default function DialogSpettacolo(){
     return(
         <Box> 
-        <CustomTextField
+        <TextField
         margin="normal"
         name="titolo"
         fullWidth
         label="Titolo"
+        sx={{"& fieldset": {
+          borderColor: "white",
+        }}}
       />
-      <CustomTextField
+      <TextField
         margin="normal"
         name="genere"
         fullWidth
         label="Genere"
+        sx={{"& fieldset": {
+          borderColor: "white",
+        },}}
       />
-      <CustomTextField
+      <TextField
         margin="normal"
         name="cast"
         fullWidth
         label="Cast"
+        sx={{"& fieldset": {
+          borderColor: "white",
+        },}}
       />
-      <CustomTextField
+      <TextField
         margin="normal"
         name="regia"
         fullWidth
         label="Regia"
+        sx={{"& fieldset": {
+          borderColor: "white",
+        },}}
       />
-      <CustomTextField
+      <TextField
         margin="normal"
         name="produttore"
         fullWidth
         label="Produttore"
+        sx={{"& fieldset": {
+          borderColor: "white",
+        },}}
       />
-      <CustomTextField
+      <TextField
         margin="normal"
         defaultValue=""
         name="data"
@@ -58,29 +61,41 @@ export default function DialogSpettacolo(){
         InputProps={{
           startAdornment: <InputAdornment position="start" />,
         }}
+        sx={{"& fieldset": {
+          borderColor: "white",
+        },}}
       />
-      <CustomTextField
+      <TextField
         margin="normal"
         name="durata"
         fullWidth
         label="Durata"
         type="number"
+        sx={{"& fieldset": {
+          borderColor: "white",
+        },}}
       />
 
-      <CustomTextField
+      <TextField
         margin="normal"
         name="trama"
         fullWidth
         label="Trama"
         multiline
+        sx={{"& fieldset": {
+          borderColor: "white",
+        },}}
       />
 
-      <CustomTextField
+      <TextField
         margin="normal"
         name="locandina"
         fullWidth
         label="Link locandina"
         type="url"
+        sx={{"& fieldset": {
+          borderColor: "white",
+        },}}
       />
       </Box>
     );

@@ -34,7 +34,7 @@ export default function FilmCard(props) {
   return (
     <Card raised   >
       
-      <CardMedia sx={{width:"100%", margin:"auto"}} 
+      <CardMedia height="350"
         component="img"
          image={props.info.image_url}
       /> 

@@ -9,7 +9,8 @@ import "./App.css"
 const Palinsesto = lazy(() => import("./pages/Palinsesto.jsx"));
 const Film = lazy(() => import("./pages/Film.jsx"));
 const Sale = lazy(() => import("./pages/Sale.jsx"));
-const Product = lazy(() => import("./pages/Product.jsx"));
+const Quiz = lazy(() => import("./pages/Quiz.jsx"));
+const Questions = lazy(() => import("./pages/Questions.jsx"));
 const ProductList = lazy(() => import("./pages/ProductList.jsx"));
 const Login = lazy(() => import("./pages/Auth/Login"));
 const ResetPassword = lazy(() => import("./pages/Auth/ResetPassword.jsx"));
@@ -45,7 +46,8 @@ const App = () => {
             <Route path="/schedule" element={<Palinsesto />} />
             <Route path="/hall" element={<Sale />} />
             <Route path="/film" element={<Film />} />
-            <Route path="/product" element={<Product />} />
+            <Route path="/quiz/:filmId" element={<Questions/>}/>
+            <Route path="/quiz" element={<Quiz />} />
             <Route path="/productList" element={<ProductList />} />
           </Routes>
         </Suspense>

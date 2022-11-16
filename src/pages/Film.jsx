@@ -79,9 +79,9 @@ export default function Film(props) {
       formType="film"
       ></InsertFormDialog>
 
-      <Grid jualistify="center" container spacing={3}>
+      <Grid jualistify="center" container spacing={4} >
         {films.map((info, index) => (
-          <Grid item key={info.codice_film} xs={12} md={6} lg={3}>
+          <Grid item key={info.codice_film} xs={12} md={6} lg={2}>
             <FilmCard
               info={info}
               onDeleteAction={() => handleDeleteFilm(index)}

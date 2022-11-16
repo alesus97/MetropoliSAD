@@ -3,7 +3,7 @@ import React from "react";
 import { InputAdornment,Box, TextField } from "@mui/material";
 
 
-export default function DialogSpettacolo(){
+export default function DialogFilm(){
     return(
         <Box> 
         <TextField

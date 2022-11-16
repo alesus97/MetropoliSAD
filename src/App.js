@@ -15,7 +15,8 @@ const ProductList = lazy(() => import("./pages/ProductList.jsx"));
 const Login = lazy(() => import("./pages/Auth/Login"));
 const ResetPassword = lazy(() => import("./pages/Auth/ResetPassword.jsx"));
 const IdentifyAccount = lazy(() => import("./pages/Auth/IdentifyAccount.jsx"));
- 
+const CreateQuiz = lazy(() => import("./pages/CreateQuiz"));
+
 axios.defaults.headers.common['Authorization'] = localStorage.getItem("ReactAmplify.TokenKey");
   
 const App = () => {
@@ -46,8 +47,9 @@ const App = () => {
             <Route path="/schedule" element={<Palinsesto />} />
             <Route path="/hall" element={<Sale />} />
             <Route path="/film" element={<Film />} />
-            <Route path="/quiz/:filmId" element={<Questions/>}/>
+            <Route path="/quiz/filmId=:filmId" element={<Questions/>}/>
             <Route path="/quiz" element={<Quiz />} />
+            <Route path="/createQuiz" element={<CreateQuiz />} />
             <Route path="/productList" element={<ProductList />} />
           </Routes>
         </Suspense>

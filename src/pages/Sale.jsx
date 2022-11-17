@@ -39,10 +39,18 @@ export default function Sale() {
     };
 
 
-  const addSala = (sala) => {
-    const newSala = [...sale];
-    newSala.push(sala);
-    setSale(newSala);
+  const addSala = (postData, response, viewData) => {
+
+
+    const newSala={
+      id_sala: response.data.id_sala,
+      numero_sala: postData.numeroSala,
+      capienza: viewData.capienza
+    }
+
+    const newSale = [...sale];
+    newSale.push(newSala);
+    setSale(newSale);
   };
 
   useEffect(() => {
@@ -78,7 +86,7 @@ export default function Sale() {
       <InsertFormDialog
         openDialog={openDialog}
         setCloseDialog={() => setOpenDialog(false)}
-        onAddSala={addSala}
+        onAdd={addSala}
         formType="sala"
       />
     </Box>

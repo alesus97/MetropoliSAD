@@ -29,10 +29,27 @@ export default function BasicTable() {
   const [openDialog, setOpenDialog] = React.useState(false);
 
 
-  const addSpettacolo = (spettacolo) => {
-    const newSpettacoli = [...spettacoli]
-    newSpettacoli.push(spettacolo)
-    setSpettacoli(newSpettacoli)
+  const addSpettacolo = (jsonData, response, viewData) => {
+   
+      const newSpettacolo = {
+      codice_spettacolo: response.data.codice_spettacolo,
+      data: jsonData.data_ora.replace(/T/, " "),
+      prezzo: jsonData.prezzo,
+      sala: {
+        id_sala: jsonData.id_sala,
+        numero_sala: viewData.numero_sala,
+      },
+      film: {
+        codice_film: jsonData.codice_film,
+        titolo: viewData.titolo,
+        durata: viewData.durata,
+      },
+    };
+    console.log(newSpettacolo) 
+
+     const newSpettacoli = [...spettacoli]
+    newSpettacoli.push(newSpettacolo)
+    setSpettacoli(newSpettacoli)   
   }
 
   const handleDelete = (index) => {
@@ -73,7 +90,7 @@ export default function BasicTable() {
       <InsertFormDialog
         openDialog={openDialog}
         setCloseDialog={() => setOpenDialog(false)}
-        onAddSpettacolo={addSpettacolo}
+        onAdd={addSpettacolo}
         formType="spettacolo"
       />
 

@@ -55,7 +55,22 @@ export default function Film(props) {
 
   };
 
-  const addFilm = (newFilm) => {
+  const addFilm = (jsonData, response, viewData) => {
+
+    const newFilm = {
+      codice_film: response.data.codice_film,
+      titolo: viewData.titolo,
+      genere: viewData.genere,
+      cast: viewData.cast,
+      regia: viewData.regia,
+      produttore: viewData.produttore,
+      data_uscita: viewData.data_uscita,
+      durata: viewData.durata,
+      trama: viewData.trama,
+      image_url: viewData.image_url
+    };
+
+
     const newFilms = [...films]
     newFilms.unshift(newFilm)
     setFilms(newFilms)
@@ -75,7 +90,7 @@ export default function Film(props) {
       <InsertFormDialog
       openDialog={openDialog}
       setCloseDialog={() => setOpenDialog(false)}
-      onAddFilm={addFilm}
+      onAdd={addFilm}
       formType="film"
       ></InsertFormDialog>
 

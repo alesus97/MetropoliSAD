@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import FilmCard from "../components/FilmCard";
+import FilmCard from "../../components/Cards/FilmCard";
 import axios from "axios";
 import { Grid, Fab, Box } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import InsertFormDialog from "../components/InsertFormDialog";
+import InsertFormDialog from "../../components/InsertFormDialog";
 
 export default function Film(props) {
   const [open, setOpen] = React.useState(false);
@@ -11,7 +11,7 @@ export default function Film(props) {
   const [films, setFilms] = useState([]);
   const [errorMessages, setErrorMessages] = useState([]);
   const [iserror, setIserror] = useState(false);
-
+ 
   const handleClickOpen = () => {
     setOpen(true);
   };

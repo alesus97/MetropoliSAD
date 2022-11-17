@@ -19,7 +19,7 @@ import axios from "axios";
 import { Delete } from "@mui/icons-material";
 
 import AddIcon from "@mui/icons-material/Add";
-import InsertFormDialog from "../components/InsertFormDialog";
+import InsertFormDialog from "../../components/InsertFormDialog";
 
 
 export default function BasicTable() {
@@ -28,7 +28,7 @@ export default function BasicTable() {
   const [errorMessages, setErrorMessages] = useState([]);
   const [openDialog, setOpenDialog] = React.useState(false);
 
-
+ 
   const addSpettacolo = (jsonData, response, viewData) => {
    
       const newSpettacolo = {

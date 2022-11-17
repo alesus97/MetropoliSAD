@@ -6,15 +6,18 @@ import { useEffect } from "react";
 import axios from "axios";
 import "./App.css"
 
-const Palinsesto = lazy(() => import("./pages/Palinsesto.jsx"));
-const Film = lazy(() => import("./pages/Film.jsx"));
-const Sale = lazy(() => import("./pages/Sale.jsx"));
-const Quiz = lazy(() => import("./pages/Quiz.jsx"));
+const Palinsesto = lazy(() => import("./pages/DrawerPages/Palinsesto.jsx"));
+const Film = lazy(() => import("./pages/DrawerPages/Film.jsx"));
+const Sale = lazy(() => import("./pages/DrawerPages/Sale.jsx"));
+const Quiz = lazy(() => import("./pages/DrawerPages/Quiz.jsx"));
+
+const Login = lazy(() => import("./pages/Auth/Login"));
+const IdentifyAccount = lazy(() => import("./pages/Auth/IdentifyAccount.jsx"));
+const ResetPassword = lazy(() => import("./pages/Auth/ResetPassword.jsx"));
+
+
 const Questions = lazy(() => import("./pages/Questions.jsx"));
 const ProductList = lazy(() => import("./pages/ProductList.jsx"));
-const Login = lazy(() => import("./pages/Auth/Login"));
-const ResetPassword = lazy(() => import("./pages/Auth/ResetPassword.jsx"));
-const IdentifyAccount = lazy(() => import("./pages/Auth/IdentifyAccount.jsx"));
 const CreateQuiz = lazy(() => import("./pages/CreateQuiz"));
 
 axios.defaults.headers.common['Authorization'] = localStorage.getItem("ReactAmplify.TokenKey");

@@ -9,13 +9,14 @@ import {Table,
   Paper,
   Box,
   IconButton,
-  Fab
+  Fab,
+  Skeleton,
+  useTheme
 
 } from "@mui/material";
 
 import InsertFormDialog from "../../components/InsertFormDialog";
 import DialogSpettacolo from "../../components/Dialogs/DialogSpettacolo";
-
 import axios from "axios";
 import { Delete, Add } from "@mui/icons-material";
 
@@ -25,7 +26,7 @@ export default function BasicTable() {
   const [iserror, setIserror] = useState(false);
   const [errorMessages, setErrorMessages] = useState([]);
   const [openDialog, setOpenDialog] = React.useState(false);
-
+  const [loading, setLoading] = useState(true);
 
   const handleSubmit = async (event) => {
 
@@ -102,9 +103,12 @@ export default function BasicTable() {
         `https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/1/spettacoli`)
       .then((res) => {
         setSpettacoli(res.data);
+        setLoading(false);
       });
   }, []);
 
+
+  const skeletonArray = Array(5).fill('');
   return (
     <Box >
       <Fab sx={{position: 'fixed' , bottom:"3%", right:"3%"}}color="primary" aria-label="add" onClick={() => setOpenDialog(true)}>
@@ -121,16 +125,42 @@ export default function BasicTable() {
       <TableContainer component={Paper} sx={{maxHeight: "800px"}}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
-            <TableRow>
-              <TableCell>Title</TableCell>
-              <TableCell align="center">Hall</TableCell>
-              <TableCell align="center">Date</TableCell>
-              <TableCell align="center">Price</TableCell>
-              <TableCell align="center">Delete</TableCell>
+          <TableRow height={70} >
+              <TableCell component="th" scope="row" width="30%">Title</TableCell>
+              <TableCell align="center" width="10%">Hall</TableCell>
+              <TableCell align="center" width="10%">Date</TableCell>
+              <TableCell align="center" width="10%">Price</TableCell>
+              <TableCell align="center" width="10%">Delete</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {spettacoli.map((spettacolo, index) => (
+
+
+          {loading &&
+            skeletonArray.map((item, index) => (
+              <TableRow   height={70}
+              key={index}>
+                <TableCell component="th" scope="row" width="30%">
+                  <Skeleton />
+                </TableCell>
+                <TableCell align="center" width="10%">
+                  <Skeleton />
+                </TableCell>
+                <TableCell align="center" width="10%">
+                  <Skeleton />
+                </TableCell>
+                <TableCell align="center" width="10%">
+                  <Skeleton />
+                </TableCell>
+                <TableCell align="center" width="10%">
+                  <IconButton> <Delete/> </IconButton>
+                </TableCell>
+              </TableRow>
+            ))} 
+
+
+            {spettacoli &&
+            spettacoli.map((spettacolo, index) => (
               <TableRow
                 key={spettacolo.codice_spettacolo}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

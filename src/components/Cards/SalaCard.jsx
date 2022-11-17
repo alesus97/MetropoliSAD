@@ -21,7 +21,6 @@ export default function SalaCard(props) {
         component="img"
         height="250"
         image="https://www.bolognatoday.it/~media/horizontal-hi/43572212541236/cinema-8-2-2.jpg"
-        alt="Paella dish"
       />
       <CardHeader
         title={

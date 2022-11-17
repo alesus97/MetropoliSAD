@@ -1,8 +1,10 @@
 
 import React, { useState, useEffect } from "react";
-import { Grid, Box, Fab } from "@mui/material";
-
+import { Grid, Box, Fab, Card, Typography, CardHeader } from "@mui/material";
+import {Skeleton} from "@mui/material";
 import axios from "axios";
+import {IconButton} from "@mui/material";
+import {Delete} from "@mui/icons-material";
 
 import {Add} from "@mui/icons-material";
 
@@ -15,6 +17,7 @@ export default function Sale() {
   const [openDialog, setOpenDialog] = React.useState(false);
   const [errorMessages, setErrorMessages] = useState([]);
   const [iserror, setIserror] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -75,10 +78,11 @@ export default function Sale() {
       .get(`https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/1/sale`)
       .then((res) => {
         setSale(res.data);
+        setLoading(false);
       });
   }, []);
 
-  console.log(sale);
+  const skeletonArray = Array(10).fill('');
   return (
     <Box>
       <Fab
@@ -90,12 +94,46 @@ export default function Sale() {
         <Add />
       </Fab>
 
+   
       <Grid jualistify="center" container spacing={3}>
-        {sale.map((sala, index) => (
+
+      {loading &&
+            skeletonArray.map((item, index) => (
+              <Grid item key={index} xs={12} md={6} lg={4}>
+                <Card raised sx={{ maxWidth: 500}}>
+                  <Skeleton height={250} variant="rounded" >  </Skeleton>
+                  <CardHeader
+        title={
+            <Grid container spacing={1}>
+            <Grid item xs={7}>
+              <Typography align="center" variant="h6" > </Typography>
+            </Grid>
+            <Grid item >
+              <Typography align="center" variant="h6" > </Typography>
+            </Grid>
+          </Grid>  
+        }
+        action={
+          <IconButton>
+          
+          </IconButton>
+        }
+       
+      />
+                 
+                </Card>
+            </Grid>
+              ))} 
+
+
+
+
+      {sale &&      
+        sale.map((sala, index) => (
           <Grid item key={sala.id_sala} xs={12} md={6} lg={4}>
             <SalaCard
-              info={sala}
-              onDeleteAction={() => handleDeleteSala(index)}
+              info= {sala}
+              onDeleteAction= {() => handleDeleteSala(index)}
             ></SalaCard>
           </Grid>
         ))}

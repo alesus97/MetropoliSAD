@@ -21,6 +21,8 @@ import {Table,
 
 } from "@mui/material";
 
+import {Skeleton} from "@mui/material";
+
 
 
 export default function Questions() {
@@ -29,6 +31,7 @@ export default function Questions() {
     const [openDialog, setOpenDialog] = React.useState(false);
     const [errorMessages, setErrorMessages] = useState([]);
     const [iserror, setIserror] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const handleSubmit = async (event) => {
       event.preventDefault();
@@ -90,9 +93,12 @@ export default function Questions() {
       .then((res) => {
         const questions = res.data;
         setQuestions(questions);
-         console.log(questions); 
+         //console.log(questions); 
+         setLoading(false);
       });
   }, []);
+
+  const skeletonArray = Array(5).fill('');
 
   return (
     <Box>
@@ -109,22 +115,53 @@ export default function Questions() {
       ><DialogQuestion/></InsertFormDialog>
 
 
-      <TableContainer component={Paper} sx={{ maxHeight: "800px" }}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <TableContainer component={Paper} >
+        <Table sx={{ minWidth: 650 }} >
           <TableHead>
-            <TableRow>
-              <TableCell>Question</TableCell>
-              <TableCell align="center">Answer 1</TableCell>
-              <TableCell align="center">Answer 2</TableCell>
-              <TableCell align="center">Answer 3</TableCell>
-              <TableCell align="center">Correct Answer</TableCell>
-              <TableCell align="center">Delete</TableCell>
+            <TableRow height={70} >
+              <TableCell component="th" scope="row" width="30%">Question</TableCell>
+              <TableCell align="center" width="10%">Answer 1</TableCell>
+              <TableCell align="center" width="10%">Answer 2</TableCell>
+              <TableCell align="center" width="10%">Answer 3</TableCell>
+              <TableCell align="center" width="10%">Correct Answer</TableCell>
+              <TableCell align="center" width="10%">Delete</TableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
-            {questions.map((question, index) => (
-              <TableRow
+
+           {loading &&
+            skeletonArray.map((item, index) => (
+              <TableRow   height={70}
+              key={index}>
+                <TableCell component="th" scope="row" width="30%">
+                  <Skeleton />
+                </TableCell>
+                <TableCell align="center" width="10%">
+                  <Skeleton />
+                </TableCell>
+                <TableCell align="center" width="10%">
+                  <Skeleton />
+                </TableCell>
+                <TableCell align="center" width="10%">
+                  <Skeleton />
+                </TableCell>
+                <TableCell align="center" width="10%">
+                  <Skeleton />
+                </TableCell>
+                <TableCell align="center" width="10%">
+                  <IconButton> <Delete color="background"/> </IconButton>
+                </TableCell>
+              </TableRow>
+            ))} 
+
+
+
+
+
+          {questions &&
+            questions.map((question, index) => (
+              <TableRow  height={70}
                 key={index}
               >
                 <TableCell component="th" scope="row"> {question.testo} </TableCell>
@@ -135,6 +172,7 @@ export default function Questions() {
                 <TableCell align="center" >  <IconButton onClick={() => handleDelete(index)}> <Delete color="primary" /> </IconButton> </TableCell>
               </TableRow>
             ))}
+            
           </TableBody>
         </Table>
       </TableContainer>

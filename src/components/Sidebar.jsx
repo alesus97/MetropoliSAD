@@ -21,8 +21,6 @@ import PersonIcon from '@mui/icons-material/Person';
 import UserMenu from "./UserMenu";
 
 
-
-
 const settings = [
   {
     name:"Account",

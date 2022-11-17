@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
-import FilmCard from "../../components/Cards/FilmCard";
 import axios from "axios";
-import { Grid, Fab, Box } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
+
+import FilmCard from "../../components/Cards/FilmCard";
 import InsertFormDialog from "../../components/InsertFormDialog";
+import DialogFilm from "../../components/Dialogs/DialogFilm";
+
+import { Grid, Fab, Box } from "@mui/material";
+import { Add } from "@mui/icons-material";
+
 
 export default function Film(props) {
   const [open, setOpen] = React.useState(false);
@@ -11,7 +15,44 @@ export default function Film(props) {
   const [films, setFilms] = useState([]);
   const [errorMessages, setErrorMessages] = useState([]);
   const [iserror, setIserror] = useState(false);
- 
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+
+    const postData = {
+      titolo: data.get("titolo"),
+      genere: data.get("genere"),
+      cast: data.get("cast"),
+      regia: data.get("regia"),
+      produttore: data.get("produttore"),
+      data_uscita: data.get("data"),
+      durata: data.get("durata"),
+      trama: data.get("trama"),
+      image_url: data.get("locandina"),
+    };
+
+     try {
+      const response = await axios.post(
+        `https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/film`,
+        postData
+      );
+      console.log(response);
+
+      const newFilm = {
+        codice_film: response.data.codice_film,
+        ...postData,
+      };
+
+      const newFilms = [...films];
+      newFilms.unshift(newFilm);
+      setFilms(newFilms);
+    } catch(error) {
+      throw error
+    } 
+
+  }
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -19,7 +60,6 @@ export default function Film(props) {
   const handleClose = () => {
     setOpen(false);
   };
- 
 
   useEffect(() => {
     axios
@@ -27,13 +67,13 @@ export default function Film(props) {
       .then((res) => {
         const films = res.data;
         setFilms(films);
-      //  console.log(films);
+        //  console.log(films);
       });
   }, []);
 
   const handleDeleteFilm = (index) => {
-  // console.log(films[index])
-    
+    // console.log(films[index])
+
     const codiceFilm = films[index].codice_film;
     axios
       .delete(
@@ -50,31 +90,7 @@ export default function Film(props) {
         setErrorMessages(["Update failed! Server error"]);
         setIserror(true);
       });
-     
-
-
   };
-
-  const addFilm = (jsonData, response, viewData) => {
-
-    const newFilm = {
-      codice_film: response.data.codice_film,
-      titolo: viewData.titolo,
-      genere: viewData.genere,
-      cast: viewData.cast,
-      regia: viewData.regia,
-      produttore: viewData.produttore,
-      data_uscita: viewData.data_uscita,
-      durata: viewData.durata,
-      trama: viewData.trama,
-      image_url: viewData.image_url
-    };
-
-
-    const newFilms = [...films]
-    newFilms.unshift(newFilm)
-    setFilms(newFilms)
-  }
 
   return (
     <Box>
@@ -84,17 +100,17 @@ export default function Film(props) {
         aria-label="add"
         onClick={() => setOpenDialog(true)}
       >
-        <AddIcon />
+        <Add />
       </Fab>
 
       <InsertFormDialog
-      openDialog={openDialog}
-      setCloseDialog={() => setOpenDialog(false)}
-      onAdd={addFilm}
-      formType="film"
-      ></InsertFormDialog>
+        openDialog={openDialog}
+        setCloseDialog={() => setOpenDialog(false)}
+        handleSubmit={handleSubmit}
+        title="Inserisci dettagli film"
+      ><DialogFilm/></InsertFormDialog>
 
-      <Grid jualistify="center" container spacing={4} >
+      <Grid jualistify="center" container spacing={4}>
         {films.map((info, index) => (
           <Grid item key={info.codice_film} xs={12} md={6} lg={2}>
             <FilmCard

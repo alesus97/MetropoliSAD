@@ -10,22 +10,16 @@ import {Table,
   Paper,
   Box,
   IconButton,
-  Fab,
-  Typography
-
 } from "@mui/material";
 
-import Film from "./Film"
-import {Delete, ArrowCircleRight} from "@mui/icons-material";
-import AddIcon from "@mui/icons-material/Add";
-import { Navigate, Route, Routes, useNavigate, Link } from "react-router-dom";
+import {ArrowCircleRight} from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 
 export default function Quiz () {
 
 
-
-
+ 
   useEffect(() => {
     axios
       .get("https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/film")

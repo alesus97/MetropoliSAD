@@ -5,12 +5,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Alert, Button, Container, Stack } from "@mui/material";
 import Box from "@mui/material/Box";
-import axios from "axios";
+
 import { Error } from "@mui/icons-material";
-import DialogSpettacolo from "./Dialogs/DialogSpettacolo";
-import DialogFilm from "./Dialogs/DialogFilm";
-import DialogSala from "./Dialogs/DialogSala";
-import createJsonData from "./DialogHelper";
 
 
 export default function InsertFormDialog(props) {
@@ -24,43 +20,24 @@ export default function InsertFormDialog(props) {
     setErrorMessage("");
   };
 
-
   const handleSubmit = (event) => {
     setIsDisabled(true);
-    
-     const {postData,link, viewData} = createJsonData(event, props.formType);
-    
-     axios.post(
-      `https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com${link}`,
-      postData
-    ).then((response) => {
-      console.log(response)
-      props.onAdd(postData, response, viewData)
 
+    props.handleSubmit(event)
+    .then( () => {
+      console.log("Bell GIUA OK")
       setIsDisabled(false);
       handleClose();
       setIserror(false);
       setErrorMessage("");
-
-    }).catch((error) =>{
+    })
+    .catch( (error)=>{
       console.log(error)
-
-    }) 
+      setIserror(true);
+      setErrorMessage(error.message);
+    })
   }
 
-
-  var content = <></>
-  var title = ""
-  if (props.formType === "film") {
-    title = "Inserisci dettagli film";
-    content= <DialogFilm />;
-  } else if (props.formType === "spettacolo"){
-    title = "Inserisci dettagli spettacolo";
-    content= <DialogSpettacolo />;
-  } else if (props.formType === "sala") {
-    title = "Inserisci sala";
-    content= <DialogSala/>;
-  }
 
     return (
       <div>
@@ -70,7 +47,7 @@ export default function InsertFormDialog(props) {
           maxWidth="sm"
           onClose={handleClose}
         >
-          <DialogTitle align="center">{title}</DialogTitle>
+          <DialogTitle align="center">{props.title}</DialogTitle>
           <DialogContent>
             <Container component="main" maxWidth="xs">
               <Box
@@ -84,7 +61,7 @@ export default function InsertFormDialog(props) {
                 }}
               >
            
-                {content}
+                {props.children}
 
                 {iserror ? <Alert variant="filled" color="primary" icon={<Error fontSize="inherit"/>}>{errorMessage}</Alert> : <></>}
                 <p></p>

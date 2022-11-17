@@ -1,13 +1,14 @@
-import * as React from "react";
-import { useState, useEffect } from "react";
-import {Grid} from "@mui/material";
 
-import { Box } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Grid, Box, Fab } from "@mui/material";
+
 import axios from "axios";
+
+import {Add} from "@mui/icons-material";
+
 import SalaCard from "../../components/Cards/SalaCard";
-import { Fab } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
 import InsertFormDialog from "../../components/InsertFormDialog";
+import DialogSala from "../../components/Dialogs/DialogSala";
 
 export default function Sale() {
   const [sale, setSale] = useState([]);
@@ -15,42 +16,58 @@ export default function Sale() {
   const [errorMessages, setErrorMessages] = useState([]);
   const [iserror, setIserror] = useState(false);
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
 
-  const handleDeleteSala = (index) => {
-
-     const idSala = sale[index].id_sala;
-    
-      axios
-        .delete(
-          `https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/sala/${idSala}`
-        )
-        .then((res) => {
-          const dataDelete = [...sale];
-          dataDelete.splice(index, 1);
-          setSale([...dataDelete]);
-          console.log("Sala cancellata correttamente");
-        })
-        .catch((error) => {
-          console.log(error);
-          setErrorMessages(["Update failed! Server error"]);
-          setIserror(true);
-        });     
-  
+    const postData = {
+      numeroSala: data.get("numero_sala"),
+      numeroFile: Number(data.get("numero_file")),
+      postiPerFila: Number(data.get("postiPerFila")),
     };
 
+    try {
+      const response = await axios.post(
+        `https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/1/sala`,
+        postData
+      );
 
-  const addSala = (postData, response, viewData) => {
+      console.log(response);
 
+      const newSala = {
+        id_sala: response.data.id_sala,
+        numero_sala: data.get("numero_sala"),
+        capienza: Number(data.get("postiPerFila") * data.get("numero_file")),
+      };
 
-    const newSala={
-      id_sala: response.data.id_sala,
-      numero_sala: postData.numeroSala,
-      capienza: viewData.capienza
+      console.log(newSala);
+
+      const newSale = [...sale];
+      newSale.push(newSala);
+      setSale(newSale);
+    } catch (error) {
+      throw error;
     }
+  };
 
-    const newSale = [...sale];
-    newSale.push(newSala);
-    setSale(newSale);
+  const handleDeleteSala = (index) => {
+    const idSala = sale[index].id_sala;
+
+    axios
+      .delete(
+        `https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/sala/${idSala}`
+      )
+      .then((res) => {
+        const dataDelete = [...sale];
+        dataDelete.splice(index, 1);
+        setSale([...dataDelete]);
+        console.log("Sala cancellata correttamente");
+      })
+      .catch((error) => {
+        console.log(error);
+        setErrorMessages(["Update failed! Server error"]);
+        setIserror(true);
+      });
   };
 
   useEffect(() => {
@@ -61,6 +78,7 @@ export default function Sale() {
       });
   }, []);
 
+  console.log(sale);
   return (
     <Box>
       <Fab
@@ -69,7 +87,7 @@ export default function Sale() {
         aria-label="add"
         onClick={() => setOpenDialog(true)}
       >
-        <AddIcon />
+        <Add />
       </Fab>
 
       <Grid jualistify="center" container spacing={3}>
@@ -77,7 +95,7 @@ export default function Sale() {
           <Grid item key={sala.id_sala} xs={12} md={6} lg={4}>
             <SalaCard
               info={sala}
-               onDeleteAction={() => handleDeleteSala(index)}
+              onDeleteAction={() => handleDeleteSala(index)}
             ></SalaCard>
           </Grid>
         ))}
@@ -86,9 +104,11 @@ export default function Sale() {
       <InsertFormDialog
         openDialog={openDialog}
         setCloseDialog={() => setOpenDialog(false)}
-        onAdd={addSala}
-        formType="sala"
-      />
+        handleSubmit={handleSubmit}
+        title="Inserisci nuova sala"
+      >
+        <DialogSala />
+      </InsertFormDialog>
     </Box>
   );
 }

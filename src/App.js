@@ -10,15 +10,13 @@ const Palinsesto = lazy(() => import("./pages/DrawerPages/Palinsesto.jsx"));
 const Film = lazy(() => import("./pages/DrawerPages/Film.jsx"));
 const Sale = lazy(() => import("./pages/DrawerPages/Sale.jsx"));
 const Quiz = lazy(() => import("./pages/DrawerPages/Quiz.jsx"));
+const Questions = lazy(() => import("./pages/Questions.jsx"));
 
 const Login = lazy(() => import("./pages/Auth/Login"));
 const IdentifyAccount = lazy(() => import("./pages/Auth/IdentifyAccount.jsx"));
 const ResetPassword = lazy(() => import("./pages/Auth/ResetPassword.jsx"));
 
 
-const Questions = lazy(() => import("./pages/Questions.jsx"));
-const ProductList = lazy(() => import("./pages/ProductList.jsx"));
-const CreateQuiz = lazy(() => import("./pages/CreateQuiz"));
 
 axios.defaults.headers.common['Authorization'] = localStorage.getItem("ReactAmplify.TokenKey");
   
@@ -39,7 +37,7 @@ const App = () => {
 
 
 
-  var [logged, setLogged] = useState(false);
+  //var [logged, setLogged] = useState(false);
   var content = null;
   if (isAuthenticated) {
     content = (
@@ -52,8 +50,6 @@ const App = () => {
             <Route path="/film" element={<Film />} />
             <Route path="/quiz/filmId=:filmId" element={<Questions/>}/>
             <Route path="/quiz" element={<Quiz />} />
-            <Route path="/createQuiz" element={<CreateQuiz />} />
-            <Route path="/productList" element={<ProductList />} />
           </Routes>
         </Suspense>
       </Sidebar>

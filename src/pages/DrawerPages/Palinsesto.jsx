@@ -1,5 +1,5 @@
-import React from "react";
-import { useState, useEffect } from "react";
+
+import React, { useState, useEffect } from "react";
 import {Table,
   TableBody,
   TableCell,
@@ -13,13 +13,11 @@ import {Table,
 
 } from "@mui/material";
 
-
+import InsertFormDialog from "../../components/InsertFormDialog";
+import DialogSpettacolo from "../../components/Dialogs/DialogSpettacolo";
 
 import axios from "axios";
-import { Delete } from "@mui/icons-material";
-
-import AddIcon from "@mui/icons-material/Add";
-import InsertFormDialog from "../../components/InsertFormDialog";
+import { Delete, Add } from "@mui/icons-material";
 
 
 export default function BasicTable() {
@@ -28,29 +26,55 @@ export default function BasicTable() {
   const [errorMessages, setErrorMessages] = useState([]);
   const [openDialog, setOpenDialog] = React.useState(false);
 
- 
-  const addSpettacolo = (jsonData, response, viewData) => {
-   
-      const newSpettacolo = {
-      codice_spettacolo: response.data.codice_spettacolo,
-      data: jsonData.data_ora.replace(/T/, " "),
-      prezzo: jsonData.prezzo,
-      sala: {
-        id_sala: jsonData.id_sala,
-        numero_sala: viewData.numero_sala,
-      },
-      film: {
-        codice_film: jsonData.codice_film,
-        titolo: viewData.titolo,
-        durata: viewData.durata,
-      },
-    };
-    console.log(newSpettacolo) 
 
-     const newSpettacoli = [...spettacoli]
-    newSpettacoli.push(newSpettacolo)
-    setSpettacoli(newSpettacoli)   
+  const handleSubmit = async (event) => {
+
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const sala = JSON.parse(data.get("sala"));
+    const film = JSON.parse(data.get("film"));
+
+    const postData = {
+      codice_film: film.codice_film,
+      id_sala: sala.id_sala,
+      data_ora: data.get("data"),
+      prezzo: data.get("prezzo"),
+    };
+
+    try {
+      const response = await axios.post(
+        `https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/spettacolo`,
+        postData
+      );
+      
+      console.log(response);
+
+      const newSpettacolo = {
+        codice_spettacolo: response.data.codice_spettacolo,
+        data: data.get("data").replace(/T/, " "),
+        prezzo: data.get("prezzo"),
+        sala: {
+          id_sala: sala.id_sala,
+          numero_sala: sala.numero_sala,
+        },
+        film: {
+          codice_film: film.codice_film,
+          titolo: film.titolo,
+          durata: film.durata,
+        },
+      };
+
+      const newSpettacoli = [...spettacoli]
+      newSpettacoli.push(newSpettacolo)
+      setSpettacoli(newSpettacoli)  
+
+    } catch(error) {
+      throw error
+    } 
   }
+
+
+
 
   const handleDelete = (index) => {
 
@@ -84,15 +108,15 @@ export default function BasicTable() {
   return (
     <Box >
       <Fab sx={{position: 'fixed' , bottom:"3%", right:"3%"}}color="primary" aria-label="add" onClick={() => setOpenDialog(true)}>
-        <AddIcon />
+        <Add />
       </Fab>
 
       <InsertFormDialog
         openDialog={openDialog}
         setCloseDialog={() => setOpenDialog(false)}
-        onAdd={addSpettacolo}
-        formType="spettacolo"
-      />
+        handleSubmit={handleSubmit}
+        title="Inserisci dettagli spettacolo"
+      ><DialogSpettacolo/></InsertFormDialog>
 
       <TableContainer component={Paper} sx={{maxHeight: "800px"}}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">

@@ -1,38 +1,19 @@
+
 import React from "react";
-import axios from "axios";
-import { useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+
 import {
-  Box,
   Typography,
   Container,
   Card,
   CardContent,
   Grid,
-  Select,
-  MenuItem,
-  InputLabel,
-  FormControl,
 } from "@mui/material";
 import { TextField } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { Button } from "react-bootstrap";
-
-export default function CreateQuiz() {
-    const [films, setFilms] = useState([]);
-    const navigate = useNavigate()
 
 
-    const { state } = useLocation();
-    const { codiceFilm } = state;
+export default function DialogQuestion(){
+    return(
 
-      const handleClick = () => {
-            console.log(codiceFilm)
-      }
-
-
-
-  return (
     <Container sx={{  paddingY: 3, marginTop: 5 }}>
       <Typography variant="h3" align="center" component="h2">
         Add Question
@@ -42,14 +23,13 @@ export default function CreateQuiz() {
 
           <Grid container spacing={2}>
                   <Grid item md={2}>
-                    <Typography variant="h5" sx={{mt:1.25}}> Question 1</Typography>
+                    <Typography variant="h5" sx={{mt:1.25}}> Question</Typography>
                   </Grid>
                   <Grid item md={10}>
                   <TextField
                     fullWidth
-                    autoComplete="email"
-                    type="email"
-                    name="email"
+                    autoComplete="question"
+                    name="question"
                     sx={{"& fieldset": {
                       borderColor: "white",
                     },}}
@@ -63,9 +43,8 @@ export default function CreateQuiz() {
                   <Grid item md={5}>
                   <TextField
                     fullWidth
-                    autoComplete="email"
-                    type="email"
-                    name="email"
+                    autoComplete="answer1"
+                    name="answer1"
                     sx={{"& fieldset": {
                       borderColor: "white",
                     },}}
@@ -74,9 +53,8 @@ export default function CreateQuiz() {
                   <Grid item md={5}>
                   <TextField
                     fullWidth
-                    autoComplete="email"
-                    type="email"
-                    name="email"
+                    autoComplete="answer2"
+                    name="answer2"
                     sx={{"& fieldset": {
                       borderColor: "white",
                     },}}
@@ -91,9 +69,8 @@ export default function CreateQuiz() {
             <Grid item md={5}>
             <TextField
               fullWidth
-              autoComplete="email"
-              type="email"
-              name="email"
+              autoComplete="answer3"
+              name="answer3"
               sx={{"& fieldset": {
                 borderColor: "white",
               },}}
@@ -102,9 +79,8 @@ export default function CreateQuiz() {
             <Grid item md={5}>
             <TextField
               fullWidth
-              autoComplete="email"
-              type="email"
-              name="email"
+              autoComplete="correctAnswer"
+              name="correctAnswer"
               sx={{"& fieldset": {
                 borderColor: "white",
               },}}
@@ -113,14 +89,9 @@ export default function CreateQuiz() {
           </Grid>
 
 
-          
-
-
-
-            
 
         </CardContent>
       </Card>
     </Container>
-  );
+    );
 }

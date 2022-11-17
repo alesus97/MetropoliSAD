@@ -12,9 +12,9 @@ import {
   useMediaQuery,
   Box,
 } from "@mui/material";
-
+import { menuItem } from "./SidebarMenu";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Movie, Chair, Dashboard, Adb, Quiz } from "@mui/icons-material";
+import {Adb } from "@mui/icons-material";
 
 import LogoutIcon from '@mui/icons-material/Logout';
 import PersonIcon from '@mui/icons-material/Person';
@@ -41,54 +41,8 @@ const Sidebar = ({ children }) => {
   const navigate = useNavigate();
   const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
 
-  const menuItem = [
-    {
-      name: "Schedule",
-      path: "/schedule",
-      icon: <Dashboard color="primary" />,
-      onClick: () => {
-        navigate("/schedule", { replace: true });
-      },
-    },
-    {
-      name: "Film",
-      path: "/film",
-      icon: <Movie color="primary" />,
-      onClick: () => {
-        navigate("/film", { replace: true });
-      },
-    },
-    {
-      name: "Hall",
-      path: "/hall",
-      icon: <Chair color="primary" />,
-      onClick: () => {
-        navigate("/hall");
-      },
-    },
-    {
-      name: "Quiz",
-      path: "/quiz",
-      icon: <Quiz color="primary" />,
-      onClick: () => {
-        navigate("/quiz");
-      },
-    },
-    {
-      name: "Product List",
-      path: "/productList",
-      icon: <Chair color="primary" />,
-      onClick: () => {
-        navigate("/productList");
-      },
-    },
-  ];
 
-  
-
-  // const {pathName} = useLocation()
   return (
-    // <div>
     <Box sx={{ display: "flex" }}>
       <AppBar
         position="fixed"
@@ -141,7 +95,7 @@ const Sidebar = ({ children }) => {
             {menuItem.map((item, index) => {
       
               return (
-                <ListItem /*selected={item.path === pathName}*/ button key={index} onClick={item.onClick}>
+                <ListItem button key={index} onClick={() => navigate(item.path, { replace: true })}>
                   <ListItemIcon>{item.icon}</ListItemIcon>
                   <ListItemText variant="title" primary={item.name} />
                 </ListItem>

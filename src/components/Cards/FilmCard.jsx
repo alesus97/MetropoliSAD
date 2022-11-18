@@ -6,11 +6,12 @@ import { styled,
   CardActions,
   Collapse,
   IconButton,
-  Typography
+  Typography, Box
 
  } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Scrollbars from 'rc-scrollbars';
 
 
 
@@ -24,6 +25,7 @@ const ExpandMore = styled((props) => {
     duration: theme.transitions.duration.shortest,
   }),
 }));
+
 
 
 
@@ -44,9 +46,12 @@ export default function FilmCard(props) {
         <Typography  gutterBottom align="center" sx={{ fontWeight: 'bold' }}>
         {props.info.titolo}
         </Typography> 
+
         </CardContent>
+
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
+{/*         <CardContent> */}
+        <Box justifyContent={'flex-start'} sx={{ml:2, mr:2}} > 
         <Typography paragraph variant="body1">
          {props.info.genere}
         </Typography>
@@ -73,11 +78,14 @@ export default function FilmCard(props) {
         </Typography>
       
           <Typography paragraph >Trama:</Typography>
-          <Typography paragraph>
-          {props.info.trama}
-          </Typography>
-          
-        </CardContent>
+
+
+          <Scrollbars color="primary" style={{ height: 300 }} >
+          <Box sx={{mr:1, ml:1}}>{props.info.trama}</Box>
+          </Scrollbars>
+          </Box>
+    {/*       
+        </CardContent> */}
       </Collapse>
      
       <CardActions disableSpacing>

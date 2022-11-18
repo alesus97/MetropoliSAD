@@ -1,102 +1,140 @@
 
 import React from "react";
-import { InputAdornment,Box, TextField } from "@mui/material";
+import { InputAdornment, Box, Stack, TextField } from "@mui/material";
 
 
 export default function DialogFilm(){
     return(
-        <Box> 
+      <Box>
+      
         <TextField
-        margin="normal"
-        name="titolo"
-        fullWidth
-        label="Titolo"
-        sx={{"& fieldset": {
-          borderColor: "white",
-        }}}
-      />
-      <TextField
-        margin="normal"
-        name="genere"
-        fullWidth
-        label="Genere"
-        sx={{"& fieldset": {
-          borderColor: "white",
-        },}}
-      />
-      <TextField
-        margin="normal"
-        name="cast"
-        fullWidth
-        label="Cast"
-        sx={{"& fieldset": {
-          borderColor: "white",
-        },}}
-      />
-      <TextField
-        margin="normal"
-        name="regia"
-        fullWidth
-        label="Regia"
-        sx={{"& fieldset": {
-          borderColor: "white",
-        },}}
-      />
-      <TextField
-        margin="normal"
-        name="produttore"
-        fullWidth
-        label="Produttore"
-        sx={{"& fieldset": {
-          borderColor: "white",
-        },}}
-      />
-      <TextField
-        margin="normal"
-        defaultValue=""
-        name="data"
-        fullWidth
-        label="Data di uscita"
-        type="date"
-        InputProps={{
-          startAdornment: <InputAdornment position="start" />,
-        }}
-        sx={{"& fieldset": {
-          borderColor: "white",
-        },}}
-      />
-      <TextField
-        margin="normal"
-        name="durata"
-        fullWidth
-        label="Durata"
-        type="number"
-        sx={{"& fieldset": {
-          borderColor: "white",
-        },}}
-      />
+          fullWidth
+          margin="normal"
+          label="Titolo"
+          required
+          autoComplete="titolo"
+          name="titolo"
+          sx={{
+            "& fieldset": {
+              borderColor: "white",
+            },
+          }}
+        />
+     
+     <Stack direction="row" spacing={2} sx={{mt:2}}>
+          <TextField
+            fullWidth
+            label="Genere"
+            required
+            autoComplete="genere"
+            name="genere"
+            sx={{
+              "& fieldset": {
+                borderColor: "white",
+              },
+            }}
+          />
 
-      <TextField
-        margin="normal"
-        name="trama"
-        fullWidth
-        label="Trama"
-        multiline
-        sx={{"& fieldset": {
-          borderColor: "white",
-        },}}
-      />
+        <TextField
+          fullWidth
+          label="Cast"
+          required
+          autoComplete="cast"
+          name="cast"
+          sx={{
+            "& fieldset": {
+              borderColor: "white",
+            },
+          }}
+        />
+       </Stack>
+       <Stack direction="row" spacing={2} sx={{mt:2}}>
+            <TextField
+              fullWidth
+              label="Regia"
+              required
+              autoComplete="regia"
+              name="regia"
+              sx={{
+                "& fieldset": {
+                  borderColor: "white",
+                },
+              }}
+            />
+          
+            <TextField
+              fullWidth
+              label="Produttore"
+              required
+              autoComplete="produttore"
+              name="produttore"
+              sx={{
+                "& fieldset": {
+                  borderColor: "white",
+                },
+              }}
+            />
+            </Stack>
+            <Stack direction="row" spacing={2} sx={{mt:2}}>
+            <TextField
+            fullWidth
+            required
+            type="date"
+            autoComplete="data"
+            name="data"
+            sx={{
+              "& fieldset": {
+                borderColor: "white",
+              },
+            }}
+              
+            />
+          
+            <TextField
+              fullWidth
+              label="Durata"
+              autoComplete="durata"
+              name="durata"
+              required
+              sx={{
+                "& fieldset": {
+                  borderColor: "white",
+                },
+              }}
+            />
+            </Stack>
 
-      <TextField
-        margin="normal"
-        name="locandina"
-        fullWidth
-        label="Link locandina"
-        type="url"
-        sx={{"& fieldset": {
-          borderColor: "white",
-        },}}
-      />
-      </Box>
+            <Stack direction="row" spacing={2} sx={{mt:2}}>
+            <TextField
+              fullWidth
+              label="Trama"
+              autoComplete="trama"
+              name="trama"
+              multiline
+              required
+              sx={{
+                "& fieldset": {
+                  borderColor: "white",
+                },
+              }}
+            />
+          
+            <TextField
+              fullWidth
+              label="Locandina"
+              autoComplete="locandina"
+              name="locandina"
+              type="url"
+              required
+              sx={{
+                "& fieldset": {
+                  borderColor: "white",
+                },
+              }}
+            />
+            </Stack>
+         
+    </Box>
+      
     );
 }

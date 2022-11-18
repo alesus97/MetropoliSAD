@@ -2,96 +2,101 @@
 import React from "react";
 
 import {
-  Typography,
-  Container,
-  Card,
-  CardContent,
-  Grid,
+ 
+  Stack, 
+  Box,
+ 
 } from "@mui/material";
 import { TextField } from "@mui/material";
 
 
-export default function DialogQuestion(){
-    return(
+export default function DialogQuestion() {
+  return (
+    <Box>
+      
+        <TextField
+          fullWidth
+          margin="normal"
+          label="Question"
+          autoComplete="question"
+          required
+          name="question"
+          sx={{
+            "& fieldset": {
+              borderColor: "white",
+            },
+          }}
+        />
+     
+     <Stack direction="row" spacing={2} sx={{mt:2}}>
+          <TextField
+            fullWidth
+            label="Answer 1"
+            autoComplete="answer1"
+            name="answer1"
+            required
+            sx={{
+              "& fieldset": {
+                borderColor: "white",
+              },
+            }}
+          />
 
-    <Container sx={{  paddingY: 3, marginTop: 5 }}>
-      <Typography variant="h3" align="center" component="h2">
-        Add Question
-      </Typography>
-      <Card sx={{ marginTop: 2 }}>
-        <CardContent align="center" sx={{ paddingY: 3, paddingX: 5 }}>
-
-          <Grid container spacing={2}>
-                  <Grid item md={2}>
-                    <Typography variant="h5" sx={{mt:1.25}}> Question</Typography>
-                  </Grid>
-                  <Grid item md={10}>
-                  <TextField
-                    fullWidth
-                    autoComplete="question"
-                    name="question"
-                    sx={{"& fieldset": {
-                      borderColor: "white",
-                    },}}
-                  />
-                  </Grid>
-                </Grid>
-          
-
-                <Grid container spacing={2} sx={{mt:2}}>
-                <Grid item md={2}></Grid>
-                  <Grid item md={5}>
-                  <TextField
-                    fullWidth
-                    autoComplete="answer1"
-                    name="answer1"
-                    sx={{"& fieldset": {
-                      borderColor: "white",
-                    },}}
-                  />
-                  </Grid>
-                  <Grid item md={5}>
-                  <TextField
-                    fullWidth
-                    autoComplete="answer2"
-                    name="answer2"
-                    sx={{"& fieldset": {
-                      borderColor: "white",
-                    },}}
-                  />
-                  </Grid>
-
-                </Grid>
-
-        
-          <Grid container spacing={2} sx={{mt:2}}>
-          <Grid item md={2}></Grid>
-            <Grid item md={5}>
+        <TextField
+          fullWidth
+          label="Answer 2"
+          autoComplete="answer2"
+          name="answer2"
+          required
+          sx={{
+            "& fieldset": {
+              borderColor: "white",
+            },
+          }}
+        />
+       </Stack>
+       <Stack direction="row" spacing={2} sx={{mt:2}}>
             <TextField
               fullWidth
+              label="Answer 3"
               autoComplete="answer3"
               name="answer3"
-              sx={{"& fieldset": {
-                borderColor: "white",
-              },}}
+              required
+              sx={{
+                "& fieldset": {
+                  borderColor: "white",
+                },
+              }}
             />
-            </Grid>
-            <Grid item md={5}>
+          
             <TextField
               fullWidth
+              label="Correct answer"
               autoComplete="correctAnswer"
               name="correctAnswer"
-              sx={{"& fieldset": {
-                borderColor: "white",
-              },}}
+              required
+              sx={{
+                "& fieldset": {
+                  borderColor: "white",
+                },
+              }}
             />
-            </Grid>
-          </Grid>
+            </Stack>
+         
+    </Box>
 
 
 
-        </CardContent>
-      </Card>
-    </Container>
-    );
+
+
+
+
+
+
+
+
+
+
+
+  );
 }

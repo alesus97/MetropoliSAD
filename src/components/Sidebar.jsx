@@ -65,7 +65,7 @@ const Sidebar = ({ children }) => {
             }}
             
           >
-            MEGLIO DELL'UCI CINEMA
+            MEGLIO DELL'UCI CINEMAs
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>

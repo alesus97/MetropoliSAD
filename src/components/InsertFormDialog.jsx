@@ -49,32 +49,26 @@ export default function InsertFormDialog(props) {
         >
           <DialogTitle align="center">{props.title}</DialogTitle>
           <DialogContent>
-            <Container component="main" maxWidth="xs">
+            <Container component="main" maxWidth="sm">
               <Box
                 component="form"
                 onSubmit={handleSubmit}
-                sx={{
-                  alignItems: "center",
-                  display: "flex",
-                  flexDirection: "column",
-                  "& .MuiTextField-root": { width: "50ch" },
-                }}
               >
            
                 {props.children}
 
                 {iserror ? <Alert variant="filled" color="primary" icon={<Error fontSize="inherit"/>}>{errorMessage}</Alert> : <></>}
                 <p></p>
-                <Stack direction="row" spacing={2}>
+                <Stack justifyContent='flex-end' direction="row" spacing={2}>
+                <Button variant="outlined" onClick={handleClose}>
+                    Cancel
+                  </Button>
                   <Button
                     variant="outlined"
                     type="submit"
                     disabled={isDisabled}
                   >
                     Ok
-                  </Button>
-                  <Button variant="outlined" onClick={handleClose}>
-                    Cancel
                   </Button>
                 </Stack>
               </Box>

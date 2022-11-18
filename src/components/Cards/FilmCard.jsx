@@ -80,7 +80,7 @@ export default function FilmCard(props) {
           <Typography paragraph >Trama:</Typography>
 
 
-          <Scrollbars color="primary" style={{ height: 300 }} >
+          <Scrollbars color="primary" style={{ height: 150 }} >
           <Box sx={{mr:1, ml:1}}>{props.info.trama}</Box>
           </Scrollbars>
           </Box>

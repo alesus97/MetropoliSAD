@@ -18,16 +18,7 @@ export default function DialogConfermaEliminazione() {
   };
 
   return (
-    <div>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"Sei sicuro di voler eliminare?"}
-        </DialogTitle>
+
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             Eliminando questo elemento verrà eliminato anche nelle altre
@@ -35,7 +26,6 @@ export default function DialogConfermaEliminazione() {
           </DialogContentText>
         </DialogContent>
         
-      </Dialog>
-    </div>
+
   );
 }

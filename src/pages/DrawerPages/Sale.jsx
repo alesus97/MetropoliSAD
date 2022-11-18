@@ -11,10 +11,13 @@ import {Add} from "@mui/icons-material";
 import SalaCard from "../../components/Cards/SalaCard";
 import InsertFormDialog from "../../components/InsertFormDialog";
 import DialogSala from "../../components/Dialogs/DialogSala";
+import DialogConfermaEliminazione from "../../components/Dialogs/DialogConfermaEliminazione";
 
 export default function Sale() {
   const [sale, setSale] = useState([]);
-  const [openDialog, setOpenDialog] = React.useState(false);
+  const [onDeleteIndex,setOnDeleteIndex] = useState();
+  const [openInsertDialog, setopenInsertDialog] = React.useState(false);
+  const [openConfirmDeleteDialog, setopenConfirmDeleteDialog] = React.useState(false);
   const [errorMessages, setErrorMessages] = useState([]);
   const [iserror, setIserror] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -53,25 +56,31 @@ export default function Sale() {
     }
   };
 
-  const handleDeleteSala = (index) => {
-    const idSala = sale[index].id_sala;
 
-    axios
-      .delete(
+
+
+
+  
+
+  const handleDelete = async (event) => {
+    event.preventDefault();
+    const idSala = sale[onDeleteIndex].id_sala;
+    
+    try {
+      const response = await axios.delete(
         `https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/sala/${idSala}`
-      )
-      .then((res) => {
-        const dataDelete = [...sale];
-        dataDelete.splice(index, 1);
+      );
+      const dataDelete = [...sale];
+        dataDelete.splice(onDeleteIndex, 1);
         setSale([...dataDelete]);
         console.log("Sala cancellata correttamente");
-      })
-      .catch((error) => {
-        console.log(error);
-        setErrorMessages(["Update failed! Server error"]);
-        setIserror(true);
-      });
-  };
+
+    } catch(error) {
+      throw error
+    } 
+    
+   };
+
 
   useEffect(() => {
     axios
@@ -89,7 +98,7 @@ export default function Sale() {
         sx={{ position: "fixed", bottom: "3%", right: "3%" }}
         color="primary"
         aria-label="add"
-        onClick={() => setOpenDialog(true)}
+        onClick={() => setopenInsertDialog(true)}
       >
         <Add />
       </Fab>
@@ -133,20 +142,28 @@ export default function Sale() {
           <Grid item key={sala.id_sala} xs={12} md={6} lg={4}>
             <SalaCard
               info= {sala}
-              onDeleteAction= {() => handleDeleteSala(index)}
+              onDeleteAction= {() => {setOnDeleteIndex(index); setopenConfirmDeleteDialog(true)}}
             ></SalaCard>
           </Grid>
         ))}
       </Grid>
 
       <InsertFormDialog
-        openDialog={openDialog}
-        setCloseDialog={() => setOpenDialog(false)}
-        handleSubmit={handleSubmit}
+        openDialog={openInsertDialog}
+        setCloseDialog={() => setopenInsertDialog(false)}
+        handleOK={handleSubmit}
         title="Inserisci nuova sala"
       >
         <DialogSala />
       </InsertFormDialog>
+
+
+      <InsertFormDialog
+        openDialog={openConfirmDeleteDialog}
+        setCloseDialog={() => setopenConfirmDeleteDialog(false)}
+        handleOK={handleDelete}
+        title="Sei sicuro di voler eliminare la sala?"
+      ><DialogConfermaEliminazione/></InsertFormDialog>
     </Box>
   );
 }

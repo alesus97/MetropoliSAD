@@ -2,7 +2,7 @@
 import InsertFormDialog from "../components/InsertFormDialog";
 
 import DialogQuestion from "../components/Dialogs/DialogQuestion";
-
+import DialogConfermaEliminazione from "../components/Dialogs/DialogConfermaEliminazione";
 import { useParams } from "react-router-dom";
 
 import {Delete, Add} from "@mui/icons-material";
@@ -28,10 +28,13 @@ import {Skeleton} from "@mui/material";
 export default function Questions() {
     const { filmId } = useParams();
     const [questions, setQuestions] = useState([]);
-    const [openDialog, setOpenDialog] = React.useState(false);
     const [errorMessages, setErrorMessages] = useState([]);
     const [iserror, setIserror] = useState(false);
     const [loading, setLoading] = useState(true);
+
+    const [onDeleteIndex,setOnDeleteIndex] = useState();
+    const [openInsertDialog, setopenInsertDialog] = React.useState(false);
+    const [openConfirmDeleteDialog, setopenConfirmDeleteDialog] = React.useState(false);
 
     const handleSubmit = async (event) => {
       event.preventDefault();
@@ -67,25 +70,24 @@ export default function Questions() {
   }
 
 
-
-  const handleDelete = (index) => {
-    const codiceDomanda = questions[index].codice_domanda;
-    axios
-      .delete(
+  const handleDelete = async (event) => {
+    event.preventDefault();
+    const codiceDomanda = questions[onDeleteIndex].codice_domanda;
+    
+    try {
+      const response = await axios.delete(
         `https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/domanda/${codiceDomanda}`
-      )
-      .then((res) => {
+      );
         const dataDelete = [...questions];
-        dataDelete.splice(index, 1);
+        dataDelete.splice(onDeleteIndex, 1);
         setQuestions([...dataDelete]);
         console.log("Domanda cancellata correttamente");
-      })
-      .catch((error) => {
-        console.log(error);
-        setErrorMessages(["Update failed! Server error"]);
-        setIserror(true);
-      });
-  };
+
+    } catch(error) {
+      throw error
+    } 
+    
+   };
 
   useEffect(() => {
     axios
@@ -103,16 +105,23 @@ export default function Questions() {
   return (
     <Box>
 
-      <Fab sx={{position: 'fixed' , bottom:"3%", right:"3%"}}color="primary" aria-label="add" onClick={() => setOpenDialog(true)}>
+      <Fab sx={{position: 'fixed' , bottom:"3%", right:"3%"}}color="primary" aria-label="add" onClick={() => setopenInsertDialog(true)}>
         <Add />
       </Fab>
 
       <InsertFormDialog
-        openDialog={openDialog}
-        setCloseDialog={() => setOpenDialog(false)}
-        handleSubmit={handleSubmit}
+        openDialog={openInsertDialog}
+        setCloseDialog={() => setopenInsertDialog(false)}
+        handleOK={handleSubmit}
         title="Inserisci nuova domanda"
       ><DialogQuestion/></InsertFormDialog>
+
+      <InsertFormDialog
+        openDialog={openConfirmDeleteDialog}
+        setCloseDialog={() => setopenConfirmDeleteDialog(false)}
+        handleOK={handleDelete}
+        title="Sei sicuro di voler eliminare la domanda?"
+      ><DialogConfermaEliminazione/></InsertFormDialog>
 
 
       <TableContainer component={Paper} >
@@ -169,7 +178,7 @@ export default function Questions() {
                 <TableCell align="center"> {question.risposta_errata_2} </TableCell>
                 <TableCell align="center"> {question.risposta_errata_3} </TableCell>
                 <TableCell align="center"> {question.risposta_corretta} </TableCell>
-                <TableCell align="center" >  <IconButton onClick={() => handleDelete(index)}> <Delete color="primary" /> </IconButton> </TableCell>
+                <TableCell align="center" >  <IconButton onClick={() => {setOnDeleteIndex(index); setopenConfirmDeleteDialog(true)}}> <Delete color="primary" /> </IconButton> </TableCell>
               </TableRow>
             ))}
             

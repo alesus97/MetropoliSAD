@@ -7,11 +7,13 @@ import DialogFilm from "../../components/Dialogs/DialogFilm";
 
 import { Grid, Fab, Box } from "@mui/material";
 import { Add } from "@mui/icons-material";
-
+import DialogConfermaEliminazione from "../../components/Dialogs/DialogConfermaEliminazione";
 
 export default function Film(props) {
   const [open, setOpen] = React.useState(false);
-  const [openDialog, setOpenDialog] = React.useState(false);
+  const [onDeleteIndex,setOnDeleteIndex] = useState();
+  const [openInsertDialog, setopenInsertDialog] = React.useState(false);
+  const [openConfirmDeleteDialog, setopenConfirmDeleteDialog] = React.useState(false);
   const [films, setFilms] = useState([]);
   const [errorMessages, setErrorMessages] = useState([]);
   const [iserror, setIserror] = useState(false);
@@ -52,6 +54,25 @@ export default function Film(props) {
     } 
 
   }
+
+  const handleDelete = async (event) => {
+    event.preventDefault();
+    const codiceFilm = films[onDeleteIndex].codice_film;
+    
+    try {
+      const response = await axios.delete(
+        `https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/film/${codiceFilm}`
+      );
+      const dataDelete = [...films];
+      dataDelete.splice(onDeleteIndex, 1);
+      setFilms([...dataDelete]);
+      console.log("Film cancellato correttamente");
+
+    } catch(error) {
+      throw error
+    } 
+    
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -98,24 +119,31 @@ export default function Film(props) {
         sx={{ position: "fixed", bottom: "3%", right: "3%" }}
         color="primary"
         aria-label="add"
-        onClick={() => setOpenDialog(true)}
+        onClick={() => setopenInsertDialog(true)}
       >
         <Add />
       </Fab>
 
       <InsertFormDialog
-        openDialog={openDialog}
-        setCloseDialog={() => setOpenDialog(false)}
-        handleSubmit={handleSubmit}
+        openDialog={openInsertDialog}
+        setCloseDialog={() => setopenInsertDialog(false)}
+        handleOK={handleSubmit}
         title="Inserisci dettagli film"
       ><DialogFilm/></InsertFormDialog>
+
+      <InsertFormDialog
+        openDialog={openConfirmDeleteDialog}
+        setCloseDialog={() => setopenConfirmDeleteDialog(false)}
+        handleOK={handleDelete}
+        title="Sei sicuro di voler eliminare il film?"
+      ><DialogConfermaEliminazione/></InsertFormDialog>
 
       <Grid jualistify="center" container spacing={4}>
         {films.map((info, index) => (
           <Grid item key={info.codice_film} xs={12} md={6} lg={2}>
             <FilmCard
               info={info}
-              onDeleteAction={() => handleDeleteFilm(index)}
+              onDeleteAction={() => {setOnDeleteIndex(index); setopenConfirmDeleteDialog(true)}}
             ></FilmCard>
           </Grid>
         ))}

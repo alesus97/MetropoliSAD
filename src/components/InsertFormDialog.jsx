@@ -20,12 +20,12 @@ export default function InsertFormDialog(props) {
     setErrorMessage("");
   };
 
-  const handleSubmit = (event) => {
+
+  const handleOK = (event) => {
     setIsDisabled(true);
 
-    props.handleSubmit(event)
+    props.handleOK(event)
     .then( () => {
-      console.log("Bell GIUA OK")
       setIsDisabled(false);
       handleClose();
       setIserror(false);
@@ -52,7 +52,7 @@ export default function InsertFormDialog(props) {
             <Container component="main" maxWidth="sm">
               <Box
                 component="form"
-                onSubmit={handleSubmit}
+                onSubmit={handleOK}
               >
            
                 {props.children}

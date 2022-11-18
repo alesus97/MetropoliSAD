@@ -19,14 +19,21 @@ import InsertFormDialog from "../../components/InsertFormDialog";
 import DialogSpettacolo from "../../components/Dialogs/DialogSpettacolo";
 import axios from "axios";
 import { Delete, Add } from "@mui/icons-material";
+import DialogConfermaEliminazione from "../../components/Dialogs/DialogConfermaEliminazione";
 
 
 export default function BasicTable() {
   const [spettacoli, setSpettacoli] = useState([]);
   const [iserror, setIserror] = useState(false);
   const [errorMessages, setErrorMessages] = useState([]);
-  const [openDialog, setOpenDialog] = React.useState(false);
+  const [onDeleteIndex,setOnDeleteIndex] = useState();
+  const [openInsertDialog, setopenInsertDialog] = React.useState(false);
+  const [openConfirmDeleteDialog, setopenConfirmDeleteDialog] = React.useState(false);
   const [loading, setLoading] = useState(true);
+
+
+
+
 
   const handleSubmit = async (event) => {
 
@@ -77,24 +84,25 @@ export default function BasicTable() {
 
 
 
-  const handleDelete = (index) => {
-
-    const codiceSpettacolo = spettacoli[index].codice_spettacolo;
-    axios
-      .delete(
+  const handleDelete = async (event) => {
+    event.preventDefault();
+    console.log(onDeleteIndex)
+    const codiceSpettacolo = spettacoli[onDeleteIndex].codice_spettacolo;
+    
+    try {
+      const response = await axios.delete(
         `https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/spettacolo/${codiceSpettacolo}`
-      )
-      .then((res) => {
+      );
         const dataDelete = [...spettacoli];
-        dataDelete.splice(index,1);
+        dataDelete.splice(onDeleteIndex,1);
         setSpettacoli([...dataDelete]);
         console.log("Spettacolo cancellato correttamente");
-      })
-      .catch((error) => {
-        console.log(error);
-        setErrorMessages(["Update failed! Server error"]);
-        setIserror(true);
-      });
+
+    } catch(error) {
+      console.log(error)
+      throw error
+    } 
+    
   };
 
   useEffect(() => {
@@ -111,16 +119,24 @@ export default function BasicTable() {
   const skeletonArray = Array(5).fill('');
   return (
     <Box >
-      <Fab sx={{position: 'fixed' , bottom:"3%", right:"3%"}}color="primary" aria-label="add" onClick={() => setOpenDialog(true)}>
+      <Fab sx={{position: 'fixed' , bottom:"3%", right:"3%"}}color="primary" aria-label="add" onClick={() => setopenInsertDialog(true)}>
         <Add />
       </Fab>
 
       <InsertFormDialog
-        openDialog={openDialog}
-        setCloseDialog={() => setOpenDialog(false)}
-        handleSubmit={handleSubmit}
+        openDialog={openInsertDialog}
+        setCloseDialog={() => setopenInsertDialog(false)}
+        handleOK={handleSubmit}
         title="Inserisci dettagli spettacolo"
       ><DialogSpettacolo/></InsertFormDialog>
+
+
+      <InsertFormDialog
+        openDialog={openConfirmDeleteDialog}
+        setCloseDialog={() => setopenConfirmDeleteDialog(false)}
+        handleOK={handleDelete}
+        title="Sei sicuro di voler eliminare lo spettacolo?"
+      ><DialogConfermaEliminazione/></InsertFormDialog>
 
       <TableContainer component={Paper} sx={{maxHeight: "800px"}}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -175,7 +191,8 @@ export default function BasicTable() {
                 <TableCell align="center">{spettacolo.prezzo}</TableCell>
 
                 <TableCell align="center">
-                  <IconButton onClick={() => handleDelete(index)}>
+                <IconButton onClick={() => {setopenConfirmDeleteDialog(true); setOnDeleteIndex(index)}}>
+                  {/* <IconButton onClick={() => handleDelete(index)}> */}
                     <Delete color="primary" />
                   </IconButton>
                 </TableCell>

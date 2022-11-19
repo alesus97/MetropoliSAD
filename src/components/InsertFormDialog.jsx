@@ -3,7 +3,7 @@ import Dialog from "@mui/material/Dialog";
 import { useState } from "react";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Alert, Button, Container, Stack } from "@mui/material";
+import { Alert, Button, Container, Stack, Divider} from "@mui/material";
 import Box from "@mui/material/Box";
 
 import { Error } from "@mui/icons-material";
@@ -39,6 +39,7 @@ export default function InsertFormDialog(props) {
   }
 
 
+
     return (
       <div>
         <Dialog
@@ -47,7 +48,8 @@ export default function InsertFormDialog(props) {
           maxWidth="sm"
           onClose={handleClose}
         >
-          <DialogTitle align="center">{props.title}</DialogTitle>
+        <DialogTitle align='center' color='primary'>{props.title}</DialogTitle>
+        <Divider light/>
           <DialogContent>
             <Container component="main" maxWidth="sm">
               <Box

@@ -6,12 +6,17 @@ import { styled,
   CardActions,
   Collapse,
   IconButton,
-  Typography, Box
+  Typography,
+  Stack,
+  Button,
+  CardHeader,
+
 
  } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Scrollbars from 'rc-scrollbars';
+
 
 
 
@@ -36,74 +41,23 @@ export default function FilmCard(props) {
     setExpanded(!expanded);
   };
   return (
-    <Card raised   >
-      
-      <CardMedia height="350"
+    <Card raised>
+        <CardContent style={{textAlign:'center'}}> 
+        {props.info.titolo}
+        </CardContent>
+
+      <CardMedia height="300"
         component="img"
          image={props.info.image_url}
       /> 
-      <CardContent>
-        <Typography  gutterBottom align="center" sx={{ fontWeight: 'bold' }}>
-        {props.info.titolo}
-        </Typography> 
-
-        </CardContent>
-
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
-{/*         <CardContent> */}
-        <Box justifyContent={'flex-start'} sx={{ml:2, mr:2}} > 
-        <Typography paragraph variant="body1">
-         {props.info.genere}
-        </Typography>
-
-        <Typography paragraph variant="body1">
-        {props.info.durata}
-        </Typography>
-
-        <Typography paragraph variant="body1">
-        {props.info.regia}
-        </Typography>
-
-        <Typography paragraph variant="body1">
-  
-        {props.info.produttore}
-        </Typography>
-
-        <Typography paragraph variant="body1">
-        {props.info.data_uscita}
-        </Typography>
-
-        <Typography paragraph variant="body1">
-        {props.info.codice_film}
-        </Typography>
-      
-          <Typography paragraph >Trama:</Typography>
-
-
-          <Scrollbars color="primary" style={{ height: 150 }} >
-          <Box sx={{mr:1, ml:1}}>{props.info.trama}</Box>
-          </Scrollbars>
-          </Box>
-    {/*       
-        </CardContent> */}
-      </Collapse>
-     
-      <CardActions disableSpacing>
+   
+   <CardActions> 
 
       <IconButton onClick={() => props.onDeleteAction()}>
       <DeleteIcon  color="primary" />
       </IconButton>
-      
-        <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-        >
-          <ExpandMoreIcon color="primary"/>
-        </ExpandMore>
-        <Typography variant="body2"  color="primary">
-          Details
-          </Typography>
+      <Button style={{marginLeft:'auto'}} onClick={() => props.openExploreAction()}variant="text">Details</Button>
+ 
       </CardActions>
     </Card>
   );

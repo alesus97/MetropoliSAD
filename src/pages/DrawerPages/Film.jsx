@@ -8,6 +8,8 @@ import DialogFilm from "../../components/Dialogs/DialogFilm";
 import { Grid, Fab, Box } from "@mui/material";
 import { Add } from "@mui/icons-material";
 import DialogConfermaEliminazione from "../../components/Dialogs/DialogConfermaEliminazione";
+import DialogDettagliFilm from "../../components/Dialogs/DialogDettagliFilm";
+
 
 export default function Film(props) {
   const [open, setOpen] = React.useState(false);
@@ -17,6 +19,9 @@ export default function Film(props) {
   const [films, setFilms] = useState([]);
   const [errorMessages, setErrorMessages] = useState([]);
   const [iserror, setIserror] = useState(false);
+
+  const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
+  const [onExploreIndex, setOnExploreIndex] = useState(0);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -113,6 +118,7 @@ export default function Film(props) {
       });
   };
 
+
   return (
     <Box>
       <Fab
@@ -138,12 +144,20 @@ export default function Film(props) {
         title="Sei sicuro di voler eliminare il film?"
       ><DialogConfermaEliminazione/></InsertFormDialog>
 
-      <Grid jualistify="center" container spacing={4}>
+      {films.length > 0 &&
+      <DialogDettagliFilm
+        openDialog={openDetailsDialog}
+        setCloseDialog={() => setOpenDetailsDialog(false)}
+        info = {films[onExploreIndex]}
+      ></DialogDettagliFilm>}
+      
+      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 2, sm: 8, md: 10, lg:12 }} >
         {films.map((info, index) => (
-          <Grid item key={info.codice_film} xs={12} md={6} lg={2}>
+          <Grid item key={info.codice_film} xs={2/2} sm={8/3} md={10/4} lg={12/5}>
             <FilmCard
               info={info}
               onDeleteAction={() => {setOnDeleteIndex(index); setopenConfirmDeleteDialog(true)}}
+              openExploreAction={() => {setOpenDetailsDialog(true); setOnExploreIndex(index);}}
             ></FilmCard>
           </Grid>
         ))}

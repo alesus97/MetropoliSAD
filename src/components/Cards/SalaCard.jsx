@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import { Grid } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-
+import {Box} from '@mui/material'
 export default function SalaCard(props) {
   const [expanded, setExpanded] = React.useState(false);
 

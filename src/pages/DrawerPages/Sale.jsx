@@ -163,6 +163,8 @@ export default function Sale() {
       >
         <DialogConfermaEliminazione />
       </InsertFormDialog>
+      <Box height={70}>
+      </Box>
     </Box>
   );
 }

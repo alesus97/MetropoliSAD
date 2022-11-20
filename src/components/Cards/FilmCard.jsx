@@ -46,7 +46,7 @@ export default function FilmCard(props) {
 
 
 
-              <CardActionArea>
+              
                 <CardMedia 
                   component="img"
                   height="350"
@@ -54,7 +54,7 @@ export default function FilmCard(props) {
                   title={props.info.titolo}
                   sx={{objectFit:'cover', objectPosition:'50% 50%'}}
                 />
-              </CardActionArea>
+              
 
 
               <CardActions >

@@ -23,7 +23,7 @@ import {Table,
 
 import { useLocation } from "react-router-dom";
 import {Skeleton} from "@mui/material";
-
+import {Typography} from "@mui/material";
 
 
 export default function Questions() {
@@ -99,7 +99,7 @@ export default function Questions() {
       .then((res) => {
         const questions = res.data;
         setQuestions(questions);
-         //console.log(questions); 
+         //console.log(questions);
          setLoading(false);
       });
   }, []);
@@ -127,7 +127,7 @@ export default function Questions() {
         title="Sei sicuro di voler eliminare la domanda?"
       ><DialogConfermaEliminazione/></InsertFormDialog>
 
-    <p>{filmTitle}</p>
+<Typography textAlign="center" color="primary" variant="h4">{filmTitle}</Typography>
       <TableContainer component={Paper} >
         <Table sx={{ minWidth: 650 }} >
           <TableHead>

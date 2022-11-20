@@ -24,16 +24,11 @@ import DialogConfermaEliminazione from "../../components/Dialogs/DialogConfermaE
 
 export default function BasicTable() {
   const [spettacoli, setSpettacoli] = useState([]);
-  const [iserror, setIserror] = useState(false);
-  const [errorMessages, setErrorMessages] = useState([]);
   const [onDeleteIndex,setOnDeleteIndex] = useState();
   const [openInsertDialog, setopenInsertDialog] = React.useState(false);
   const [openConfirmDeleteDialog, setopenConfirmDeleteDialog] = React.useState(false);
   const [loading, setLoading] = useState(true);
-
-
-
-
+  const skeletonArray = Array(5).fill('');
 
   const handleSubmit = async (event) => {
 
@@ -116,7 +111,7 @@ export default function BasicTable() {
   }, []);
 
 
-  const skeletonArray = Array(5).fill('');
+
   return (
     <Box >
       <Fab sx={{position: 'fixed' , bottom:"3%", right:"3%"}}color="primary" aria-label="add" onClick={() => setopenInsertDialog(true)}>
@@ -169,7 +164,7 @@ export default function BasicTable() {
                   <Skeleton />
                 </TableCell>
                 <TableCell align="center" width="10%">
-                  <IconButton> <Delete/> </IconButton>
+                  <IconButton> <Delete color="disabled"/> </IconButton>
                 </TableCell>
               </TableRow>
             ))} 

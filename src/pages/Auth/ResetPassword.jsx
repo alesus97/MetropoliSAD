@@ -210,25 +210,8 @@ const ResetPassword = (props) => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={animate}
                 >
-                  {/* <p></p>
-                  {iserror ? (
-                    <Alert
-                      variant="filled"
-                      color="primary"
-                      icon={<Error fontSize="inherit" />}
-                    >
-                      {errorMessage}
-                    </Alert>
-                  ) : (
-                    <></>
-                  )} */}
-
-                  <Stack
-                    direction="row"
-                    alignItems="center"
-                    justifyContent="space-between"
-                    sx={{ my: 2 }}
-                  ></Stack>
+    
+                  <Box my={2} />
 
                   <Fade
                     in={iserror} //Write the needed condition here to make it appear
@@ -247,7 +230,7 @@ const ResetPassword = (props) => {
                       {errorMessage}
                     </Alert>
                   </Fade>
-                  <p></p>
+                  <p/>
 
                   <LoadingButton
                     fullWidth

@@ -68,15 +68,11 @@ const LoginForm = (props) => {
         .then((user) => {
           setIserror(false);
           setErrorMessage("");
-          // console.log(user);
 
           localStorage.setItem(
             AUTH_USER_TOKEN_KEY,
             user.signInUserSession.accessToken.jwtToken
           );
-
-          
-          // console.log(localStorage);
 
           props.onLoginAction();
 
@@ -172,22 +168,6 @@ const LoginForm = (props) => {
                   animate={animate}
                 >
                   <p></p>
-
-        
-                  
-
-                  {/* {iserror ? (
-                    
-                    <Alert
-                      variant="filled"
-                      color="primary"
-                      icon={<Error fontSize="inherit" />}
-                    >
-                      {errorMessage}
-                    </Alert>
-                  ) : (
-                    <></>
-                  )} */}
 
                   <Stack
                     direction="row"

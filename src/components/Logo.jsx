@@ -4,9 +4,10 @@ import { Box } from "@mui/material";
 
 const Logo = () => {
   return (
-    <Box>
+    <Box minHeight={180}>
       <Link to="/">
-        <Box component="img" src="static/logo192.png" alt="logo" />
+        <p></p>
+        <Box component="img" src="logo128.png" alt="logo"  />
       </Link>
     </Box>
   );

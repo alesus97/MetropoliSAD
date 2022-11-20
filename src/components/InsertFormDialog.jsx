@@ -5,7 +5,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Alert, Button, Container, Stack, Divider} from "@mui/material";
 import Box from "@mui/material/Box";
-
+import {Fade} from "@mui/material";
 import { Error } from "@mui/icons-material";
 
 
@@ -34,7 +34,7 @@ export default function InsertFormDialog(props) {
     .catch( (error)=>{
       console.log(error)
       setIserror(true);
-      setErrorMessage(error.message);
+      setErrorMessage(error.response.data.message);
     })
   }
 
@@ -59,7 +59,32 @@ export default function InsertFormDialog(props) {
            
                 {props.children}
 
-                {iserror ? <Alert variant="filled" color="primary" icon={<Error fontSize="inherit"/>}>{errorMessage}</Alert> : <></>}
+
+
+                <Fade
+                    in={iserror} //Write the needed condition here to make it appear
+                    timeout={{ enter: 1000, exit: 1000 }} //Edit these two values to change the duration of transition when the element is getting appeared and disappeard
+                    addEndListener={() => {
+                      setTimeout(() => {
+                        console.log("prova")
+                        setIsDisabled(false)
+                        setIserror(false);
+                      }, 4000);
+                    }}
+                  >
+                    
+                    <Alert
+                       variant="filled"
+                       color="primary"
+                       icon={<Error fontSize="inherit" />}
+                    >
+                      
+                      {errorMessage}
+                    </Alert>
+                  </Fade>
+
+
+                {/* {iserror ? <Alert variant="filled" color="primary" icon={<Error fontSize="inherit"/>}>{errorMessage}</Alert> : <></>} */}
                 <p></p>
                 <Stack justifyContent='flex-end' direction="row" spacing={2}>
                 <Button variant="outlined" onClick={handleClose}>

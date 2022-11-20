@@ -18,6 +18,7 @@ import {Table,
   Box,
   IconButton,
   Fab,
+  Typography,
 
 } from "@mui/material";
 
@@ -127,7 +128,8 @@ export default function Questions() {
         title="Sei sicuro di voler eliminare la domanda?"
       ><DialogConfermaEliminazione/></InsertFormDialog>
 
-    <p>{filmTitle}</p>
+    <Typography variant="h5" color="primary" >{filmTitle}</Typography>
+    <p></p>
       <TableContainer component={Paper} >
         <Table sx={{ minWidth: 650 }} >
           <TableHead>
@@ -167,9 +169,6 @@ export default function Questions() {
                 </TableCell>
               </TableRow>
             ))} 
-
-
-
 
 
           {questions &&

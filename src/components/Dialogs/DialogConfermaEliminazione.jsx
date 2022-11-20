@@ -21,8 +21,8 @@ export default function DialogConfermaEliminazione() {
 
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Eliminando questo elemento verrà eliminato anche nelle altre
-            schermate!
+            Confermando, questo elemento verrà eliminato anche nelle altre
+            schermate !
           </DialogContentText>
         </DialogContent>
         

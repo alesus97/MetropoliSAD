@@ -10,6 +10,7 @@ import {Table,
   Paper,
   Box,
   IconButton,
+  Skeleton,
 } from "@mui/material";
 
 import {ArrowCircleRight} from "@mui/icons-material";
@@ -17,8 +18,9 @@ import { Link } from "react-router-dom";
 
 
 export default function Quiz () {
-
-
+  const [loading, setLoading] = useState(true);
+  const [films, setFilms] = useState([]);
+  const skeletonArray = Array(5).fill('');
  
   useEffect(() => {
     axios
@@ -26,39 +28,49 @@ export default function Quiz () {
       .then((res) => {
         const films = res.data;
         setFilms(films);
-        console.log(films);
+        setLoading(false)
       });
   }, []);
 
-  const [films, setFilms] = useState([]);
+  
 
   return (
     <Box>
-
-  
-
       <p></p>
        <TableContainer component={Paper} sx={{maxHeight: "800px"}}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Film Title</TableCell>
-              <TableCell align="center">View questions</TableCell>
+              <TableCell component="th" scope="row" width="60%">Film Title</TableCell>
+              <TableCell align="center" width="10%">View questions</TableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
+            
 
-          {films.map((film, index) => (
+          {films && 
+          films.map((film, index) => (
                <TableRow
                key={film.codice_film}
-             /*   sx={{ "&:last-child td, &:last-child th": { border: 0 } }} */
              >
-               <TableCell component="th" scope="row">  {film.titolo} </TableCell>
-              <TableCell align="center" >  
+               <TableCell component="th" scope="row" width="60%">  {film.titolo} </TableCell>
+              <TableCell align="center" width="10%" >  
               <Link to={`/quiz/filmId=${film.codice_film}`} state={{ filmTitle: film.titolo }}><ArrowCircleRight color="primary" /></Link> 
 
               </TableCell>
+              </TableRow>  
+        ))}
+
+
+
+        {loading && 
+          skeletonArray.map((film, index) => (
+               <TableRow
+               key={index}
+             >
+               <TableCell component="th" scope="row" width="60%"> <Skeleton/> </TableCell>
+               <TableCell align="center" width="10%"> <ArrowCircleRight color="disabled" /> </TableCell>
               </TableRow>  
         ))}
 

@@ -5,23 +5,25 @@ import FilmCard from "../../components/Cards/FilmCard";
 import InsertFormDialog from "../../components/InsertFormDialog";
 import DialogFilm from "../../components/Dialogs/DialogFilm";
 
-import { Grid, Fab, Box } from "@mui/material";
+import { Grid, Fab, Box, Card, Skeleton, CardActions, IconButton, Button, Typography } from "@mui/material";
 import { Add } from "@mui/icons-material";
 import DialogConfermaEliminazione from "../../components/Dialogs/DialogConfermaEliminazione";
 import DialogDettagliFilm from "../../components/Dialogs/DialogDettagliFilm";
 
 
 export default function Film(props) {
-  const [open, setOpen] = React.useState(false);
   const [onDeleteIndex,setOnDeleteIndex] = useState();
   const [openInsertDialog, setopenInsertDialog] = React.useState(false);
   const [openConfirmDeleteDialog, setopenConfirmDeleteDialog] = React.useState(false);
   const [films, setFilms] = useState([]);
-  const [errorMessages, setErrorMessages] = useState([]);
-  const [iserror, setIserror] = useState(false);
+
 
   const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
   const [onExploreIndex, setOnExploreIndex] = useState(0);
+
+  const [loading, setLoading] = useState(true);
+
+  const skeletonArray = Array(12).fill("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -52,7 +54,7 @@ export default function Film(props) {
       };
 
       const newFilms = [...films];
-      newFilms.unshift(newFilm);
+      newFilms.push(newFilm);
       setFilms(newFilms);
     } catch(error) {
       throw error
@@ -79,45 +81,15 @@ export default function Film(props) {
     
   };
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   useEffect(() => {
     axios
       .get("https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/film")
       .then((res) => {
         const films = res.data;
         setFilms(films);
-        //  console.log(films);
+        setLoading(false);
       });
   }, []);
-
-  const handleDeleteFilm = (index) => {
-    // console.log(films[index])
-
-    const codiceFilm = films[index].codice_film;
-    axios
-      .delete(
-        `https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/film/${codiceFilm}`
-      )
-      .then((res) => {
-        const dataDelete = [...films];
-        dataDelete.splice(index, 1);
-        setFilms([...dataDelete]);
-        console.log("Film cancellato correttamente");
-      })
-      .catch((error) => {
-        console.log(error);
-        setErrorMessages(["Update failed! Server error"]);
-        setIserror(true);
-      });
-  };
-
 
   return (
     <Box>
@@ -144,15 +116,17 @@ export default function Film(props) {
         title="Sei sicuro di voler eliminare il film?"
       ><DialogConfermaEliminazione/></InsertFormDialog>
 
-      {films.length > 0 &&
+      {films.length > 0 && 
       <DialogDettagliFilm
         openDialog={openDetailsDialog}
         setCloseDialog={() => setOpenDetailsDialog(false)}
         info = {films[onExploreIndex]}
       ></DialogDettagliFilm>}
-      
-      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 2, sm: 8, md: 10, lg:12, xl:12 }} >
-        {films.map((info, index) => (
+
+
+<Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 2, sm: 8, md: 10, lg:12, xl:12 }} >
+      {films &&
+        films.map((info, index) => (       
           <Grid item key={info.codice_film} xs={2/2} sm={8/3} md={10/4} lg={12/5} xl={12/6}>
             <FilmCard
               info={info}
@@ -160,9 +134,30 @@ export default function Film(props) {
               openExploreAction={() => {setOpenDetailsDialog(true); setOnExploreIndex(index);}}
             ></FilmCard>
           </Grid>
-        ))}
+        ))
+      }
+
+      {loading &&
+        skeletonArray.map((info, index) => (
+          <Grid item key={index} xs={2/2} sm={8/3} md={10/4} lg={12/5} xl={12/6}>
+             <Card raised sx={{ maxWidth: "450px", height: "100%" }}>
+              <Skeleton height={405.5} variant="rounded"></Skeleton>
+              
+             </Card>
+          </Grid>
+        ))
+      }
       </Grid>
-      <p></p>
+
+
+
+
+
+
+
+
+      <Box height={70}></Box>
     </Box>
+    
   );
 }

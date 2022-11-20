@@ -16,10 +16,8 @@ export default function Sale() {
   const [sale, setSale] = useState([]);
   const [onDeleteIndex, setOnDeleteIndex] = useState();
   const [openInsertDialog, setopenInsertDialog] = React.useState(false);
-  const [openConfirmDeleteDialog, setopenConfirmDeleteDialog] =
-    React.useState(false);
-  const [errorMessages, setErrorMessages] = useState([]);
-  const [iserror, setIserror] = useState(false);
+  const [openConfirmDeleteDialog, setopenConfirmDeleteDialog] = React.useState(false);
+
   const [loading, setLoading] = useState(true);
 
   const handleSubmit = async (event) => {
@@ -99,12 +97,12 @@ export default function Sale() {
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 2, sm: 8, md: 10, lg: 12 }}
       >
-        {loading &&
+         {loading &&
           skeletonArray.map((item, index) => (
-            <Grid item key={index} xs={12} md={6} lg={4}>
+            <Grid item key={index}  xs={2 / 1} sm={8 / 2}  md={10 / 3}
+            lg={12 / 4}>
               <Card raised sx={{ maxWidth: 500 }}>
                 <Skeleton height={250} variant="rounded">
-                  {" "}
                 </Skeleton>
                 <CardHeader
                   title={
@@ -123,7 +121,10 @@ export default function Sale() {
                 />
               </Card>
             </Grid>
-          ))}
+          ))} 
+
+
+
 
         {sale &&
           sale.map((sala, index) => (
@@ -163,6 +164,7 @@ export default function Sale() {
       >
         <DialogConfermaEliminazione />
       </InsertFormDialog>
+      <Box height={70}></Box>
     </Box>
   );
 }

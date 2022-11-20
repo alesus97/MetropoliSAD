@@ -10,6 +10,7 @@ import { styled,
   Stack,
   Button,
   CardHeader,
+  CardActionArea
 
 
  } from '@mui/material';
@@ -41,24 +42,38 @@ export default function FilmCard(props) {
     setExpanded(!expanded);
   };
   return (
-    <Card raised>
-        <CardContent style={{textAlign:'center'}}> 
-        {props.info.titolo}
-        </CardContent>
+    <Card raised sx={{maxWidth: "450px", height: "100%"}}>
 
-      <CardMedia height="300"
-        component="img"
-         image={props.info.image_url}
-      /> 
+
+
+              <CardActionArea>
+                <CardMedia 
+                  component="img"
+                  height="350"
+                  image={props.info.image_url}
+                  title={props.info.titolo}
+                  sx={{objectFit:'cover', objectPosition:'50% 50%'}}
+                />
+              </CardActionArea>
+
+
+              <CardActions >
+              <IconButton onClick={() => props.onDeleteAction()}>
+                <DeleteIcon  color="primary" />
+                </IconButton>
+                <Button style={{marginLeft:'auto'}} onClick={() => props.openExploreAction()}variant="text">Details</Button>
+              </CardActions>
+       
+
    
-   <CardActions> 
+{/*    <CardActions> 
 
       <IconButton onClick={() => props.onDeleteAction()}>
       <DeleteIcon  color="primary" />
       </IconButton>
       <Button style={{marginLeft:'auto'}} onClick={() => props.openExploreAction()}variant="text">Details</Button>
  
-      </CardActions>
+      </CardActions> */}
     </Card>
   );
 }

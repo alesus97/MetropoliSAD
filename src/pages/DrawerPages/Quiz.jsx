@@ -55,10 +55,9 @@ export default function Quiz () {
              /*   sx={{ "&:last-child td, &:last-child th": { border: 0 } }} */
              >
                <TableCell component="th" scope="row">  {film.titolo} </TableCell>
-              <TableCell align="center" >   
-                <IconButton component={Link} to={`/quiz/filmId=${film.codice_film}`}>
-                    <ArrowCircleRight color="primary" />
-                </IconButton> 
+              <TableCell align="center" >  
+              <Link to={`/quiz/filmId=${film.codice_film}`} state={{ filmTitle: film.titolo }}><ArrowCircleRight color="primary" /></Link> 
+
               </TableCell>
               </TableRow>  
         ))}

@@ -49,10 +49,8 @@ export default function DialogDettagliFilm(props) {
        <DialogTitle align='center' color='primary'>{props.info.titolo}</DialogTitle>
         <Divider light/>
          <DialogContent>
-
-
+        
         <List>
-
               <TabUsageListItem label="Genere">
                {props.info.genere}
               </TabUsageListItem>
@@ -69,12 +67,9 @@ export default function DialogDettagliFilm(props) {
                 {props.info.data_uscita}
               </TabUsageListItem>
               <TabUsageListItem label="Trama">
-             
                 {props.info.trama}
-    
               </TabUsageListItem>
             </List>
-
          </DialogContent>
         
         <DialogActions>

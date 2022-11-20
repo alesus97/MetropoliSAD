@@ -151,9 +151,9 @@ export default function Film(props) {
         info = {films[onExploreIndex]}
       ></DialogDettagliFilm>}
       
-      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 2, sm: 8, md: 10, lg:12 }} >
+      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 2, sm: 8, md: 10, lg:12, xl:12 }} >
         {films.map((info, index) => (
-          <Grid item key={info.codice_film} xs={2/2} sm={8/3} md={10/4} lg={12/5}>
+          <Grid item key={info.codice_film} xs={2/2} sm={8/3} md={10/4} lg={12/5} xl={12/6}>
             <FilmCard
               info={info}
               onDeleteAction={() => {setOnDeleteIndex(index); setopenConfirmDeleteDialog(true)}}

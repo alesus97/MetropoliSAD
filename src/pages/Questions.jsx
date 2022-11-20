@@ -21,12 +21,16 @@ import {Table,
 
 } from "@mui/material";
 
+import { useLocation } from "react-router-dom";
 import {Skeleton} from "@mui/material";
 
 
 
 export default function Questions() {
     const { filmId } = useParams();
+    const location = useLocation()
+    const { filmTitle } = location.state
+
     const [questions, setQuestions] = useState([]);
     const [errorMessages, setErrorMessages] = useState([]);
     const [iserror, setIserror] = useState(false);
@@ -113,7 +117,7 @@ export default function Questions() {
         openDialog={openInsertDialog}
         setCloseDialog={() => setopenInsertDialog(false)}
         handleOK={handleSubmit}
-        title="Inserisci nuova domanda"
+        title={`Inserisci nuova domanda per "${filmTitle}"`}
       ><DialogQuestion/></InsertFormDialog>
 
       <InsertFormDialog
@@ -123,7 +127,7 @@ export default function Questions() {
         title="Sei sicuro di voler eliminare la domanda?"
       ><DialogConfermaEliminazione/></InsertFormDialog>
 
-
+    <p>{filmTitle}</p>
       <TableContainer component={Paper} >
         <Table sx={{ minWidth: 650 }} >
           <TableHead>

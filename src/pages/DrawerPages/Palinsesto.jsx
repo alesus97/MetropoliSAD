@@ -149,7 +149,7 @@ export default function BasicTable() {
 
           {loading &&
             skeletonArray.map((item, index) => (
-              <TableRow   height={70}
+              <TableRow  height={70}
               key={index}>
                 <TableCell component="th" scope="row" width="30%">
                   <Skeleton />

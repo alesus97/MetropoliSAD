@@ -16,6 +16,7 @@ const Login = lazy(() => import("./pages/Auth/Login"));
 const IdentifyAccount = lazy(() => import("./pages/Auth/IdentifyAccount.jsx"));
 const ResetPassword = lazy(() => import("./pages/Auth/ResetPassword.jsx"));
 
+const NotFound404 = lazy(() => import("./pages/NotFound404"));
 
 
 axios.defaults.headers.common['Authorization'] = localStorage.getItem("ReactAmplify.TokenKey");
@@ -50,6 +51,7 @@ const App = () => {
             <Route path="/film" element={<Film />} />
             <Route path="/quiz/filmId=:filmId" element={<Questions/>}/>
             <Route path="/quiz" element={<Quiz />} />
+            <Route path="*" element={<NotFound404 />} />
           </Routes>
         </Suspense>
       </Sidebar>

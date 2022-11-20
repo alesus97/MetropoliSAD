@@ -18,7 +18,7 @@ export default function NotFound404() {
       <Stack direction="row" spacing={2}>
    
         <ListItem> 
-          <Grid xs={6}>
+          <Grid >
             <Typography variant="h1">
               404
             </Typography>
@@ -30,7 +30,7 @@ export default function NotFound404() {
           </Grid> 
           </ListItem>
           <ListItem> 
-         <Grid xs={6}>
+         <Grid >
             <img
               src="/404.png"
               alt=""

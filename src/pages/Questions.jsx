@@ -26,7 +26,6 @@ import { useLocation } from "react-router-dom";
 import {Skeleton} from "@mui/material";
 
 
-
 export default function Questions() {
     const { filmId } = useParams();
     const location = useLocation()
@@ -100,7 +99,7 @@ export default function Questions() {
       .then((res) => {
         const questions = res.data;
         setQuestions(questions);
-         //console.log(questions); 
+         //console.log(questions);
          setLoading(false);
       });
   }, []);
@@ -128,8 +127,7 @@ export default function Questions() {
         title="Sei sicuro di voler eliminare la domanda?"
       ><DialogConfermaEliminazione/></InsertFormDialog>
 
-    <Typography variant="h5" color="primary" >{filmTitle}</Typography>
-    <p></p>
+    <p>{filmTitle}</p>
       <TableContainer component={Paper} >
         <Table sx={{ minWidth: 650 }} >
           <TableHead>

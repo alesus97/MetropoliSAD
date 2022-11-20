@@ -149,14 +149,8 @@ export default function Film(props) {
       }
       </Grid>
 
-
-
-
-
-
-
-
       <Box height={70}></Box>
+
     </Box>
     
   );

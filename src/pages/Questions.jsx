@@ -127,7 +127,7 @@ export default function Questions() {
         title="Sei sicuro di voler eliminare la domanda?"
       ><DialogConfermaEliminazione/></InsertFormDialog>
 
-  <Typography variant="h5" color="primary" >{filmTitle}</Typography>
+  <Typography variant="h5" color="primary" align="center" >{filmTitle}</Typography>
     <p></p>
       <TableContainer component={Paper} >
         <Table sx={{ minWidth: 650 }} >

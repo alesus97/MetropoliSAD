@@ -1,4 +1,6 @@
-import { Movie, Chair, Dashboard, Adb, Quiz } from "@mui/icons-material";
+import { Movie, Chair, Dashboard, Adb, Quiz, EmojiEvents } from "@mui/icons-material";
+
+
 import React from "react";
 
  export const menuItem = [
@@ -21,5 +23,11 @@ import React from "react";
       name: "Quiz",
       path: "/quiz",
       icon: <Quiz color="primary" />,
+    },
+    {
+      name: "Store",
+      path:"/store",
+      icon: <EmojiEvents color="primary"/>,
+
     },
   ];

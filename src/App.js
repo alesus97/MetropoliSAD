@@ -11,6 +11,7 @@ const Film = lazy(() => import("./pages/DrawerPages/Film.jsx"));
 const Sale = lazy(() => import("./pages/DrawerPages/Sale.jsx"));
 const Quiz = lazy(() => import("./pages/DrawerPages/Quiz.jsx"));
 const Questions = lazy(() => import("./pages/Questions.jsx"));
+const Store = lazy(()=> import("./pages/DrawerPages/Store.jsx"));
 
 const Login = lazy(() => import("./pages/Auth/Login"));
 const IdentifyAccount = lazy(() => import("./pages/Auth/IdentifyAccount.jsx"));
@@ -51,6 +52,7 @@ const App = () => {
             <Route path="/film" element={<Film />} />
             <Route path="/quiz/filmId=:filmId" element={<Questions/>}/>
             <Route path="/quiz" element={<Quiz />} />
+            <Route path="/store" element={<Store/>}/>
             <Route path="*" element={<NotFound404 />} />
           </Routes>
         </Suspense>

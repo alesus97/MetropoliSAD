@@ -114,7 +114,7 @@ export default function Store(){
         openDialog={openConfirmDeleteDialog}
         setCloseDialog={() => setopenConfirmDeleteDialog(false)}
         handleOK={handleDelete}
-        title="Sei sicuro di voler eliminare la domanda?"
+        title="Sei sicuro di voler eliminare il premio?"
       ><DialogConfermaEliminazione/></InsertFormDialog>
 
       <TableContainer component={Paper} >

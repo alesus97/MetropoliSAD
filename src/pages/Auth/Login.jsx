@@ -10,6 +10,7 @@ import { Error } from "@mui/icons-material";
 import { useEffect } from "react";
 import {Fade} from "@mui/material";
 import {AlertTitle} from "@mui/material";
+import axios from "axios";
 import {
   animate,
   RootStyle,
@@ -68,6 +69,8 @@ const LoginForm = (props) => {
         .then((user) => {
           setIserror(false);
           setErrorMessage("");
+
+          axios.defaults.headers.common['Authorization'] =  user.signInUserSession.accessToken.jwtToken;
 
           localStorage.setItem(
             AUTH_USER_TOKEN_KEY,

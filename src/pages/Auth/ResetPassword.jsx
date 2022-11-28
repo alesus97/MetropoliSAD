@@ -1,10 +1,6 @@
 import React, { useState } from "react";
-import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
-import { Form, FormikProvider, useFormik } from "formik";
-import * as Yup from "yup";
-import { Amplify, Auth } from "aws-amplify";
-import { AUTH_USER_TOKEN_KEY } from "../../const";
-import awsconfig from "../../aws-exports";
+import { Form, FormikProvider } from "formik";
+
 import Logo from "../../components/Logo";
 import { Error, Visibility, VisibilityOff } from "@mui/icons-material";
 import {
@@ -14,15 +10,10 @@ import {
   ContentStyle,
   fadeInUp,
 } from "./ConstAuth";
-import YupPassword from "yup-password";
 import {
   Box,
-  Checkbox,
-  FormControlLabel,
   IconButton,
   InputAdornment,
-  Link,
-  Stack,
   TextField,
   CircularProgress,
   Alert,
@@ -32,70 +23,20 @@ import {
 } from "@mui/material";
 
 import { LoadingButton } from "@mui/lab";
-import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
 
 
-const ResetPassword = (props) => {
-  YupPassword(Yup);
-  Amplify.configure(awsconfig);
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [iserror, setIserror] = useState(false);
-  const [errorMessage, setErrorMessage] = useState();
-  const { state } = useLocation();
-  const { email } = state;
-
+const ResetPassword = ({formik,
+  errors,
+  touched,
+  getFieldProps,
+  handleSubmit,
+  isSubmitting,
+  errorMessage,
+  iserror,
+  setIserror}) => {
+  
   const [showPassword, setShowPassword] = useState(false);
-
-  const ResetPasswordSchema = Yup.object().shape({
-    verificationCode: Yup.string().required("Verification code is required"),
-    password: Yup.string()
-      .required("Password is required")
-      .min(8, "Password is too short - shoud be 8 chars minimum.")
-      .minLowercase(1, "password must contain at least 1 lower case letter")
-      .minUppercase(1, "password must contain at least 1 upper case letter")
-      .minNumbers(1, "password must contain at least 1 number")
-      .minSymbols(1, "password must contain at least 1 special character"),
-    confirmPassword: Yup.string()
-      .required("Password is required")
-      .min(8, "Password is too short - shoud be 8 chars minimum.")
-      .minLowercase(1, "password must contain at least 1 lower case letter")
-      .minUppercase(1, "password must contain at least 1 upper case letter")
-      .minNumbers(1, "password must contain at least 1 number")
-      .minSymbols(1, "password must contain at least 1 special character"),
-    confirmPassword: Yup.string().oneOf(
-      [Yup.ref("password"), null],
-      "Passwords must match"
-    ),
-  });
-
-  const formik = useFormik({
-    initialValues: {
-      verificationCode: "",
-      password: "",
-      confirmPassword: "",
-    },
-    validationSchema: ResetPasswordSchema,
-    onSubmit: () => {
-      Auth.forgotPasswordSubmit(email, values.verificationCode, values.password)
-        .then((data) => {
-          setIserror(false);
-          setErrorMessage("");
-          navigate("/login");
-        })
-        .catch((err) => {
-          setIsSubmitting(false);
-          setErrorMessage(err.message);
-          setIserror(true);
-        });
-    },
-  });
-
-  const { errors, touched, values, getFieldProps, handleSubmit } =
-    formik;
-
   return (
     <RootStyle>
       <Container maxWidth="sm">

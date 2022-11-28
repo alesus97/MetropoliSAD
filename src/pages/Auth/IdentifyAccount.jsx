@@ -1,70 +1,36 @@
-import React, { useState } from "react";
-import {useNavigate } from "react-router-dom";
-import { Form, FormikProvider, useFormik } from "formik";
-import * as Yup from "yup";
-import { Amplify, Auth } from "aws-amplify";
-import { AUTH_USER_TOKEN_KEY } from "../../const";
-import awsconfig from "../../aws-exports";
-import { Container, Typography, Divider } from "@mui/material";
+import React from "react";
+import { Form, FormikProvider } from "formik";
+
+import { Container, Typography } from "@mui/material";
 import Logo from "../../components/Logo";
 import { CircularProgress } from "@mui/material";
-import {Alert} from "@mui/material"
+import { Alert } from "@mui/material";
 import { Error } from "@mui/icons-material";
-import { animate, RootStyle, HeadingStyle, ContentStyle, fadeInUp } from "./ConstAuth";
-import {Fade} from "@mui/material";
 import {
-  Box,
-  Stack,
-  TextField,
-} from "@mui/material";
+  animate,
+  RootStyle,
+  HeadingStyle,
+  ContentStyle,
+  fadeInUp,
+} from "./ConstAuth";
+import { Fade } from "@mui/material";
+import { Box, Stack, TextField } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import { Icon } from "@iconify/react";
+
 import { motion } from "framer-motion";
 
-const IdentifyAccount = (props) => {
-  Amplify.configure(awsconfig);
-  const navigate = useNavigate();
- 
-  const [iserror, setIserror] = useState(false);
-  const [errorMessage, setErrorMessage] = useState();
-  const [isOkClicked, setOkClicked] = useState(false);
-
-  const IdentifyAccountSchema = Yup.object().shape({
-    email: Yup.string()
-      .email("Provide a valid email address")
-      .required("Email is required"),
-  });
-
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-    },
-    validationSchema: IdentifyAccountSchema,
-    onSubmit: () => {
-      console.log("submitting...");
-
-      Auth.forgotPassword(values.email)
-        .then((data) => {
-          setErrorMessage("");
-          setOkClicked(true);
-          setIserror(false);
-
-          console.log(data);
-
-          navigate("/resetPassword", { state: { email: values.email } });
-        })
-        .catch((err) => {
-          setOkClicked(true);
-          setIserror(true);
-          console.log(err);
-          setErrorMessage(err.message);
-        });
-    },
-  });
-
-  const { errors, touched, values, isSubmitting, getFieldProps, handleSubmit } =
-    formik;
-
+const IdentifyAccount = ({
+  formik,
+  errors,
+  touched,
+  getFieldProps,
+  handleSubmit,
+  isSubmitting,
+  errorMessage,
+  iserror,
+  setIserror,
+  isOkClicked,
+}) => {
   return (
     <RootStyle>
       <Container maxWidth="sm">
@@ -105,10 +71,11 @@ const IdentifyAccount = (props) => {
                     {...getFieldProps("email")}
                     error={Boolean(touched.email && errors.email)}
                     helperText={touched.email && errors.email}
-                    sx={{"& fieldset": {
-                      borderColor: "white",
-                    },}}
-                    
+                    sx={{
+                      "& fieldset": {
+                        borderColor: "white",
+                      },
+                    }}
                   />
                 </Box>
 
@@ -117,20 +84,6 @@ const IdentifyAccount = (props) => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={animate}
                 >
-                  {/* <p></p>
-                  {isOkClicked ? (
-                    <Alert
-                      variant="filled"
-                      color="primary"
-                      icon={<Error fontSize="inherit" />}
-                    >
-                      {iserror ? errorMessage : "Codice inviato correttamente"}
-                    </Alert>
-                  ) : (
-                    <></>
-                  )}
-                  <p></p> */}
-
                   <Stack
                     direction="row"
                     alignItems="center"
@@ -138,9 +91,9 @@ const IdentifyAccount = (props) => {
                     sx={{ my: 2 }}
                   ></Stack>
 
-<Fade
-                    in={isOkClicked} //Write the needed condition here to make it appear
-                    timeout={{ enter: 500, exit: 500 }} //Edit these two values to change the duration of transition when the element is getting appeared and disappeard
+                  <Fade
+                    in={isOkClicked}
+                    timeout={{ enter: 500, exit: 500 }}
                     addEndListener={() => {
                       setTimeout(() => {
                         setIserror(false);
@@ -148,11 +101,11 @@ const IdentifyAccount = (props) => {
                     }}
                   >
                     <Alert
-                       variant="filled"
-                       color="primary"
-                       icon={<Error fontSize="inherit" />}
+                      variant="filled"
+                      color="primary"
+                      icon={<Error fontSize="inherit" />}
                     >
-                       {iserror ? errorMessage : "Codice inviato correttamente"}
+                      {iserror ? errorMessage : "Codice inviato correttamente"}
                     </Alert>
                   </Fade>
                   <p></p>

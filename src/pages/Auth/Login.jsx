@@ -1,15 +1,10 @@
 import React, { useState } from "react";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import { Form, FormikProvider, useFormik } from "formik";
-import * as Yup from "yup";
-import { Amplify, Auth } from "aws-amplify";
-import { AUTH_USER_TOKEN_KEY } from "../../const";
-import awsconfig from "../../aws-exports";
+
 import Logo from "../../components/Logo";
-import { Error } from "@mui/icons-material";
-import { useEffect } from "react";
+
 import {Fade} from "@mui/material";
-import {AlertTitle} from "@mui/material";
 import axios from "axios";
 import {
   animate,
@@ -18,7 +13,7 @@ import {
   ContentStyle,
   fadeInUp,
 } from "./ConstAuth";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { Visibility, VisibilityOff, Error } from "@mui/icons-material";
 
 import {
   Box,
@@ -36,60 +31,11 @@ import {
 } from "@mui/material";
 
 import { LoadingButton } from "@mui/lab";
-import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
 
-const LoginForm = (props) => {
-  Amplify.configure(awsconfig);
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [iserror, setIserror] = useState(false);
-  const [errorMessage, setErrorMessage] = useState();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+const LoginForm = ({formik, errors, touched, values, getFieldProps, handleSubmit, isSubmitting, errorMessage, iserror, setIserror}) => {
+
   const [showPassword, setShowPassword] = useState(false);
-
-  const LoginSchema = Yup.object().shape({
-    email: Yup.string()
-      .email("Provide a valid email address")
-      .required("Email is required"),
-    password: Yup.string().required("Password is required"),
-  });
-
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-      remember: true,
-    },
-    validationSchema: LoginSchema,
-    onSubmit: () => {
-      setIsSubmitting(true);
-      console.log("submitting...");
-      Auth.signIn(values.email, values.password)
-        .then((user) => {
-          setIserror(false);
-          setErrorMessage("");
-
-          axios.defaults.headers.common['Authorization'] =  user.signInUserSession.accessToken.jwtToken;
-
-          localStorage.setItem(
-            AUTH_USER_TOKEN_KEY,
-            user.signInUserSession.accessToken.jwtToken
-          );
-
-          props.onLoginAction();
-
-          navigate("/schedule", { replace: true });
-        })
-        .catch((err) => {
-          setIsSubmitting(false);
-          setErrorMessage(err.message);
-          setIserror(true);
-        });
-    },
-  });
-
-  const { errors, touched, values, getFieldProps, handleSubmit } = formik;
 
   return (
     <RootStyle>

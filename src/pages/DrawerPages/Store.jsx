@@ -1,13 +1,11 @@
 
 import InsertFormDialog from "../../components/InsertFormDialog";
 import DialogConfermaEliminazione from "../../components/Dialogs/DialogConfermaEliminazione";
-import { useParams } from "react-router-dom";
-import DialogQuestion from "../../components/Dialogs/DialogQuestion";
-import DialogStore from "../../components/Dialogs/DialogStore";
 
+import DialogStore from "../../components/Dialogs/DialogStore";
 import {Delete, Add} from "@mui/icons-material";
-import React, { useState, useEffect } from "react";
-import axios from "axios"
+import React from "react";
+
 import {Table,
   TableBody,
   TableCell,
@@ -18,83 +16,16 @@ import {Table,
   Box,
   IconButton,
   Fab,
-  Typography,
 
 } from "@mui/material";
 
-import { useLocation } from "react-router-dom";
 import {Skeleton} from "@mui/material";
 
-export default function Store(){
-    const [prizes, setPrizes] =useState();
-    const [loading, setLoading] = useState(true);
-
-    const [onDeleteIndex,setOnDeleteIndex] = useState();
+export default function Store({handleSubmit, handleDelete, loading, prizes, setOnDeleteIndex }){
     const [openInsertDialog, setopenInsertDialog] = React.useState(false);
     const [openConfirmDeleteDialog, setopenConfirmDeleteDialog] = React.useState(false);
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        const postData = {
-            premio: data.get("premio"),
-            crediti: data.get("crediti"),
-
-          };
     
-          try {
-            const response = await axios.post(
-              `/quiVaIlLink`,
-              postData
-            );
-    
-            const newPrize = {
-             
-            };
-      
-            const newPrizes = [...prizes];
-            newPrizes.push(newPrize);
-            setPrizes(newPrizes);
-    
-        } catch(error) {
-          throw error
-        } 
-
-    }
-
-
-    useEffect(() => {
-        axios
-          .get(`https://637fa4675b1cc8d6f94c16b5.mockapi.io/store`)
-          .then((res) => {
-            const prizes = res.data;
-            setPrizes(prizes);
-             console.log(prizes);
-             setLoading(false);
-          });
-      }, []);
-
-      const handleDelete = async (event) => {
-        event.preventDefault();
-        const codiceDomanda = prizes[onDeleteIndex].codice_domanda;
-    
-        try {
-          const response = await axios.delete(
-            `/quiVaIlLink`
-          );
-            const dataDelete = [...prizes];
-            dataDelete.splice(onDeleteIndex, 1);
-            setPrizes([...dataDelete]);
-            console.log("Premio cancellato correttamente");
-    
-        } catch(error) {
-          throw error
-        } 
-       
-       };
-    
-
-
       const skeletonArray = Array(5).fill('');
     return(
         <Box>

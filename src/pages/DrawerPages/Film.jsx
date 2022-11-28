@@ -1,95 +1,25 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 
 import FilmCard from "../../components/Cards/FilmCard";
 import InsertFormDialog from "../../components/InsertFormDialog";
 import DialogFilm from "../../components/Dialogs/DialogFilm";
 
-import { Grid, Fab, Box, Card, Skeleton, CardActions, IconButton, Button, Typography } from "@mui/material";
+import { Grid, Fab, Box, Card, Skeleton} from "@mui/material";
 import { Add } from "@mui/icons-material";
 import DialogConfermaEliminazione from "../../components/Dialogs/DialogConfermaEliminazione";
 import DialogDettagliFilm from "../../components/Dialogs/DialogDettagliFilm";
 
 
-export default function Film(props) {
-  const [onDeleteIndex,setOnDeleteIndex] = useState();
+
+export default function Film({handleSubmit, handleDelete, loading, films, setOnDeleteIndex}) {
+  const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
   const [openInsertDialog, setopenInsertDialog] = React.useState(false);
   const [openConfirmDeleteDialog, setopenConfirmDeleteDialog] = React.useState(false);
-  const [films, setFilms] = useState([]);
-
-
-  const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
   const [onExploreIndex, setOnExploreIndex] = useState(0);
-
-  const [loading, setLoading] = useState(true);
 
   const skeletonArray = Array(12).fill("");
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-
-    const postData = {
-      titolo: data.get("titolo"),
-      genere: data.get("genere"),
-      cast: data.get("cast"),
-      regia: data.get("regia"),
-      produttore: data.get("produttore"),
-      data_uscita: data.get("data"),
-      durata: data.get("durata"),
-      trama: data.get("trama"),
-      image_url: data.get("locandina"),
-    };
-
-     try {
-      const response = await axios.post(
-        `https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/film`,
-        postData
-      );
-      console.log(response);
-
-      const newFilm = {
-        codice_film: response.data.codice_film,
-        ...postData,
-      };
-
-      const newFilms = [...films];
-      newFilms.push(newFilm);
-      setFilms(newFilms);
-    } catch(error) {
-      throw error
-    } 
-
-  }
-
-  const handleDelete = async (event) => {
-    event.preventDefault();
-    const codiceFilm = films[onDeleteIndex].codice_film;
-    
-    try {
-      const response = await axios.delete(
-        `https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/film/${codiceFilm}`
-      );
-      const dataDelete = [...films];
-      dataDelete.splice(onDeleteIndex, 1);
-      setFilms([...dataDelete]);
-      console.log("Film cancellato correttamente");
-
-    } catch(error) {
-      throw error
-    } 
-    
-  };
-
-  useEffect(() => {
-    axios
-      .get("https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/film")
-      .then((res) => {
-        const films = res.data;
-        setFilms(films);
-        setLoading(false);
-      });
-  }, []);
+  
 
   return (
     <Box>

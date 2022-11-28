@@ -6,16 +6,17 @@ import { useEffect } from "react";
 import axios from "axios";
 import "./App.css"
 
-const Palinsesto = lazy(() => import("./pages/DrawerPages/Palinsesto.jsx"));
-const Film = lazy(() => import("./pages/DrawerPages/Film.jsx"));
-const Sale = lazy(() => import("./pages/DrawerPages/Sale.jsx"));
-const Quiz = lazy(() => import("./pages/DrawerPages/Quiz.jsx"));
-const Questions = lazy(() => import("./pages/Questions.jsx"));
-const Store = lazy(()=> import("./pages/DrawerPages/Store.jsx"));
+const Palinsesto = lazy(() => import("./controllers/PalinsestoController"));
 
-const Login = lazy(() => import("./pages/Auth/Login"));
-const IdentifyAccount = lazy(() => import("./pages/Auth/IdentifyAccount.jsx"));
-const ResetPassword = lazy(() => import("./pages/Auth/ResetPassword.jsx"));
+const Film = lazy(() => import("./controllers/FilmController"));
+const Sale = lazy(() => import("./controllers/SaleController"));
+const Quiz = lazy(() => import("./controllers/QuizController"));
+const Questions = lazy(() => import("./controllers/QuestionsController"));
+const Store = lazy(()=> import("./controllers/StoreController"));
+
+const Login = lazy(() => import("./controllers/LoginController"));
+const IdentifyAccount = lazy(() => import("./controllers/IdentifyAccountController"));
+const ResetPassword = lazy(() => import("./controllers/ResetPasswordController"));
 
 const NotFound404 = lazy(() => import("./pages/NotFound404"));
 

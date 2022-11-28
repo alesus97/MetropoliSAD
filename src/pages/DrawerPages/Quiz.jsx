@@ -1,6 +1,6 @@
 
-import React, { useState, useEffect } from "react";
-import axios from "axios"
+import React from "react";
+
 import {Table,
   TableBody,
   TableCell,
@@ -9,7 +9,6 @@ import {Table,
   TableRow,
   Paper,
   Box,
-  IconButton,
   Skeleton,
 } from "@mui/material";
 
@@ -17,23 +16,10 @@ import {ArrowCircleRight} from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 
-export default function Quiz () {
-  const [loading, setLoading] = useState(true);
-  const [films, setFilms] = useState([]);
+export default function Quiz ({films, loading}) {
+  
   const skeletonArray = Array(5).fill('');
  
-  useEffect(() => {
-    axios
-      .get("https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/film")
-      .then((res) => {
-        const films = res.data;
-        setFilms(films);
-        setLoading(false)
-      });
-  }, []);
-
-  
-
   return (
     <Box>
       <p></p>

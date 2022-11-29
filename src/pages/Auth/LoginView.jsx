@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { Form, FormikProvider } from "formik";
+import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
+import { Form, FormikProvider, useFormik } from "formik";
 
 import Logo from "../../components/Logo";
-import { Error, Visibility, VisibilityOff } from "@mui/icons-material";
+
+import {Fade} from "@mui/material";
+import axios from "axios";
 import {
   animate,
   RootStyle,
@@ -10,33 +13,30 @@ import {
   ContentStyle,
   fadeInUp,
 } from "./ConstAuth";
+import { Visibility, VisibilityOff, Error } from "@mui/icons-material";
+
 import {
   Box,
+  Checkbox,
+  FormControlLabel,
   IconButton,
   InputAdornment,
+  Link,
+  Stack,
   TextField,
   CircularProgress,
   Alert,
   Container,
-  Typography, 
-  Fade
+  Typography,
 } from "@mui/material";
 
 import { LoadingButton } from "@mui/lab";
 import { motion } from "framer-motion";
 
+const LoginView = ({formik, errors, touched, values, getFieldProps, handleSubmit, isSubmitting, errorMessage, iserror, setIserror}) => {
 
-const ResetPassword = ({formik,
-  errors,
-  touched,
-  getFieldProps,
-  handleSubmit,
-  isSubmitting,
-  errorMessage,
-  iserror,
-  setIserror}) => {
-  
   const [showPassword, setShowPassword] = useState(false);
+
   return (
     <RootStyle>
       <Container maxWidth="sm">
@@ -44,7 +44,7 @@ const ResetPassword = ({formik,
           <HeadingStyle component={motion.div} {...fadeInUp}>
             <Logo />
             <Typography sx={{ color: "text.secondary", mb: 5 }}>
-              Check your email for verification code
+              Login to your account
             </Typography>
           </HeadingStyle>
 
@@ -70,64 +70,29 @@ const ResetPassword = ({formik,
                 >
                   <TextField
                     fullWidth
-                    autoComplete="verificationCode"
-                    label="Verification Code"
-                    name="verificationCode"
-                    {...getFieldProps("verificationCode")}
+                    autoComplete="email"
+                    type="email"
+                    label="Email Address"
+                    name="email"
+                    {...getFieldProps("email")}
+                    error={Boolean(touched.email && errors.email)}
+                    helperText={touched.email && errors.email}
                     sx={{"& fieldset": {
                       borderColor: "white",
                     },}}
-                    error={Boolean(
-                      touched.verificationCode && errors.verificationCode
-                    )}
-                    helperText={
-                      touched.verificationCode && errors.verificationCode
-                    }
                   />
 
                   <TextField
                     fullWidth
                     autoComplete="current-password"
                     type={showPassword ? "text" : "password"}
-                    label="New Password"
+                    label="Password"
                     {...getFieldProps("password")}
                     error={Boolean(touched.password && errors.password)}
                     helperText={touched.password && errors.password}
                     sx={{"& fieldset": {
                       borderColor: "white",
                     },}}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton
-                            onClick={() => setShowPassword((prev) => !prev)}
-                          >
-                            {showPassword ? (
-                              <Visibility color="primary" />
-                            ) : (
-                              <VisibilityOff color="primary" />
-                            )}
-                          </IconButton>
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-
-                  <TextField
-                    fullWidth
-                    autoComplete="current-password"
-                    type={showPassword ? "text" : "password"}
-                    label="Confirm New Password"
-                    {...getFieldProps("confirmPassword")}
-                    sx={{"& fieldset": {
-                      borderColor: "white",
-                    },}}
-                    error={Boolean(
-                      touched.confirmPassword && errors.confirmPassword
-                    )}
-                    helperText={
-                      touched.confirmPassword && errors.confirmPassword
-                    }
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">
@@ -151,8 +116,34 @@ const ResetPassword = ({formik,
                   initial={{ opacity: 0, y: 20 }}
                   animate={animate}
                 >
-    
-                  <Box my={2} />
+                  <p></p>
+
+                  <Stack
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="space-between"
+                    sx={{ my: 2 }}
+                  >
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          {...getFieldProps("remember")}
+                          checked={values.remember}
+                        />
+                      }
+                      label="Remember me"
+                    />
+
+                    <Link
+                      component={RouterLink}
+                      variant="subtitle2"
+                      to="/identifyAccount"
+                      underline="hover"
+                    >
+                      Forgot password?
+                    </Link>
+                  </Stack>
+
 
                   <Fade
                     in={iserror} //Write the needed condition here to make it appear
@@ -163,15 +154,17 @@ const ResetPassword = ({formik,
                       }, 4000);
                     }}
                   >
+                    
                     <Alert
-                      variant="filled"
-                      color="primary"
-                      icon={<Error fontSize="inherit" />}
+                       variant="filled"
+                       color="primary"
+                       icon={<Error fontSize="inherit" />}
                     >
+                      
                       {errorMessage}
                     </Alert>
                   </Fade>
-                  <p/>
+                  <p></p>
 
                   <LoadingButton
                     fullWidth
@@ -183,7 +176,7 @@ const ResetPassword = ({formik,
                       <CircularProgress color="primary" size={16} />
                     }
                   >
-                    {isSubmitting ? "loading..." : "Reset"}
+                    {isSubmitting ? "loading..." : "Login"}
                   </LoadingButton>
                 </Box>
               </Box>
@@ -195,4 +188,4 @@ const ResetPassword = ({formik,
   );
 };
 
-export default ResetPassword;
+export default LoginView;

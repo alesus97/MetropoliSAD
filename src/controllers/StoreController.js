@@ -1,4 +1,4 @@
-import Store from "../pages/DrawerPages/Store"
+import StoreView from "../pages/DrawerPages/StoreView"
 import { useState, useEffect } from "react";
 import { APIService } from "../apis/APIService";
 import axios from "axios";
@@ -48,8 +48,7 @@ export default function StoreController(){
           .then((res) => {
             const prizes = res.data;
             setPrizes(prizes);
-             console.log(prizes);
-             setLoading(false);
+            setLoading(false);
           });
       }, []);
 
@@ -72,6 +71,6 @@ export default function StoreController(){
        };
 
     return(
-        <Store handleSubmit={handleSubmit} handleDelete={handleDelete} loading={loading} prizes={prizes} setOnDeleteIndex={setOnDeleteIndex}/>
+        <StoreView handleSubmit={handleSubmit} handleDelete={handleDelete} loading={loading} prizes={prizes} setOnDeleteIndex={setOnDeleteIndex}/>
     );
 }

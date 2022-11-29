@@ -1,7 +1,7 @@
-import Sale from "../pages/DrawerPages/Sale";
+import SaleView from "../pages/DrawerPages/SaleView";
 import { useState, useEffect } from "react";
 import { APIService } from "../apis/APIService";
-
+import Sala from "../models/Sala";
 
 export default function SaleController(){
   const [sale, setSale] = useState([]);
@@ -62,7 +62,8 @@ export default function SaleController(){
       useEffect(() => {
     
         APIService.getAllSale().then((res) => {
-          setSale(res.data);
+          const newSale = res.data.map((sala) => new Sala(sala));
+          setSale(newSale);
           setLoading(false);
         });
     
@@ -70,7 +71,7 @@ export default function SaleController(){
       }, []); 
     
     return(
-        <Sale handleSubmit={handleSubmit} handleDelete={handleDelete} loading={loading} sale={sale} setOnDeleteIndex={setOnDeleteIndex}/>
+        <SaleView handleSubmit={handleSubmit} handleDelete={handleDelete} loading={loading} sale={sale} setOnDeleteIndex={setOnDeleteIndex}/>
 
     );
 }

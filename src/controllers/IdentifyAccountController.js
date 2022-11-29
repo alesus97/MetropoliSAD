@@ -2,7 +2,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { Auth } from "aws-amplify";
 import { useNavigate } from "react-router-dom";
-import IdentifyAccount from "../pages/Auth/IdentifyAccount";
+import IdentifyAccountView from "../pages/Auth/IdentifyAccountView";
 import Amplify from "aws-amplify";
 import { useState } from "react";
 import awsconfig from "../constants/aws-exports";
@@ -53,7 +53,7 @@ Amplify.configure(awsconfig);
   const { errors, touched, values, isSubmitting, getFieldProps, handleSubmit } =
     formik;
   return (
-    <IdentifyAccount
+    <IdentifyAccountView
       formik={formik}
       errors={errors}
       touched={touched}

@@ -19,7 +19,7 @@ import { LoadingButton } from "@mui/lab";
 
 import { motion } from "framer-motion";
 
-const IdentifyAccount = ({
+const IdentifyAccountView = ({
   formik,
   errors,
   touched,
@@ -131,4 +131,4 @@ const IdentifyAccount = ({
   );
 };
 
-export default IdentifyAccount;
+export default IdentifyAccountView;

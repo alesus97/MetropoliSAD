@@ -1,8 +1,10 @@
 
-import InsertFormDialog from "../../components/InsertFormDialog";
-import DialogConfermaEliminazione from "../../components/Dialogs/DialogConfermaEliminazione";
+import InsertFormDialog from "../components/InsertFormDialog";
 
-import DialogStore from "../../components/Dialogs/DialogStore";
+import DialogQuestion from "../components/Dialogs/DialogQuestion";
+import DialogConfermaEliminazione from "../components/Dialogs/DialogConfermaEliminazione";
+
+
 import {Delete, Add} from "@mui/icons-material";
 import React from "react";
 
@@ -16,19 +18,28 @@ import {Table,
   Box,
   IconButton,
   Fab,
+  Typography,
+  Skeleton
 
 } from "@mui/material";
 
-import {Skeleton} from "@mui/material";
+import { useLocation } from "react-router-dom";
 
-export default function Store({handleSubmit, handleDelete, loading, prizes, setOnDeleteIndex }){
+
+export default function QuestionsView({handleSubmit, handleDelete, loading, questions, setOnDeleteIndex }) {
+  
+    const location = useLocation()
+    const { filmTitle } = location.state
+
     const [openInsertDialog, setopenInsertDialog] = React.useState(false);
     const [openConfirmDeleteDialog, setopenConfirmDeleteDialog] = React.useState(false);
 
-    
-      const skeletonArray = Array(5).fill('');
-    return(
-        <Box>
+
+
+  const skeletonArray = Array(5).fill('');
+
+  return (
+    <Box>
 
       <Fab sx={{position: 'fixed' , bottom:"3%", right:"3%"}}color="primary" aria-label="add" onClick={() => setopenInsertDialog(true)}>
         <Add />
@@ -38,22 +49,27 @@ export default function Store({handleSubmit, handleDelete, loading, prizes, setO
         openDialog={openInsertDialog}
         setCloseDialog={() => setopenInsertDialog(false)}
         handleOK={handleSubmit}
-        title={"Inserisci nuovo premio"}
-      ><DialogStore/></InsertFormDialog>
+        title={`Inserisci nuova domanda per "${filmTitle}"`}
+      ><DialogQuestion/></InsertFormDialog>
 
       <InsertFormDialog
         openDialog={openConfirmDeleteDialog}
         setCloseDialog={() => setopenConfirmDeleteDialog(false)}
         handleOK={handleDelete}
-        title="Sei sicuro di voler eliminare il premio?"
+        title="Sei sicuro di voler eliminare la domanda?"
       ><DialogConfermaEliminazione/></InsertFormDialog>
 
+  <Typography variant="h5" color="primary" align="center" >{filmTitle}</Typography>
+    <p></p>
       <TableContainer component={Paper} >
         <Table sx={{ minWidth: 650 }} >
           <TableHead>
             <TableRow height={70} >
-              <TableCell component="th" scope="row" width="30%">Premio</TableCell>
-              <TableCell align="center" width="10%">Punti necessari</TableCell>
+              <TableCell component="th" scope="row" width="30%">Question</TableCell>
+              <TableCell align="center" width="10%">Answer 1</TableCell>
+              <TableCell align="center" width="10%">Answer 2</TableCell>
+              <TableCell align="center" width="10%">Answer 3</TableCell>
+              <TableCell align="center" width="10%">Correct Answer</TableCell>
               <TableCell align="center" width="10%">Delete</TableCell>
             </TableRow>
           </TableHead>
@@ -70,7 +86,15 @@ export default function Store({handleSubmit, handleDelete, loading, prizes, setO
                 <TableCell align="center" width="10%">
                   <Skeleton />
                 </TableCell>
-                
+                <TableCell align="center" width="10%">
+                  <Skeleton />
+                </TableCell>
+                <TableCell align="center" width="10%">
+                  <Skeleton />
+                </TableCell>
+                <TableCell align="center" width="10%">
+                  <Skeleton />
+                </TableCell>
                 <TableCell align="center" width="10%">
                   <IconButton> <Delete color="background"/> </IconButton>
                 </TableCell>
@@ -78,13 +102,16 @@ export default function Store({handleSubmit, handleDelete, loading, prizes, setO
             ))} 
 
 
-          {prizes &&
-            prizes.map((prize, index) => (
+          {questions &&
+            questions.map((question, index) => (
               <TableRow  height={70}
                 key={index}
               >
-                <TableCell component="th" scope="row"> {prize.nome} </TableCell>
-                <TableCell align="center"> {prize.crediti} </TableCell>
+                <TableCell component="th" scope="row"> {question.testo} </TableCell>
+                <TableCell align="center"> {question.risposta_errata_1} </TableCell>
+                <TableCell align="center"> {question.risposta_errata_2} </TableCell>
+                <TableCell align="center"> {question.risposta_errata_3} </TableCell>
+                <TableCell align="center"> {question.risposta_corretta} </TableCell>
                 <TableCell align="center" >  <IconButton onClick={() => {setOnDeleteIndex(index); setopenConfirmDeleteDialog(true)}}> <Delete color="primary" /> </IconButton> </TableCell>
               </TableRow>
             ))}
@@ -94,5 +121,5 @@ export default function Store({handleSubmit, handleDelete, loading, prizes, setO
       </TableContainer>
       <p />
     </Box>
-    );
+  );
 }

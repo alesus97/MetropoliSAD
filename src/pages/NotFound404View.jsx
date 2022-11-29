@@ -3,7 +3,7 @@ import { Box, Container, Grid, Typography, Button, Stack } from "@mui/material";
 import {ListItem} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-export default function NotFound404() {
+export default function NotFound404View() {
     const navigate = useNavigate();
     return(
         <Box

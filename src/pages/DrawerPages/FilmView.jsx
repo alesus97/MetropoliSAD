@@ -11,7 +11,7 @@ import DialogDettagliFilm from "../../components/Dialogs/DialogDettagliFilm";
 
 
 
-export default function Film({handleSubmit, handleDelete, loading, films, setOnDeleteIndex}) {
+export default function FilmView({handleSubmit, handleDelete, loading, films, setOnDeleteIndex}) {
   const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
   const [openInsertDialog, setopenInsertDialog] = React.useState(false);
   const [openConfirmDeleteDialog, setopenConfirmDeleteDialog] = React.useState(false);
@@ -46,7 +46,7 @@ export default function Film({handleSubmit, handleDelete, loading, films, setOnD
         title="Sei sicuro di voler eliminare il film?"
       ><DialogConfermaEliminazione/></InsertFormDialog>
 
-      {films.length > 0 && 
+      {(films.length > 0 && films[onExploreIndex] !== undefined)  && 
       <DialogDettagliFilm
         openDialog={openDetailsDialog}
         setCloseDialog={() => setOpenDetailsDialog(false)}

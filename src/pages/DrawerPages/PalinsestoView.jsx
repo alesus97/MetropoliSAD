@@ -22,7 +22,7 @@ import { Delete, Add } from "@mui/icons-material";
 import DialogConfermaEliminazione from "../../components/Dialogs/DialogConfermaEliminazione";
 
 
-export default function Palinsesto({handleSubmit, handleDelete, loading, spettacoli, setOnDeleteIndex }) {
+export default function PalinsestoView({handleSubmit, handleDelete, loading, spettacoli, setOnDeleteIndex }) {
 
   const [openInsertDialog, setopenInsertDialog] = React.useState(false);
   const [openConfirmDeleteDialog, setopenConfirmDeleteDialog] = React.useState(false);

@@ -1,7 +1,8 @@
-import Palinsesto from "../pages/DrawerPages/Palinsesto";
+import PalinsestoView from "../pages/DrawerPages/PalinsestoView";
 import { useState } from "react";
 import { APIService } from "../apis/APIService";
 import { useEffect } from "react";
+import Spettacolo from "../models/Spettacolo";
 
 export default function PalinsestoController(){
     const [spettacoli, setSpettacoli] = useState([]);
@@ -35,7 +36,8 @@ export default function PalinsestoController(){
     useEffect(() => {
 
         APIService.getAllSpettacoli().then((res) => {
-          setSpettacoli(res.data);
+          const newSpettacoli = res.data.map((spettacolo) => new Spettacolo(spettacolo));
+          setSpettacoli(newSpettacoli)
           setLoading(false);
         })
     
@@ -87,6 +89,6 @@ export default function PalinsestoController(){
       }
     
     return(
-        <Palinsesto handleSubmit={handleSubmit} handleDelete={handleDelete} loading={loading} spettacoli={spettacoli} setOnDeleteIndex={setOnDeleteIndex}/>
+        <PalinsestoView handleSubmit={handleSubmit} handleDelete={handleDelete} loading={loading} spettacoli={spettacoli} setOnDeleteIndex={setOnDeleteIndex}/>
     );
 }

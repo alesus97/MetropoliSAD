@@ -18,7 +18,7 @@ const Login = lazy(() => import("./controllers/LoginController"));
 const IdentifyAccount = lazy(() => import("./controllers/IdentifyAccountController"));
 const ResetPassword = lazy(() => import("./controllers/ResetPasswordController"));
 
-const NotFound404 = lazy(() => import("./pages/NotFound404"));
+const NotFound404 = lazy(() => import("./pages/NotFound404View"));
 
 
 axios.defaults.headers.common['Authorization'] = localStorage.getItem("ReactAmplify.TokenKey");

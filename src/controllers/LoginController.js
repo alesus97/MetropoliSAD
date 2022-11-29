@@ -8,7 +8,7 @@ import awsconfig from "../constants/aws-exports"
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import LoginForm from "../pages/Auth/Login";
+import LoginView from "../pages/Auth/LoginView";
 
 
 export default function LoginController(props){
@@ -66,6 +66,6 @@ export default function LoginController(props){
 
 
     return(
-        <LoginForm formik={formik} errors={errors} touched={touched} values={values} getFieldProps={getFieldProps} handleSubmit={handleSubmit} isSubmitting={isSubmitting} errorMessage={errorMessage} iserror={iserror} setIserror={setIserror}   />
+        <LoginView formik={formik} errors={errors} touched={touched} values={values} getFieldProps={getFieldProps} handleSubmit={handleSubmit} isSubmitting={isSubmitting} errorMessage={errorMessage} iserror={iserror} setIserror={setIserror}   />
     );
 }

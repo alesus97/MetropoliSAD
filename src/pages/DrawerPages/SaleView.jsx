@@ -11,7 +11,8 @@ import InsertFormDialog from "../../components/InsertFormDialog";
 import DialogSala from "../../components/Dialogs/DialogSala";
 import DialogConfermaEliminazione from "../../components/Dialogs/DialogConfermaEliminazione";
 
-export default function Sale({handleSubmit, handleDelete, loading, sale, setOnDeleteIndex }) {
+
+export default function SaleView({handleSubmit, handleDelete, loading, sale, setOnDeleteIndex }) {
  
   const [openInsertDialog, setopenInsertDialog] = React.useState(false);
   const [openConfirmDeleteDialog, setopenConfirmDeleteDialog] = React.useState(false);

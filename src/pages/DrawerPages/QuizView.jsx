@@ -16,7 +16,7 @@ import {ArrowCircleRight} from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 
-export default function Quiz ({films, loading}) {
+export default function QuizView ({films, loading}) {
   
   const skeletonArray = Array(5).fill('');
  

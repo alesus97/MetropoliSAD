@@ -1,18 +1,20 @@
-import Quiz from "../pages/DrawerPages/Quiz";
+import QuizView from "../pages/DrawerPages/QuizView";
 import { useState, useEffect } from "react";
 import { APIService } from "../apis/APIService";
+import Film from "../models/Film";
+
 export default function QuizController() {
   const [loading, setLoading] = useState(true);
   const [films, setFilms] = useState([]);
 
   useEffect(() => {
     APIService.getAllFilms().then((res) => {
-        const films = res.data;
-        setFilms(films);
+      const newFilms = res.data.map((film) => new Film(film));
+      setFilms(newFilms);
         setLoading(false);
       });
       
   }, []);
 
-  return( <Quiz films={films} loading={loading}/>);
+  return( <QuizView films={films} loading={loading}/>);
 }

@@ -1,7 +1,7 @@
-import Film from "../pages/DrawerPages/Film";
+import FilmView from "../pages/DrawerPages/FilmView";
 import { useState, useEffect } from "react";
 import { APIService } from "../apis/APIService";
-
+import Film from "../models/Film";
 export default function FilmController(){
     const [onDeleteIndex,setOnDeleteIndex] = useState();
     const [films, setFilms] = useState([]);
@@ -14,7 +14,7 @@ export default function FilmController(){
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-    
+        
         const postData = {
           titolo: data.get("titolo"),
           genere: data.get("genere"),
@@ -26,6 +26,7 @@ export default function FilmController(){
           trama: data.get("trama"),
           image_url: data.get("locandina"),
         };
+
     
          try {
           const response = await APIService.createFilm(postData);
@@ -66,7 +67,8 @@ export default function FilmController(){
       useEffect(() => {
     
         APIService.getAllFilms().then((res) => {
-          setFilms(res.data);
+          const newFilms = res.data.map((film) => new Film(film));
+          setFilms(newFilms);
           setLoading(false);
         });
     
@@ -75,7 +77,7 @@ export default function FilmController(){
 
 
     return(
-        <Film handleSubmit={handleSubmit} handleDelete={handleDelete} loading={loading} films={films} setOnDeleteIndex={setOnDeleteIndex} />
+        <FilmView handleSubmit={handleSubmit} handleDelete={handleDelete} loading={loading} films={films} setOnDeleteIndex={setOnDeleteIndex} />
 
     );
 }

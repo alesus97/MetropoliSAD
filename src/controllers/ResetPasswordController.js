@@ -1,4 +1,4 @@
-import ResetPassword from "../pages/Auth/ResetPassword";
+import ResetPasswordView from "../pages/Auth/ResetPasswordView";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import YupPassword from "yup-password";
@@ -63,7 +63,7 @@ export default function ResetPasswordController(props){
     formik;
 
     return(
-        <ResetPassword formik={formik}
+        <ResetPasswordView formik={formik}
         errors={errors}
         touched={touched}
         getFieldProps={getFieldProps}

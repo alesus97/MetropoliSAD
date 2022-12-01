@@ -14,22 +14,21 @@ import { Box,
   useMediaQuery
   } from "@mui/material";
 import {theme} from "./constants/theme"
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate, useLocation } from "react-router-dom";
 
 const App = () => {
   window.addEventListener('storage', ({oldValue, newValue}) => {
     localStorage.setItem('roles', oldValue);
   });
 
-
+  const { pathname } = useLocation();
   const navigate = useNavigate()
   const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
 
   const drawerItems = privateRoutes.filter((element) => element.permission.includes(isLoggedIn()) )
   .map((item, index) => {
     return (
-      <ListItem button key={index} onClick={() => navigate(item.path, { replace: true })}>
+      <ListItem selected={item.path === pathname} button key={index} onClick={() => navigate(item.path, { replace: true })}>
         <ListItemIcon>{item.icon}</ListItemIcon>
         <ListItemText variant="title" primary={item.name} />
       </ListItem>
@@ -43,6 +42,7 @@ const App = () => {
    <>
    <CinemaAppBar/>
         <Drawer
+        
         variant={isMdUp ? "permanent" : "temporary"}
         anchor="left"
         sx={{

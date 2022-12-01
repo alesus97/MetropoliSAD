@@ -14,6 +14,7 @@ import {
   import LogoutIcon from '@mui/icons-material/Logout';
   import PersonIcon from '@mui/icons-material/Person';
 import { useNavigate } from "react-router-dom";
+import { Settings } from "@mui/icons-material";
 
 export default function UserMenu(){
 const navigate = useNavigate();
@@ -51,8 +52,8 @@ const navigate = useNavigate();
         
         <Box sx={{ flexGrow: 0 }}>
         <Tooltip title="Open settings">
-          <IconButton onClick={handleOpenUserMenu}>
-             <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/> 
+          <IconButton color="inherit" onClick={handleOpenUserMenu}>
+              <Settings/>
           </IconButton>
         </Tooltip>
 

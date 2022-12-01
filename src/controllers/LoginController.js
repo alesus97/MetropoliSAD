@@ -49,7 +49,7 @@ export default function LoginController(props){
               user.signInUserSession.accessToken.jwtToken
             );
 
-            localStorage.setItem('roles', "GESTORE_CINEMA");
+            localStorage.setItem('roles', "ADMIN");
   
   
             navigate("/schedule", { replace: true });

@@ -1,3 +1,4 @@
+
 ::-webkit-calendar-picker-indicator {
     filter: invert(83%) sepia(74%) saturate(498%) hue-rotate(325deg) brightness(101%) contrast(95%);
 }
@@ -5,4 +6,17 @@
 
 .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
     border-color: "white";
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px #292828 inset !important;
+    box-shadow: 0 0 0 30px #292828 inset !important;
+
+}
+
+input:-webkit-autofill{
+    -webkit-text-fill-color: white !important;
 }

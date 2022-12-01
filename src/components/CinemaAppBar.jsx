@@ -1,7 +1,7 @@
 
 
 import { AppBar, Typography, Box, Toolbar } from "@mui/material";
-import { Adb } from "@mui/icons-material";
+import { Adb, Settings } from "@mui/icons-material";
 import UserMenu from "./UserMenu";
 export default function CinemaAppBar(){
     
@@ -35,7 +35,7 @@ export default function CinemaAppBar(){
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             
           </Box>
-         
+           
          <UserMenu/>
           
         </Toolbar>

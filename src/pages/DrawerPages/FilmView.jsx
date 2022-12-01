@@ -22,7 +22,7 @@ export default function FilmView({handleSubmit, handleDelete, loading, films, se
   
 
   return (
-    <Box>
+    <Box sx={{p:3}}>
       <Fab
         sx={{ position: "fixed", bottom: "3%", right: "3%" }}
         color="primary"

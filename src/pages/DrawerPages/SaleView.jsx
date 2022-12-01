@@ -21,7 +21,7 @@ export default function SaleView({handleSubmit, handleDelete, loading, sale, set
   const skeletonArray = Array(10).fill("");
   
   return (
-    <Box>
+    <Box sx={{p:3}} >
       <Fab
         sx={{ position: "fixed", bottom: "3%", right: "3%" }}
         color="primary"

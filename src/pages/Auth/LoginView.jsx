@@ -4,8 +4,6 @@ import { Form, FormikProvider, useFormik } from "formik";
 
 import Logo from "../../components/Logo";
 
-import {Fade} from "@mui/material";
-import axios from "axios";
 import {
   animate,
   RootStyle,
@@ -21,13 +19,14 @@ import {
   FormControlLabel,
   IconButton,
   InputAdornment,
-  Link,
+  Link, 
   Stack,
   TextField,
   CircularProgress,
   Alert,
   Container,
   Typography,
+  Fade
 } from "@mui/material";
 
 import { LoadingButton } from "@mui/lab";
@@ -136,6 +135,7 @@ const LoginView = ({formik, errors, touched, values, getFieldProps, handleSubmit
 
                     <Link
                       component={RouterLink}
+                      color="primary"
                       variant="subtitle2"
                       to="/identifyAccount"
                       underline="hover"

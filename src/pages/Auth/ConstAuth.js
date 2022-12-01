@@ -15,7 +15,6 @@ export const animate = {
 };
 
 export const RootStyle = styled("div")({
-    //   background: "rgb(249, 250, 251)",
     height: "100vh",
     display: "grid",
     placeItems: "center",

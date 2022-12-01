@@ -21,8 +21,7 @@ export default function QuizView ({films, loading}) {
   const skeletonArray = Array(5).fill('');
  
   return (
-    <Box>
-      <p></p>
+    <Box sx={{p:3}}>
        <TableContainer component={Paper} sx={{maxHeight: "800px"}}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -63,7 +62,6 @@ export default function QuizView ({films, loading}) {
           </TableBody> 
           </Table>
           </TableContainer>
-          <p/>
 
     </Box>
   );

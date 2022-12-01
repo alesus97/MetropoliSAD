@@ -1,4 +1,3 @@
-import { Login } from "@mui/icons-material";
 import { useFormik } from "formik";
 import { Amplify, Auth } from "aws-amplify";
 import * as Yup from "yup";
@@ -49,8 +48,9 @@ export default function LoginController(props){
               AUTH_USER_TOKEN_KEY,
               user.signInUserSession.accessToken.jwtToken
             );
+
+            localStorage.setItem('roles', "GESTORE_CINEMA");
   
-            props.onLoginAction();
   
             navigate("/schedule", { replace: true });
           })

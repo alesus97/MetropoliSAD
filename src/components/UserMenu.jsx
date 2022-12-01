@@ -27,8 +27,7 @@ const navigate = useNavigate();
           icon: <LogoutIcon color="primary"/>,
           onClick: () => {
             localStorage.removeItem("ReactAmplify.TokenKey");
-            localStorage.setItem("auth",false);
-            console.log("PROVA")
+            localStorage.removeItem("roles");
             navigate("/", { replace: true });
           },
         },

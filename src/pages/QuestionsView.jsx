@@ -39,7 +39,7 @@ export default function QuestionsView({handleSubmit, handleDelete, loading, ques
   const skeletonArray = Array(5).fill('');
 
   return (
-    <Box>
+    <Box sx={{p:3}}>
 
       <Fab sx={{position: 'fixed' , bottom:"3%", right:"3%"}}color="primary" aria-label="add" onClick={() => setopenInsertDialog(true)}>
         <Add />
@@ -119,7 +119,8 @@ export default function QuestionsView({handleSubmit, handleDelete, loading, ques
           </TableBody>
         </Table>
       </TableContainer>
-      <p />
     </Box>
   );
 }
+
+

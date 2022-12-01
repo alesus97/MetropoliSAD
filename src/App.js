@@ -1,89 +1,75 @@
-import React, { Suspense, lazy, useState } from "react";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import Sidebar from "./components/Sidebar";
-import SimpleBackdrop from "./pages/LoadingPage";
-import { useEffect } from "react";
-import axios from "axios";
+import React from "react";
+import { privateRoutes } from "./navigation/routes";
 import "./App.css"
+import CinemaAppBar from "./components/CinemaAppBar";
+import AppRoutes from "./navigation/AppRoutes";
+import { isLoggedIn } from "./navigation/utils";
+import { Box, 
+  Drawer, 
+  List, 
+  Toolbar, 
+  ListItemText, 
+  ListItemIcon, 
+  ListItem,
+  useMediaQuery
+  } from "@mui/material";
+import {theme} from "./constants/theme"
+import { useNavigate } from "react-router-dom";
 
-const Palinsesto = lazy(() => import("./controllers/PalinsestoController"));
 
-const Film = lazy(() => import("./controllers/FilmController"));
-const Sale = lazy(() => import("./controllers/SaleController"));
-const Quiz = lazy(() => import("./controllers/QuizController"));
-const Questions = lazy(() => import("./controllers/QuestionsController"));
-const Store = lazy(()=> import("./controllers/StoreController"));
-
-const Login = lazy(() => import("./controllers/LoginController"));
-const IdentifyAccount = lazy(() => import("./controllers/IdentifyAccountController"));
-const ResetPassword = lazy(() => import("./controllers/ResetPasswordController"));
-
-const NotFound404 = lazy(() => import("./pages/NotFound404View"));
-
-
-axios.defaults.headers.common['Authorization'] = localStorage.getItem("ReactAmplify.TokenKey");
-  
 const App = () => {
-
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    () => JSON.parse(localStorage.getItem('auth')) || false
-  );
-
-  const setAuth = (value) => {
-    setIsAuthenticated(value);
-    
-  };
-
-  useEffect(()=>{
-    localStorage.setItem("auth", JSON.stringify(isAuthenticated));
-  }, [isAuthenticated]);
+  window.addEventListener('storage', ({oldValue, newValue}) => {
+    localStorage.setItem('roles', oldValue);
+  });
 
 
+  const navigate = useNavigate()
+  const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
 
-  //var [logged, setLogged] = useState(false);
-  var content = null;
-  if (isAuthenticated) {
-    content = (
-      <Sidebar>
-        <Suspense fallback={<SimpleBackdrop />}>
-          <Routes>
-            <Route path="/" element={<Navigate to="/schedule" replace />} />
-            <Route path="/schedule" element={<Palinsesto />} />
-            <Route path="/hall" element={<Sale />} />
-            <Route path="/film" element={<Film />} />
-            <Route path="/quiz/filmId=:filmId" element={<Questions/>}/>
-            <Route path="/quiz" element={<Quiz />} />
-            <Route path="/store" element={<Store/>}/>
-            <Route path="*" element={<NotFound404 />} />
-          </Routes>
-        </Suspense>
-      </Sidebar>
+  const drawerItems = privateRoutes.filter((element) => element.permission.includes(isLoggedIn()) )
+  .map((item, index) => {
+    return (
+      <ListItem button key={index} onClick={() => navigate(item.path, { replace: true })}>
+        <ListItemIcon>{item.icon}</ListItemIcon>
+        <ListItemText variant="title" primary={item.name} />
+      </ListItem>
     );
-  } else {
-    content = (
-      <Suspense fallback={<SimpleBackdrop />}>
-        <Routes>
-          <Route path="/identifyAccount" element={<IdentifyAccount />} />
-          <Route path="/resetPassword" element={<ResetPassword />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-          <Route
-            path="/"
-            element={
-              <Login
-                onLoginAction={() => {
-                  // console.log("Cambiato stato login in vero");
-                  // setLogged(true);
-                  setAuth(true)
-                }}
-              />
-            }
-          />
-        </Routes>
-      </Suspense>
-    );
-  }
+  })
 
-  return <BrowserRouter>{content}</BrowserRouter>;
+  return ( 
+    <Box sx={{ display: "flex"}}>
+ 
+   { isLoggedIn() && 
+   <>
+   <CinemaAppBar/>
+        <Drawer
+        variant={isMdUp ? "permanent" : "temporary"}
+        anchor="left"
+        sx={{
+          width: theme.layout.drawerWidth,
+          flexShrink: 0,
+          [`& .MuiDrawer-paper`]: { width: theme.layout.drawerWidth, boxSizing: "border-box" },
+        }}
+      >
+        <Box sx={{ overflow: "auto" }}>
+          <List>
+            <Toolbar />
+              {drawerItems}
+          </List>
+        </Box>
+      </Drawer>
+      </>
+      }
+ 
+
+  <Box component="main" sx={{ flexGrow: 1}}>
+      {isLoggedIn() &&  <Toolbar/>}
+        <AppRoutes/>
+    </Box>
+</Box>
+
+
+   );
 };
 
 export default App;

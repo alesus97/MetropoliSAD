@@ -20,10 +20,10 @@ export default function ErrorPage(props) {
         <ListItem> 
           <Grid >
             <Typography variant="h1">
-              {props.error.response.status}
+              {props.error.response?.status}
             </Typography>
             <Typography variant="h6">
-             {props.error.message}
+             {props.error?.message}
             </Typography>
             <p></p>
             {/* <Button variant="contained" onClick={() => navigate('/schedule')}>Back Home</Button> */}

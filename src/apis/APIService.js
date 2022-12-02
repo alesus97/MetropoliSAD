@@ -13,7 +13,7 @@ const axiosInstance = axios.create({
     return response;
 }, (error) => {
     
-      if(error.response.status === 401) {
+      if(error.response?.status === 401) {
         localStorage.removeItem("ReactAmplify.TokenKey");
         localStorage.removeItem("roles");
         window.location.reload(true);

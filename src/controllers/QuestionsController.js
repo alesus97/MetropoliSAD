@@ -3,7 +3,11 @@ import { useState, useEffect } from "react";
 import { APIService } from "../apis/APIService";
 import Domanda from "../models/Domanda";
 import { useParams } from "react-router-dom";
+import ErrorPage from "../pages/ErrorPage";
 export default function QuestionsController(){
+    const [errorMessage, setErrorMessage] = useState("");
+    const [error, setError] = useState()
+
     const [questions, setQuestions] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -66,13 +70,19 @@ export default function QuestionsController(){
         const newQuestions = res.data.map((question) => new Domanda(question));
         setQuestions(newQuestions);
         setLoading(false);
+      }).catch((err) => {
+        console.log(err)
+          setError(true)
+          setErrorMessage(err)
       });
   
     }, []);
 
 
     return(
-        <QuestionsView handleSubmit={handleSubmit} handleDelete={handleDelete} loading={loading} questions={questions} setOnDeleteIndex={setOnDeleteIndex}/>
+      error ?  
+      <ErrorPage error={errorMessage}/> :
+      <QuestionsView handleSubmit={handleSubmit} handleDelete={handleDelete} loading={loading} questions={questions} setOnDeleteIndex={setOnDeleteIndex}/>
 
     );
 

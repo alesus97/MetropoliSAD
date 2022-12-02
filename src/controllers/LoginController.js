@@ -37,16 +37,11 @@ export default function LoginController(props){
   
         Auth.signIn(values.email, values.password)
           .then((user) => {
+            console.log(user)
             setIserror(false);
             setErrorMessage("");
   
-            axios.defaults.headers.common['Authorization'] =  user.signInUserSession.accessToken.jwtToken;
-  
-            localStorage.setItem(
-              AUTH_USER_TOKEN_KEY,
-              user.signInUserSession.accessToken.jwtToken
-            );
-
+            localStorage.setItem( AUTH_USER_TOKEN_KEY, user.signInUserSession.accessToken.jwtToken );
             localStorage.setItem('roles', "ADMIN");
   
   

@@ -1,4 +1,5 @@
 import SaleView from "../pages/DrawerPages/SaleView";
+import ErrorPage from "../pages/ErrorPage";
 import { useState, useEffect } from "react";
 import { APIService } from "../apis/APIService";
 import Sala from "../models/Sala";
@@ -7,6 +8,9 @@ export default function SaleController(){
   const [sale, setSale] = useState([]);
   const [onDeleteIndex, setOnDeleteIndex] = useState();
   const [loading, setLoading] = useState(true);
+
+  const [errorMessage, setErrorMessage] = useState("");
+  const [error, setError] = useState();
 
 
     const handleSubmit = async (event) => {
@@ -65,12 +69,18 @@ export default function SaleController(){
           const newSale = res.data.map((sala) => new Sala(sala));
           setSale(newSale);
           setLoading(false);
+        }).catch((err) => {
+          console.log(err);
+        setError(true);
+        setErrorMessage(err);
         });
     
     
       }, []); 
     
     return(
+      error ?  
+      <ErrorPage error={errorMessage}/> :
         <SaleView handleSubmit={handleSubmit} handleDelete={handleDelete} loading={loading} sale={sale} setOnDeleteIndex={setOnDeleteIndex}/>
 
     );

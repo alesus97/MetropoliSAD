@@ -1,4 +1,5 @@
 import StoreView from "../pages/DrawerPages/StoreView"
+import ErrorPage from "../pages/ErrorPage";
 import { useState, useEffect } from "react";
 import { APIService } from "../apis/APIService";
 import axios from "axios";
@@ -6,6 +7,9 @@ export default function StoreController(){
     const [prizes, setPrizes] =useState();
     const [loading, setLoading] = useState(true);
     const [onDeleteIndex,setOnDeleteIndex] = useState();
+
+    const [errorMessage, setErrorMessage] = useState("");
+    const [error, setError] = useState();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -49,7 +53,11 @@ export default function StoreController(){
             const prizes = res.data;
             setPrizes(prizes);
             setLoading(false);
-          });
+          }).catch((err) => {
+            console.log(err);
+        setError(true);
+        setErrorMessage(err);
+          })
       }, []);
 
       const handleDelete = async (event) => {
@@ -71,6 +79,8 @@ export default function StoreController(){
        };
 
     return(
+      error ?  
+      <ErrorPage error={errorMessage}/> :
         <StoreView handleSubmit={handleSubmit} handleDelete={handleDelete} loading={loading} prizes={prizes} setOnDeleteIndex={setOnDeleteIndex}/>
     );
 }

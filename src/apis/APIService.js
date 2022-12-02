@@ -1,9 +1,26 @@
+import { SnoozeOutlined } from "@mui/icons-material";
 import axios from "axios";
+import { Location } from "react-router-dom";
 
 const axiosInstance = axios.create({
     baseURL: 'https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com'
  });
  
+ axiosInstance.defaults.headers.common['Authorization'] = localStorage.getItem("ReactAmplify.TokenKey")
+
+
+  axiosInstance.interceptors.response.use((response) => {
+    return response;
+}, (error) => {
+    
+      if(error.response.status === 401) {
+        localStorage.removeItem("ReactAmplify.TokenKey");
+        localStorage.removeItem("roles");
+        window.location.reload(true);
+   } else return Promise.reject(error);
+
+}); 
+
 
  export const APIService = {
     /* *
@@ -15,7 +32,7 @@ const axiosInstance = axios.create({
         return axiosInstance.request({
             method: "GET",
             url: `/1/spettacoli`
-        });
+        })
     },
 
     deleteSpettacolo: function(codiceSpettacolo) {

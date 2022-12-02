@@ -17,9 +17,11 @@ import {theme} from "./constants/theme"
 import { useNavigate, useLocation } from "react-router-dom";
 
 const App = () => {
-  window.addEventListener('storage', ({oldValue, newValue}) => {
+ /*  window.addEventListener('storage', ({oldValue, newValue}) => {
     localStorage.setItem('roles', oldValue);
-  });
+  }); */
+
+
 
   const { pathname } = useLocation();
   const navigate = useNavigate()

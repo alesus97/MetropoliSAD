@@ -11,6 +11,7 @@ const StorePage = lazy(()=> import("../controllers/StoreController"));
 const LoginPage = lazy(() => import("../controllers/LoginController"));
 const IdentifyAccountPage = lazy(() => import("../controllers/IdentifyAccountController"));
 const ResetPasswordPage = lazy(() => import("../controllers/ResetPasswordController"));
+const QuestionsPage = lazy(() => import("../controllers/QuestionsController"));
 
 
 
@@ -53,7 +54,14 @@ export const privateRoutes = [
     page: <QuizPage/>,
     permission: [
         Roles.ADMIN
-    ],
+    ],		
+      children: [
+		  	{
+			  	name: "Domande",
+			  	path: 'quiz/filmId=:filmId',
+			  	page: <QuestionsPage/>,		
+		  	},    
+      ]
   },
   {
     name: "Store",

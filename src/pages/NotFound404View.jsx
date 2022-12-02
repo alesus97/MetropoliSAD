@@ -26,7 +26,7 @@ export default function NotFound404View() {
               The page you’re looking for doesn’t exist.
             </Typography>
             <p></p>
-            <Button variant="contained" onClick={() => navigate('/')}>Back Home</Button>
+            <Button variant="contained" onClick={() => navigate('/schedule')}>Back Home</Button>
           </Grid> 
           </ListItem>
           <ListItem> 

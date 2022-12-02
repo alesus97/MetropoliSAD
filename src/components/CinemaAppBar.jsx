@@ -17,7 +17,7 @@ export default function CinemaAppBar(){
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href="/schedule"
             sx={{
               ml: "1.3%",
               fontFamily: "monospace",

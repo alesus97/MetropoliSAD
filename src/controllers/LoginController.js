@@ -34,8 +34,6 @@ export default function LoginController(props){
       validationSchema: LoginSchema,
       onSubmit: () => {
         setIsSubmitting(true);
-        console.log("submitting...");
-  
   
         Auth.signIn(values.email, values.password)
           .then((user) => {

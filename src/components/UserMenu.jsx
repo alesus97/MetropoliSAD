@@ -6,18 +6,24 @@ import {
   } from "@mui/material";
   
   
-  import Avatar from "@mui/material/Avatar";
-  import IconButton from "@mui/material/IconButton";
-  import Menu from "@mui/material/Menu";
-  import MenuItem from "@mui/material/MenuItem";
-  import Tooltip from "@mui/material/Tooltip";
-  import LogoutIcon from '@mui/icons-material/Logout';
-  import PersonIcon from '@mui/icons-material/Person';
+import Avatar from "@mui/material/Avatar";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Tooltip from "@mui/material/Tooltip";
+import LogoutIcon from '@mui/icons-material/Logout';
+import PersonIcon from '@mui/icons-material/Person';
 import { useNavigate } from "react-router-dom";
 import { Settings } from "@mui/icons-material";
+import { useDispatch } from "react-redux";
+import { logout } from "../redux/userSlice";
+
+
 
 export default function UserMenu(){
 const navigate = useNavigate();
+const dispatch = useDispatch();
+
     const items = [
         {
           name:"Account",
@@ -28,7 +34,9 @@ const navigate = useNavigate();
           icon: <LogoutIcon color="primary"/>,
           onClick: () => {
             localStorage.removeItem("ReactAmplify.TokenKey");
-            localStorage.removeItem("roles");
+            dispatch(logout())
+            /* localStorage.removeItem("roles"); */
+
             navigate("/", { replace: true });
           },
         },

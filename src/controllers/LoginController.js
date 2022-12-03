@@ -6,8 +6,9 @@ import { AUTH_USER_TOKEN_KEY } from "../constants/const";
 import awsconfig from "../constants/aws-exports"
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import axios from "axios";
 import LoginView from "../pages/Auth/LoginView";
+import { useDispatch } from "react-redux";
+import { login } from "../redux/userSlice";
 
 
 export default function LoginController(props){
@@ -16,6 +17,8 @@ export default function LoginController(props){
     const [iserror, setIserror] = useState(false);
     const [errorMessage, setErrorMessage] = useState();
     const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const dispatch = useDispatch()
    
   
     const LoginSchema = Yup.object().shape({
@@ -40,9 +43,15 @@ export default function LoginController(props){
             console.log(user)
             setIserror(false);
             setErrorMessage("");
-  
+
+
+             dispatch(login({
+                userInfo: user.attributes,
+                role: "ADMIN"
+            })) 
+
             localStorage.setItem( AUTH_USER_TOKEN_KEY, user.signInUserSession.accessToken.jwtToken );
-            localStorage.setItem('roles', "ADMIN");
+            /* localStorage.setItem('roles', "ADMIN"); */
   
   
             navigate("/schedule", { replace: true });

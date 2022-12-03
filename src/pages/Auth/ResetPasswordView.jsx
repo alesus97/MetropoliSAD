@@ -19,7 +19,8 @@ import {
   Alert,
   Container,
   Typography, 
-  Fade
+  Fade,
+  Stack
 } from "@mui/material";
 
 import { LoadingButton } from "@mui/lab";
@@ -152,9 +153,32 @@ const ResetPasswordView = ({formik,
                   animate={animate}
                 >
     
-                  <Box my={2} />
+                   <Stack
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="space-between"
+                    sx={{ my: 2 }}
+                  ></Stack>
 
-                  <Fade
+                  
+                
+
+                  <LoadingButton
+                    fullWidth
+                    size="large"
+                    type="submit"
+                    variant="contained"
+                    loading={isSubmitting}
+                    loadingIndicator={
+                      <CircularProgress color="primary" size={16} />
+                    }
+                  >
+                    {isSubmitting ? "loading..." : "Reset"}
+                  </LoadingButton>
+
+                  <p></p>
+
+                  { iserror && <Fade
                     in={iserror} //Write the needed condition here to make it appear
                     timeout={{ enter: 1000, exit: 1000 }} //Edit these two values to change the duration of transition when the element is getting appeared and disappeard
                     addEndListener={() => {
@@ -170,23 +194,11 @@ const ResetPasswordView = ({formik,
                     >
                       {errorMessage}
                     </Alert>
-                  </Fade>
-                  <p/>
+                  </Fade>}
 
-                  <LoadingButton
-                    fullWidth
-                    size="large"
-                    type="submit"
-                    variant="contained"
-                    loading={isSubmitting}
-                    loadingIndicator={
-                      <CircularProgress color="primary" size={16} />
-                    }
-                  >
-                    {isSubmitting ? "loading..." : "Reset"}
-                  </LoadingButton>
                 </Box>
               </Box>
+
             </Form>
           </FormikProvider>
         </ContentStyle>

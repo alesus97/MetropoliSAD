@@ -91,24 +91,7 @@ const IdentifyAccountView = ({
                     sx={{ my: 2 }}
                   ></Stack>
 
-                  <Fade
-                    in={isOkClicked}
-                    timeout={{ enter: 500, exit: 500 }}
-                    addEndListener={() => {
-                      setTimeout(() => {
-                        setIserror(false);
-                      }, 2000);
-                    }}
-                  >
-                    <Alert
-                      variant="filled"
-                      color="primary"
-                      icon={<Error fontSize="inherit" />}
-                    >
-                      {iserror ? errorMessage : "Codice inviato correttamente"}
-                    </Alert>
-                  </Fade>
-                  <p></p>
+          
                   <LoadingButton
                     fullWidth
                     size="large"
@@ -123,6 +106,26 @@ const IdentifyAccountView = ({
                   </LoadingButton>
                 </Box>
               </Box>
+              <p></p>
+              
+          { iserror &&   <Fade
+                    in={isOkClicked}
+                    timeout={{ enter: 500, exit: 500 }}
+                    addEndListener={() => {
+                      setTimeout(() => {
+                        setIserror(false);
+                      }, 4000);
+                    }}
+                  >
+                    <Alert
+                      variant="filled"
+                      color="primary"
+                      icon={<Error fontSize="inherit" />}
+                    >
+                      {iserror ? errorMessage : "Codice inviato correttamente"}
+                    </Alert>
+                  </Fade>}
+                 
             </Form>
           </FormikProvider>
         </ContentStyle>

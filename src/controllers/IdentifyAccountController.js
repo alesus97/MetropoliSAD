@@ -8,14 +8,15 @@ import { useState } from "react";
 import awsconfig from "../constants/aws-exports";
 
 export default function IdentifyAccountController() {
-Amplify.configure(awsconfig);
+  
   const navigate = useNavigate();
-
+  Amplify.configure(awsconfig);
 
 
   const [iserror, setIserror] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
   const [isOkClicked, setOkClicked] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const IdentifyAccountSchema = Yup.object().shape({
     email: Yup.string()
@@ -45,12 +46,13 @@ Amplify.configure(awsconfig);
           setOkClicked(true);
           setIserror(true);
           console.log(err);
+          setIsSubmitting(false);
           setErrorMessage(err.message);
         });
     },
   });
 
-  const { errors, touched, values, isSubmitting, getFieldProps, handleSubmit } =
+  const { errors, touched, values, getFieldProps, handleSubmit } =
     formik;
   return (
     <IdentifyAccountView

@@ -4,6 +4,8 @@ import "./App.css"
 import CinemaAppBar from "./components/CinemaAppBar";
 import AppRoutes from "./navigation/AppRoutes";
 import { isLoggedIn } from "./navigation/utils";
+import { useSelector } from "react-redux";
+import { selectUser } from "./redux/userSlice";
 import { Box, 
   Drawer, 
   List, 
@@ -17,17 +19,17 @@ import {theme} from "./constants/theme"
 import { useNavigate, useLocation } from "react-router-dom";
 
 const App = () => {
- /*  window.addEventListener('storage', ({oldValue, newValue}) => {
+   window.addEventListener('storage', ({oldValue, newValue}) => {
     localStorage.setItem('roles', oldValue);
-  }); */
+  });
 
 
-
+  const user = useSelector(selectUser)
   const { pathname } = useLocation();
   const navigate = useNavigate()
   const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
 
-  const drawerItems = privateRoutes.filter((element) => element.permission.includes(isLoggedIn()) )
+  const drawerItems = privateRoutes.filter((element) => element.permission.includes(user?.role) )
   .map((item, index) => {
     return (
       <ListItem selected={item.path === pathname} button key={index} onClick={() => navigate(item.path, { replace: true })}>
@@ -40,7 +42,7 @@ const App = () => {
   return ( 
     <Box sx={{ display: "flex"}}>
  
-   { isLoggedIn() && 
+   { user?.role && 
    <>
    <CinemaAppBar/>
         <Drawer
@@ -65,7 +67,7 @@ const App = () => {
  
 
   <Box component="main" sx={{ flexGrow: 1}}>
-      {isLoggedIn() &&  <Toolbar/>}
+      {user?.role &&  <Toolbar/>}
         <AppRoutes/>
     </Box>
 </Box>

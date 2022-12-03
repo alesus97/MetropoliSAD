@@ -145,7 +145,24 @@ const LoginView = ({formik, errors, touched, values, getFieldProps, handleSubmit
                   </Stack>
 
 
-                  <Fade
+                 
+
+                  <LoadingButton
+                    fullWidth
+                    size="large"
+                    type="submit"
+                    variant="contained"
+                    loading={isSubmitting}
+                    loadingIndicator={
+                      <CircularProgress color="primary" size={16} />
+                    }
+                  >
+                    {isSubmitting ? "loading..." : "Login"}
+                  </LoadingButton>
+
+                  <p></p>
+                  
+            {   iserror &&  <Fade
                     in={iserror} //Write the needed condition here to make it appear
                     timeout={{ enter: 1000, exit: 1000 }} //Edit these two values to change the duration of transition when the element is getting appeared and disappeard
                     addEndListener={() => {
@@ -163,21 +180,9 @@ const LoginView = ({formik, errors, touched, values, getFieldProps, handleSubmit
                       
                       {errorMessage}
                     </Alert>
-                  </Fade>
-                  <p></p>
+                  </Fade>}
+                  
 
-                  <LoadingButton
-                    fullWidth
-                    size="large"
-                    type="submit"
-                    variant="contained"
-                    loading={isSubmitting}
-                    loadingIndicator={
-                      <CircularProgress color="primary" size={16} />
-                    }
-                  >
-                    {isSubmitting ? "loading..." : "Login"}
-                  </LoadingButton>
                 </Box>
               </Box>
             </Form>

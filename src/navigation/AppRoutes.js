@@ -3,15 +3,21 @@ import { Routes, Route } from 'react-router-dom';
 import SimpleBackdrop from "../pages/LoadingPage"
 import { isLoggedIn } from './utils';
 import { privateRoutes, publicRoutes } from './routes';
-
+import { useSelector } from 'react-redux';
+import { selectUser } from '../redux/userSlice';
 
 const NotFound404 = lazy(() => import("../pages/NotFound404View"));
 /* const Questions = lazy(() => import("../controllers/QuestionsController")); */
  
 function AppRoutes() {
 
+	const user = useSelector(selectUser)
+	/* console.log(user.role) */
+
 	//Filtraggio di tutte le routes in base al ruolo. Restituisce solo le route per cui quell'utente è autorizzato
-	const allowedRoutes = privateRoutes.filter((element) => element.permission.includes(isLoggedIn()));
+	const allowedRoutes = privateRoutes.filter((element) => element.permission.includes(user?.role));
+
+
 
 	return (
 
@@ -20,7 +26,7 @@ function AppRoutes() {
 		<Suspense fallback={<SimpleBackdrop />}>
 			<Routes>
 				{
-					isLoggedIn() ? 
+					user ? 
 					<> 
 					{/* Map delle routes */ }
 					{allowedRoutes.map((route, index) => <Route path={route.path} element={route.page} key={index}/>) }

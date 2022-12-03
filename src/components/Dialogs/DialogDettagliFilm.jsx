@@ -55,7 +55,7 @@ export default function DialogDettagliFilm(props) {
                {props.info.genere}
               </TabUsageListItem>
               <TabUsageListItem label="Durata">
-               {props.info.durata}
+               {props.info.durata} minuti
               </TabUsageListItem>
               <TabUsageListItem label="Regia">
                 {props.info.regia}

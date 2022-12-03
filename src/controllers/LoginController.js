@@ -54,7 +54,7 @@ export default function LoginController(props){
             /* localStorage.setItem('roles', "ADMIN"); */
   
   
-            navigate("/schedule", { replace: true });
+            navigate("/", { replace: true });
           })
           .catch((err) => {
             setIsSubmitting(false);

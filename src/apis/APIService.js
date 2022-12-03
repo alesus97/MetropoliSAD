@@ -122,7 +122,7 @@ const axiosInstance = axios.create({
     deleteQuestion: function(codiceDomanda) {
         return axiosInstance.request({
             method: "DELETE",
-            url: `domanda/${codiceDomanda}`
+            url: `/domanda/${codiceDomanda}`
         });
     },
 
@@ -164,8 +164,30 @@ const axiosInstance = axios.create({
 
 
      /** 
-     *  ! Login
+     *  ! Cinema
     */
+
+      getAllCinemas: function() {
+        return axiosInstance.request({
+            method: "GET",
+            url: `/cinema`
+        });
+    },
+
+    deleteCinema: function(codiceCinema) {
+        return axiosInstance.request({
+            method: "DELETE",
+            url: `/cinema/${codiceCinema}`
+        });
+    },
+
+    createCinema: function(cinema) {
+        return axiosInstance.request({
+            method: "POST",
+            url: `/cinema`,
+            data: cinema
+        });
+    },
 
 
 }

@@ -17,7 +17,7 @@ function AppRoutes() {
 	//Filtraggio di tutte le routes in base al ruolo. Restituisce solo le route per cui quell'utente è autorizzato
 	const allowedRoutes = privateRoutes.filter((element) => element.permission.includes(user?.role));
 
-
+	
 
 	return (
 
@@ -33,7 +33,7 @@ function AppRoutes() {
 
 					{/* Map delle subroutes */ }
 					{allowedRoutes.map((route, index) =>  route.children?.map((subroute) => <Route path={subroute.path} element={subroute.page} key={index}/>))}
-					
+					<Route path="/" element={allowedRoutes[0].page}/>
 					<Route path="*" element={<NotFound404 />}/> 
 					</>
 					: 

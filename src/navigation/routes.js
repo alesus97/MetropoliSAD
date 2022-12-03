@@ -3,6 +3,7 @@ import { Dashboard, Movie, Chair, Quiz, EmojiEvents } from '@mui/icons-material'
 import { lazy } from 'react';
 import { Navigate } from 'react-router-dom'
 
+const CinemaPage = lazy(() => import("../controllers/CinemaController"));
 const FilmPage = lazy(() => import("../controllers/FilmController"));
 const SalePage = lazy(() => import("../controllers/SaleController"));
 const QuizPage = lazy(() => import("../controllers/QuizController"));
@@ -16,13 +17,21 @@ const QuestionsPage = lazy(() => import("../controllers/QuestionsController"));
 
 
 export const privateRoutes = [
-{
+  {
+    name: "Cinema",
+    path: "/cinema",
+    icon: <Movie color="primary" />,
+    page: <CinemaPage/>,
+    permission: [
+        Roles.ADMIN,
+    ],
+  },
+  {
     name: "Schedule",
     path: "/schedule",
     icon: <Dashboard color="primary" />,
     page: <PalinsestoPage/>,
     permission: [
-        Roles.ADMIN,
         Roles.GESTORE_CINEMA
     ],
 
@@ -43,7 +52,6 @@ export const privateRoutes = [
     icon: <Chair color="primary" />,
     page: <SalePage/>,
     permission: [
-        Roles.ADMIN,
         Roles.GESTORE_CINEMA
     ],
   },

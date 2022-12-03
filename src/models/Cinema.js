@@ -1,5 +1,5 @@
 
-class Cinema{
+export default class Cinema{
     via
     latitudine
     longitudine
@@ -8,7 +8,8 @@ class Cinema{
     nome
     citta
     recapito
-    codiceCinema
+    codice_cinema
+    image_url
     
 
     constructor(data) {
@@ -20,8 +21,8 @@ class Cinema{
         this.nome = data.nome;
         this.citta = data.citta;
         this.recapito = data.recapito;
-        this.codiceCinema = data.codiceCinema;
-        this.sale = data.sale;
+        this.codice_cinema = data.codice_cinema;
+        this.image_url = data.image_url;
       }
 
 }

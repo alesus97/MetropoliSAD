@@ -35,7 +35,7 @@ const dispatch = useDispatch();
           onClick: () => {
             localStorage.removeItem("ReactAmplify.TokenKey");
             dispatch(logout())
-            /* localStorage.removeItem("roles"); */
+            localStorage.removeItem("role");
 
             navigate("/", { replace: true });
           },

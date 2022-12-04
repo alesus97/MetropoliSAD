@@ -21,7 +21,7 @@ export default function DialogFilm(){
           }}
         />
      
-     <Stack direction="row" spacing={2} sx={{mt:2}}>
+      <Stack direction="row" spacing={2} sx={{mt:2}}>
           <TextField
             fullWidth
             label="Genere"

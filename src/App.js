@@ -3,7 +3,6 @@ import { privateRoutes } from "./navigation/routes";
 import "./App.css"
 import CinemaAppBar from "./components/CinemaAppBar";
 import AppRoutes from "./navigation/AppRoutes";
-import { isLoggedIn } from "./navigation/utils";
 import { useSelector } from "react-redux";
 import { selectUser } from "./redux/userSlice";
 import { Box, 
@@ -19,10 +18,6 @@ import {theme} from "./constants/theme"
 import { useNavigate, useLocation } from "react-router-dom";
 
 const App = () => {
-   window.addEventListener('storage', ({oldValue, newValue}) => {
-    localStorage.setItem('roles', oldValue);
-  });
-
 
   const user = useSelector(selectUser)
   const { pathname } = useLocation();
@@ -46,17 +41,17 @@ const App = () => {
    <>
    <CinemaAppBar/>
         <Drawer
-        
         variant={isMdUp ? "permanent" : "temporary"}
         anchor="left"
         sx={{
           width: theme.layout.drawerWidth,
           flexShrink: 0,
           [`& .MuiDrawer-paper`]: { width: theme.layout.drawerWidth, boxSizing: "border-box" },
+          
         }}
       >
-        <Box sx={{ overflow: "auto" }}>
-          <List>
+        <Box  sx={{ overflow: "auto"}}>
+          <List >
             <Toolbar />
               {drawerItems}
           </List>

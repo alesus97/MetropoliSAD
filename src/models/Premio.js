@@ -1,4 +1,4 @@
-import { EightMpSharp } from "@mui/icons-material"
+
 
 export default class Premio{
     

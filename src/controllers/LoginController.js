@@ -1,6 +1,5 @@
 
 import { Amplify, Auth } from "aws-amplify";
-import * as Yup from "yup";
 
 import { AUTH_USER_TOKEN_KEY } from "../constants/const";
 import awsconfig from "../constants/aws-exports"
@@ -38,12 +37,13 @@ export default function LoginController(){
 
 
            dispatch(login({
-              userInfo: user.attributes,
+              userInfo: user.attributes, 
               role: "ADMIN"
           })) 
 
           localStorage.setItem( AUTH_USER_TOKEN_KEY, user.signInUserSession.accessToken.jwtToken );
-          /* localStorage.setItem('roles', "ADMIN"); */
+        
+          
 
 
           navigate("/", { replace: true });

@@ -80,18 +80,21 @@ export default function StoreView({handleSubmit, handleDelete, loading, prizes, 
 
           {prizes &&
             prizes.map((prize, index) => (
+            
               <TableRow  height={70}
                 key={index}
               >
-                <TableCell component="th" scope="row"> {prize.nome} </TableCell>
-                <TableCell align="center"> {prize.crediti} </TableCell>
+                <TableCell component="th" scope="row"> {prize.descrizione} </TableCell>
+                <TableCell align="center"> {prize.costo} </TableCell>
                 <TableCell align="center" >  <IconButton onClick={() => {setOnDeleteIndex(index); setopenConfirmDeleteDialog(true)}}> <Delete color="primary" /> </IconButton> </TableCell>
               </TableRow>
             ))}
             
           </TableBody>
+          
         </Table>
       </TableContainer>
     </Box>
+    
     );
 }

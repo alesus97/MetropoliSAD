@@ -143,21 +143,21 @@ const axiosInstance = axios.create({
       getAllPrizes: function() {
         return axiosInstance.request({
             method: "GET",
-            url: `/quiVaIlLinkDellaGet`
+            url: `/premi`
         });
     },
 
     deletePrize: function(codicePremio) {
         return axiosInstance.request({
             method: "DELETE",
-            url: `/quiVaIlLinkDellaDelete`
+            url: `/premio/${codicePremio}`
         });
     },
 
     createPrize: function(prize) {
         return axiosInstance.request({
             method: "POST",
-            url: `quiVaIlLinkDellaPost`,
+            url: `/premio`,
             data: prize
         });
     },

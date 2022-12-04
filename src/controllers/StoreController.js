@@ -2,9 +2,10 @@ import StoreView from "../pages/DrawerPages/StoreView"
 import ErrorPage from "../pages/ErrorPage";
 import { useState, useEffect } from "react";
 import { APIService } from "../apis/APIService";
-import axios from "axios";
+import Premio from "../models/Premio"
+
 export default function StoreController(){
-    const [prizes, setPrizes] =useState();
+    const [prizes, setPrizes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [onDeleteIndex,setOnDeleteIndex] = useState();
 
@@ -15,49 +16,43 @@ export default function StoreController(){
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         const postData = {
-            premio: data.get("premio"),
-            crediti: data.get("crediti"),
-
+            descrizione: data.get("premio"),
+            costo: data.get("crediti"),
           };
     
           try {
-            const response = await APIService.createPrize(postData)
+            const response = await APIService.createPrize(postData);
     
             const newPrize = {
+              codice_premio: response.data.codice_premio,
+              ...postData,
              
             };
       
             const newPrizes = [...prizes];
             newPrizes.push(newPrize);
             setPrizes(newPrizes);
-    
         } catch(error) {
           throw error
         } 
 
-    }
+    };
 
 
     useEffect(() => {
-    /*   APIService.getAllPrizes().then((res) => {
-        const prizes = res.data;
-        setPrizes(prizes);
-         console.log(prizes);
+       APIService.getAllPrizes().then((res) => {
+        const newPrizes = res.data.map((prize) => new Premio(prize));
+        console.log(newPrizes);
+        setPrizes(newPrizes);
          setLoading(false);
-      }); */
+      }).catch((err) => {
+        console.log(err);
+      setError(true);
+      setErrorMessage(err);
+      });
 
 
-        axios
-          .get(`https://637fa4675b1cc8d6f94c16b5.mockapi.io/store`)
-          .then((res) => {
-            const prizes = res.data;
-            setPrizes(prizes);
-            setLoading(false);
-          }).catch((err) => {
-            console.log(err);
-        setError(true);
-        setErrorMessage(err);
-          })
+        
       }, []);
 
       const handleDelete = async (event) => {
@@ -65,7 +60,7 @@ export default function StoreController(){
         const codicePremio = prizes[onDeleteIndex].codice_premio;
     
         try {
-          const response = await APIService.createPrize(codicePremio)
+          const response = await APIService.deletePrize(codicePremio)
   
             const dataDelete = [...prizes];
             dataDelete.splice(onDeleteIndex, 1);

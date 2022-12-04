@@ -1,11 +1,12 @@
-export default class Premio{
-    /**
-     *  ! INSERIRE VARIABILI
-     */
+import { EightMpSharp } from "@mui/icons-material"
 
+export default class Premio{
+    
     constructor(data) {
-        /**
-     *  ! INSERIRE CREARE COSTRUTTORE
-     */
+        this.descrizione = data.descrizione;
+        this.costo = data.costo;
+        this.codice_premio = data.codice_premio;
     }
 }
+
+

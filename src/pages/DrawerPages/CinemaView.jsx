@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Grid, Box, Fab, Card, Typography, CardHeader } from "@mui/material";
 import { Skeleton } from "@mui/material";
 
@@ -10,12 +10,15 @@ import CinemaCard from "../../components/Cards/CinemaCard";
 import InsertFormDialog from "../../components/InsertFormDialog";
 import DialogCinema from "../../components/Dialogs/DialogCinema";
 import DialogConfermaEliminazione from "../../components/Dialogs/DialogConfermaEliminazione";
+import DialogDettagliCinema from "../../components/Dialogs/DialogDettagliCinema";
 
 
 export default function CinemaView({handleSubmit, handleDelete, loading, cinemas, setOnDeleteIndex }) {
  
   const [openInsertDialog, setopenInsertDialog] = React.useState(false);
   const [openConfirmDeleteDialog, setopenConfirmDeleteDialog] = React.useState(false);
+  const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
+  const [onExploreIndex, setOnExploreIndex] = useState(0);
 
 
   const skeletonArray = Array(10).fill("");
@@ -82,6 +85,10 @@ export default function CinemaView({handleSubmit, handleDelete, loading, cinemas
                   setOnDeleteIndex(index);
                   setopenConfirmDeleteDialog(true);
                 }}
+                openExploreAction={() => {
+                  setOpenDetailsDialog(true);
+                  setOnExploreIndex(index);
+                }}
               ></CinemaCard>
             </Grid>
           ))}
@@ -104,6 +111,14 @@ export default function CinemaView({handleSubmit, handleDelete, loading, cinemas
       >
         <DialogConfermaEliminazione />
       </InsertFormDialog>
+              
+      {(cinemas.length > 0 && cinemas[onExploreIndex] !== undefined)  && 
+      <DialogDettagliCinema
+        openDialog={openDetailsDialog}
+        setCloseDialog={() => setOpenDetailsDialog(false)}
+        info = {cinemas[onExploreIndex]}
+      ></DialogDettagliCinema>}
+      
       <Box height={70}></Box>
     </Box>
   );

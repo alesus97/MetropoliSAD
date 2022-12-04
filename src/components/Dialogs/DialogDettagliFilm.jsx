@@ -3,13 +3,10 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Box, Typography, List,  ListItem, Card, CardContent, Grid,Tooltip, Divider,
-    ListItemButton,
-    ListItemText,
-    ListItemIcon } from '@mui/material';
-import Scrollbars from 'rc-scrollbars';
+import { Typography, List,  ListItem,  Divider,
+    ListItemText } from '@mui/material';
+
 
 
 const TabUsageListItem = ({ label, children }) => (

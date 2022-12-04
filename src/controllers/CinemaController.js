@@ -2,7 +2,6 @@
 import ErrorPage from "../pages/ErrorPage";
 import { useState, useEffect } from "react";
 import { APIService } from "../apis/APIService";
-import axios from "axios";
 import CinemaView from "../pages/DrawerPages/CinemaView";
 import Cinema from "../models/Cinema"
 
@@ -76,6 +75,7 @@ export default function CinemaController(){
         APIService.getAllCinemas().then((res) => {
           const newCinemas = res.data.map((cinema) => new Cinema(cinema));
           setCinemas(newCinemas);
+          console.log(cinemas);
           setLoading(false);
         }).catch((err) => {
           console.log(err);

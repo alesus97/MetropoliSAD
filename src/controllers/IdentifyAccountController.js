@@ -1,5 +1,4 @@
-import * as Yup from "yup";
-import { useFormik } from "formik";
+
 import { Auth } from "aws-amplify";
 import { useNavigate } from "react-router-dom";
 import IdentifyAccountView from "../pages/Auth/IdentifyAccountView";
@@ -12,27 +11,20 @@ export default function IdentifyAccountController() {
   const navigate = useNavigate();
   Amplify.configure(awsconfig);
 
-
   const [iserror, setIserror] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
   const [isOkClicked, setOkClicked] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const IdentifyAccountSchema = Yup.object().shape({
-    email: Yup.string()
-      .email("Provide a valid email address")
-      .required("Email is required"),
-  });
 
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-    },
-    validationSchema: IdentifyAccountSchema,
-    onSubmit: () => {
-      console.log("submitting...");
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const email = data.get("identifyAccount")
 
-      Auth.forgotPassword(values.email)
+    console.log("submitting...");
+
+      Auth.forgotPassword(email)
         .then((data) => {
           setErrorMessage("");
           setOkClicked(true);
@@ -40,7 +32,7 @@ export default function IdentifyAccountController() {
 
           console.log(data);
 
-          navigate("/resetPassword", { state: { email: values.email } });
+          navigate("/resetPassword", { state: { email: email } });
         })
         .catch((err) => {
           setOkClicked(true);
@@ -49,17 +41,11 @@ export default function IdentifyAccountController() {
           setIsSubmitting(false);
           setErrorMessage(err.message);
         });
-    },
-  });
 
-  const { errors, touched, values, getFieldProps, handleSubmit } =
-    formik;
+  };
+
   return (
     <IdentifyAccountView
-      formik={formik}
-      errors={errors}
-      touched={touched}
-      getFieldProps={getFieldProps}
       handleSubmit={handleSubmit}
       isSubmitting={isSubmitting}
       errorMessage={errorMessage}

@@ -6,12 +6,10 @@ import * as Yup from "yup";
 import Amplify from "aws-amplify";
 import awsconfig from "../constants/aws-exports";
 import { useLocation } from "react-router-dom";
-import { useFormik } from "formik";
 import { Auth } from "aws-amplify";
 
-
-export default function ResetPasswordController(props){
-    YupPassword(Yup);
+export default function ResetPasswordController() {
+  YupPassword(Yup);
   Amplify.configure(awsconfig);
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -20,9 +18,7 @@ export default function ResetPasswordController(props){
   const { state } = useLocation();
   const { email } = state;
 
-
-
-  const ResetPasswordSchema = Yup.object().shape({
+  const resetPasswordSchema = Yup.object().shape({
     verificationCode: Yup.string().required("Verification code is required"),
     password: Yup.string()
       .required("Password is required")
@@ -37,40 +33,40 @@ export default function ResetPasswordController(props){
     ),
   });
 
-  const formik = useFormik({
-    initialValues: {
-      verificationCode: "",
-      password: "",
-      confirmPassword: "",
-    },
-    validationSchema: ResetPasswordSchema,
-    onSubmit: () => {
-      Auth.forgotPasswordSubmit(email, values.verificationCode, values.password)
-        .then((data) => {
-          setIserror(false);
-          setErrorMessage("");
-          navigate("/login");
-        })
-        .catch((err) => {
-          setIsSubmitting(false);
-          setErrorMessage(err.message);
-          setIserror(true);
-        });
-    },
-  });
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const verificationCode = data.get("verificationCode");
+    const newPassword = data.get("newPassword");
 
-  const { errors, touched, values, getFieldProps, handleSubmit } =
-    formik;
+    try{
+      const parsedUser = await resetPasswordSchema
+      .validate(
+        {
+          verificationCode: data.get("verificationCode"),
+          password: data.get("newPassword"),
+          confirmPassword: data.get("confirmNewPassword"),
+        },
+        { strict: true }
+      )
 
-    return(
-        <ResetPasswordView formik={formik}
-        errors={errors}
-        touched={touched}
-        getFieldProps={getFieldProps}
-        handleSubmit={handleSubmit}
-        isSubmitting={isSubmitting}
-        errorMessage={errorMessage}
-        iserror={iserror}
-        setIserror={setIserror}/>
-    );
+      const resetPassword = await Auth.forgotPasswordSubmit(email, verificationCode, newPassword)
+
+    }catch(err){
+      setIserror(true)
+       setErrorMessage(err.message)  
+      console.log(err.message)
+    }
+    
+  };
+
+  return (
+    <ResetPasswordView
+      handleSubmit={handleSubmit}
+      isSubmitting={isSubmitting}
+      errorMessage={errorMessage}
+      iserror={iserror}
+      setIserror={setIserror}
+    />
+  );
 }

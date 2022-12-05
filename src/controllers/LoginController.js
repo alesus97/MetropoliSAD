@@ -1,11 +1,9 @@
 
 import { Amplify, Auth} from "aws-amplify";
-import { fromCognitoIdentityPool } from "@aws-sdk/credential-providers";
-import { CognitoIdentityCredentials } from "aws-sdk";
+import  {config as AWSConfig, CognitoIdentityCredentials} from 'aws-sdk'
 import { AUTH_USER_TOKEN_KEY } from "../constants/const";
 import awsconfig from "../constants/aws-exports"
 import { useNavigate } from "react-router-dom";
-
 import LoginView from "../pages/Auth/LoginView";
 import { useDispatch } from "react-redux";
 import { login } from "../redux/userSlice";
@@ -15,7 +13,7 @@ import AuthLayout from "../components/AuthLayout";
 export default function LoginController(){
     Amplify.configure(awsconfig);
     const navigate = useNavigate();
-
+    AWSConfig.region = "eu-central-1";
   
     const dispatch = useDispatch()
 
@@ -35,24 +33,38 @@ export default function LoginController(){
       })) 
 
       
-
  
-
-    /*   Auth.currentSession()
+       Auth.currentSession()
       .then((result) =>{
 
         console.log(user)
        
-        const credentials = new CognitoIdentityCredentials({
+        AWSConfig.credentials = new CognitoIdentityCredentials({
           IdentityPoolId: "eu-central-1:fb1ff7b7-f27e-4ee0-8183-889d89999912",
           Logins: {
             "cognito-idp.eu-central-1.amazonaws.com/eu-central-1_PS719oUcl" : result.getIdToken().getJwtToken()
           }
         }) 
 
-        console.log(credentials)
+        AWSConfig.credentials.refresh( (err) => {
+          if (err) {
+            console.error('Failed To Login To CognitoID:', err)
+          } else {
 
-      }) */
+            console.log(AWSConfig.credentials.data.Credentials)
+              localStorage.setItem("IdentityPoolCredentials", JSON.stringify(AWSConfig.credentials.data.Credentials))  
+
+          }
+        })
+
+        
+
+  
+      
+      }) 
+
+
+     
 
  /*      Auth.currentCredentials().then((result)=>{
         console.log(result)

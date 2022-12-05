@@ -1,57 +1,30 @@
-
 import { Auth } from "aws-amplify";
 import { useNavigate } from "react-router-dom";
 import IdentifyAccountView from "../pages/Auth/IdentifyAccountView";
 import Amplify from "aws-amplify";
-import { useState } from "react";
 import awsconfig from "../constants/aws-exports";
+import AuthLayout from "../components/AuthLayout";
 
 export default function IdentifyAccountController() {
-  
-  const navigate = useNavigate();
   Amplify.configure(awsconfig);
+  const navigate = useNavigate();
 
-  const [iserror, setIserror] = useState(false);
-  const [errorMessage, setErrorMessage] = useState();
-  const [isOkClicked, setOkClicked] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const email = data.get("identifyAccount")
+    const email = data.get("identifyAccount");
 
-    console.log("submitting...");
-
-      Auth.forgotPassword(email)
-        .then((data) => {
-          setErrorMessage("");
-          setOkClicked(true);
-          setIserror(false);
-
-          console.log(data);
-
-          navigate("/resetPassword", { state: { email: email } });
-        })
-        .catch((err) => {
-          setOkClicked(true);
-          setIserror(true);
-          console.log(err);
-          setIsSubmitting(false);
-          setErrorMessage(err.message);
-        });
-
+    try {
+      const forgotPassUser = await Auth.forgotPassword(email);
+      navigate("/resetPassword", { state: { email: email } });
+    } catch (err) {
+      throw err;
+    }
   };
 
   return (
-    <IdentifyAccountView
-      handleSubmit={handleSubmit}
-      isSubmitting={isSubmitting}
-      errorMessage={errorMessage}
-      iserror={iserror}
-      setIserror={setIserror}
-      isOkClicked={isOkClicked}
-    />
+    <AuthLayout handleSubmit={handleSubmit}>
+      <IdentifyAccountView />
+    </AuthLayout>
   );
 }

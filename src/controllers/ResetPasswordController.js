@@ -7,6 +7,7 @@ import Amplify from "aws-amplify";
 import awsconfig from "../constants/aws-exports";
 import { useLocation } from "react-router-dom";
 import { Auth } from "aws-amplify";
+import AuthLayout from "../components/AuthLayout";
 
 export default function ResetPasswordController() {
   YupPassword(Yup);
@@ -51,22 +52,18 @@ export default function ResetPasswordController() {
       )
 
       const resetPassword = await Auth.forgotPasswordSubmit(email, verificationCode, newPassword)
+      console.log(resetPassword)
+      navigate("/login");
 
     }catch(err){
-      setIserror(true)
-       setErrorMessage(err.message)  
-      console.log(err.message)
+      throw err;
     }
     
   };
 
   return (
-    <ResetPasswordView
-      handleSubmit={handleSubmit}
-      isSubmitting={isSubmitting}
-      errorMessage={errorMessage}
-      iserror={iserror}
-      setIserror={setIserror}
-    />
+    <AuthLayout handleSubmit={handleSubmit}> 
+      <ResetPasswordView/>
+    </AuthLayout>
   );
 }

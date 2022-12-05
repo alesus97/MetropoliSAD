@@ -57,7 +57,7 @@ export default function QuestionsView({handleSubmit, handleDelete, loading, ques
         setCloseDialog={() => setopenConfirmDeleteDialog(false)}
         handleOK={handleDelete}
         title="Sei sicuro di voler eliminare la domanda?"
-      ><DialogConfermaEliminazione/></InsertFormDialog>
+      ><DialogConfermaEliminazione onDeleteMessage="L'azione non potrà essere annullata"/></InsertFormDialog>
 
   <Typography variant="h5" color="primary" align="center" >{filmTitle}</Typography>
     <p></p>

@@ -49,7 +49,7 @@ export default function PalinsestoView({handleSubmit, handleDelete, loading, spe
         setCloseDialog={() => setopenConfirmDeleteDialog(false)}
         handleOK={handleDelete}
         title="Sei sicuro di voler eliminare lo spettacolo?"
-      ><DialogConfermaEliminazione/></InsertFormDialog>
+      ><DialogConfermaEliminazione onDeleteMessage="L'azione non potrà essere annullata"/></InsertFormDialog>
 
       <TableContainer component={Paper} sx={{maxHeight: "800px"}}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">

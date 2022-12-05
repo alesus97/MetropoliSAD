@@ -44,7 +44,7 @@ export default function FilmView({handleSubmit, handleDelete, loading, films, se
         setCloseDialog={() => setopenConfirmDeleteDialog(false)}
         handleOK={handleDelete}
         title="Sei sicuro di voler eliminare il film?"
-      ><DialogConfermaEliminazione/></InsertFormDialog>
+      ><DialogConfermaEliminazione onDeleteMessage="L'eliminazione di un film comporta l'eliminazione di tutti gli spettacoli ad esso associati"/></InsertFormDialog>
 
       {(films.length > 0 && films[onExploreIndex] !== undefined)  && 
       <DialogDettagliFilm

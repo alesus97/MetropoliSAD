@@ -28,8 +28,7 @@ export default function CinemaController(){
             latitudine: data.get("latitudine"),
             longitudine: data.get("longitudine"),
             image_url: data.get("image_url"),
-            civico: data.get("civico"),
-          
+            civico: data.get("civico"), 
         };
     
         try {
@@ -72,6 +71,7 @@ export default function CinemaController(){
       };
     
       useEffect(() => {
+
         APIService.getAllCinemas().then((res) => {
           const newCinemas = res.data.map((cinema) => new Cinema(cinema));
           setCinemas(newCinemas);

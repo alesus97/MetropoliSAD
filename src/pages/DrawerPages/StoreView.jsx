@@ -46,7 +46,7 @@ export default function StoreView({handleSubmit, handleDelete, loading, prizes, 
         setCloseDialog={() => setopenConfirmDeleteDialog(false)}
         handleOK={handleDelete}
         title="Sei sicuro di voler eliminare il premio?"
-      ><DialogConfermaEliminazione/></InsertFormDialog>
+      ><DialogConfermaEliminazione onDeleteMessage="L'azione non potrà essere annullata"/></InsertFormDialog>
 
       <TableContainer component={Paper} >
         <Table sx={{ minWidth: 650 }} >

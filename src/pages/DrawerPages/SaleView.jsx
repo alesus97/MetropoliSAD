@@ -101,7 +101,7 @@ export default function SaleView({handleSubmit, handleDelete, loading, sale, set
         handleOK={handleDelete}
         title="Sei sicuro di voler eliminare la sala?"
       >
-        <DialogConfermaEliminazione />
+        <DialogConfermaEliminazione onDeleteMessage="L'eliminazione di una sala comporta l'eliminazione di tutti gli spettacoli ad essa associati" />
       </InsertFormDialog>
       <Box height={70}></Box>
     </Box>

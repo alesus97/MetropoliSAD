@@ -109,7 +109,7 @@ export default function CinemaView({handleSubmit, handleDelete, loading, cinemas
         handleOK={handleDelete}
         title="Sei sicuro di voler eliminare il cinema?"
       >
-        <DialogConfermaEliminazione />
+        <DialogConfermaEliminazione onDeleteMessage="L'eliminazione di un cinema comporta l'eliminazione degli spettacoli e delle sale associati ad esso"/>
       </InsertFormDialog>
               
       {(cinemas.length > 0 && cinemas[onExploreIndex] !== undefined)  && 

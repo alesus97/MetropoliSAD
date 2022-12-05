@@ -6,23 +6,14 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-export default function DialogConfermaEliminazione() {
-  const [open, setOpen] = React.useState(false);
+export default function DialogConfermaEliminazione(props) {
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   return (
 
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Confermando, questo elemento verrà eliminato anche nelle altre
-            schermate !
+            {props.onDeleteMessage}
           </DialogContentText>
         </DialogContent>
         

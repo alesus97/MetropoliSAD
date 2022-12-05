@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function ErrorPage(props) {
     const navigate = useNavigate();
+    console.log(props.error)
     return(
         <Box
       sx={{
@@ -22,8 +23,11 @@ export default function ErrorPage(props) {
             <Typography variant="h1">
               {props.error.response?.status}
             </Typography>
+            <Typography variant="h5">
+             {props.error?.code}
+            </Typography>
             <Typography variant="h6">
-             {props.error?.message}
+             {props.error.response?.data.message}
             </Typography>
             <p></p>
             {/* <Button variant="contained" onClick={() => navigate('/schedule')}>Back Home</Button> */}

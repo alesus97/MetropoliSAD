@@ -1,38 +1,16 @@
 import React, { useState } from "react";
-import { Form, FormikProvider } from "formik";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
-import Logo from "../../components/Logo";
-import { Error, Visibility, VisibilityOff } from "@mui/icons-material";
-import {
-  animate,
-  RootStyle,
-  HeadingStyle,
-  ContentStyle,
-  fadeInUp,
-} from "./ConstAuth";
 import {
   Box,
   IconButton,
   InputAdornment,
   TextField,
-  CircularProgress,
-  Alert,
-  Container,
-  Typography,
-  Fade,
-  Stack,
 } from "@mui/material";
 
-import { LoadingButton } from "@mui/lab";
-import { motion } from "framer-motion";
 
-const ResetPasswordView = ({
-  handleSubmit,
-  isSubmitting,
-  errorMessage,
-  iserror,
-  setIserror,
-}) => {
+
+const ResetPasswordView = () => {
   const [showPassword, setShowPassword] = useState(false);
   return (
           <Box>

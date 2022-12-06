@@ -1,16 +1,7 @@
 import React, { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
-import Logo from "../../components/Logo";
-
-import {
-  animate,
-  RootStyle,
-  HeadingStyle,
-  ContentStyle,
-  fadeInUp,
-} from "./ConstAuth";
-import { Visibility, VisibilityOff, Error } from "@mui/icons-material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 import {
   Box,
@@ -21,15 +12,7 @@ import {
   Link,
   Stack,
   TextField,
-  CircularProgress,
-  Alert,
-  Container,
-  Typography,
-  Fade,
 } from "@mui/material";
-
-import { LoadingButton } from "@mui/lab";
-import { motion } from "framer-motion";
 
 const LoginView = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -37,6 +20,8 @@ const LoginView = () => {
   return (
 
         <Box>
+          alesus97@gmail.com Gabeweaver96! -> ADMIN
+          alessiocarusio@gmail.com Carlo000! -> GESTORE_CINEMA
             <TextField
               fullWidth
               margin="normal"

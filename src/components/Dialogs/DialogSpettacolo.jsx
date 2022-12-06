@@ -12,24 +12,8 @@ import { MenuItem } from "@mui/material";
 
 
 
-export default function DialogSpettacolo(){
-    const [film, setFilm] = useState([]);
-    const [sale, setSale] = useState([]);
-    useEffect(() => {
-        axios
-          .get(`https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/film`)
-          .then((res) => {
-            setFilm(res.data);
-          });
-      }, []);
-    
-      useEffect(() => {
-        axios
-          .get(`https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com/1/sale`)
-          .then((res) => {
-            setSale(res.data);
-          });
-      }, []);
+export default function DialogSpettacolo({films, sale}){
+
     return(
     <Box> 
     <TextField
@@ -46,7 +30,7 @@ export default function DialogSpettacolo(){
       color: "#F9D159",
     },}}
   >
-    {film.map((film, index) => (
+    {films.map((film, index) => (
       <MenuItem key={index} value={JSON.stringify(film)}>
         {film.titolo}
       </MenuItem>

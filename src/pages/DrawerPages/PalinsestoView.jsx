@@ -22,7 +22,7 @@ import { Delete, Add } from "@mui/icons-material";
 import DialogConfermaEliminazione from "../../components/Dialogs/DialogConfermaEliminazione";
 
 
-export default function PalinsestoView({handleSubmit, handleDelete, loading, spettacoli, setOnDeleteIndex }) {
+export default function PalinsestoView({handleSubmit, handleDelete, loading, spettacoli, setOnDeleteIndex, films, sale }) {
 
   const [openInsertDialog, setopenInsertDialog] = React.useState(false);
   const [openConfirmDeleteDialog, setopenConfirmDeleteDialog] = React.useState(false);
@@ -41,7 +41,7 @@ export default function PalinsestoView({handleSubmit, handleDelete, loading, spe
         setCloseDialog={() => setopenInsertDialog(false)}
         handleOK={handleSubmit}
         title="Inserisci dettagli spettacolo"
-      ><DialogSpettacolo/></InsertFormDialog>
+      ><DialogSpettacolo films={films} sale={sale}/></InsertFormDialog>
 
 
       <InsertFormDialog

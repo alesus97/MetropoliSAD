@@ -25,7 +25,7 @@ export default function SaleController(){
     
         try {
     
-          const response = await APIService.createSala(postData);
+          const response = await APIService.createSala(10,postData);  /* // CAMBIARE CON CODICE_CINEMA */
     
           console.log(response);
     
@@ -65,7 +65,7 @@ export default function SaleController(){
     
       useEffect(() => {
     
-        APIService.getAllSale().then((res) => {
+        APIService.getAllSale(10).then((res) => { //INSERIRE CODICE CINEMA
           const newSale = res.data.map((sala) => new Sala(sala));
           setSale(newSale);
           setLoading(false);

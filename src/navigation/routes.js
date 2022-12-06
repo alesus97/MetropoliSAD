@@ -24,6 +24,8 @@ export const privateRoutes = [
     page: <CinemaPage/>,
     permission: [
         Roles.ADMIN,
+        Roles.GESTORE_CINEMA
+
     ],
   },
   {
@@ -61,7 +63,8 @@ export const privateRoutes = [
     icon: <Quiz color="primary" />,
     page: <QuizPage/>,
     permission: [
-        Roles.ADMIN
+        Roles.ADMIN,
+        Roles.GESTORE_CINEMA
     ],		
       children: [
 		  	{
@@ -77,7 +80,8 @@ export const privateRoutes = [
     icon: <EmojiEvents color="primary"/>,
     page: <StorePage/>,
     permission: [
-        Roles.ADMIN
+        Roles.ADMIN,
+        Roles.GESTORE_CINEMA
     ],
   },
 ]

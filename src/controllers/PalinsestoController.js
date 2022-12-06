@@ -4,11 +4,15 @@ import { APIService } from "../apis/APIService";
 import { useEffect } from "react";
 import Spettacolo from "../models/Spettacolo";
 import ErrorPage from "../pages/ErrorPage";
+import Film from "../models/Film";
+import Sala from "../models/Sala";
 
 export default function PalinsestoController() {
   const [errorMessage, setErrorMessage] = useState("");
   const [error, setError] = useState();
   const [spettacoli, setSpettacoli] = useState([]);
+  const [films, setFilms] = useState([]);
+  const [sale, setSale] = useState([]);
   const [onDeleteIndex, setOnDeleteIndex] = useState();
   const [loading, setLoading] = useState(true);
 
@@ -31,7 +35,9 @@ export default function PalinsestoController() {
   };
 
   useEffect(() => {
-    APIService.getAllSpettacoli()
+
+
+    APIService.getAllSpettacoli(10) /* PASSARE CODICE CINEMA */
       .then((res) => {
         const newSpettacoli = res.data.map(
           (spettacolo) => new Spettacolo(spettacolo)
@@ -44,6 +50,39 @@ export default function PalinsestoController() {
         setError(true);
         setErrorMessage(err);
       });
+
+
+
+    APIService.getAllFilms()
+    .then((res) => {
+      const newFilms = res.data.map(
+        (film) => new Film(film)
+      );
+      setFilms(newFilms);
+      setLoading(false);
+    }) 
+    .catch((err) => { 
+      console.log(err);
+      setError(true);
+      setErrorMessage(err);
+    });
+
+
+    APIService.getAllSale()
+    .then((res) => {
+      const newSale = res.data.map(
+        (sala) => new Sala(sala)
+      );
+      setSale(newSale);
+      setLoading(false);
+
+    }) 
+    .catch((err) => { 
+      console.log(err);
+      setError(true);
+      setErrorMessage(err);
+
+    });
   }, []);
 
   const handleSubmit = async (event) => {
@@ -54,13 +93,12 @@ export default function PalinsestoController() {
 
     const postData = {
       codice_film: film.codice_film,
-      id_sala: sala.id_sala,
       data_ora: data.get("data"),
       prezzo: data.get("prezzo"),
     };
 
     try {
-      const response = await APIService.createSpettacolo(postData);
+      const response = await APIService.createSpettacolo(sala.id_sala, postData);
 
       console.log(response);
 
@@ -96,6 +134,8 @@ export default function PalinsestoController() {
       loading={loading}
       spettacoli={spettacoli}
       setOnDeleteIndex={setOnDeleteIndex}
+      films={films}
+      sale={sale}
     />
   );
 }

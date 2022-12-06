@@ -50,10 +50,10 @@ export const APIService = {
         * OK funziona
     */
 
-  getAllSpettacoli: function (/* codiceCinema */) {
+  getAllSpettacoli: function (codiceCinema) {
     const request = {
       method: "GET",
-      url: `/1/spettacoli`,
+      url: `/cinema/${codiceCinema}/spettacoli`,
     };
     return axios(signRequest(request));
   },
@@ -61,15 +61,15 @@ export const APIService = {
   deleteSpettacolo: function (codiceSpettacolo) {
     const request = {
       method: "DELETE",
-      url: `/spettacolo/${codiceSpettacolo}`,
+      url: `/spettacoli/${codiceSpettacolo}`,
     };
     return axios(signRequest(request));
   },
 
-  createSpettacolo: function (spettacolo) {
+  createSpettacolo: function (idSala, spettacolo) {
     const request = {
       method: "POST",
-      url: `/spettacolo`,
+      url: `/sale/${idSala}/spettacoli`,
       data: spettacolo,
     };
     return axios(signRequest(request));
@@ -80,10 +80,10 @@ export const APIService = {
         * OK funziona
     */
 
-  getAllSale: function (/* codiceCinema */) {
+  getAllSale: function ( codiceCinema ) {
     const request = {
       method: "GET",
-      url: `/1/sale`,
+      url: `/cinema/${codiceCinema}/sale`,
     };
     return axios(signRequest(request));
   },
@@ -91,15 +91,15 @@ export const APIService = {
   deleteSala: function (idSala) {
     const request = {
       method: "DELETE",
-      url: `/sala/${idSala}`,
+      url: `/sale/${idSala}`,
     };
     return axios(signRequest(request));
   },
 
-  createSala: function (sala) {
+  createSala: function (codiceCinema, sala) {
     const request = {
       method: "POST",
-      url: `/1/sala`,
+      url: `/cinema/${codiceCinema}/sale`,
       data: sala,
     };
     return axios(signRequest(request));
@@ -148,7 +148,7 @@ export const APIService = {
   getAllQuestions: function (filmId) {
     const request = {
       method: "GET",
-      url: `/${filmId}/domande`,
+      url: `/film/${filmId}/domande`,
     };
     return axios(signRequest(request));
   },
@@ -156,7 +156,7 @@ export const APIService = {
   deleteQuestion: function (codiceDomanda) {
     const request = {
       method: "DELETE",
-      url: `/domanda/${codiceDomanda}`,
+      url: `/domande/${codiceDomanda}`,
     };
     return axios(signRequest(request));
   },
@@ -164,7 +164,7 @@ export const APIService = {
   createQuestion: function (filmId, question) {
     const request = {
       method: "POST",
-      url: `${filmId}/domanda`,
+      url: `/film/${filmId}/domande`,
       data: question,
     };
     return axios(signRequest(request));
@@ -186,7 +186,7 @@ export const APIService = {
   deletePrize: function (codicePremio) {
     const request = {
       method: "DELETE",
-      url: `/premio/${codicePremio}`,
+      url: `/premi/${codicePremio}`,
     };
     return axios(signRequest(request));
   },
@@ -194,7 +194,7 @@ export const APIService = {
   createPrize: function (prize) {
     const request = {
       method: "POST",
-      url: `/premio`,
+      url: `/premi`,
       data: prize,
     };
     return axios(signRequest(request));

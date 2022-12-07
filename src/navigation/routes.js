@@ -27,8 +27,8 @@ export const privateRoutes = [
     ],
   },
   {
-    name: "Schedule",
-    path: "/schedule",
+    name: "Palinsesto",
+    path: "/palinsesto",
     icon: <Dashboard color="primary" />,
     page: <PalinsestoPage/>,
     permission: [
@@ -47,8 +47,8 @@ export const privateRoutes = [
     ],
   },
   {
-    name: "Hall",
-    path: "/hall",
+    name: "Sale",
+    path: "/sale",
     icon: <Chair color="primary" />,
     page: <SalePage/>,
     permission: [
@@ -91,13 +91,13 @@ export const publicRoutes =[
   page: <LoginPage/>  
 },
 {
-  name: "Identify Account",
-  path: "/identifyAccount",
+  name: "Identifica Account",
+  path: "/identificaAccount",
   page: <IdentifyAccountPage/>  
 },
 {
-  name: "Reset Password",
-  path: "/resetPassword",
+  name: "Reimposta password",
+  path: "/reimpostaPassword",
   page: <ResetPasswordPage/>
 },
 {

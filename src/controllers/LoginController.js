@@ -19,6 +19,9 @@ export default function LoginController(){
   
     const dispatch = useDispatch()
 
+    const title = "Effettua il login";
+    const buttonLabel = "Login";
+
     const handleSubmit = async (event) => {
       event.preventDefault();
       const data = new FormData(event.currentTarget);
@@ -27,12 +30,6 @@ export default function LoginController(){
   
       try {
         const user = await Auth.signIn(email, password)
-
-       
-     
-      
-
-
 
        Auth.currentSession()
       .then((result) =>{
@@ -44,13 +41,11 @@ export default function LoginController(){
           }
         })  
 
-
          AWSConfig.credentials.refresh( (err) => {
           if (err) {
             console.error('Failed To Login To CognitoID:', err)
           } else {
 
-            console.log(AWSConfig.credentials.data.Credentials)
               localStorage.setItem("IdentityPoolCredentials", JSON.stringify(AWSConfig.credentials.data.Credentials))  
 
               var userInfo = {
@@ -87,7 +82,7 @@ export default function LoginController(){
     };
 
     return(
-      <AuthLayout handleSubmit={handleSubmit} >
+      <AuthLayout handleSubmit={handleSubmit} title={title} buttonLabel={buttonLabel}>
         <LoginView/>
       </AuthLayout>
         

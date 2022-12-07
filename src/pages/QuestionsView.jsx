@@ -24,12 +24,10 @@ import {Table,
 } from "@mui/material";
 
 import { useLocation } from "react-router-dom";
+import NotFound404View from "./NotFound404View";
 
 
-export default function QuestionsView({handleSubmit, handleDelete, loading, questions, setOnDeleteIndex }) {
-  
-    const location = useLocation()
-    const { filmTitle } = location.state
+export default function QuestionsView({handleSubmit, handleDelete, loading, questions, setOnDeleteIndex, filmTitle }) {
 
     const [openInsertDialog, setopenInsertDialog] = React.useState(false);
     const [openConfirmDeleteDialog, setopenConfirmDeleteDialog] = React.useState(false);
@@ -39,8 +37,11 @@ export default function QuestionsView({handleSubmit, handleDelete, loading, ques
   const skeletonArray = Array(5).fill('');
 
   return (
+    
     <Box sx={{p:3}}>
 
+      { !filmTitle ? <NotFound404View/> : 
+    <>
       <Fab sx={{position: 'fixed' , bottom:"3%", right:"3%"}}color="primary" aria-label="add" onClick={() => setopenInsertDialog(true)}>
         <Add />
       </Fab>
@@ -65,16 +66,18 @@ export default function QuestionsView({handleSubmit, handleDelete, loading, ques
         <Table sx={{ minWidth: 650 }} >
           <TableHead>
             <TableRow height={70} >
-              <TableCell component="th" scope="row" width="30%">Question</TableCell>
-              <TableCell align="center" width="10%">Answer 1</TableCell>
-              <TableCell align="center" width="10%">Answer 2</TableCell>
-              <TableCell align="center" width="10%">Answer 3</TableCell>
-              <TableCell align="center" width="10%">Correct Answer</TableCell>
-              <TableCell align="center" width="10%">Delete</TableCell>
+              <TableCell component="th" scope="row" width="30%">Domanda</TableCell>
+              <TableCell align="center" width="10%">Risposta 1</TableCell>
+              <TableCell align="center" width="10%">Risposta 2</TableCell>
+              <TableCell align="center" width="10%">Risposta 3</TableCell>
+              <TableCell align="center" width="10%">Risposta corretta</TableCell>
+              <TableCell align="center" width="10%">Elimina</TableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
+
+         
 
            {loading &&
             skeletonArray.map((item, index) => (
@@ -119,6 +122,8 @@ export default function QuestionsView({handleSubmit, handleDelete, loading, ques
           </TableBody>
         </Table>
       </TableContainer>
+      </>
+      }
     </Box>
   );
 }

@@ -32,7 +32,7 @@ export default function FilmCard(props) {
           onClick={() => props.openExploreAction()}
           variant="text"
         >
-          Details
+          Dettagli
         </Button>
       </CardActions>
     </Card>

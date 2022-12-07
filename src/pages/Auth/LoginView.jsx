@@ -20,14 +20,13 @@ const LoginView = () => {
   return (
 
         <Box>
-          alesus97@gmail.com Gabeweaver96! -> ADMIN
-          alessiocarusio@gmail.com Carlo000! -> GESTORE_CINEMA
+          {/* alesus97@gmail.com Gabeweaver96! -> ADMIN
+          alessiocarusio@gmail.com Carlo000! -> GESTORE_CINEMA */}
             <TextField
               fullWidth
               margin="normal"
-              label="Email Address"
+              label="Indirizzo email"
               required
-              autoComplete="Email Address"
               name="email"
               type="email"
               sx={{
@@ -41,9 +40,8 @@ const LoginView = () => {
               fullWidth
               margin="normal"
               name="password"
-              autoComplete="current-password"
               type={showPassword ? "text" : "password"}
-              label="password"
+              label="Password"
               sx={{
                 "& fieldset": {
                   borderColor: "white",
@@ -72,16 +70,16 @@ const LoginView = () => {
               justifyContent="space-between"
               sx={{ my: 2 }}
             >
-              <FormControlLabel control={<Checkbox />} label="Remember me" />
+              <FormControlLabel control={<Checkbox />} label="Ricordami" />
 
               <Link
                 component={RouterLink}
                 color="primary"
                 variant="subtitle2"
-                to="/identifyAccount"
+                to="/identificaAccount"
                 underline="hover"
               >
-                Forgot password?
+                Password dimenticata?
               </Link>
             </Stack>
             </Box>

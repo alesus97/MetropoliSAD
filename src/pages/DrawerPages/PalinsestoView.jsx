@@ -55,11 +55,11 @@ export default function PalinsestoView({handleSubmit, handleDelete, loading, spe
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
           <TableRow height={70} >
-              <TableCell component="th" scope="row" width="30%">Title</TableCell>
-              <TableCell align="center" width="10%">Hall</TableCell>
-              <TableCell align="center" width="10%">Date</TableCell>
-              <TableCell align="center" width="10%">Price</TableCell>
-              <TableCell align="center" width="10%">Delete</TableCell>
+              <TableCell component="th" scope="row" width="30%">Titolo del film</TableCell>
+              <TableCell align="center" width="10%">Sala</TableCell>
+              <TableCell align="center" width="10%">Data dello spettacolo</TableCell>
+              <TableCell align="center" width="10%">Prezzo</TableCell>
+              <TableCell align="center" width="10%">Elimina</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

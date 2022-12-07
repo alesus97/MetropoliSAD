@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function NotFound404View() {
     const navigate = useNavigate();
+    console.log("404NOTFOUND")
     return(
         <Box
       sx={{
@@ -23,10 +24,10 @@ export default function NotFound404View() {
               404
             </Typography>
             <Typography variant="h6">
-              The page you’re looking for doesn’t exist.
+              Pagina non trovata
             </Typography>
             <p></p>
-            <Button variant="contained" onClick={() => navigate('/schedule')}>Back Home</Button>
+            <Button variant="contained" onClick={() => navigate('/')}>Torna alla home</Button>
           </Grid> 
           </ListItem>
           <ListItem> 

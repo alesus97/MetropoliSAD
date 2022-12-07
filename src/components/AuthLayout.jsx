@@ -50,7 +50,7 @@ export default function AuthLayout(props) {
           <HeadingStyle component={motion.div} {...fadeInUp}>
             <Logo />
             <Typography sx={{ color: "text.secondary", mb: 5 }}>
-              Login to your account
+              {props.title}
             </Typography>
           </HeadingStyle>
 
@@ -80,7 +80,7 @@ export default function AuthLayout(props) {
               loading={isSubmitting}
               loadingIndicator={<CircularProgress color="primary" size={16} />}
             >
-              {isSubmitting ? "loading..." : "Login"}
+              {isSubmitting ? "loading..." : props.buttonLabel}
             </LoadingButton>
 
             <p></p>

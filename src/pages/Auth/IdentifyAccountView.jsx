@@ -1,17 +1,16 @@
 import React from "react";
-import {TextField } from "@mui/material";
+import {TextField, Box, Stack} from "@mui/material";
 
 
 const IdentifyAccountView = () => {
 
   return (
-        
+        <Box> 
             <TextField
               fullWidth
               margin="normal"
-              label="Identify Account"
+              label="Indirizzo email"
               required
-              autoComplete="Identify Account"
               name="identifyAccount"
               type="email"
               sx={{
@@ -20,6 +19,14 @@ const IdentifyAccountView = () => {
                 },
               }}
             />
+
+            <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+            sx={{ my: 2 }}
+          ></Stack>
+          </Box>
 
   );
 };

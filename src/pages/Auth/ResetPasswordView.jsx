@@ -6,6 +6,7 @@ import {
   IconButton,
   InputAdornment,
   TextField,
+  Stack
 } from "@mui/material";
 
 
@@ -16,8 +17,7 @@ const ResetPasswordView = () => {
           <Box>
             <TextField
               fullWidth
-              autoComplete="verificationCode"
-              label="Verification Code"
+              label="Codice di verifica"
               name="verificationCode"
               margin="normal"
               required
@@ -32,9 +32,8 @@ const ResetPasswordView = () => {
             <TextField
               margin="normal"
               fullWidth
-              autoComplete="new-password"
               type={showPassword ? "text" : "password"}
-              label="New Password"
+              label="Nuova password"
               name="newPassword"
               sx={{
                 "& fieldset": {
@@ -64,7 +63,7 @@ const ResetPasswordView = () => {
               fullWidth
               autoComplete="confirm-new-password"
               type={showPassword ? "text" : "password"}
-              label="Confirm New Password"
+              label="Conferma nuova password"
               name="confirmNewPassword"
               sx={{
                 "& fieldset": {
@@ -88,6 +87,13 @@ const ResetPasswordView = () => {
               }}
 
             />
+
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+            sx={{ my: 2 }}
+          ></Stack>
           </Box>
 
         

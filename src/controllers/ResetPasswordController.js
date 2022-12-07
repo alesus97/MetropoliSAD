@@ -12,6 +12,8 @@ import AuthLayout from "../components/AuthLayout";
 export default function ResetPasswordController() {
   YupPassword(Yup);
   Amplify.configure(awsconfig);
+  const title = "È stato inviato un codice di verifica all'email indicata";
+  const buttonLabel = "Reimposta password";
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [iserror, setIserror] = useState(false);
@@ -62,7 +64,7 @@ export default function ResetPasswordController() {
   };
 
   return (
-    <AuthLayout handleSubmit={handleSubmit}> 
+    <AuthLayout handleSubmit={handleSubmit} title={title} buttonLabel={buttonLabel}> 
       <ResetPasswordView/>
     </AuthLayout>
   );

@@ -12,6 +12,7 @@ export default function QuestionsController(){
     const [loading, setLoading] = useState(true);
 
     const [onDeleteIndex,setOnDeleteIndex] = useState();
+    const [filmTitle, setFilmTitle] = useState("");
 
     const { filmId } = useParams();
 
@@ -67,7 +68,8 @@ export default function QuestionsController(){
   
     useEffect(() => {
       APIService.getAllQuestions(filmId).then((res) => {
-        const newQuestions = res.data.map((question) => new Domanda(question));
+        setFilmTitle(res.data.titolo)
+        const newQuestions = res.data.domande.map((question) => new Domanda(question));
         setQuestions(newQuestions);
         setLoading(false);
       }).catch((err) => {
@@ -82,7 +84,7 @@ export default function QuestionsController(){
     return(
       error ?  
       <ErrorPage error={errorMessage}/> :
-      <QuestionsView handleSubmit={handleSubmit} handleDelete={handleDelete} loading={loading} questions={questions} setOnDeleteIndex={setOnDeleteIndex}/>
+      <QuestionsView handleSubmit={handleSubmit} handleDelete={handleDelete} loading={loading} questions={questions} setOnDeleteIndex={setOnDeleteIndex} filmTitle={filmTitle}/>
 
     );
 

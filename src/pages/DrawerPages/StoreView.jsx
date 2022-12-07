@@ -54,7 +54,7 @@ export default function StoreView({handleSubmit, handleDelete, loading, prizes, 
             <TableRow height={70} >
               <TableCell component="th" scope="row" width="30%">Premio</TableCell>
               <TableCell align="center" width="10%">Punti necessari</TableCell>
-              <TableCell align="center" width="10%">Delete</TableCell>
+              <TableCell align="center" width="10%">Elimina</TableCell>
             </TableRow>
           </TableHead>
 

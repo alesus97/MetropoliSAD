@@ -26,8 +26,8 @@ export default function QuizView ({films, loading}) {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell component="th" scope="row" width="60%">Film Title</TableCell>
-              <TableCell align="center" width="10%">View questions</TableCell>
+              <TableCell component="th" scope="row" width="60%">Titolo del film</TableCell>
+              <TableCell align="center" width="10%">Vedi domande</TableCell>
             </TableRow>
           </TableHead>
 
@@ -41,7 +41,7 @@ export default function QuizView ({films, loading}) {
              >
                <TableCell component="th" scope="row" width="60%">  {film.titolo} </TableCell>
               <TableCell align="center" width="10%" >  
-              <Link to={`/quiz/filmId=${film.codice_film}`} state={{ filmTitle: film.titolo }}><ArrowCircleRight color="primary" /></Link> 
+              <Link to={`/quiz/filmId=${film.codice_film}`}><ArrowCircleRight color="primary" /></Link> 
 
               </TableCell>
               </TableRow>  

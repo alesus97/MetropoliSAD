@@ -1,11 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const identityPoolCredentials = JSON.parse(localStorage.getItem("IdentityPoolCredentials"));
+const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
 export const userSlice = createSlice({
   name: "user",
 
   initialState: {
-    user: null,
+    user: (!identityPoolCredentials || !userInfo) ? null : {
+      ...userInfo,
+      tokens: {
+        accessKeyId: identityPoolCredentials?.AccessKeyId,
+        secretAccessKey: identityPoolCredentials?.SecretKey,
+        sessionToken: identityPoolCredentials?.SessionToken,
+      }
+    } 
   },
 
   reducers: {

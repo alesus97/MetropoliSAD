@@ -23,9 +23,7 @@ export const privateRoutes = [
     icon: <Movie color="primary" />,
     page: <CinemaPage/>,
     permission: [
-        Roles.ADMIN,
-        Roles.GESTORE_CINEMA
-
+        Roles.ADMIN
     ],
   },
   {
@@ -34,7 +32,7 @@ export const privateRoutes = [
     icon: <Dashboard color="primary" />,
     page: <PalinsestoPage/>,
     permission: [
-        Roles.GESTORE_CINEMA
+      Roles.GESTORE_CINEMA
     ],
 
   },
@@ -54,7 +52,7 @@ export const privateRoutes = [
     icon: <Chair color="primary" />,
     page: <SalePage/>,
     permission: [
-        Roles.GESTORE_CINEMA
+      Roles.GESTORE_CINEMA
     ],
   },
   {
@@ -64,7 +62,6 @@ export const privateRoutes = [
     page: <QuizPage/>,
     permission: [
         Roles.ADMIN,
-        Roles.GESTORE_CINEMA
     ],		
       children: [
 		  	{
@@ -80,8 +77,7 @@ export const privateRoutes = [
     icon: <EmojiEvents color="primary"/>,
     page: <StorePage/>,
     permission: [
-        Roles.ADMIN,
-        Roles.GESTORE_CINEMA
+        Roles.ADMIN
     ],
   },
 ]

@@ -33,9 +33,8 @@ const dispatch = useDispatch();
           name:"Logout",
           icon: <LogoutIcon color="primary"/>,
           onClick: () => {
-            localStorage.removeItem("ReactAmplify.TokenKey");
             dispatch(logout())
-            localStorage.removeItem("role");
+            localStorage.clear();
 
             navigate("/", { replace: true });
           },

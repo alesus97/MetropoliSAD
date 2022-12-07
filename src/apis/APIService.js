@@ -1,6 +1,7 @@
 import axios from "axios";
 import { sign } from "aws4";
 
+
 /* axiosInstance.interceptors.response.use(
   (response) => {
     return response;
@@ -18,14 +19,16 @@ import { sign } from "aws4";
 
 
 function signRequest(request) {
-  const { method, url, data } = request;
+  const { method, url, headers, data } = request;
 
   const baseRequest = {
     host: "0ptix34dk9.execute-api.eu-central-1.amazonaws.com",
     method: method,
     url: "https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com" + url,
     path: url,
-    data: data
+    data: data,
+    body: JSON.stringify(data), //Serve per far calcolare la content-length
+    headers: headers
   };
 
   const identityPoolCredentials = JSON.parse(
@@ -70,6 +73,9 @@ export const APIService = {
     const request = {
       method: "POST",
       url: `/sale/${idSala}/spettacoli`,
+      headers: {
+        'Content-Type': 'application/json'
+      },
       data: spettacolo,
     };
     return axios(signRequest(request));
@@ -100,6 +106,9 @@ export const APIService = {
     const request = {
       method: "POST",
       url: `/cinema/${codiceCinema}/sale`,
+      headers: {
+        'Content-Type': 'application/json'
+      },
       data: sala,
     };
     return axios(signRequest(request));
@@ -135,6 +144,9 @@ export const APIService = {
     const request = {
       method: "POST",
       url: `/film`,
+      headers: {
+        'Content-Type': 'application/json'
+      },
       data: film,
     };
     return axios(signRequest(request));
@@ -165,6 +177,9 @@ export const APIService = {
     const request = {
       method: "POST",
       url: `/film/${filmId}/domande`,
+      headers: {
+        'Content-Type': 'application/json'
+      },
       data: question,
     };
     return axios(signRequest(request));
@@ -195,6 +210,9 @@ export const APIService = {
     const request = {
       method: "POST",
       url: `/premi`,
+      headers: {
+        'Content-Type': 'application/json'
+      },
       data: prize,
     };
     return axios(signRequest(request));
@@ -224,6 +242,9 @@ export const APIService = {
     const request = {
       method: "POST",
       url: `/cinema`,
+      headers: {
+        'Content-Type': 'application/json'
+      },
       data: cinema,
     };
     return axios(signRequest(request));

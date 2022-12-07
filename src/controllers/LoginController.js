@@ -1,6 +1,6 @@
 
 import { Amplify, Auth} from "aws-amplify";
-import  {config as AWSConfig, CognitoIdentityCredentials} from 'aws-sdk'
+import  {config as AWSConfig, CognitoIdentityCredentials, CognitoIdentityServiceProvider, CognitoIdentity} from 'aws-sdk'
 import { AUTH_USER_TOKEN_KEY } from "../constants/const";
 import awsconfig from "../constants/aws-exports"
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { login } from "../redux/userSlice";
 import AuthLayout from "../components/AuthLayout";
 import { Groups } from "@mui/icons-material";
+import { Cache } from "aws-amplify";
 
 
 export default function LoginController(){
@@ -27,19 +28,15 @@ export default function LoginController(){
       try {
         const user = await Auth.signIn(email, password)
 
-        dispatch(login({
-          userInfo: user.attributes, 
-          role: user.signInUserSession.accessToken.payload["cognito:groups"][0]
-      })) 
-
+       
      
-
       
+
+
+
        Auth.currentSession()
       .then((result) =>{
-
-        /* console.log(result) */
-       
+      
         AWSConfig.credentials = new CognitoIdentityCredentials({
           IdentityPoolId: "eu-central-1:fb1ff7b7-f27e-4ee0-8183-889d89999912",
           Logins: {
@@ -56,13 +53,31 @@ export default function LoginController(){
             console.log(AWSConfig.credentials.data.Credentials)
               localStorage.setItem("IdentityPoolCredentials", JSON.stringify(AWSConfig.credentials.data.Credentials))  
 
+              var userInfo = {
+                ...user.attributes,
+                role: user.signInUserSession.accessToken.payload["cognito:groups"][0]
+              }
+
+              localStorage.setItem("userInfo", JSON.stringify(userInfo))
+        
+              dispatch(login({
+                ...userInfo,
+                tokens: {
+                  accessKeyId: AWSConfig.credentials.data.Credentials.AccessKeyId,
+                  secretAccessKey: AWSConfig.credentials.data.Credentials.SecretKey,
+                  sessionToken: AWSConfig.credentials.data.Credentials.SessionToken,
+                 
+                }
+            }))
+
+            navigate("/", { replace: true });
           } 
         }) 
       }) 
 
-      localStorage.setItem( AUTH_USER_TOKEN_KEY, user.signInUserSession.accessToken.jwtToken );
+    
         
-          navigate("/", { replace: true });
+          
 
       }catch(err){
         console.log("ERRORE")

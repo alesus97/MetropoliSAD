@@ -2,7 +2,7 @@ import { Auth, button } from "aws-amplify";
 import { useNavigate } from "react-router-dom";
 import IdentifyAccountView from "../pages/Auth/IdentifyAccountView";
 import Amplify from "aws-amplify";
-import awsconfig from "../constants/aws-exports";
+import awsconfig from "../aws-exports";
 import AuthLayout from "../components/AuthLayout";
 
 export default function IdentifyAccountController() {

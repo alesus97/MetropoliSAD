@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import YupPassword from "yup-password";
 import * as Yup from "yup";
-import awsconfig from "../constants/aws-exports";
+import awsconfig from "../aws-exports";
 import { useLocation } from "react-router-dom";
 import Amplify, { Auth } from "aws-amplify";
 import AuthLayout from "../components/AuthLayout";

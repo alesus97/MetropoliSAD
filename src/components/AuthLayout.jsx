@@ -75,6 +75,7 @@ export default function AuthLayout(props) {
             animate={animate}
           >
             <LoadingButton
+              name="loadingButton"
               fullWidth
               size="large"
               type="submit"

@@ -5,7 +5,7 @@ import {
   animate,
   fadeInUp,
 } from "../pages/Auth/ConstAuth";
-import { motion } from "framer-motion";
+
 import {
   Box,
   CircularProgress,
@@ -14,10 +14,12 @@ import {
   Typography,
   Fade,
 } from "@mui/material";
+
 import { Error } from "@mui/icons-material";
 import Logo from "./Logo";
 import { LoadingButton } from "@mui/lab";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 export default function AuthLayout(props) {
     const [iserror, setIserror] = useState(false);

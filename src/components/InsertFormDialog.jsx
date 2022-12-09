@@ -1,11 +1,18 @@
 import * as React from "react";
-import Dialog from "@mui/material/Dialog";
+import {
+  Dialog, 
+  DialogContent, 
+  DialogTitle,
+  Alert, 
+  Button, 
+  Container, 
+  Stack, 
+  Divider,
+  Box,
+  Fade
+ } from "@mui/material";
+
 import { useState } from "react";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-import { Alert, Button, Container, Stack, Divider} from "@mui/material";
-import Box from "@mui/material/Box";
-import {Fade} from "@mui/material";
 import { Error } from "@mui/icons-material";
 
 

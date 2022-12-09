@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { 
+  Visibility, 
+  VisibilityOff 
+} from "@mui/icons-material";
 
 import {
   Box,
@@ -20,10 +23,11 @@ const LoginView = () => {
   return (
 
         <Box>
-          {/* alesus97@gmail.com Gabeweaver96! -> ADMIN
-          alessiocarusio@gmail.com Carlo000! -> GESTORE_CINEMA */}
+           alesus97@gmail.com Gabeweaver96! --- ADMIN
+          alessiocarusio@gmail.com Carlo000! --- GESTORE_CINEMA 
             <TextField
               fullWidth
+              autoComplete="username"
               margin="normal"
               label="Indirizzo email"
               required
@@ -40,6 +44,7 @@ const LoginView = () => {
               fullWidth
               margin="normal"
               name="password"
+              autoComplete="current-password"
               type={showPassword ? "text" : "password"}
               label="Password"
               sx={{

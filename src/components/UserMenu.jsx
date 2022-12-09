@@ -35,7 +35,6 @@ const dispatch = useDispatch();
           onClick: () => {
             dispatch(logout())
             localStorage.clear();
-
             navigate("/", { replace: true });
           },
         },

@@ -1,22 +1,25 @@
 import axios from "axios";
 import { sign } from "aws4";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../redux/userSlice";
 
-
-/* axiosInstance.interceptors.response.use(
+axios.interceptors.response.use(
   (response) => {
     return response;
   },
   (error) => {
     console.log(error);
-    if (error.response?.status === 401) {
-      localStorage.removeItem("ReactAmplify.TokenKey");
-      localStorage.removeItem("roles");
-      window.location.reload(true);
-    } else return Promise.reject(error);
+
+    if (error.response?.status == 403) {
+      localStorage.clear();
+      console.log("Cancellato Local storage")
+      //DEVO USCIRE
+    } 
+    
+    return Promise.reject(error);
   }
 );
- */
-
 
 function signRequest(request) {
   const { method, url, headers, data } = request;
@@ -28,13 +31,13 @@ function signRequest(request) {
     path: url,
     data: data,
     body: JSON.stringify(data), //Serve per far calcolare la content-length
-    headers: headers
+    headers: headers,
   };
 
   const identityPoolCredentials = JSON.parse(
     localStorage.getItem("IdentityPoolCredentials")
   );
-  
+
   const signedRequest = sign(baseRequest, {
     accessKeyId: identityPoolCredentials.AccessKeyId,
     secretAccessKey: identityPoolCredentials.SecretKey,
@@ -74,7 +77,7 @@ export const APIService = {
       method: "POST",
       url: `/sale/${idSala}/spettacoli`,
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       data: spettacolo,
     };
@@ -86,7 +89,7 @@ export const APIService = {
         * OK funziona
     */
 
-  getAllSale: function ( codiceCinema ) {
+  getAllSale: function (codiceCinema) {
     const request = {
       method: "GET",
       url: `/cinema/${codiceCinema}/sale`,
@@ -107,7 +110,7 @@ export const APIService = {
       method: "POST",
       url: `/cinema/${codiceCinema}/sale`,
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       data: sala,
     };
@@ -120,24 +123,21 @@ export const APIService = {
    */
 
   getAllFilms: function () {
-
     const request = {
-        method: "GET",
-        url: `/film`,
-      };
+      method: "GET",
+      url: `/film`,
+    };
 
     return axios(signRequest(request));
   },
 
   deleteFilm: function (codiceFilm) {
-    
     const request = {
-        method: "DELETE",
-        url: `/film/${codiceFilm}`
-    }
-      
+      method: "DELETE",
+      url: `/film/${codiceFilm}`,
+    };
+
     return axios(signRequest(request));
-  
   },
 
   createFilm: function (film) {
@@ -145,7 +145,7 @@ export const APIService = {
       method: "POST",
       url: `/film`,
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       data: film,
     };
@@ -178,7 +178,7 @@ export const APIService = {
       method: "POST",
       url: `/film/${filmId}/domande`,
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       data: question,
     };
@@ -211,7 +211,7 @@ export const APIService = {
       method: "POST",
       url: `/premi`,
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       data: prize,
     };
@@ -243,7 +243,7 @@ export const APIService = {
       method: "POST",
       url: `/cinema`,
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       data: cinema,
     };

@@ -1,19 +1,17 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
-import { Grid } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import {Button, CardActions} from '@mui/material';
-export default function CinemaCard(props) {
-  const [expanded, setExpanded] = React.useState(false);
+import {
+  Button, 
+  CardActions,
+  Typography,
+  IconButton,
+  CardMedia,
+  CardHeader,
+  Card
+} from '@mui/material';
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+
+export default function CinemaCard(props) {
 
   return (
     <Card raised sx={{ maxWidth: 500}}>

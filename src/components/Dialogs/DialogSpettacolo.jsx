@@ -1,15 +1,11 @@
 import * as React from "react";
-import TextField from "@mui/material/TextField";
 
-import { useState } from "react";
-
-import { InputAdornment } from "@mui/material";
-import Box from "@mui/material/Box";
-import axios from "axios";
-import { useEffect } from "react";
-import { MenuItem } from "@mui/material";
-
-
+import {
+  MenuItem, 
+  Box, 
+  InputAdornment, 
+  TextField  
+} from "@mui/material";
 
 
 export default function DialogSpettacolo({films, sale}){

@@ -1,10 +1,9 @@
-import { AppBar, Typography, Button, Toolbar, Grid } from "@mui/material";
-import { Adb, Settings } from "@mui/icons-material";
+import { AppBar, Typography, Toolbar, Grid } from "@mui/material";
+import { Adb } from "@mui/icons-material";
 import UserMenu from "./UserMenu";
-import { Stack } from "react-bootstrap";
 export default function CinemaAppBar() {
   return (
-    <AppBar
+    <AppBar 
       position="fixed"
       sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
     >

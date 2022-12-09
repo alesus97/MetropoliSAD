@@ -60,8 +60,7 @@ export default function LoginController(){
                 tokens: {
                   accessKeyId: AWSConfig.credentials.data.Credentials.AccessKeyId,
                   secretAccessKey: AWSConfig.credentials.data.Credentials.SecretKey,
-                  sessionToken: AWSConfig.credentials.data.Credentials.SessionToken,
-                 
+                  sessionToken: AWSConfig.credentials.data.Credentials.SessionToken,                
                 }
             }))
 

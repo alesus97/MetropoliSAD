@@ -1,12 +1,16 @@
 
+import React from "react";
 import InsertFormDialog from "../../components/InsertFormDialog";
 import DialogConfermaEliminazione from "../../components/Dialogs/DialogConfermaEliminazione";
-
 import DialogStore from "../../components/Dialogs/DialogStore";
-import {Delete, Add} from "@mui/icons-material";
-import React from "react";
 
-import {Table,
+import {
+  Delete, 
+  Add
+} from "@mui/icons-material";
+
+import {
+  Table,
   TableBody,
   TableCell,
   TableContainer,
@@ -16,10 +20,9 @@ import {Table,
   Box,
   IconButton,
   Fab,
+  Skeleton
 
 } from "@mui/material";
-
-import {Skeleton} from "@mui/material";
 
 export default function StoreView({handleSubmit, handleDelete, loading, prizes, setOnDeleteIndex }){
     const [openInsertDialog, setopenInsertDialog] = React.useState(false);

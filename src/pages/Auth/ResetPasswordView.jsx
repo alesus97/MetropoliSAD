@@ -1,17 +1,25 @@
 import React, { useState } from "react";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+import ResetPasswordController from "../../controllers/ResetPasswordController";
+import { Auth } from "aws-amplify";
+import { 
+  Visibility, 
+  VisibilityOff 
+} from "@mui/icons-material";
 
 import {
   Box,
   IconButton,
   InputAdornment,
   TextField,
-  Stack
+  Stack,
+  Link,
+  Typography
 } from "@mui/material";
 
 
 
-const ResetPasswordView = () => {
+const ResetPasswordView = ({resendConfirmationCode}) => {
+
   const [showPassword, setShowPassword] = useState(false);
   return (
           <Box>
@@ -93,7 +101,19 @@ const ResetPasswordView = () => {
             alignItems="center"
             justifyContent="space-between"
             sx={{ my: 2 }}
-          ></Stack>
+          >
+
+          <Typography
+            onClick={resendConfirmationCode}
+            alignContent="center"
+            color="primary"
+            variant="subtitle2"
+            underline="hover"
+          >  Non hai ricevuto il codice di verifica? Clicca qui per re-inviarlo
+          </Typography>
+
+          </Stack>
+
           </Box>
 
         

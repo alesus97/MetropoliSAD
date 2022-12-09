@@ -75,10 +75,9 @@ export default function CinemaController(){
         APIService.getAllCinemas().then((res) => {
           const newCinemas = res.data.map((cinema) => new Cinema(cinema));
           setCinemas(newCinemas);
-          console.log(cinemas);
           setLoading(false);
         }).catch((err) => {
-          console.log(err);
+
         setError(true);
         setErrorMessage(err);
         }); 

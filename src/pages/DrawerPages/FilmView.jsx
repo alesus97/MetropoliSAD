@@ -1,10 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import FilmCard from "../../components/Cards/FilmCard";
 import InsertFormDialog from "../../components/InsertFormDialog";
 import DialogFilm from "../../components/Dialogs/DialogFilm";
 
-import { Grid, Fab, Box, Card, Skeleton} from "@mui/material";
+import { 
+  Grid, 
+  Fab, 
+  Box, 
+  Card, 
+  Skeleton
+} from "@mui/material";
+
 import { Add } from "@mui/icons-material";
 import DialogConfermaEliminazione from "../../components/Dialogs/DialogConfermaEliminazione";
 import DialogDettagliFilm from "../../components/Dialogs/DialogDettagliFilm";

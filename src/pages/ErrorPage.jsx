@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function ErrorPage(props) {
     const navigate = useNavigate();
-    console.log(props.error)
+   /*  console.log(props.error) */
     return(
         <Box
       sx={{

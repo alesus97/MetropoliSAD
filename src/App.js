@@ -5,14 +5,17 @@ import CinemaAppBar from "./components/CinemaAppBar";
 import AppRoutes from "./navigation/AppRoutes";
 import { useSelector } from "react-redux";
 import { selectUser } from "./redux/userSlice";
-import { Box, 
+import { 
+  Box, 
   Drawer, 
   List, 
   Toolbar, 
   ListItemText, 
   ListItemIcon, 
   ListItem,
-  useMediaQuery
+  useMediaQuery,
+  Typography,
+  Link
   } from "@mui/material";
 import {theme} from "./constants/theme"
 import { useNavigate, useLocation } from "react-router-dom";
@@ -59,13 +62,17 @@ const App = () => {
       </Drawer>
       </>
       }
- 
+
+      
 
   <Box component="main" sx={{ flexGrow: 1}}>
       {user?.role &&  <Toolbar/>}
         <AppRoutes/>
     </Box>
+
 </Box>
+
+
 
 
    );

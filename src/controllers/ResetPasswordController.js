@@ -3,10 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import YupPassword from "yup-password";
 import * as Yup from "yup";
-import Amplify from "aws-amplify";
 import awsconfig from "../constants/aws-exports";
 import { useLocation } from "react-router-dom";
-import { Auth } from "aws-amplify";
+import Amplify, { Auth } from "aws-amplify";
 import AuthLayout from "../components/AuthLayout";
 
 export default function ResetPasswordController() {
@@ -35,6 +34,15 @@ export default function ResetPasswordController() {
       "Passwords must match"
     ),
   });
+
+  const resendConfirmationCode = async () => {
+    try {
+      await Auth.forgotPassword(email)
+      console.log('code resent successfully');
+  } catch (err) {
+      throw err;
+  }
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -65,7 +73,7 @@ export default function ResetPasswordController() {
 
   return (
     <AuthLayout handleSubmit={handleSubmit} title={title} buttonLabel={buttonLabel}> 
-      <ResetPasswordView/>
+      <ResetPasswordView resendConfirmationCode={resendConfirmationCode}/>
     </AuthLayout>
   );
 }

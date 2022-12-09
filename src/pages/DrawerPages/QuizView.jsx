@@ -27,7 +27,7 @@ export default function QuizView ({films, loading}) {
           <TableHead>
             <TableRow>
               <TableCell component="th" scope="row" width="60%">Titolo del film</TableCell>
-              <TableCell align="center" width="10%">Vedi domande</TableCell>
+              <TableCell align="center" width="20%">Vedi domande</TableCell>
             </TableRow>
           </TableHead>
 

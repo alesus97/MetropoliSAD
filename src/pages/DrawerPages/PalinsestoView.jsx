@@ -12,15 +12,19 @@ import {Table,
   IconButton,
   Fab,
   Skeleton,
+  Link,
+  Typography
 
 } from "@mui/material";
 
+import { 
+  Delete, 
+  Add 
+} from "@mui/icons-material";
+
 import InsertFormDialog from "../../components/InsertFormDialog";
 import DialogSpettacolo from "../../components/Dialogs/DialogSpettacolo";
-
-import { Delete, Add } from "@mui/icons-material";
 import DialogConfermaEliminazione from "../../components/Dialogs/DialogConfermaEliminazione";
-
 
 export default function PalinsestoView({handleSubmit, handleDelete, loading, spettacoli, setOnDeleteIndex, films, sale }) {
 

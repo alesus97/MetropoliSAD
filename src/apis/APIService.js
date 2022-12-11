@@ -1,52 +1,11 @@
 import axios from "axios";
 import { sign } from "aws4";
-import {API} from "aws-amplify";
+import {API, Amplify} from "aws-amplify";
+import awsmobile from "../aws-exports";
 
-axios.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  (error) => {
-    console.log(error);
+Amplify.configure(awsmobile)
 
-    if (error.response?.status == 403) {
-      localStorage.clear();
-    } 
-    
-    return Promise.reject(error);
-  }
-);
-
-const apiName = "cinema-sad"
-
-function signRequest(request) {
-  const { method, url, headers, data } = request;
-
-  const baseRequest = {
-    host: "0ptix34dk9.execute-api.eu-central-1.amazonaws.com",
-    method: method,
-    url: "https://0ptix34dk9.execute-api.eu-central-1.amazonaws.com" + url,
-    path: url,
-    data: data,
-    body: JSON.stringify(data), //Serve per far calcolare la content-length
-    headers: headers,
-  };
-
-  const identityPoolCredentials = JSON.parse(
-    localStorage.getItem("IdentityPoolCredentials")
-  );
-
-  const signedRequest = sign(baseRequest, {
-    accessKeyId: identityPoolCredentials.accessKeyId,
-    secretAccessKey: identityPoolCredentials.secretAccessKey,
-    sessionToken: identityPoolCredentials.sessionToken,
-  });
-
-  delete signedRequest.headers["Host"];
-  delete signedRequest.headers["Content-Length"];
-
-  return signedRequest;
-}
+const apiName = "cinema-sad";
 
 export const APIService = {
   /* *
@@ -55,29 +14,19 @@ export const APIService = {
     */
 
   getAllSpettacoli: function (codiceCinema) {
-    return API.get(apiName,`/cinema/${codiceCinema}/spettacoli`, {})
+    return API.get(apiName,`/cinema/${codiceCinema}/spettacoli`, {response: true})
   },
 
   deleteSpettacolo: function (codiceSpettacolo) {
-    const request = {
-      method: "DELETE",
-      url: `/spettacoli/${codiceSpettacolo}`,
-    };
-
-    //return axios(signRequest(request));
-    return API.get()
+    return API.del(apiName,`/spettacoli/${codiceSpettacolo}`, {response: true} )
   },
 
   createSpettacolo: function (idSala, spettacolo) {
-    const request = {
-      method: "POST",
-      url: `/sale/${idSala}/spettacoli`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: spettacolo,
-    };
-    return axios(signRequest(request));
+    const myInit = {
+      body: spettacolo,
+      response: true
+    }
+    return API.post(apiName,`/sale/${idSala}/spettacoli`, myInit)
   },
 
   /* *
@@ -86,31 +35,19 @@ export const APIService = {
     */
 
   getAllSale: function (codiceCinema) {
-    const request = {
-      method: "GET",
-      url: `/cinema/${codiceCinema}/sale`,
-    };
-    return axios(signRequest(request));
+    return API.get(apiName, `/cinema/${codiceCinema}/sale`, {response: true})
   },
 
   deleteSala: function (idSala) {
-    const request = {
-      method: "DELETE",
-      url: `/sale/${idSala}`,
-    };
-    return axios(signRequest(request));
+    return API.del(apiName, `/sale/${idSala}`, {response: true})
   },
 
   createSala: function (codiceCinema, sala) {
-    const request = {
-      method: "POST",
-      url: `/cinema/${codiceCinema}/sale`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: sala,
-    };
-    return axios(signRequest(request));
+    const myInit = {
+      body: sala,
+      response: true
+    }
+    return API.post(apiName, `/cinema/${codiceCinema}/sale`, myInit )
   },
 
   /**
@@ -119,33 +56,20 @@ export const APIService = {
    */
 
   getAllFilms: function () {
-    const request = {
-      method: "GET",
-      url: `/film`,
-    };
-
-    return axios(signRequest(request));
+    return API.get(apiName, `/film`, {response: true})
   },
 
   deleteFilm: function (codiceFilm) {
-    const request = {
-      method: "DELETE",
-      url: `/film/${codiceFilm}`,
-    };
-
-    return axios(signRequest(request));
+    return API.del(apiName, `/film/${codiceFilm}`, {response: true})
   },
 
   createFilm: function (film) {
-    const request = {
-      method: "POST",
-      url: `/film`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: film,
-    };
-    return axios(signRequest(request));
+    const myInit = {
+      body: film,
+      response: true
+    }
+
+    return API.post(apiName, `/film`, myInit )
   },
 
   /**
@@ -154,31 +78,21 @@ export const APIService = {
    */
 
   getAllQuestions: function (filmId) {
-    const request = {
-      method: "GET",
-      url: `/film/${filmId}/domande`,
-    };
-    return axios(signRequest(request));
+    return API.get(apiName, `/film/${filmId}/domande`, {response: true} )
   },
 
   deleteQuestion: function (codiceDomanda) {
-    const request = {
-      method: "DELETE",
-      url: `/domande/${codiceDomanda}`,
-    };
-    return axios(signRequest(request));
+    return API.del(apiName, `/domande/${codiceDomanda}`, {response: true} )
   },
 
   createQuestion: function (filmId, question) {
-    const request = {
-      method: "POST",
-      url: `/film/${filmId}/domande`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: question,
-    };
-    return axios(signRequest(request));
+
+    const myInit = {
+      body: question,
+      response: true
+    }
+
+    return API.post(apiName, `/film/${filmId}/domande`, myInit)
   },
 
   /**
@@ -187,31 +101,20 @@ export const APIService = {
    */
 
   getAllPrizes: function () {
-    const request = {
-      method: "GET",
-      url: `/premi`,
-    };
-    return axios(signRequest(request));
+    return API.get(apiName, `/premi`, {response: true})
   },
 
   deletePrize: function (codicePremio) {
-    const request = {
-      method: "DELETE",
-      url: `/premi/${codicePremio}`,
-    };
-    return axios(signRequest(request));
+    return API.del(apiName, `/premi/${codicePremio}`, {response: true})
   },
 
   createPrize: function (prize) {
-    const request = {
-      method: "POST",
-      url: `/premi`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: prize,
-    };
-    return axios(signRequest(request));
+    const myInit = {
+      body: prize,
+      response: true
+    }
+
+    return API.post(apiName, `/premi`, myInit )
   },
 
   /**
@@ -219,30 +122,18 @@ export const APIService = {
    */
 
   getAllCinemas: function () {
-    const request = {
-      method: "GET",
-      url: `/cinema`,
-    };
-    return axios(signRequest(request));
+    return API.get(apiName, `/cinema`, {response: true} )
   },
 
   deleteCinema: function (codiceCinema) {
-    const request = {
-      method: "DELETE",
-      url: `/cinema/${codiceCinema}`,
-    };
-    return axios(signRequest(request));
+    return API.del(apiName, `/cinema/${codiceCinema}`, {response: true})
   },
 
   createCinema: function (cinema) {
-    const request = {
-      method: "POST",
-      url: `/cinema`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: cinema,
-    };
-    return axios(signRequest(request));
+    const myInit = {
+      body: cinema,
+      response: true
+    }
+    return API.post(apiName, `/cinema`, myInit )
   },
 };

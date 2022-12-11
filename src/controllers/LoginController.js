@@ -21,12 +21,15 @@ export default function LoginController(){
 
         try {
             const user = await Auth.signIn(email, password)
-
+            console.log(user)
+           
             var userInfo = {
                 ...user.attributes,
                 role: user.signInUserSession.accessToken.payload["cognito:groups"][0]
             }
             const credentials = await Auth.currentCredentials();
+
+            console.log(credentials)
 
             localStorage.setItem("IdentityPoolCredentials", JSON.stringify(credentials))
             localStorage.setItem("userInfo", JSON.stringify(userInfo))

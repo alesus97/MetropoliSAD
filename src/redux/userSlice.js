@@ -1,4 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import {Amplify} from "aws-amplify";
+import awsmobile from "../aws-exports";
+
+Amplify.configure(awsmobile)
 
 const identityPoolCredentials = JSON.parse(localStorage.getItem("IdentityPoolCredentials"));
 const userInfo = JSON.parse(localStorage.getItem("userInfo"));

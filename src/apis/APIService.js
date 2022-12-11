@@ -13,8 +13,6 @@ axios.interceptors.response.use(
 
     if (error.response?.status == 403) {
       localStorage.clear();
-      console.log("Cancellato Local storage")
-      //DEVO USCIRE
     } 
     
     return Promise.reject(error);
@@ -39,9 +37,9 @@ function signRequest(request) {
   );
 
   const signedRequest = sign(baseRequest, {
-    accessKeyId: identityPoolCredentials.AccessKeyId,
-    secretAccessKey: identityPoolCredentials.SecretKey,
-    sessionToken: identityPoolCredentials.SessionToken,
+    accessKeyId: identityPoolCredentials.accessKeyId,
+    secretAccessKey: identityPoolCredentials.secretAccessKey,
+    sessionToken: identityPoolCredentials.sessionToken,
   });
 
   delete signedRequest.headers["Host"];

@@ -78,6 +78,7 @@ const LoginView = () => {
               <FormControlLabel control={<Checkbox />} label="Ricordami" />
 
               <Link
+                data-cy= "any-link"
                 component={RouterLink}
                 color="primary"
                 variant="subtitle2"

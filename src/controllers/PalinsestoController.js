@@ -39,7 +39,7 @@ export default function PalinsestoController() {
 
     APIService.getAllSpettacoli(10) /* PASSARE CODICE CINEMA */
       .then((res) => {
-        const newSpettacoli = res.data.map(
+        const newSpettacoli = res.map(
           (spettacolo) => new Spettacolo(spettacolo)
         );
         setSpettacoli(newSpettacoli);

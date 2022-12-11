@@ -1,8 +1,6 @@
 import axios from "axios";
 import { sign } from "aws4";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { logout } from "../redux/userSlice";
+import {API} from "aws-amplify";
 
 axios.interceptors.response.use(
   (response) => {
@@ -18,6 +16,8 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+const apiName = "cinema-sad"
 
 function signRequest(request) {
   const { method, url, headers, data } = request;
@@ -55,11 +55,7 @@ export const APIService = {
     */
 
   getAllSpettacoli: function (codiceCinema) {
-    const request = {
-      method: "GET",
-      url: `/cinema/${codiceCinema}/spettacoli`,
-    };
-    return axios(signRequest(request));
+    return API.get(apiName,`/cinema/${codiceCinema}/spettacoli`, {})
   },
 
   deleteSpettacolo: function (codiceSpettacolo) {
@@ -67,7 +63,9 @@ export const APIService = {
       method: "DELETE",
       url: `/spettacoli/${codiceSpettacolo}`,
     };
-    return axios(signRequest(request));
+
+    //return axios(signRequest(request));
+    return API.get()
   },
 
   createSpettacolo: function (idSala, spettacolo) {

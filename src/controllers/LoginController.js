@@ -7,7 +7,7 @@ import { login } from "../redux/userSlice";
 import AuthLayout from "../components/AuthLayout";
 
 export default function LoginController(){
-    Amplify.configure(awsconfig);
+    console.log(Amplify.configure(awsconfig));
     const navigate = useNavigate();
     const dispatch = useDispatch()
     const title = "Effettua il login";

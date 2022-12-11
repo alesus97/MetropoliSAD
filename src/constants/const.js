@@ -1,3 +1,9 @@
-export const AUTH_USER_TOKEN_KEY = 'ReactAmplify.TokenKey';
+import {Amplify} from "aws-amplify";
+import awsmobile from "../aws-exports";
+
+export default function configAmplify(){
+    Amplify.configure(awsmobile) 
+}
+
 
 

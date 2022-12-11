@@ -87,7 +87,7 @@ export const privateRoutes = [
 export const publicRoutes =[
   {
   name: "Login",
-  path: "/login",
+  path: "/",
   page: <LoginPage/>  
 },
 {
@@ -103,6 +103,6 @@ export const publicRoutes =[
 {
   name: "Not Found",
   path: "*",
-  page: <Navigate to="/login" replace />
+  page: <Navigate to="/" replace />
 },
 ]

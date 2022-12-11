@@ -5,11 +5,11 @@ import LoginView from "../pages/Auth/LoginView";
 import { useDispatch } from "react-redux";
 import { login } from "../redux/userSlice";
 import AuthLayout from "../components/AuthLayout";
-
 export default function LoginController(){
-    console.log(Amplify.configure(awsconfig));
+    Amplify.configure(awsconfig);
     const navigate = useNavigate();
     const dispatch = useDispatch()
+
     const title = "Effettua il login";
     const buttonLabel = "Login";
 
@@ -20,8 +20,8 @@ export default function LoginController(){
         const password = data.get("password")
 
         try {
-            const user = await Auth.signIn(email, password)
-            console.log(user)
+  
+            const user = await Auth.signIn(email, password)   
            
             var userInfo = {
                 ...user.attributes,
@@ -46,7 +46,6 @@ export default function LoginController(){
             navigate("/", { replace: true });
 
         }catch(err){
-            console.log("ERRORE")
             throw err
         }
     };

@@ -14,8 +14,6 @@ import {
   ListItemIcon, 
   ListItem,
   useMediaQuery,
-  Typography,
-  Link
   } from "@mui/material";
 import {theme} from "./constants/theme"
 import { useNavigate, useLocation } from "react-router-dom";

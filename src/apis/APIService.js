@@ -1,10 +1,4 @@
-import axios from "axios";
-import { sign } from "aws4";
-import {API, Amplify} from "aws-amplify";
-import awsmobile from "../aws-exports";
-
-Amplify.configure(awsmobile)
-
+import {API} from "aws-amplify";
 const apiName = "cinema-sad";
 
 export const APIService = {

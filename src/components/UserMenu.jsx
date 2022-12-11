@@ -6,7 +6,7 @@ import {
   } from "@mui/material";
   
   
-import Avatar from "@mui/material/Avatar";
+
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { Settings } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/userSlice";
+import { Auth } from "aws-amplify";
 
 
 
@@ -28,14 +29,32 @@ const dispatch = useDispatch();
         {
           name:"Account",
           icon: <PersonIcon color="primary"/>,
+          onClick : async () => {
+            try {
+              await Auth.signOut({ global: true });
+          } catch (error) {
+              console.log('error signing out: ', error);
+          }
+          }
         },
         {
           name:"Logout",
           icon: <LogoutIcon color="primary"/>,
-          onClick: () => {
+          onClick: async () => {
             dispatch(logout())
+ 
             localStorage.clear();
-            navigate("/", { replace: true });
+
+            try {
+              await Auth.signOut({ global: true });
+          } catch (error) {
+              console.log('error signing out: ', error);
+          }
+
+
+
+
+           // navigate("/", { replace: true });
           },
         },
        

@@ -25,6 +25,7 @@ const ResetPasswordView = ({resendConfirmationCode}) => {
           <Box>
             <TextField
               fullWidth
+              autoComplete="off"
               label="Codice di verifica"
               name="verificationCode"
               margin="normal"
@@ -40,6 +41,7 @@ const ResetPasswordView = ({resendConfirmationCode}) => {
             <TextField
               margin="normal"
               fullWidth
+              autoComplete="off"
               type={showPassword ? "text" : "password"}
               label="Nuova password"
               name="newPassword"
@@ -69,7 +71,7 @@ const ResetPasswordView = ({resendConfirmationCode}) => {
             <TextField
               margin="normal"
               fullWidth
-              autoComplete="confirm-new-password"
+              autoComplete="off"
               type={showPassword ? "text" : "password"}
               label="Conferma nuova password"
               name="confirmNewPassword"

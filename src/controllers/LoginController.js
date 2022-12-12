@@ -14,6 +14,7 @@ export default function LoginController(){
     const buttonLabel = "Login";
 
     const handleSubmit = async (event) => {
+        
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         const email = data.get("email")
@@ -23,16 +24,16 @@ export default function LoginController(){
   
             const user = await Auth.signIn(email, password)   
            
-            var userInfo = {
+    /*         var userInfo = {
                 ...user.attributes,
                 role: user.signInUserSession.accessToken.payload["cognito:groups"][0]
-            }
-            const credentials = await Auth.currentCredentials();
+            } */
+        //    const credentials = await Auth.currentCredentials();
 
-            console.log(credentials)
 
-            localStorage.setItem("IdentityPoolCredentials", JSON.stringify(credentials))
-            localStorage.setItem("userInfo", JSON.stringify(userInfo))
+
+     /*        localStorage.setItem("IdentityPoolCredentials", JSON.stringify(credentials))
+            localStorage.setItem("userInfo", JSON.stringify(userInfo)) 
 
             dispatch(login({
                 ...userInfo,
@@ -41,7 +42,7 @@ export default function LoginController(){
                     secretAccessKey: credentials.secretAccessKey,
                     sessionToken: credentials.sessionToken,
                 }
-            }))
+            }))  */
 
             navigate("/", { replace: true });
 

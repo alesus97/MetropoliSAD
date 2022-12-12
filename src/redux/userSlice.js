@@ -11,14 +11,14 @@ export const userSlice = createSlice({
   name: "user",
 
   initialState: {
-    user: (!identityPoolCredentials || !userInfo) ? null : {
+    user: null /* (!identityPoolCredentials || !userInfo) ? null : {
       ...userInfo,
       tokens: {
         accessKeyId: identityPoolCredentials?.AccessKeyId,
         secretAccessKey: identityPoolCredentials?.SecretKey,
         sessionToken: identityPoolCredentials?.SessionToken,
       }
-    } 
+    }  */
   },
 
   reducers: {

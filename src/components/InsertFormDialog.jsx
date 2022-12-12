@@ -55,8 +55,8 @@ export default function InsertFormDialog(props) {
           maxWidth="sm"
           onClose={handleClose}
         >
-        <DialogTitle align='center' color='primary'>{props.title}</DialogTitle>
-        <Divider light/>
+        <DialogTitle align='center' >{props.title}</DialogTitle>
+        <Divider/>
           <DialogContent>
             <Container component="main" maxWidth="sm">
               <Box
@@ -68,7 +68,7 @@ export default function InsertFormDialog(props) {
 
 
 
-                <Fade
+                {iserror && <Fade
                     in={iserror} //Write the needed condition here to make it appear
                     timeout={{ enter: 1000, exit: 1000 }} //Edit these two values to change the duration of transition when the element is getting appeared and disappeard
                     addEndListener={() => {
@@ -84,22 +84,19 @@ export default function InsertFormDialog(props) {
                        variant="filled"
                        color="primary"
                        icon={<Error fontSize="inherit" />}
-                    >
-                      
+                    >                     
                       {errorMessage}
                     </Alert>
-                  </Fade>
+                  </Fade>}
 
-
-                {/* {iserror ? <Alert variant="filled" color="primary" icon={<Error fontSize="inherit"/>}>{errorMessage}</Alert> : <></>} */}
                 <p></p>
                 <Stack justifyContent='flex-end' direction="row" spacing={2}>
-                <Button variant="outlined" onClick={handleClose}>
+                <Button variant="contained" onClick={handleClose}>
                     Cancel
                   </Button>
                   <Button
-                    variant="outlined"
-                    type="submit"
+                    variant="contained"
+                    type="submit"      
                     disabled={isDisabled}
                   >
                     Ok

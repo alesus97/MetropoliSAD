@@ -12,15 +12,16 @@ import {
   Toolbar, 
   ListItemText, 
   ListItemIcon, 
-  ListItem,
   useMediaQuery,
+  ListItemButton,
   } from "@mui/material";
 import {theme} from "./constants/theme"
 import { useNavigate, useLocation } from "react-router-dom";
+import useUser from "./useUser";
 
 const App = () => {
-
-  const user = useSelector(selectUser)
+  const {user, error} = useUser();
+ /*  const user = useSelector(selectUser) */
   const { pathname } = useLocation();
   const navigate = useNavigate()
   const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
@@ -28,10 +29,10 @@ const App = () => {
   const drawerItems = privateRoutes.filter((element) => element.permission.includes(user?.role) )
   .map((item, index) => {
     return (
-      <ListItem selected={item.path === pathname} button key={index} onClick={() => navigate(item.path, { replace: true })}>
+      <ListItemButton selected={item.path === pathname} key={index} onClick={() => navigate(item.path, { replace: true })}>
         <ListItemIcon>{item.icon}</ListItemIcon>
         <ListItemText variant="title" primary={item.name} />
-      </ListItem>
+      </ListItemButton>
     );
   })
 

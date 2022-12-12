@@ -49,8 +49,8 @@ export default function DialogDettagliFilm(props) {
         onClose={props.setCloseDialog}
       >
         
-       <DialogTitle align='center' color='primary'>{props.info.titolo}</DialogTitle>
-        <Divider light/>
+       <DialogTitle align='center' >{props.info.titolo}</DialogTitle>
+        <Divider />
          <DialogContent>
         
         <List>
@@ -76,7 +76,7 @@ export default function DialogDettagliFilm(props) {
          </DialogContent>
         
         <DialogActions>
-          <Button variant='outlined' onClick={() => props.setCloseDialog()}>
+          <Button variant="contained"   onClick={() => props.setCloseDialog()}>
             Ok
           </Button>
         </DialogActions>

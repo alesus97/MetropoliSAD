@@ -36,7 +36,7 @@ export default function QuestionsView({handleSubmit, handleDelete, loading, ques
     const [openInsertDialog, setopenInsertDialog] = React.useState(false);
     const [openConfirmDeleteDialog, setopenConfirmDeleteDialog] = React.useState(false);
 
-    console.log(Object.keys(questions).length ===0)
+
 
   const skeletonArray = Array(5).fill('');
 
@@ -78,9 +78,7 @@ export default function QuestionsView({handleSubmit, handleDelete, loading, ques
             </TableRow>
           </TableHead>
 
-          <TableBody>
-
-         
+          <TableBody>   
 
            {loading &&
             skeletonArray.map((item, index) => (

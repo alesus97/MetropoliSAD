@@ -39,7 +39,7 @@ export default function DialogFilm(){
             }}
           />
 
-        <TextField
+        {/* <TextField
           fullWidth
           label="Cast"
           required
@@ -50,7 +50,7 @@ export default function DialogFilm(){
               borderColor: "white",
             },
           }}
-        />
+        /> */}
        </Stack>
        <Stack direction="row" spacing={2} sx={{mt:2}}>
             <TextField

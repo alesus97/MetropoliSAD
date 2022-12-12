@@ -76,7 +76,7 @@ export default function DialogDettagliFilm(props) {
          </DialogContent>
         
         <DialogActions>
-          <Button variant="contained"   onClick={() => props.setCloseDialog()}>
+          <Button  variant="contained"   onClick={() => props.setCloseDialog()}>
             Ok
           </Button>
         </DialogActions>

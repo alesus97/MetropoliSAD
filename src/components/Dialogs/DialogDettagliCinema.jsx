@@ -76,7 +76,7 @@ export default function DialogDettagliCinema(props) {
          </DialogContent>
         
         <DialogActions>
-          <Button variant='outlined' onClick={() => props.setCloseDialog()}>
+          <Button  variant="contained" onClick={() => props.setCloseDialog()}>
             Ok
           </Button>
         </DialogActions>

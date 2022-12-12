@@ -9,7 +9,7 @@ export default function QuizController() {
   const [films, setFilms] = useState([]);
 
   const [errorMessage, setErrorMessage] = useState("");
-  const [error, setError] = useState();
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     APIService.getAllFilms()

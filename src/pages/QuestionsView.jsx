@@ -36,7 +36,7 @@ export default function QuestionsView({handleSubmit, handleDelete, loading, ques
     const [openInsertDialog, setopenInsertDialog] = React.useState(false);
     const [openConfirmDeleteDialog, setopenConfirmDeleteDialog] = React.useState(false);
 
-
+    console.log(Object.keys(questions).length ===0)
 
   const skeletonArray = Array(5).fill('');
 
@@ -44,7 +44,6 @@ export default function QuestionsView({handleSubmit, handleDelete, loading, ques
     
     <Box sx={{p:3}}>
 
-      { !filmTitle ? <NotFound404View/> : 
     <>
       <Fab sx={{position: 'fixed' , bottom:"3%", right:"3%"}}color="primary" aria-label="add" onClick={() => setopenInsertDialog(true)}>
         <Add />
@@ -127,7 +126,6 @@ export default function QuestionsView({handleSubmit, handleDelete, loading, ques
         </Table>
       </TableContainer>
       </>
-      }
     </Box>
   );
 }

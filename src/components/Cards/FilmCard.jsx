@@ -14,7 +14,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 export default function FilmCard(props) {
 
   return (
-    <Card raised sx={{ maxWidth: "450px", height: "100%" }}>
+    <Card raised sx={{ maxWidth: "450px", height: "100%" }} data-cy={"filmCard-" + props.info.titolo + "-" + props.info.produttore} >
       <CardMedia
         component="img"
         height="350"

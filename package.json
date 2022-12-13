@@ -11,25 +11,21 @@
     "@reduxjs/toolkit": "^1.9.1",
     "aws-amplify": "^4.3.43",
     "buffer": "^6.0.3",
-    "crypto": "npm:crypto-browserify",
-    "crypto-browserify": "^3.12.0",
     "cypress-mochawesome-reporter": "^3.2.3",
     "framer-motion": "^7.6.6",
     "process": "^0.11.10",
     "react": "^18.0.0",
-    "react-app-rewired": "^2.2.1",
     "react-dom": "^18.0.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.3.0",
-    "stream-browserify": "^3.0.0",
     "yup": "^0.32.11",
     "yup-password": "^0.2.2"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
-    "eject": "react-app-rewired eject"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "npx cypress run",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -54,8 +50,7 @@
     "cypress": "^12.1.0",
     "cypress-multi-reporters": "^1.6.2",
     "mocha-junit-reporter": "^2.2.0",
-    "react-scripts": "^5.0.1",
-    "web-vitals": "^2.1.4"
+    "react-scripts": "^5.0.1"
   },
   "overrides": {
     "@svgr/webpack": "^6.5.1"

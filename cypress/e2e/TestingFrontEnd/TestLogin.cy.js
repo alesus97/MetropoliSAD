@@ -9,7 +9,9 @@ describe("Test di login", () => {
         cy.url().should("eq", "http://localhost:3000/");
       }); 
       cy.wait(1000);
-  }); 
+  });
+
+  //CIAO
 
    it("Login fallito", function () {
     cy.visit("http://localhost:3000/");

@@ -22,7 +22,7 @@ function AppRoutes() {
 					user ? 
 					<> 
 					{/* Map delle routes */ }
-					{allowedRoutes.map((route, index) => <Route path={route.path} element={route.page} key={index}/>) }
+					{allowedRoutes.map((route, index) => <Route path={route.path} element={route.page} key={index} />) }
 
 					{/* Map delle subroutes */ }
 					{allowedRoutes.map((route, index) =>  route.children?.map((subroute) => <Route path={subroute.path} element={subroute.page} key={index}/>))}

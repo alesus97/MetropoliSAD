@@ -8,8 +8,7 @@ describe("Test film GESTORE_CINEMA", () => {
       cy.get('[data-cy="formPassword"]').type("Carlo000!");
       cy.get('[data-cy="loginButton"]').click();
       //CLICK SUL BOTTONE FILM NELLA SIDEBAR PER NAVIGARE
-      cy.get(".MuiList-root > :nth-child(3)").click();
-     
+      cy.get('[data-cy="page-/film"]').click();
     })
 
 

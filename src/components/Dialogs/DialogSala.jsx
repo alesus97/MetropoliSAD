@@ -14,6 +14,7 @@ export default function DialogSala(){
         <TextField
         margin="normal"
         fullWidth
+        data-cy="numero_sala"
         label="Numero Sala"
         type="number"
         name="numero_sala"
@@ -24,6 +25,7 @@ export default function DialogSala(){
       <TextField
       margin="normal"
       fullWidth
+      data-cy="numero_file"
       label="Numero File"
       type="number"
       name="numero_file"
@@ -34,6 +36,7 @@ export default function DialogSala(){
        <TextField
       margin="normal"
       fullWidth
+      data-cy="numero_posti_per_fila"
       label="Numero Posti per fila"
       type="number"
       name="postiPerFila"

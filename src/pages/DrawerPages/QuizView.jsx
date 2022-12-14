@@ -41,7 +41,7 @@ export default function QuizView ({films, loading}) {
              >
                <TableCell component="th" scope="row" width="60%">  {film.titolo} </TableCell>
               <TableCell align="center" width="10%" >  
-              <Link to={`/quiz/filmId=${film.codice_film}`}><ArrowCircleRight color="primary" /></Link> 
+              <Link to={`/quiz/filmId=${film.codice_film}`}><ArrowCircleRight color="primary" data-cy={"button-"+film.codice_film}/></Link> 
 
               </TableCell>
               </TableRow>  

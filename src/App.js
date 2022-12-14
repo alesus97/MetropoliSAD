@@ -29,7 +29,7 @@ const App = () => {
   const drawerItems = privateRoutes.filter((element) => element.permission.includes(user?.role) )
   .map((item, index) => {
     return (
-      <ListItemButton selected={item.path === pathname} key={index} onClick={() => navigate(item.path, { replace: true })}>
+      <ListItemButton selected={item.path === pathname} key={index} onClick={() => navigate(item.path, { replace: true })} data-cy={"page-"+item.path}>
         <ListItemIcon>{item.icon}</ListItemIcon>
         <ListItemText variant="title" primary={item.name} />
       </ListItemButton>

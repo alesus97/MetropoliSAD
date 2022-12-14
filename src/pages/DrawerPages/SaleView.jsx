@@ -30,6 +30,7 @@ export default function SaleView({handleSubmit, handleDelete, loading, sale, set
   return (
     <Box sx={{p:3}} >
       <Fab
+        data-cy="addSala"
         sx={{ position: "fixed", bottom: "3%", right: "3%" }}
         color="primary"
         aria-label="add"

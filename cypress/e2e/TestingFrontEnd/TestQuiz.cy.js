@@ -7,8 +7,8 @@ describe("Test quiz", () => {
         cy.get('[data-cy="formPassword"]').type("Gabeweaver96!");
         cy.get('[data-cy="loginButton"]').click();
 
-        cy.get('.MuiList-root > :nth-child(4)').click();
-        cy.get(':nth-child(5) > .MuiTableCell-alignCenter > a > [data-testid="ArrowCircleRightIcon"]').click();
+        cy.get('[data-cy="page-/quiz"]').click();
+        cy.get('[data-cy="button-409"]').click();
       
 
       

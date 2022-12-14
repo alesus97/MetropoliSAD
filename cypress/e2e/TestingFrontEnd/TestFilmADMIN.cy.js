@@ -8,7 +8,8 @@ describe("Test film ADMIN", () => {
     cy.get('[data-cy="formPassword"]').type("Gabeweaver96!");
     cy.get('[data-cy="loginButton"]').click();
     //CLICK SUL BOTTONE FILM NELLA SIDEBAR PER NAVIGARE
-    cy.get(".MuiList-root > :nth-child(3)").click();
+    cy.get('[data-cy="page-/film"]').click();
+
    
   })
 

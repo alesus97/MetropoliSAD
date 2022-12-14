@@ -40,7 +40,7 @@ export const privateRoutes = [
     name: "Film",
     path: "/film",
     icon: <Movie color="primary" />,
-    page: <FilmPage data-cy="film"/>,
+    page: <FilmPage/>,
     permission: [
         Roles.ADMIN,
         Roles.GESTORE_CINEMA

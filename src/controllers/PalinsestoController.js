@@ -136,6 +136,7 @@ export default function PalinsestoController() {
       setOnDeleteIndex={setOnDeleteIndex}
       films={films}
       sale={sale}
+      
     />
   );
 }

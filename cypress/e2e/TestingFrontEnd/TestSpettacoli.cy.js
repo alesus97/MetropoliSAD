@@ -1,6 +1,6 @@
 describe("Test spettacoli", () => {
 
-it('Inserimento spettacolo già esistente da parte del GESTORE_CINEMA', function(){
+it('Inserimento spettacolo in una sala già occupata', function(){
     //LOGIN
     cy.visit('http://localhost:3000/login');
     cy.get('[data-cy="formEmail"]').type("alessiocarusio@gmail.com");

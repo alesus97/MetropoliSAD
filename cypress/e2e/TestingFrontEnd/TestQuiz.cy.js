@@ -1,5 +1,5 @@
 describe("Test quiz", () => {
-    it('Inserimento di due risposte uguali all\'interno di una domanda', function(){
+    it('Inserimento di due risposte uguali all\'interno della stessa domanda', function(){
         //LOGIN
         cy.visit('http://localhost:3000/login');
 

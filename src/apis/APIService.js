@@ -130,4 +130,26 @@ export const APIService = {
     }
     return API.post(apiName, `/cinema`, myInit )
   },
+
+  /**
+   *  ! Prenotazione (questa sta qua solo per il testing)
+   */
+
+    getPostiDisponibili: function (codiceSpettacolo) {
+    return API.get(apiName, `/spettacoli/${codiceSpettacolo}/disponibilita`, {response: true} )
+  },
+
+  getBiglietti: function () {
+    return API.get(apiName, `/biglietti`, {response: true} )
+  },
+
+  createBiglietto: function (posti, codiceSpettacolo) {
+    const myInit = {
+      body: posti,
+      response: true
+    }
+
+    return API.post(apiName, `/spettacoli/${codiceSpettacolo}/biglietti`, myInit )
+  }, 
+
 };

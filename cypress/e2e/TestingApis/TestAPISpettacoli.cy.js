@@ -16,7 +16,7 @@ before(async ()=>{
     
     it('GET', async function() { 
             APIService.getAllSpettacoli(10).then((res)=>{
-                //console.log(res)
+                console.log(res)
                 expect(res.status===200).to.be.true
 
             }).catch((error)=>{
@@ -25,7 +25,7 @@ before(async ()=>{
         })
     
     
-       it('POST - DELETE', async function() { 
+        it('POST - DELETE', async function() { 
         const spettacolo ={
             codice_film: "402",
             data_ora: '2021-12-07T17:46',
@@ -50,7 +50,7 @@ before(async ()=>{
         })
                 
     })
- 
+  
         
     }) 
 

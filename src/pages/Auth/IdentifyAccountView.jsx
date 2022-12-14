@@ -12,6 +12,7 @@ const IdentifyAccountView = () => {
         <Box> 
             <TextField
               fullWidth
+              data-cy="emailRecPassword"
               margin="normal"
               label="Indirizzo email"
               required

@@ -28,6 +28,7 @@ const LoginView = () => {
             <TextField
               fullWidth
               autoComplete="username"
+              data-cy="formEmail"
               margin="normal"
               label="Indirizzo email"
               required
@@ -43,6 +44,7 @@ const LoginView = () => {
             <TextField
               fullWidth
               margin="normal"
+              data-cy="formPassword"
               name="password"
               autoComplete="current-password"
               type={showPassword ? "text" : "password"}
@@ -78,7 +80,7 @@ const LoginView = () => {
               <FormControlLabel control={<Checkbox />} label="Ricordami" />
 
               <Link
-                data-cy= "any-link"
+                data-cy= "recPassLink"
                 component={RouterLink}
                 color="primary"
                 variant="subtitle2"

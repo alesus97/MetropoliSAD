@@ -14,6 +14,7 @@ export default function DialogSpettacolo({films, sale}){
     <Box> 
     <TextField
     margin="normal"
+    data-cy="selFilm"
     defaultValue=""
     select
     name="film"
@@ -27,7 +28,7 @@ export default function DialogSpettacolo({films, sale}){
     },}}
   >
     {films.map((film, index) => (
-      <MenuItem key={index} value={JSON.stringify(film)}>
+      <MenuItem key={index} value={JSON.stringify(film)} data-cy={"sceltaFilm-"+film.titolo}>
         {film.titolo}
       </MenuItem>
     ))}
@@ -35,6 +36,7 @@ export default function DialogSpettacolo({films, sale}){
 
   <TextField
     margin="normal"
+    data-cy="selSala"
     defaultValue=""
     select
     name="sala"
@@ -50,7 +52,7 @@ export default function DialogSpettacolo({films, sale}){
   }}
   >
     {sale.map((sala, index) => (
-      <MenuItem key={index} value={JSON.stringify(sala)}>
+      <MenuItem key={index} value={JSON.stringify(sala)} data-cy={"sceltaSala-"+sala.numero_sala}>
         {sala.numero_sala}
       </MenuItem>
     ))}
@@ -58,6 +60,7 @@ export default function DialogSpettacolo({films, sale}){
 
   <TextField
     label="Data spettacolo"
+    data-cy="data_spettacolo"
     id="standard-start-adornment"
     InputProps={{
       startAdornment: <InputAdornment position="start" />,
@@ -76,6 +79,7 @@ export default function DialogSpettacolo({films, sale}){
 
   <TextField
     margin="normal"
+    data-cy="prezzo_biglietto"
     fullWidth
     label="Prezzo biglietto"
     type="number"

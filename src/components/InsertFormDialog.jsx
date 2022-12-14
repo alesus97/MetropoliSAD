@@ -81,6 +81,7 @@ export default function InsertFormDialog(props) {
                   >
                     
                     <Alert
+                       data-cy="AlertDialog"
                        variant="filled"
                        color="primary"
                        icon={<Error fontSize="inherit" />}
@@ -95,6 +96,7 @@ export default function InsertFormDialog(props) {
                     Cancel
                   </Button>
                   <Button
+                    data-cy="ok"
                     variant="contained"
                     type="submit"      
                     disabled={isDisabled}

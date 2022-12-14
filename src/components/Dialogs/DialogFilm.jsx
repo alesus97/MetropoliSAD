@@ -12,6 +12,7 @@ export default function DialogFilm(){
       <Box>
       
         <TextField
+          data-cy="titolo"
           fullWidth
           margin="normal"
           label="Titolo"
@@ -28,6 +29,7 @@ export default function DialogFilm(){
       <Stack direction="row" spacing={2} sx={{mt:2}}>
           <TextField
             fullWidth
+            data-cy="genere"
             label="Genere"
             required
             autoComplete="genere"
@@ -54,6 +56,7 @@ export default function DialogFilm(){
        </Stack>
        <Stack direction="row" spacing={2} sx={{mt:2}}>
             <TextField
+              data-cy="regia"
               fullWidth
               label="Regia"
               required
@@ -68,6 +71,7 @@ export default function DialogFilm(){
           
             <TextField
               fullWidth
+              data-cy="produttore"
               label="Produttore"
               required
               autoComplete="produttore"
@@ -82,6 +86,7 @@ export default function DialogFilm(){
             <Stack direction="row" spacing={2} sx={{mt:2}}>
             <TextField
             fullWidth
+            data-cy="data_di_uscita"
             required
             type="date"
             autoComplete="data"
@@ -96,6 +101,7 @@ export default function DialogFilm(){
           
             <TextField
               fullWidth
+              data-cy="durata"
               label="Durata"
               autoComplete="durata"
               name="durata"
@@ -111,6 +117,7 @@ export default function DialogFilm(){
             <Stack direction="row" spacing={2} sx={{mt:2}}>
             <TextField
               fullWidth
+              data-cy="trama"
               label="Trama"
               autoComplete="trama"
               name="trama"
@@ -125,6 +132,7 @@ export default function DialogFilm(){
           
             <TextField
               fullWidth
+              data-cy="locandina"
               label="Locandina"
               autoComplete="locandina"
               name="locandina"

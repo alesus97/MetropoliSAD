@@ -79,6 +79,7 @@ export default function AuthLayout(props) {
               fullWidth
               size="large"
               type="submit"
+              data-cy="loginButton"
               variant="contained"
               loading={isSubmitting}
               loadingIndicator={<CircularProgress color="primary" size={16} />}
@@ -99,6 +100,7 @@ export default function AuthLayout(props) {
                 }}
               >
                 <Alert
+                  data-cy="alertLogin"
                   variant="filled"
                   color="primary"
                   icon={<Error fontSize="inherit" />}

@@ -26,6 +26,7 @@ const ResetPasswordView = ({resendConfirmationCode}) => {
             <TextField
               fullWidth
               autoComplete="off"
+              data-cy="codice_verifica"
               label="Codice di verifica"
               name="verificationCode"
               margin="normal"
@@ -42,6 +43,7 @@ const ResetPasswordView = ({resendConfirmationCode}) => {
               margin="normal"
               fullWidth
               autoComplete="off"
+              data-cy="new_password"
               type={showPassword ? "text" : "password"}
               label="Nuova password"
               name="newPassword"
@@ -71,6 +73,7 @@ const ResetPasswordView = ({resendConfirmationCode}) => {
             <TextField
               margin="normal"
               fullWidth
+              data-cy="confirm_new_password"
               autoComplete="off"
               type={showPassword ? "text" : "password"}
               label="Conferma nuova password"

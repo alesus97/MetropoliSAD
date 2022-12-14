@@ -31,6 +31,7 @@ export default function FilmView({handleSubmit, handleDelete, loading, films, se
   return (
     <Box sx={{p:3}}>
       <Fab
+        data-cy="add_film"
         sx={{ position: "fixed", bottom: "3%", right: "3%" }}
         color="primary"
         aria-label="add"

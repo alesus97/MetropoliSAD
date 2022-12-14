@@ -2,31 +2,29 @@ describe("Test quiz", () => {
     it('Inserimento di due risposte uguali all\'interno di una domanda', function(){
         //LOGIN
         cy.visit('http://localhost:3000/login');
-        cy.get('#\\3Ar1\\3A').click();
-        cy.get('#\\3Ar1\\3A').type('alesus97@gmail.com');
-        cy.get('#\\3Ar3\\3A').click();
-        cy.get('#\\3Ar3\\3A').type('Gabeweaver96!');
-        cy.get('#\\3Ar5\\3A').click();
-        cy.get('.MuiContainer-root').submit();
+
+        cy.get('[data-cy="formEmail"]').type("alesus97@gmail.com");
+        cy.get('[data-cy="formPassword"]').type("Gabeweaver96!");
+        cy.get('[data-cy="loginButton"]').click();
 
         cy.get('.MuiList-root > :nth-child(4)').click();
         cy.get(':nth-child(5) > .MuiTableCell-alignCenter > a > [data-testid="ArrowCircleRightIcon"]').click();
       
 
       
-        cy.get('.MuiFab-root').click();
-        cy.get('#\\:rd\\:').type('Quante definizioni della parola \'Pulp\' compaiono all\'inizio del film?');
+        cy.get('[data-cy="addQuiz"]').click();
+        cy.get('[data-cy="domanda"]').type('Quanti minuti dura il film?');
       
-        cy.get('#\\:rf\\:').type('3');
+        cy.get('[data-cy="risposta_1"]').type('153');
         
-        cy.get('#\\:rh\\:').type('4');
+        cy.get('[data-cy="risposta_2"]').type('180');
        
-        cy.get('#\\:rj\\:').type('5');
+        cy.get('[data-cy="risposta_3"]').type('180');
         
-        cy.get('#\\:rl\\:').type('5');
+        cy.get('[data-cy="risposta_corretta"]').type('178');
       
-        cy.get('.MuiContainer-root > .MuiBox-root').submit().then(()=>{
-            cy.get('form.MuiBox-root > .MuiPaper-root').contains('Check constraint \'CHK_risposta_unique\' is violated.')
+        cy.get('[data-cy="ok"]').click().then(()=>{
+            cy.get('[data-cy="AlertDialog"]').contains('Check constraint \'CHK_risposta_unique\' is violated.')
         })
 
     })

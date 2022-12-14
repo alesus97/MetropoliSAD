@@ -36,7 +36,7 @@ export default function PalinsestoView({handleSubmit, handleDelete, loading, spe
  
   return (
     <Box sx={{p:3}}>
-      <Fab sx={{position: 'fixed' , bottom:"3%", right:"3%"}}color="primary" aria-label="add" onClick={() => setopenInsertDialog(true)}>
+      <Fab data-cy="addSpettacolo" sx={{position: 'fixed' , bottom:"3%", right:"3%"}}color="primary" aria-label="add" onClick={() => setopenInsertDialog(true)}>
         <Add />
       </Fab>
 

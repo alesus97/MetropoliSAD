@@ -15,8 +15,8 @@ before(async ()=>{
     describe('DOMANDE', ()=>{
     
     it('GET', async function() { 
-            APIService.getAllQuestions(404).then((res)=>{
-                expect(res.status===200 || res.data.domande.length > 0).to.be.true
+            APIService.getAllQuestions(402).then((res)=>{
+                expect(res.status===200).to.be.true
 
             }).catch((error)=>{
                 console.log(error)
@@ -24,7 +24,7 @@ before(async ()=>{
         })
     
     
-    it('POST - DELETE', async function() { 
+     it('POST - DELETE', async function() { 
         const question ={
             testo: "Quanti minuti dura il film?",
             risposta_errata_1: "156",
@@ -49,7 +49,7 @@ before(async ()=>{
             console.log(error)
         })
                 
-    })
+    }) 
 
 
         

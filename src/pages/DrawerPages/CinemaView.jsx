@@ -112,7 +112,7 @@ export default function CinemaView({handleSubmit, handleDelete, loading, cinemas
       <InsertFormDialog
         openDialog={openConfirmDeleteDialog}
         setCloseDialog={() => setopenConfirmDeleteDialog(false)}
-       // handleOK={handleDelete}
+       handleOK={handleDelete}
         title="Sei sicuro di voler eliminare il cinema?"
       >
         <DialogConfermaEliminazione onDeleteMessage="L'eliminazione di un cinema comporta l'eliminazione degli spettacoli e delle sale associati ad esso"/>

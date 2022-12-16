@@ -1,4 +1,5 @@
 import { API, Amplify, Auth } from "aws-amplify";
+//import { expect } from "chai";
 import { APIService } from "../../../src/apis/APIService";
 
 import awsmobile from "../../../src/aws-exports";
@@ -14,7 +15,7 @@ before(async ()=>{
 
     describe('FILM', ()=>{
     
-    it('GET', async function() { 
+    /* it('GET', async function() { 
             APIService.getAllFilms().then((res)=>{
                 expect(res.status===200 || res.data.length > 0).to.be.true
                 //console.log(res)
@@ -24,7 +25,7 @@ before(async ()=>{
         })
     
     
-    it('POST - DELETE', async function() { 
+    it('POST - DELETE di un film non esistente', async function() { 
         const film = {
             titolo: 'Hercules',
             genere: 'Fantastico',
@@ -50,6 +51,29 @@ before(async ()=>{
         //console.log(onDeleteIndex)
         }).catch((error)=>{
             console.log(error)
+        })
+                
+    }) */
+    it('POST  di un film già esistente', async function() { 
+        const film = {
+            titolo: 'Ricomincio da tre',
+            genere: 'Commedia',
+            regia:' Massimo Troisi',
+            produttore: 'Fulvio Lucisano, Mauro Berardi',
+            data_uscita: "1981-05-03",
+            durata: '106',
+            trama: 'In cerca di nuovi stimoli un giovane napoletano si trasferisce a Firenze, dove si innamora di una donna che non sa chi sia il padre di suo figlio ',
+            image_url: 'https://pad.mymovies.it/filmclub/2006/10/216/locandina.jpg',
+          };
+        APIService.createFilm(film).then((res)=>{
+             expect(res.status===200).to.be.true
+             console.log(res)
+             console.log(onDeleteIndex)
+
+        }).catch((error)=>{
+            expect(error.message==='Request failed with status code 500').to.be.true
+            console.log(error.message) 
+            
         })
                 
     })

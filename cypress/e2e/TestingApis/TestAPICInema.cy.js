@@ -14,16 +14,16 @@ before(async ()=>{
 
     describe('CINEMA', ()=>{
     
-    it('GET', async function() { 
-            APIService.getAllCinemas().then((res)=>{
-                //console.log(res)
-                expect(res.status===200).to.be.true
+        it('GET', async function() { 
+                APIService.getAllCinemas().then((res)=>{
+                    //console.log(res)
+                    expect(res.status===200).to.be.true
 
-            }).catch((error)=>{
-                console.log(error)
-            }) 
+                }).catch((error)=>{
+                    console.log(error)
+                }) 
            
-        
+         })  
     
        it('POST - DELETE', async function() { 
         const cinema ={
@@ -64,4 +64,3 @@ before(async ()=>{
 
 
 
-}) 

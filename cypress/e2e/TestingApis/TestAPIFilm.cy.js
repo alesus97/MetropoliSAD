@@ -15,7 +15,7 @@ before(async ()=>{
 
     describe('FILM', ()=>{
     
-    /* it('GET', async function() { 
+    it('GET', async function() { 
             APIService.getAllFilms().then((res)=>{
                 expect(res.status===200 || res.data.length > 0).to.be.true
                 //console.log(res)
@@ -53,7 +53,7 @@ before(async ()=>{
             console.log(error)
         })
                 
-    }) */
+    })
     it('POST  di un film già esistente', async function() { 
         const film = {
             titolo: 'Ricomincio da tre',

@@ -9,7 +9,7 @@ module.exports = defineConfig({
     "overwrite": false,
     "html": true,
     "json": true,
-    "reportFilename": `Cinesad-Test-Report`,
+    "reportFilename": `MetropoliSAD-Test-Report`,
     "embeddedScreenshots": true,
     "inlineAssets": true,
     "cdn": true,

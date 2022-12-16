@@ -4,7 +4,7 @@ import SimpleBackdrop from "../pages/LoadingPage"
 import { privateRoutes, publicRoutes } from './routes';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../redux/userSlice';
-import useUser from '../useUser';
+import useUser from '../utils/useUserHook';
 const NotFound404 = lazy(() => import("../pages/NotFound404View"));
 
  

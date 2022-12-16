@@ -7,6 +7,7 @@ module.exports = defineConfig({
     "reportDir": "cypress/reports",
     "charts": true,
     "overwrite": false,
+    "autoOpen": true,
     "html": true,
     "json": true,
     "reportFilename": `MetropoliSAD-Test-Report`,

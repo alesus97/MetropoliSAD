@@ -1,4 +1,4 @@
-import Roles from './utils/Roles'
+import Roles from './Roles'
 import { Dashboard, Movie, Chair, Quiz, EmojiEvents } from '@mui/icons-material'
 import { lazy } from 'react';
 import { Navigate } from 'react-router-dom'

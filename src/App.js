@@ -15,9 +15,9 @@ import {
   useMediaQuery,
   ListItemButton,
   } from "@mui/material";
-import {theme} from "./constants/theme"
+import {theme} from "./utils/theme"
 import { useNavigate, useLocation } from "react-router-dom";
-import useUser from "./useUser";
+import useUser from "./utils/useUserHook";
 
 const App = () => {
   const {user, error} = useUser();
@@ -70,9 +70,6 @@ const App = () => {
     </Box>
 
 </Box>
-
-
-
 
    );
 };

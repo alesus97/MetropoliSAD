@@ -6,7 +6,6 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { theme } from "../../constants/theme";
 
 import { WarningAmber } from "@mui/icons-material";
 
@@ -27,11 +26,6 @@ export default function DialogConfermaEliminazione(props) {
          <WarningAmber color="error" />
           </Stack>
       
-
-
-
-
-
         </DialogContentText> 
         </DialogContent>
         

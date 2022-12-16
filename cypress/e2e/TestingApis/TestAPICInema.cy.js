@@ -21,11 +21,11 @@ before(async ()=>{
 
             }).catch((error)=>{
                 console.log(error)
-            })     
-        })
+            }) 
+           
+        
     
-    
-      it('POST - DELETE', async function() { 
+       it('POST - DELETE', async function() { 
         const cinema ={
             nome: "MetropoliSAD - Bologna",
             citta: "Bologna",
@@ -55,8 +55,8 @@ before(async ()=>{
             console.log(error)
         })
                 
-    })
-
+    }) 
+ 
 
         
     }) 
@@ -64,4 +64,4 @@ before(async ()=>{
 
 
 
-
+}) 

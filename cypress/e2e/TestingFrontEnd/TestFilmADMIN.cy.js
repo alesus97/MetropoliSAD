@@ -9,11 +9,10 @@ describe("Test film ADMIN", () => {
     cy.get('[data-cy="loginButton"]').click();
     //CLICK SUL BOTTONE FILM NELLA SIDEBAR PER NAVIGARE
     cy.get('[data-cy="page-/film"]').click();
-
    
   })
 
-  it('Creazione film da parte dell\' ADMIN"', function(){
+  it('Inserimento nuovo film', function(){
     
     cy.get('[data-cy="add_film"]').click();
     cy.get('[data-cy="titolo"]').type("La fabbrica di cioccolato");
@@ -34,7 +33,7 @@ describe("Test film ADMIN", () => {
  
 
 
-  it("Cancellazione film da parte dell\'ADMIN", function () {
+  it("Cancellazione film", function () {
     cy.wait(500);
 
     //ELIMINAZIONE FILM
@@ -49,7 +48,7 @@ describe("Test film ADMIN", () => {
    
 
 
-  it('Inserimento film già esistente da parte dell\'ADMIN', function(){
+  it('Inserimento film già esistente', function(){
     
     
     //CREAZIONE NUOVO FILM

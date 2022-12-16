@@ -151,5 +151,10 @@ export const APIService = {
 
     return API.post(apiName, `/spettacoli/${codiceSpettacolo}/biglietti`, myInit )
   }, 
-
+/**
+   *  ! Visualizza profilo (questa sta qua solo per il testing)
+   */
+  getProfilo: function () {
+    return API.get(apiName, `/user`, {response: true} )
+  },
 };

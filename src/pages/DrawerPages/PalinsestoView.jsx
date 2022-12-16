@@ -105,7 +105,7 @@ export default function PalinsestoView({handleSubmit, handleDelete, loading, spe
                   {spettacolo.sala.numero_sala}
                 </TableCell>
                 <TableCell align="center">{spettacolo.data}</TableCell>
-                <TableCell align="center">{spettacolo.prezzo}</TableCell>
+                <TableCell align="center">{spettacolo.prezzo} €</TableCell>
 
                 <TableCell align="center">
                 <IconButton onClick={() => {setopenConfirmDeleteDialog(true); setOnDeleteIndex(index)}}>

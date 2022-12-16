@@ -2,18 +2,19 @@ const { defineConfig } = require("cypress");
 
 
 module.exports = defineConfig({
-  projectId: 'rtxrdb',
   "reporter": "cypress-mochawesome-reporter",
     "reporterOptions": {
     "reportDir": "cypress/reports",
     "charts": true,
     "overwrite": false,
-    "html": false,
+    "html": true,
     "json": true,
 /*     "reportPageTitle": "Legrande Cypress",
     "reportFilename": `Legrande Cypress Test Report `, */
     "embeddedScreenshots": true,
-    "inlineAssets": true
+    "inlineAssets": true,
+    "cdn": true,
+    "timestamp":true
   }, 
  
   e2e: {

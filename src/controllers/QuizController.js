@@ -11,7 +11,8 @@ export default function QuizController() {
   const [errorMessage, setErrorMessage] = useState("");
   const [error, setError] = useState(null);
 
-  useEffect(() => {
+  
+    const getAllFilms = async (event) => { 
     APIService.getAllFilms()
       .then((res) => {
         const newFilms = res.data.map((film) => new Film(film));
@@ -23,6 +24,9 @@ export default function QuizController() {
         setError(true);
         setErrorMessage(err);
       });
+    }
+    useEffect(() => {
+      getAllFilms()
   }, []);
 
   return error ? (

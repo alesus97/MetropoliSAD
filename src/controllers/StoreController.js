@@ -12,7 +12,7 @@ export default function StoreController(){
     const [errorMessage, setErrorMessage] = useState("");
     const [error, setError] = useState();
 
-    const handleSubmit = async (event) => {
+    const createPremio = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         const postData = {
@@ -39,7 +39,8 @@ export default function StoreController(){
     };
 
 
-    useEffect(() => {
+    
+      const getAllPremi = async (event) => { 
        APIService.getAllPrizes().then((res) => {
         const newPrizes = res.data.map((prize) => new Premio(prize));
         console.log(newPrizes);
@@ -50,12 +51,14 @@ export default function StoreController(){
       setError(true);
       setErrorMessage(err);
       });
+    }
 
-
+    useEffect(() => {
+      getAllPremi()
         
       }, []);
 
-      const handleDelete = async (event) => {
+      const deletePremio = async (event) => {
         event.preventDefault();
         const codicePremio = prizes[onDeleteIndex].codice_premio;
     
@@ -76,6 +79,6 @@ export default function StoreController(){
     return(
       error ?  
       <ErrorPage error={errorMessage}/> :
-        <StoreView handleSubmit={handleSubmit} handleDelete={handleDelete} loading={loading} prizes={prizes} setOnDeleteIndex={setOnDeleteIndex}/>
+        <StoreView handleSubmit={createPremio} handleDelete={deletePremio} loading={loading} prizes={prizes} setOnDeleteIndex={setOnDeleteIndex}/>
     );
 }

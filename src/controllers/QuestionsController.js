@@ -16,7 +16,7 @@ export default function QuestionsController(){
 
     const { filmId } = useParams();
 
-    const handleSubmit = async (event) => {
+    const createQuestion = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         
@@ -47,7 +47,7 @@ export default function QuestionsController(){
     }
   
   
-    const handleDelete = async (event) => {
+    const deleteQuestion = async (event) => {
       event.preventDefault();
       const codiceDomanda = questions[onDeleteIndex].codice_domanda;
       
@@ -66,7 +66,8 @@ export default function QuestionsController(){
       
      };
   
-    useEffect(() => {
+    
+      const getAllQuestions = async (event) => { 
       APIService.getAllQuestions(filmId).then((res) => {
         setFilmTitle(res.data.titolo)
         const newQuestions = res.data.domande.map((question) => new Domanda(question));
@@ -77,14 +78,17 @@ export default function QuestionsController(){
           setError(true)
           setErrorMessage(err)
       });
-  
+    }
+    useEffect(() => {
+      getAllQuestions()
+
     }, []);
 
 
     return(
       error ?  
       <ErrorPage error={errorMessage}/> :
-      <QuestionsView handleSubmit={handleSubmit} handleDelete={handleDelete} loading={loading} questions={questions} setOnDeleteIndex={setOnDeleteIndex} filmTitle={filmTitle}/>
+      <QuestionsView handleSubmit={createQuestion} handleDelete={deleteQuestion} loading={loading} questions={questions} setOnDeleteIndex={setOnDeleteIndex} filmTitle={filmTitle}/>
 
     );
 

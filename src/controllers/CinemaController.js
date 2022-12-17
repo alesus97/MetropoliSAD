@@ -15,7 +15,7 @@ export default function CinemaController(){
   const [error, setError] = useState();
 
 
-    const handleSubmit = async (event) => {
+    const createCinema = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
     
@@ -52,7 +52,7 @@ export default function CinemaController(){
         }
       };
     
-      const handleDelete = async (event) => {
+      const deleteCinema = async (event) => {
         event.preventDefault();
          const id_cinema = cinemas[onDeleteIndex].codice_cinema;
     
@@ -70,8 +70,8 @@ export default function CinemaController(){
         } 
       };
     
-      useEffect(() => {
-
+      
+        const getAllCinemas = async (event) => {
         APIService.getAllCinemas().then((res) => {
           const newCinemas = res.data.map((cinema) => new Cinema(cinema));
           setCinemas(newCinemas);
@@ -81,16 +81,18 @@ export default function CinemaController(){
         setError(true);
         setErrorMessage(err);
         }); 
+      }
         
        
-    
+      useEffect(() => {
+        getAllCinemas()
     
       }, []); 
     
     return(
       error ?  
       <ErrorPage error={errorMessage}/> :
-        <CinemaView handleSubmit={handleSubmit} handleDelete={handleDelete} loading={loading} cinemas={cinemas} setOnDeleteIndex={setOnDeleteIndex}/>
+        <CinemaView handleSubmit={createCinema} handleDelete={deleteCinema} loading={loading} cinemas={cinemas} setOnDeleteIndex={setOnDeleteIndex}/>
 
     );
 }

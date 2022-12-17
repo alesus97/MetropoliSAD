@@ -13,7 +13,7 @@ export default function SaleController(){
   const [error, setError] = useState();
 
 
-    const handleSubmit = async (event) => {
+    const createSala = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
     
@@ -45,7 +45,7 @@ export default function SaleController(){
         }
       };
     
-      const handleDelete = async (event) => {
+      const deleteSala = async (event) => {
         event.preventDefault();
         const idSala = sale[onDeleteIndex].id_sala;
     
@@ -63,8 +63,9 @@ export default function SaleController(){
         }
       };
     
-      useEffect(() => {
+      
     
+        const getAllSale = async (event) => { 
         APIService.getAllSale(10).then((res) => { //INSERIRE CODICE CINEMA
           const newSale = res.data.map((sala) => new Sala(sala));
           setSale(newSale);
@@ -74,14 +75,16 @@ export default function SaleController(){
         setError(true);
         setErrorMessage(err);
         });
-    
+      }
+      useEffect(() => {
+        getAllSale()
     
       }, []); 
     
     return(
       error ?  
       <ErrorPage error={errorMessage}/> :
-        <SaleView handleSubmit={handleSubmit} handleDelete={handleDelete} loading={loading} sale={sale} setOnDeleteIndex={setOnDeleteIndex}/>
+        <SaleView handleSubmit={createSala} handleDelete={deleteSala} loading={loading} sale={sale} setOnDeleteIndex={setOnDeleteIndex}/>
 
     );
 }

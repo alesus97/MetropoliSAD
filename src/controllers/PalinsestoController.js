@@ -16,7 +16,7 @@ export default function PalinsestoController() {
   const [onDeleteIndex, setOnDeleteIndex] = useState();
   const [loading, setLoading] = useState(true);
 
-  const handleDelete = async (event) => {
+  const deleteSpettacolo = async (event) => {
     event.preventDefault();
     console.log(onDeleteIndex);
     const codiceSpettacolo = spettacoli[onDeleteIndex].codice_spettacolo;
@@ -34,9 +34,9 @@ export default function PalinsestoController() {
     }
   };
 
-  useEffect(() => {
+  
 
-
+    const getAllSpettacoli = async (event) => {
     APIService.getAllSpettacoli(10) /* PASSARE CODICE CINEMA */
       .then((res) => {
         const newSpettacoli = res.data.map(
@@ -83,9 +83,12 @@ export default function PalinsestoController() {
       setErrorMessage(err);
 
     });
+  }
+  useEffect(() => {
+    getAllSpettacoli()
   }, []);
 
-  const handleSubmit = async (event) => {
+  const createSpettacolo = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const sala = JSON.parse(data.get("sala"));
@@ -129,8 +132,8 @@ export default function PalinsestoController() {
     <ErrorPage error={errorMessage} />
   ) : (
     <PalinsestoView
-      handleSubmit={handleSubmit}
-      handleDelete={handleDelete}
+      handleSubmit={createSpettacolo}
+      handleDelete={deleteSpettacolo}
       loading={loading}
       spettacoli={spettacoli}
       setOnDeleteIndex={setOnDeleteIndex}

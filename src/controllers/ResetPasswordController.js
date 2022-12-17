@@ -45,7 +45,7 @@ export default function ResetPasswordController() {
   }
   //test
 
-  const handleSubmit = async (event) => {
+  const forgotPasswordSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const verificationCode = data.get("verificationCode");
@@ -73,7 +73,7 @@ export default function ResetPasswordController() {
   };
 
   return (
-    <AuthLayout handleSubmit={handleSubmit} title={title} buttonLabel={buttonLabel}> 
+    <AuthLayout handleSubmit={forgotPasswordSubmit} title={title} buttonLabel={buttonLabel}> 
       <ResetPasswordView resendConfirmationCode={resendConfirmationCode}/>
     </AuthLayout>
   );

@@ -13,7 +13,7 @@ export default function LoginController(){
     const title = "Effettua il login";
     const buttonLabel = "Login";
 
-    const handleSubmit = async (event) => {
+    const signIn = async (event) => {
         
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -52,7 +52,7 @@ export default function LoginController(){
     };
 
     return(
-        <AuthLayout handleSubmit={handleSubmit} title={title} buttonLabel={buttonLabel}>
+        <AuthLayout handleSubmit={signIn} title={title} buttonLabel={buttonLabel}>
             <LoginView/>
         </AuthLayout>
 

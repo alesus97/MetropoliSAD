@@ -10,7 +10,8 @@ export default function IdentifyAccountController() {
   const navigate = useNavigate();
   const title = "Inserisci l'account per il quale vuoi recuperare la password";
   const buttonLabel = "Continua";
-  const handleSubmit = async (event) => {
+
+  const forgotPassword = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const email = data.get("identifyAccount");
@@ -24,7 +25,7 @@ export default function IdentifyAccountController() {
   };
 
   return (
-    <AuthLayout handleSubmit={handleSubmit} title={title} buttonLabel={buttonLabel}>
+    <AuthLayout handleSubmit={forgotPassword} title={title} buttonLabel={buttonLabel}>
       <IdentifyAccountView />
     </AuthLayout>
   );

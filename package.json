@@ -24,8 +24,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test-frontend" : "npx cypress run --spec cypress/e2e/TestingFrontend",
-    "test-apis" : "npx cypress run --spec cypress/e2e/TestingApis",
+    "test-frontend": "npx cypress run --spec cypress/e2e/TestingFrontend",
+    "test-apis": "npx cypress run --spec cypress/e2e/TestingApis",
     "test": "npx cypress run",
     "eject": "react-scripts eject"
   },

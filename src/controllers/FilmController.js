@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { APIService } from "../apis/APIService";
 import Film from "../models/Film";
 
+
 export default function FilmController(){
     const [onDeleteIndex,setOnDeleteIndex] = useState();
     const [films, setFilms] = useState([]);
@@ -16,7 +17,7 @@ export default function FilmController(){
 
 
 
-    const handleSubmit = async (event) => {
+    const createFilm = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         
@@ -52,7 +53,7 @@ export default function FilmController(){
     
       }
     
-      const handleDelete = async (event) => {
+      const deleteFilm = async (event) => {
         event.preventDefault();
         const codiceFilm = films[onDeleteIndex].codice_film;
         
@@ -68,9 +69,9 @@ export default function FilmController(){
         } 
         
       };
-    
-      useEffect(() => {
-    
+      
+
+      const getAllFilms = async (event) => {
         APIService.getAllFilms().then((res) => {
           const newFilms = res.data.map((film) => new Film(film));
           setFilms(newFilms);
@@ -80,15 +81,18 @@ export default function FilmController(){
           setError(true)
           setErrorMessage(err)
         })
-    
-    
+      }
+
+      
+      useEffect(() => {
+       getAllFilms()
       }, []);
 
 
     return(
       error ?  
       <ErrorPage error={errorMessage}/> :
-      <FilmView handleSubmit={handleSubmit} handleDelete={handleDelete} loading={loading} films={films} setOnDeleteIndex={setOnDeleteIndex} />
+      <FilmView handleSubmit={createFilm} handleDelete={deleteFilm} loading={loading} films={films} setOnDeleteIndex={setOnDeleteIndex} />
 
     );
 }

@@ -4,7 +4,7 @@
 [![Contributors][contributors-shield]][contributors-url] [![Forks][forks-shield]][forks-url] [![Stargazers][stars-shield]][stars-url] [![Issues][issues-shield]][issues-url] [![MIT License][license-shield]][license-url]
 
 
-<img src="https://i.postimg.cc/kM0vtTML/Senza-titolo-1.png" data-canonical-src="https://i.postimg.cc/kM0vtTML/Senza-titolo-1.png" width="200" height="400" />
+<img src="https://i.postimg.cc/kM0vtTML/Senza-titolo-1.png" data-canonical-src="https://i.postimg.cc/kM0vtTML/Senza-titolo-1.png" width="400" height="194" />
 
 
 <!-- TABLE OF CONTENTS -->

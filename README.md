@@ -4,8 +4,7 @@
 [![Contributors][contributors-shield]][contributors-url] [![Forks][forks-shield]][forks-url] [![Stargazers][stars-shield]][stars-url] [![Issues][issues-shield]][issues-url] [![MIT License][license-shield]][license-url]
 
 
-<img src="https://camo.githubusercontent.com/..." data-canonical-src="https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png" width="200" height="400" />
-
+<img src="https://camo.githubusercontent.com/..." data-canonical-src="https://i.postimg.cc/kM0vtTML/Senza-titolo-1.png" width="200" height="400" />
 
 
 <!-- TABLE OF CONTENTS -->

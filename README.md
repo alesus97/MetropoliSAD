@@ -12,25 +12,11 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li>
-      <a href="#Realizzata-con">Realizzata con</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <li><a href="#Realizzata-con">Realizzata con</a> </li>
+    <li><a href="#Installazione">Getting Started</a> </li>
+    <li><a href="#Dipendenze">Usage</a></li>
+    <li><a href="#Testing">Roadmap</a></li>
+    <li><a href="#Licenza">Licenza</a></li>
   </ol>
 </details>
 
@@ -45,13 +31,11 @@ MetropoliSAD è un'applicazione web progettata e realizzata per consentire ad Am
 
 
 
-
-## Per iniziale
+<!-- Installazione -->
+##  Installazione
 
 Per ottenere una copia locale e funzionante seguire i seguenti steps.
 
-
-### Installazione
 
 
 1. Clonare the repoository
@@ -66,7 +50,7 @@ Per ottenere una copia locale e funzionante seguire i seguenti steps.
    ```sh
    npm start
    ```
-
+<!-- Dipendenze -->
 ## Dipendenze
 
  *  **@emotion/react**: ^11.10.5
@@ -87,7 +71,7 @@ Per ottenere una copia locale e funzionante seguire i seguenti steps.
  *  **yup**: ^0.32.11
  *  **yup-password**: ^0.2.2
 
-
+<!-- Testing -->
 ## Testing
 Per avviare il processo di testing, è necessario eseguire il seguente comnando:
 ```sh
@@ -104,6 +88,7 @@ presente al path
 MetropoliSAD\cypress\reports
 ```
 
+<!-- Licenza -->
 ## Licenza
 
 MIT

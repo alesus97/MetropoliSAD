@@ -13,7 +13,7 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a href="#Realizzata-con">Realizzata con</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
@@ -36,6 +36,7 @@
 
 
 
+<!-- Realizzata con -->
 ## Realizzata con
  [![React][React.js]][React-url] [![MUI][MUI]][MUI-url]
 

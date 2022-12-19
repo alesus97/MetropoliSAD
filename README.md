@@ -3,6 +3,11 @@
 
 [![Contributors][contributors-shield]][contributors-url] [![Forks][forks-shield]][forks-url] [![Stargazers][stars-shield]][stars-url] [![Issues][issues-shield]][issues-url] [![MIT License][license-shield]][license-url]
 
+
+<img src="https://camo.githubusercontent.com/..." data-canonical-src="https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png" width="200" height="400" />
+
+
+
 ## Realizzata con
  [![React][React.js]][React-url] [![MUI][MUI]][MUI-url]
 
@@ -33,9 +38,7 @@ Per ottenere una copia locale e funzionante seguire i seguenti steps.
    npm start
    ```
 
-
-
-## Dependecies
+## Dipendenze
 
  *  **@emotion/react**: ^11.10.5
  *  **@emotion/styled**: ^11.10.5

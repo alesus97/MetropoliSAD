@@ -13,7 +13,7 @@ before(async () => {
 });
 
 describe("SPETTACOLI", () => {
-  it("GET", async function () {
+   it("GET", async function () {
     APIService.getAllSpettacoli(10)
       .then((res) => {
         console.log(res);
@@ -22,8 +22,7 @@ describe("SPETTACOLI", () => {
       .catch((error) => {
         console.log(error);
       });
-  });
-
+  }); 
   it("POST - DELETE", async function () {
     const spettacolo = {
       codice_film: "402",
@@ -32,27 +31,25 @@ describe("SPETTACOLI", () => {
     };
     APIService.createSpettacolo(181, spettacolo)
       .then((res) => {
-        // console.log(res)
+         
         expect(
-          res.status === 200 ||
-            res.data.message === "Spettacolo inserito correttamente"
-        ).to.be.true;
-        // console.log(res)
+          res.status === 200 && res.data.codice_film == "402" && res.data.data_ora == "2021-12-07T17:46" && res.data.prezzo == "12").to.be.true;
+        
         onDeleteIndex = res.data.codice_spettacolo;
-        // console.log(onDeleteIndex)
-        APIService.deleteCinema(onDeleteIndex)
+       
+        APIService.deleteSpettacolo(onDeleteIndex)
           .then((res) => {
             expect(
               res.status === 200 ||
                 res.data.message ===
-                  "Il cinema è stato correttamente eliminato."
+                  "Lo spettacolo è stato correttamente eliminato."
             ).to.be.true;
             console.log(res);
           })
           .catch((error) => {
             console.log(error);
           });
-        //console.log(onDeleteIndex)
+       
       })
       .catch((error) => {
         console.log(error);

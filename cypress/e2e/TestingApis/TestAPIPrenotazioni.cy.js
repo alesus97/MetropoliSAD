@@ -11,7 +11,7 @@ before(async () => {
 });
 
 describe("PRENOTAZIONE", () => {
-  it("GET BIGLIETTI", async function () {
+   it("GET BIGLIETTI", async function () {
     APIService.getBiglietti()
       .then((res) => {
         expect(res.status === 200).to.be.true;
@@ -20,7 +20,7 @@ describe("PRENOTAZIONE", () => {
       .catch((error) => {
         console.log(error);
       });
-  });
+  }); 
 
   it("GET POSTI DISPONIBILI - CREATE BIGLIETTI", async function () {
     const posti = {

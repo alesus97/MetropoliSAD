@@ -1,70 +1,122 @@
-# Getting Started with Create React App
+# MetropoliSAD
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+[![Contributors][contributors-shield]][contributors-url] [![Forks][forks-shield]][forks-url] [![Stargazers][stars-shield]][stars-url] [![Issues][issues-shield]][issues-url] [![MIT License][license-shield]][license-url]
 
-In the project directory, you can run:
 
-### `npm start`
+<img src="https://i.postimg.cc/kM0vtTML/Senza-titolo-1.png" data-canonical-src="https://i.postimg.cc/kM0vtTML/Senza-titolo-1.png" width="1000" height="486" />
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li><a href="#Realizzata-con">Realizzata con</a> </li>
+    <li><a href="#Installazione">Getting Started</a> </li>
+    <li><a href="#Dipendenze">Usage</a></li>
+    <li><a href="#Testing">Roadmap</a></li>
+    <li><a href="#Licenza">Licenza</a></li>
+  </ol>
+</details>
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+<!-- Realizzata con -->
+## Realizzata con
+ [![React][React.js]][React-url] [![MUI][MUI]][MUI-url]
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+MetropoliSAD è un'applicazione web progettata e realizzata per consentire ad Amministratori e Gestori di una catena di cinema di amministrare 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<!-- Installazione -->
+##  Installazione
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Per ottenere una copia locale e funzionante seguire i seguenti steps.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+1. Clonare the repoository
+   ```sh
+   git clone https://github.com/alesus97/MetropoliSAD.git
+   ```
+2. Installare le dipendenze NPM
+   ```sh
+   npm install
+   ```
+3. Avviare il progetto
+   ```sh
+   npm start
+   ```
+<!-- Dipendenze -->
+## Dipendenze
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+ *  **@emotion/react**: ^11.10.5
+ *  **@emotion/styled**: ^11.10.5
+ *  **@mui/icons-material**: ^5.10.9
+ *  **@mui/lab**: ^5.0.0-alpha.106
+ *  **@mui/material**: ^5.10.12
+ *  **@reduxjs/toolkit**: ^1.9.1
+ *  **aws-amplify**: ^4.3.43
+ *  **buffer**: ^6.0.3
+ *  **cypress-mochawesome-reporter**: ^3.2.3
+ *  **framer-motion**: ^7.6.6
+ *  **process**: ^0.11.10
+ *  **react**: ^18.0.0
+ *  **react-dom**: ^18.0.0
+ *  **react-redux**: ^8.0.5
+ *  **react-router-dom**: ^6.3.0
+ *  **yup**: ^0.32.11
+ *  **yup-password**: ^0.2.2
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<!-- Testing -->
+## Testing
+Per avviare il processo di testing, è necessario eseguire il seguente comnando:
+```sh
+npm test
+```
+Nel caso in cui si volessero eseguire separatamente i test di interfaccia e delle apis, è possibile eseguire uno dei due comandi seguenti:
+```sh
+npm run test−frontend
+npm run test−apis
+```
+Le operazioni di testing apriranno in automatico il report generato, che sarà comunque
+presente al path
+```sh
+MetropoliSAD\cypress\reports
+```
 
-### Code Splitting
+<!-- Licenza -->
+## Licenza
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+MIT
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+[contributors-shield]: https://img.shields.io/github/contributors/alesus97/MetropoliSAD.svg
+[contributors-url]: https://github.com/alesus97/MetropoliSAD/graphs/contributors
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+[forks-shield]: https://img.shields.io/github/forks/alesus97/MetropoliSAD.svg
+[forks-url]: https://github.com/alesus97/MetropoliSAD/network/members
 
-### Advanced Configuration
+[stars-shield]: https://img.shields.io/github/stars/alesus97/MetropoliSAD.svg
+[stars-url]: https://github.com/alesus97/MetropoliSAD/stargazers
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+[issues-shield]: https://img.shields.io/github/issues/alesus97/MetropoliSAD.svg
+[issues-url]: https://github.com/alesus97/MetropoliSAD/issues
 
-### Deployment
+[license-shield]: https://img.shields.io/github/license/alesus97/MetropoliSAD.svg
+[license-url]: https://github.com/alesus97/MetropoliSAD/blob/master/LICENSE.txt
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/linkedin_username
 
-### `npm run build` fails to minify
+[product-screenshot]: images/screenshot.png
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+
+[MUI]: https://img.shields.io/badge/MUI-35495E?style=for-the-badge&logo=MUI&logoColor=#007fff
+[MUI-url]:https://mui.com/

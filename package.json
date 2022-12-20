@@ -9,6 +9,7 @@
     "@mui/lab": "^5.0.0-alpha.106",
     "@mui/material": "^5.10.12",
     "@reduxjs/toolkit": "^1.9.1",
+    "amplify": "^0.0.11",
     "aws-amplify": "^4.3.43",
     "buffer": "^6.0.3",
     "cypress-mochawesome-reporter": "^3.2.3",

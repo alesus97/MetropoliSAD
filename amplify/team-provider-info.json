@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-metropolisad-dev-180024-authRole",
+      "UnauthRoleArn": "arn:aws:iam::440871172531:role/amplify-metropolisad-dev-180024-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::440871172531:role/amplify-metropolisad-dev-180024-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-metropolisad-dev-180024-deployment",
+      "UnauthRoleName": "amplify-metropolisad-dev-180024-unauthRole",
+      "StackName": "amplify-metropolisad-dev-180024",
+      "StackId": "arn:aws:cloudformation:eu-central-1:440871172531:stack/amplify-metropolisad-dev-180024/cc840da0-8087-11ed-ac28-0653b6118a76",
+      "AmplifyAppId": "d1rfw6xijyb0c4"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d1rfw6xijyb0c4",
+          "type": "cicd"
+        }
+      }
+    }
+  }
+}

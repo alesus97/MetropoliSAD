@@ -72,7 +72,13 @@ Per ottenere una copia locale e funzionante seguire i seguenti steps.
 
 <!-- Testing -->
 ## Testing
-Per avviare il processo di testing, è necessario eseguire il seguente comnando:
+Per avviare il processo di testing, è necessario prima avviare il progetto con il comando
+
+```sh
+npm start
+```
+
+In seguito, su un altro terminale, si può eseguire il seguente comnando:
 ```sh
 npm test
 ```

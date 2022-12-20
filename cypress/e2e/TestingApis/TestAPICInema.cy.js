@@ -13,18 +13,18 @@ before(async () => {
 });
 
 describe("CINEMA", () => {
-  it("GET", async function () {
+   it("GET", async function () {
     APIService.getAllCinemas()
       .then((res) => {
-        //console.log(res)
+      
         expect(res.status === 200).to.be.true;
       })
       .catch((error) => {
         console.log(error);
       });
-  });
+  }); 
 
-  it("POST - DELETE", async function () {
+   it("POST - DELETE", async function () {
     const cinema = {
       nome: "MetropoliSAD - Bologna",
       citta: "Bologna",
@@ -39,30 +39,31 @@ describe("CINEMA", () => {
     };
     APIService.createCinema(cinema)
       .then((res) => {
-        //console.log(res)
-        expect(
-          res.status === 200 ||
-            res.data.message === "Film inserito correttamente"
-        ).to.be.true;
-        //console.log(res)
-        onDeleteIndex = res.data.codice_cinema;
-        // console.log(onDeleteIndex)
+       
+         expect(res.status === 200 && res.data.cap === "40010" && res.data.citta === "Bologna" && res.data.civico === "6"
+           && res.data.image_url === "https://www.cna.it/wp-content/uploads/2020/11/shutterstock_169841813-1024x682.jpg" 
+          && res.data.latitudine === "44°29′38.00″ Nord" && res.data.longitudine === "11°20′34.00″ Est" 
+          && res.data.nome === "MetropoliSAD - Bologna" && res.data.recapito === "051 4578994" && res.data.via === "Piazza Minghetti").to.be.true; 
+       
+         onDeleteIndex = res.data.codice_cinema;
+        
         APIService.deleteCinema(onDeleteIndex)
+        
           .then((res) => {
+            
             expect(
               res.status === 200 ||
-                res.data.message ===
-                  "La domanda è stata correttamente eliminata."
+                res.data.message === "Il cinema è stato correttamente eliminato."
             ).to.be.true;
             console.log(res);
-          })
+          }) 
           .catch((error) => {
             console.log(error);
           });
-        //console.log(onDeleteIndex)
+        
       })
       .catch((error) => {
         console.log(error);
       });
-  });
+  }); 
 });

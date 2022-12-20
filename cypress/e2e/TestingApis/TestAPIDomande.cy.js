@@ -13,7 +13,7 @@ before(async () => {
 });
 
 describe("DOMANDE", () => {
-  it("GET", async function () {
+   it("GET", async function () {
     APIService.getAllQuestions(402)
       .then((res) => {
         expect(res.status === 200).to.be.true;
@@ -21,7 +21,7 @@ describe("DOMANDE", () => {
       .catch((error) => {
         console.log(error);
       });
-  });
+  }); 
 
   it("POST - DELETE", async function () {
     const question = {
@@ -34,25 +34,21 @@ describe("DOMANDE", () => {
     APIService.createQuestion(402, question)
       .then((res) => {
         expect(
-          res.status === 200 ||
-            res.data.message === "Domanda inserita correttamente"
-        ).to.be.true;
-        //console.log(res)
+          res.status === 200 && res.data.risposta_corretta == "142" && res.data.risposta_errata_1 == "156" 
+          && res.data.risposta_errata_2 == "180" && res.data.risposta_errata_3 == "170").to.be.true;
+      
         onDeleteIndex = res.data.codice_domanda;
         console.log(onDeleteIndex);
         APIService.deleteQuestion(onDeleteIndex)
           .then((res) => {
             expect(
-              res.status === 200 ||
-                res.data.message ===
-                  "La domanda è stata correttamente eliminata."
-            ).to.be.true;
-            // console.log(res)
+              res.status === 200 || res.data.message === "La domanda è stata correttamente eliminata.").to.be.true;
+           
           })
           .catch((error) => {
             console.log(error);
           });
-        //console.log(onDeleteIndex)
+       
       })
       .catch((error) => {
         console.log(error);

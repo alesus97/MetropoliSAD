@@ -13,48 +13,41 @@ before(async () => {
 });
 
 describe("PREMI", () => {
-  it("GET", async function () {
+   it("GET", async function () {
     APIService.getAllPrizes()
       .then((res) => {
-        //console.log(res)
+        
         expect(res.status === 200).to.be.true;
       })
       .catch((error) => {
         console.log(error);
       });
-  });
+  }); 
 
   it("POST - DELETE", async function () {
-    const premio = {
+     const premio = {
       descrizione: "M&M's",
       costo: "30",
     };
     APIService.createPrize(premio)
       .then((res) => {
-        //console.log(res)
+        console.log(res)
         expect(
-          res.status === 200 ||
-            res.data.message === "Premio inserito correttamente"
-        ).to.be.true;
-        // console.log(res)
+          res.status === 200 && res.data.descrizione == "M&M's" && res.data.costo == "30").to.be.true;
         onDeleteIndex = res.data.codice_premio;
-        console.log(onDeleteIndex);
-        APIService.deleteCinema(onDeleteIndex)
+        
+        APIService.deletePrize(onDeleteIndex)
           .then((res) => {
-            expect(
-              res.status === 200 ||
-                res.data.message ===
-                  "Il cinema è stato correttamente eliminato."
-            ).to.be.true;
-            //   console.log(res)
+            expect(res.status === 200 || res.data.message === "Il premio è stato correttamente eliminato.").to.be.true;
+           
           })
           .catch((error) => {
             console.log(error);
           });
-        //console.log(onDeleteIndex)
+        
       })
       .catch((error) => {
         console.log(error);
-      });
+      }); 
   });
 });

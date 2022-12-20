@@ -87,7 +87,7 @@ export default function DialogCinema(){
               fullWidth
               label="Latitudine"
               required
-              type="number"
+              
               autoComplete="latitudine"
               name="latitudine"
               sx={{
@@ -100,7 +100,7 @@ export default function DialogCinema(){
               fullWidth
               label="Longitudine"
               required
-              type="number"
+            
               autoComplete="longitudine"
               name="longitudine"
               sx={{
@@ -119,7 +119,6 @@ export default function DialogCinema(){
               fullWidth
               label="Recapito"
               required
-              type="number"
               autoComplete="recapito"
               name="recapito"
               sx={{

@@ -43,7 +43,7 @@ const App = () => {
    <>
    <CinemaAppBar/>
         <Drawer
-        variant={isMdUp ? "permanent" : "temporary"}
+        variant="permanent" //{isMdUp ? "permanent" : "temporary"}
         anchor="left"
         sx={{
           width: theme.layout.drawerWidth,

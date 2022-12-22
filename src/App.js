@@ -3,8 +3,6 @@ import { privateRoutes } from "./navigation/routes";
 import "./App.css"
 import CinemaAppBar from "./components/CinemaAppBar";
 import AppRoutes from "./navigation/AppRoutes";
-import { useSelector } from "react-redux";
-import { selectUser } from "./redux/userSlice";
 import { 
   Box, 
   Drawer, 
@@ -20,8 +18,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import useUser from "./utils/useUserHook";
 
 const App = () => {
-  const {user, error} = useUser();
- /*  const user = useSelector(selectUser) */
+ const {user, error} = useUser();
+
   const { pathname } = useLocation();
   const navigate = useNavigate()
   const isMdUp = useMediaQuery(theme.breakpoints.up("md"));

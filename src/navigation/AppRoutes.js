@@ -2,8 +2,6 @@ import React, {lazy, Suspense} from 'react';
 import { Routes, Route } from 'react-router-dom';
 import SimpleBackdrop from "../pages/LoadingPage"
 import { privateRoutes, publicRoutes } from './routes';
-import { useSelector } from 'react-redux';
-import { selectUser } from '../redux/userSlice';
 import useUser from '../utils/useUserHook';
 const NotFound404 = lazy(() => import("../pages/NotFound404View"));
 

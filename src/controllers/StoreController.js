@@ -43,7 +43,6 @@ export default function StoreController(){
       const getAllPremi = async (event) => { 
        APIService.getAllPrizes().then((res) => {
         const newPrizes = res.data.map((prize) => new Premio(prize));
-        console.log(newPrizes);
         setPrizes(newPrizes);
          setLoading(false);
       }).catch((err) => {

@@ -3,27 +3,20 @@ import {
     Typography,
     ListItemIcon,
     Box,
-  } from "@mui/material";
-  
-  
-
+} from "@mui/material";
+   
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Tooltip from "@mui/material/Tooltip";
 import {Logout, Person, Settings} from '@mui/icons-material';
-
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { logout } from "../redux/userSlice";
 import { Auth } from "aws-amplify";
 
 
 
 export default function UserMenu(){
 const navigate = useNavigate();
-const dispatch = useDispatch();
-
     const items = [
         {
           name:"Account",

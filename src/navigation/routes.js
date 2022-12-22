@@ -1,8 +1,7 @@
 import Roles from './Roles'
-import { Dashboard, Movie, Chair, Quiz, EmojiEvents } from '@mui/icons-material'
+import { Dashboard, VideoStable, Movie, Chair, Quiz, EmojiEvents } from '@mui/icons-material'
 import { lazy } from 'react';
 import { Navigate } from 'react-router-dom'
-
 const CinemaPage = lazy(() => import("../controllers/CinemaController"));
 const FilmPage = lazy(() => import("../controllers/FilmController"));
 const SalePage = lazy(() => import("../controllers/SaleController"));
@@ -20,7 +19,7 @@ export const privateRoutes = [
   {
     name: "Cinema",
     path: "/cinema",
-    icon: <Movie color="primary" />,
+    icon: <VideoStable color="primary" />,
     page: <CinemaPage/>,
     permission: [
         Roles.ADMIN
@@ -100,9 +99,9 @@ export const publicRoutes =[
   path: "/reimpostaPassword",
   page: <ResetPasswordPage/>
 },
-{
+ {
   name: "Not Found",
   path: "*",
   page: <Navigate to="/" replace />
-},
+},     
 ]

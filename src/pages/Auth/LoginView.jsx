@@ -23,8 +23,6 @@ const LoginView = () => {
   return (
 
         <Box>
-          {/*  alesus97@gmail.com Gabeweaver96! --- ADMIN
-          alessiocarusio@gmail.com Carlo000! --- GESTORE_CINEMA  */}
             <TextField
               fullWidth
               autoComplete="username"

@@ -78,7 +78,7 @@ Per avviare il processo di testing, è necessario prima avviare il progetto con 
 npm start
 ```
 
-In seguito, su un altro terminale, si può eseguire il seguente comnando:
+In seguito, su un altro terminale, si può eseguire il seguente comando:
 ```sh
 npm test
 ```

@@ -68,7 +68,7 @@ export default function PalinsestoController() {
     });
 
 
-    APIService.getAllSale()
+    APIService.getAllSale(10)
     .then((res) => {
       const newSale = res.data.map(
         (sala) => new Sala(sala)

@@ -18,13 +18,13 @@ import { Auth } from "aws-amplify";
 export default function UserMenu(){
 const navigate = useNavigate();
     const items = [
-        {
+        /* {
           name:"Account",
           icon: <Person color="primary"/>,
           onClick : () => {
            
           }
-        },
+        }, */
         {
           name:"Logout",
           icon: <Logout color="primary"/>,
